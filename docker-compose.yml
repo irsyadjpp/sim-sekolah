@@ -29,20 +29,6 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
 
-  # 3. Neo4j: Knowledge Graph (Relasi Materi & Siswa)
-  neo4j:
-    image: neo4j:5-community
-    container_name: sim_sekolah_graph
-    restart: always
-    ports:
-      - "7474:7474" # HTTP Dashboard
-      - "7687:7687" # Bolt Protocol
-    environment:
-      NEO4J_AUTH: neo4j/password123
-    volumes:
-      - neo4j_data:/data
-      - neo4j_logs:/logs
-
   # 6. RustFS: S3-Compatible Object Storage (Files, Media, Dokumen)
   rustfs:
     image: rustfs/rustfs:latest
@@ -82,17 +68,14 @@ services:
       - REDIS_PORT=${REDIS_PORT}
       - REDIS_PASSWORD=${REDIS_PASSWORD}
       - REDIS_DB=${REDIS_DB}
-      - NEO4J_URI=bolt://neo4j:7687
-      - NEO4J_USER=neo4j
-      - NEO4J_PASSWORD=password123
+
       - JWT_SECRET=4f9d7c2b1a8e6f5d9c3b7e1a2f4c8d6e9b1f3a7c5d8e2f6a1b9c4d7e8f2a6c1
       - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
       - OTEL_EXPORTER_OTLP_ENDPOINT=otel-collector:4317
     depends_on:
       postgres:
         condition: service_healthy
-      neo4j:
-        condition: service_started
+
       otel-collector:
         condition: service_started
 
@@ -136,6 +119,5 @@ networks:
 volumes:
   postgres_data:
   qdrant_data:
-  neo4j_data:
-  neo4j_logs:
+
   rustfs_data:

@@ -61,14 +61,6 @@ type Config struct {
 		RabbitMQURL  string `mapstructure:"rabbitmq_url"`
 		KafkaBrokers string `mapstructure:"kafka_brokers"`
 	} `mapstructure:"messaging"`
-
-	Graph struct {
-		Neo4j struct {
-			URI      string `mapstructure:"uri"`
-			User     string `mapstructure:"user"`
-			Password string `mapstructure:"password"`
-		} `mapstructure:"neo4j"`
-	} `mapstructure:"graph"`
 }
 
 var Cfg Config

@@ -66,7 +66,7 @@ Untuk menjamin performa tinggi dan keandalan sistem berskala produksi, backend i
 - **Database Utama:** PostgreSQL **16.5** - DBMS Relasional tangguh untuk menyimpan data master dan operasional.
 - **Object Storage:** [RustFS](https://github.com/rustfs/rustfs) - server penyimpanan file berbasis HTTP mandiri untuk menangani file dokumen & media (S3-compatible).
 - **Caching & Queue:** Redis **v9** - digunakan untuk global rate limiting (menghindari serangan DDoS/abuse) serta backend *Asynchronous Queue Worker* menggunakan mekanisme List `BRPOP` untuk menangani antrean tugas latar belakang.
-- **Graph Database:** Neo4j **v5** - menyimpan relasi materi pelajaran, peta kompetensi, dan graf akademik siswa.
+
 - **Message Broker:** RabbitMQ - untuk manajemen event-driven communication dan pub-sub messages.
 - **Vector Search (RAG Context):** Qdrant - database vektor untuk menunjang pencarian semantik (Semantic Search) dan context chunking data sekolah (untuk RAG modul ajar AI mendatang).
 - **Observability Stack (Enterprise Monitoring) 🆕:** Integrasi penuh **OpenTelemetry (OTel)** dan terstruktur JSON logging. Alur log dialirkan secara terpusat melalui OTel Collector menuju Loki, Tempo, dan dashboard Grafana untuk melacak performa, trace database, dan query bermasalah (*Slow Queries*).
@@ -81,13 +81,12 @@ Pastikan servis-servis berikut terpasang atau dapat diakses:
 - **Go** versi 1.26 atau lebih tinggi.
 - **PostgreSQL 16+**
 - **Redis v9**
-- **Neo4j v5** (Community Edition)
 - **RabbitMQ**
 - **RustFS** (untuk media storage)
 - **OpenTelemetry Collector** (jika ingin melacak trace/logs di Grafana Cloud)
 
 > [!TIP]
-> Seluruh database pendukung (PostgreSQL, Neo4j, Qdrant, RustFS, OTel Collector) dapat dijalankan dengan sangat mudah menggunakan Docker Compose yang telah disediakan di root workspace:
+> Seluruh database pendukung (PostgreSQL, Qdrant, RustFS, OTel Collector) dapat dijalankan dengan sangat mudah menggunakan Docker Compose yang telah disediakan di root workspace:
 > ```bash
 > docker-compose up -d
 > ```
@@ -138,11 +137,6 @@ REDIS_DB=0
 
 # RABBITMQ BROKER
 RABBITMQ_URL=amqp://user:password123@localhost:5672/
-
-# NEO4J GRAPH DB
-NEO4J_URI=bolt://localhost:7687
-NEO4J_USERNAME=neo4j
-NEO4J_PASSWORD=password123
 
 # RUSTFS STORAGE
 RUSTFS_URL=http://localhost:9000
@@ -202,7 +196,7 @@ backend/
 │   ├── database.go             # Konektor Postgresql (GORM)
 │   ├── migrate.go              # Runner golang-migrate
 │   ├── redis.go                # Konektor Redis Client
-│   ├── neo4j.go                # Konektor Neo4j Driver
+
 │   ├── rabbitmq.go             # Konektor RabbitMQ
 │   └── viper.go                # Loader konfigurasi dinamis (Viper + Env Bind)
 ├── internal/                   # Direktori modul-modul bisnis (Domain Logic)

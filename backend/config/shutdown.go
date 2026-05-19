@@ -46,7 +46,7 @@ func GracefulShutdown(app *fiber.App) {
 		RedisClient.Close()
 	}
 
-	// Neo4j, RabbitMQ etc should also be closed here
+	// RabbitMQ etc should also be closed here
 	// For now we rely on the process exit, but in a real app
 	// we should have explicit Close() calls for all drivers.
 
