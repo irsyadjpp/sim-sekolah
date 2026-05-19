@@ -12,9 +12,10 @@ import (
 var JWT_SECRET = []byte(config.GetEnv("JWT_SECRET", "4f9d7c2b1a8e6f5d9c3b7e1a2f4c8d6e9b1f3a7c5d8e2f6a1b9c4d7e8f2a6c1"))
 
 type JWTCustomClaims struct {
-	UserID   string   `json:"user_id"`
-	Username string   `json:"username"`
-	Roles    []string `json:"roles"`
+	UserID         string   `json:"user_id"`
+	Username       string   `json:"username"`
+	Roles          []string `json:"roles"`
+	ImpersonatorID string   `json:"impersonator_id,omitempty"`
 	jwt.RegisteredClaims
 }
 
@@ -66,12 +67,19 @@ func Protected() fiber.Handler {
 		c.Locals("user_id", claims.UserID)
 		c.Locals("username", claims.Username)
 		c.Locals("roles", claims.Roles)
+		if claims.ImpersonatorID != "" {
+			c.Locals("impersonator_id", claims.ImpersonatorID)
+		}
 
 		// Propagate to Go context for repositories/services
 		//nolint:staticcheck // SA1029: using built-in string type as key for backward compatibility across modules
 		ctx := context.WithValue(c.UserContext(), "user_id", claims.UserID)
 		//nolint:staticcheck // SA1029: using built-in string type as key for backward compatibility across modules
 		ctx = context.WithValue(ctx, "roles", claims.Roles)
+		if claims.ImpersonatorID != "" {
+			//nolint:staticcheck // SA1029: using built-in string type as key for backward compatibility across modules
+			ctx = context.WithValue(ctx, "impersonator_id", claims.ImpersonatorID)
+		}
 		c.SetUserContext(ctx)
 
 		return c.Next()

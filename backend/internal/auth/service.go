@@ -41,6 +41,8 @@ type AuthService interface {
 	UpdateMe(ctx context.Context, userID string, req UpdateMeRequest) error
 	ChangePassword(ctx context.Context, userID string, req ChangePasswordRequest) error
 	UploadPhoto(ctx context.Context, userID string, fileHeader *multipart.FileHeader) (string, error)
+	Impersonate(ctx context.Context, actorID string, targetUserID string) (string, error)
+	StopImpersonation(ctx context.Context, tokenStr string) error
 }
 
 type authService struct {
@@ -719,5 +721,54 @@ func (s *authService) Disable2FA(ctx context.Context, userID string, code string
 
 	logger.Audit(ctx, "user_disable_2fa", userID, userID, slog.String("username", user.Username))
 
+	return nil
+}
+
+func (s *authService) Impersonate(ctx context.Context, actorID string, targetUserID string) (string, error) {
+	// 1. Fetch actor
+	actor, err := s.repo.FindByID(actorID)
+	if err != nil {
+		return "", errors.New("aktor tidak ditemukan")
+	}
+
+	// 2. Check if actor has SUPER_ADMIN or ADMIN role
+	hasPermission := false
+	for _, r := range actor.Roles {
+		if r.RoleName == "SUPER_ADMIN" || r.RoleName == "ADMIN" {
+			hasPermission = true
+			break
+		}
+	}
+	if !hasPermission {
+		return "", errors.New("tidak memiliki izin untuk melakukan impersonasi")
+	}
+
+	// 3. Fetch target user
+	targetUser, err := s.repo.FindByID(targetUserID)
+	if err != nil {
+		return "", errors.New("user target tidak ditemukan")
+	}
+
+	// 4. Retrieve roles of target user
+	var targetRoleNames []string
+	for _, r := range targetUser.Roles {
+		targetRoleNames = append(targetRoleNames, r.RoleName)
+	}
+
+	// 5. Generate a JWT token with ImpersonatorID = actorID, and UserID/Username/Roles of targetUser
+	token, err := jwtpkg.GenerateImpersonatorToken(targetUser.ID.String(), targetUser.Username, targetRoleNames, actor.ID.String())
+	if err != nil {
+		return "", err
+	}
+
+	return token, nil
+}
+
+func (s *authService) StopImpersonation(ctx context.Context, tokenStr string) error {
+	// Blacklist the impersonation token in Redis for 24 hours
+	err := s.repo.BlacklistAccessToken(ctx, tokenStr, time.Hour*24)
+	if err != nil {
+		return err
+	}
 	return nil
 }

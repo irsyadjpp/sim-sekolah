@@ -28,8 +28,9 @@ func (r *auditRepository) FindAll(ctx context.Context, page int, limit int, sear
 	var total int64
 
 	query := r.db.WithContext(ctx).Table("audit_logs").
-		Select("audit_logs.*, auth_user.full_name AS user_full_name, auth_user.email AS user_email").
-		Joins("LEFT JOIN auth_user ON audit_logs.user_id = auth_user.id")
+		Select("audit_logs.*, u.full_name AS user_full_name, u.email AS user_email, imp.full_name AS impersonator_full_name, imp.email AS impersonator_email").
+		Joins("LEFT JOIN auth_user u ON audit_logs.user_id = u.id").
+		Joins("LEFT JOIN auth_user imp ON audit_logs.impersonator_id = imp.id")
 
 	if actionFilter != "" {
 		query = query.Where("audit_logs.action = ?", actionFilter)
@@ -38,8 +39,8 @@ func (r *auditRepository) FindAll(ctx context.Context, page int, limit int, sear
 	if search != "" {
 		searchTerm := "%" + search + "%"
 		query = query.Where(
-			"auth_user.full_name ILIKE ? OR auth_user.email ILIKE ? OR audit_logs.action ILIKE ? OR audit_logs.entity ILIKE ? OR audit_logs.ip_address ILIKE ?",
-			searchTerm, searchTerm, searchTerm, searchTerm, searchTerm,
+			"u.full_name ILIKE ? OR u.email ILIKE ? OR imp.full_name ILIKE ? OR audit_logs.action ILIKE ? OR audit_logs.entity ILIKE ? OR audit_logs.ip_address ILIKE ?",
+			searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm,
 		)
 	}
 

@@ -69,3 +69,7 @@ type Verify2FARequest struct {
 type OTPVerificationRequest struct {
 	Code string `json:"code" validate:"required,len=6" example:"654321"` // Kode verifikasi 6-digit untuk konfirmasi perubahan penting
 }
+
+type ImpersonateRequest struct {
+	TargetUserID string `json:"target_user_id" validate:"required" example:"c5d2f366-3ff2-422c-807a-44c618bef84f"` // ID user target yang akan diimpersonasi (diwakili)
+}

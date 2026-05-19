@@ -38,14 +38,25 @@ func (s *auditService) LogEvent(ctx context.Context, userIDStr string, action st
 			}
 		}
 
+		var impID *uuid.UUID
+		if ctx != nil {
+			if impIDStr, ok := ctx.Value("impersonator_id").(string); ok && impIDStr != "" {
+				parsedImpID, err := uuid.Parse(impIDStr)
+				if err == nil {
+					impID = &parsedImpID
+				}
+			}
+		}
+
 		log := &AuditLog{
-			ID:        uuid.New(),
-			UserID:    uID,
-			Action:    action,
-			Entity:    entity,
-			EntityID:  entityID,
-			IPAddress: ipAddress,
-			CreatedAt: time.Now(),
+			ID:             uuid.New(),
+			UserID:         uID,
+			Action:         action,
+			Entity:         entity,
+			EntityID:       entityID,
+			IPAddress:      ipAddress,
+			ImpersonatorID: impID,
+			CreatedAt:      time.Now(),
 		}
 
 		if err := s.repo.Create(bgCtx, log); err != nil {
@@ -56,7 +67,13 @@ func (s *auditService) LogEvent(ctx context.Context, userIDStr string, action st
 			if userIDStr != "" {
 				actorName = userIDStr
 			}
-			logger.Audit(bgCtx, action, actorName, entity, "entity_id", entityID, "ip_address", ipAddress)
+
+			auditCtx := bgCtx
+			if impID != nil {
+				//nolint:staticcheck // SA1029: using built-in string type as key for backward compatibility across modules
+				auditCtx = context.WithValue(auditCtx, "impersonator_id", impID.String())
+			}
+			logger.Audit(auditCtx, action, actorName, entity, "entity_id", entityID, "ip_address", ipAddress)
 		}
 	}()
 }

@@ -33,4 +33,6 @@ func SetupRoutes(router fiber.Router, db *gorm.DB, rdb *redis.Client) {
 	protected.Post("/2fa/setup", h.Setup2FA)
 	protected.Post("/2fa/enable", h.Enable2FA)
 	protected.Post("/2fa/disable", h.Disable2FA)
+	protected.Post("/impersonate", h.Impersonate)
+	protected.Post("/stop-impersonation", h.StopImpersonation)
 }

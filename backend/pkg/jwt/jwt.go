@@ -8,9 +8,10 @@ import (
 )
 
 type JWTClaim struct {
-	UserID   string   `json:"user_id"`
-	Username string   `json:"username"`
-	Roles    []string `json:"roles"`
+	UserID         string   `json:"user_id"`
+	Username       string   `json:"username"`
+	Roles          []string `json:"roles"`
+	ImpersonatorID string   `json:"impersonator_id,omitempty"`
 	jwtlib.RegisteredClaims
 }
 
@@ -24,6 +25,33 @@ func GenerateToken(userID string, username string, roles []string) (string, erro
 		UserID:   userID,
 		Username: username,
 		Roles:    roles,
+		RegisteredClaims: jwtlib.RegisteredClaims{
+			ExpiresAt: jwtlib.NewNumericDate(time.Now().Add(time.Hour * time.Duration(expireHour))),
+			IssuedAt:  jwtlib.NewNumericDate(time.Now()),
+		},
+	}
+
+	token := jwtlib.NewWithClaims(jwtlib.SigningMethodHS256, claims)
+
+	secret := config.Cfg.Auth.JWT.Secret
+	if secret == "" {
+		secret = "4f9d7c2b1a8e6f5d9c3b7e1a2f4c8d6e9b1f3a7c5d8e2f6a1b9c4d7e8f2a6c1"
+	}
+
+	return token.SignedString([]byte(secret))
+}
+
+func GenerateImpersonatorToken(userID string, username string, roles []string, impersonatorID string) (string, error) {
+	expireHour := config.Cfg.Auth.JWT.ExpireHour
+	if expireHour == 0 {
+		expireHour = 24
+	}
+
+	claims := JWTClaim{
+		UserID:         userID,
+		Username:       username,
+		Roles:          roles,
+		ImpersonatorID: impersonatorID,
 		RegisteredClaims: jwtlib.RegisteredClaims{
 			ExpiresAt: jwtlib.NewNumericDate(time.Now().Add(time.Hour * time.Duration(expireHour))),
 			IssuedAt:  jwtlib.NewNumericDate(time.Now()),

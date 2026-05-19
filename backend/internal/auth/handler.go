@@ -390,3 +390,63 @@ func (h *AuthHandler) Disable2FA(c *fiber.Ctx) error {
 
 	return common.Success(c, "2FA disabled successfully", nil)
 }
+
+func (h *AuthHandler) Impersonate(c *fiber.Ctx) error {
+	actorID, ok := c.Locals("user_id").(string)
+	if !ok {
+		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+	}
+
+	var req ImpersonateRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	if req.TargetUserID == "" {
+		return common.Error(c, fiber.StatusBadRequest, "Target user ID is required", "")
+	}
+
+	token, err := h.svc.Impersonate(c.UserContext(), actorID, req.TargetUserID)
+	if err != nil {
+		return common.Error(c, fiber.StatusForbidden, err.Error(), "")
+	}
+
+	// Trigger Audit Log
+	if system.GlobalAuditService != nil {
+		// Prepare a temporary context with impersonator_id to audit log correctly
+		//nolint:staticcheck // SA1029: using built-in string type as key for backward compatibility across modules
+		auditCtx := context.WithValue(c.UserContext(), "impersonator_id", actorID)
+		system.GlobalAuditService.LogEvent(auditCtx, req.TargetUserID, "IMPERSONATE_START", "auth", req.TargetUserID, c.IP())
+	}
+
+	return common.Success(c, "Impersonation started successfully", fiber.Map{
+		"token": token,
+	})
+}
+
+func (h *AuthHandler) StopImpersonation(c *fiber.Ctx) error {
+	// Extract the actual token from the request Authorization header
+	authHeader := c.Get("Authorization")
+	tokenString := strings.Replace(authHeader, "Bearer ", "", 1)
+
+	// Verify we are actually impersonating
+	impersonatorID, isImpersonating := c.Locals("impersonator_id").(string)
+	targetUserID, ok := c.Locals("user_id").(string)
+
+	if !isImpersonating || !ok {
+		return common.Error(c, fiber.StatusBadRequest, "No active impersonation session found", "")
+	}
+
+	if err := h.svc.StopImpersonation(c.UserContext(), tokenString); err != nil {
+		return common.Error(c, fiber.StatusInternalServerError, "Failed to stop impersonation", err.Error())
+	}
+
+	// Trigger Audit Log
+	if system.GlobalAuditService != nil {
+		//nolint:staticcheck // SA1029: using built-in string type as key for backward compatibility across modules
+		auditCtx := context.WithValue(c.UserContext(), "impersonator_id", impersonatorID)
+		system.GlobalAuditService.LogEvent(auditCtx, targetUserID, "IMPERSONATE_STOP", "auth", targetUserID, c.IP())
+	}
+
+	return common.Success(c, "Impersonation stopped successfully", nil)
+}
