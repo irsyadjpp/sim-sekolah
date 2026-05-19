@@ -12,12 +12,12 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	svc := NewGradeService(repo)
 	h := NewGradeHandler(svc)
 
-	group := router.Group("/grades")
+	group := router.Group("/tingkat-kelas")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAllGrades)
 	group.Get("/:id", h.GetGradeByID)
-	group.Get("/phase/:phaseId", h.GetGradesByPhase)
+	group.Get("/fase/:phaseId", h.GetGradesByPhase)
 	group.Post("/", h.CreateGrade)
 	group.Put("/:id", h.UpdateGrade)
 	group.Delete("/:id", h.DeleteGrade)

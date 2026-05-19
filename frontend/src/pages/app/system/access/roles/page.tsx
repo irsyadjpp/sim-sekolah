@@ -68,7 +68,7 @@ const getPermissionName = (moduleKey: string, action: "view" | "create" | "edit"
     if (action === "edit") return "student:update";
     if (action === "delete") return "student:delete";
   }
-  if (moduleKey === "ppdb") {
+  if (moduleKey === "spmb") {
     if (action === "view") return "ppdb:view";
     if (action === "edit") return "ppdb:update";
     return null;
@@ -162,7 +162,7 @@ export default function RolesPage() {
       });
       const rolesJson = await rolesRes.json();
       if (rolesJson.status !== "success") {
-        throw new Error(rolesJson.message || "Gagal mengambil data roles");
+        throw new Error(rolesJson.message || t("access-roles.fetch-roles-error"));
       }
       const fetchedRoles: Role[] = rolesJson.data || [];
       setRoles(fetchedRoles);
@@ -173,7 +173,7 @@ export default function RolesPage() {
       });
       const permsJson = await permsRes.json();
       if (permsJson.status !== "success") {
-        throw new Error(permsJson.message || "Gagal mengambil data perizinan");
+        throw new Error(permsJson.message || t("access-roles.fetch-perms-error"));
       }
       const fetchedPerms: Permission[] = permsJson.data || [];
       setAllPermissions(fetchedPerms);
@@ -314,9 +314,9 @@ export default function RolesPage() {
 
       <Breadcrumbs className="mb-6">
         <Link to="/home">{t("staff-form.breadcrumb-home")}</Link>
-        <Link to="/system">Sistem</Link>
-        <Link to="/system/access">Akses</Link>
-        <Typography variant="body2">Peran & Izin</Typography>
+        <Link to="/system">{t("common-ui.system")}</Link>
+        <Link to="/system/access">{t("common-ui.access")}</Link>
+        <Typography variant="body2">{t("access-roles.breadcrumb-roles")}</Typography>
       </Breadcrumbs>
 
       {error && (

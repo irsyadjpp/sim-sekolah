@@ -13,10 +13,10 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	h := NewAssessmentHandler(svc)
 
 	// Assessment endpoints
-	router.Get("/teaching-assignments/:assignmentId/assessments", middleware.Protected(), h.GetAssessments)
-	router.Post("/teaching-assignments/:assignmentId/assessments", middleware.Protected(), h.CreateAssessment)
+	router.Get("/tugas-mengajar/:assignmentId/penilaian", middleware.Protected(), h.GetAssessments)
+	router.Post("/tugas-mengajar/:assignmentId/penilaian", middleware.Protected(), h.CreateAssessment)
 
-	assessment := router.Group("/assessments")
+	assessment := router.Group("/penilaian")
 	assessment.Use(middleware.Protected())
 
 	assessment.Get("/:id", h.GetAssessmentByID)
@@ -24,10 +24,10 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	assessment.Delete("/:id", h.DeleteAssessment)
 
 	// Scores
-	assessment.Get("/:id/scores", h.GetScores)
-	assessment.Post("/:id/scores", h.UpsertScores)
+	assessment.Get("/:id/nilai", h.GetScores)
+	assessment.Post("/:id/nilai", h.UpsertScores)
 
 	// Daily Attendance endpoints
-	router.Get("/classrooms/:classroomId/attendances", middleware.Protected(), h.GetAttendances)
-	router.Post("/classrooms/:classroomId/attendances", middleware.Protected(), h.UpsertAttendances)
+	router.Get("/kelas/:classroomId/kehadiran", middleware.Protected(), h.GetAttendances)
+	router.Post("/kelas/:classroomId/kehadiran", middleware.Protected(), h.UpsertAttendances)
 }

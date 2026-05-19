@@ -14,14 +14,14 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 	h := NewUserHandler(svc)
 
 	// Fitur ini murni untuk ADMIN
-	group := api.Group("/users")
+	group := api.Group("/pengguna")
 	group.Use(middleware.Protected())
 	group.Use(auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"))
 
 	group.Get("/", h.GetAll)
-	group.Get("/roles", h.GetAllRoles)
+	group.Get("/peran", h.GetAllRoles)
 	group.Get("/:id", h.GetByID)
 	group.Patch("/:id/status", h.UpdateStatus)
-	group.Put("/:id/roles", h.AssignRoles)
-	group.Post("/:id/reset-password", h.ResetPassword)
+	group.Put("/:id/peran", h.AssignRoles)
+	group.Post("/:id/atur-ulang-kata-sandi", h.ResetPassword)
 }

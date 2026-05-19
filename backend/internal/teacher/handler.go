@@ -33,7 +33,7 @@ func (h *TeacherHandler) GetAll(c *fiber.Ctx) error {
 
 	data, total, err := h.svc.GetAll(c.UserContext(), pagination, search)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data guru", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data guru", err)
 	}
 	return common.Paginated(c, "Data guru berhasil diambil", data, pagination.Page, pagination.Limit, total)
 }
@@ -49,7 +49,7 @@ func (h *TeacherHandler) GetAll(c *fiber.Ctx) error {
 func (h *TeacherHandler) GetBySchool(c *fiber.Ctx) error {
 	data, err := h.svc.GetBySchoolID(c.UserContext(), c.Params("schoolId"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data guru", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data guru", err)
 	}
 	return common.Success(c, "Data guru berhasil diambil", data)
 }
@@ -65,7 +65,7 @@ func (h *TeacherHandler) GetBySchool(c *fiber.Ctx) error {
 func (h *TeacherHandler) GetByID(c *fiber.Ctx) error {
 	data, err := h.svc.GetByID(c.UserContext(), c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "Guru tidak ditemukan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Guru tidak ditemukan", err)
 	}
 	return common.Success(c, "Detail guru berhasil diambil", data)
 }
@@ -82,15 +82,15 @@ func (h *TeacherHandler) GetByID(c *fiber.Ctx) error {
 func (h *TeacherHandler) Create(c *fiber.Ctx) error {
 	var req CreateTeacherRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	data, err := h.svc.Create(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal membuat data guru", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat data guru", err)
 	}
 	return common.Created(c, "Data guru berhasil dibuat", data)
 }
@@ -108,12 +108,12 @@ func (h *TeacherHandler) Create(c *fiber.Ctx) error {
 func (h *TeacherHandler) Update(c *fiber.Ctx) error {
 	var req UpdateTeacherRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 
 	data, err := h.svc.Update(c.UserContext(), c.Params("id"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal memperbarui data guru", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui data guru", err)
 	}
 	return common.Success(c, "Data guru berhasil diperbarui", data)
 }
@@ -128,7 +128,7 @@ func (h *TeacherHandler) Update(c *fiber.Ctx) error {
 // @Router /teachers/{id} [delete]
 func (h *TeacherHandler) Delete(c *fiber.Ctx) error {
 	if err := h.svc.Delete(c.UserContext(), c.Params("id")); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menghapus data guru", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus data guru", err)
 	}
 	return common.Success(c, "Data guru berhasil dihapus", nil)
 }

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import {
@@ -48,8 +49,10 @@ import {
 
 import { DEFAULTS } from "@/config";
 import { useClientTable } from "@/hooks/use-client-table";
+import { spmbStatusLabel } from "@/i18n/spmb-status";
 
-export default function PPDBAdminPage() {
+export default function SPMBAdminPage() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -76,7 +79,7 @@ export default function PPDBAdminPage() {
     setError(null);
     const token = localStorage.getItem("accessToken");
     try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/ppdb/admin/applicants`, {
+      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/spmb/admin/applicants`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const json = await res.json();
@@ -92,10 +95,10 @@ export default function PPDBAdminPage() {
         const rejected = list.filter((a: any) => a.status === "Rejected").length;
         setStats({ total, pending, verified, accepted, rejected });
       } else {
-        setError(json.message || "Gagal memuat daftar pendaftar.");
+        setError(json.message || t("spmb.admin.load-error"));
       }
     } catch (err) {
-      setError("Kesalahan koneksi saat mengambil data pendaftar.");
+      setError(t("spmb.admin.connection-error"));
     } finally {
       setLoading(false);
     }
@@ -120,7 +123,7 @@ export default function PPDBAdminPage() {
 
     const token = localStorage.getItem("accessToken");
     try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/ppdb/admin/applicants/${selectedApplicant.id}/verify`, {
+      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/spmb/admin/applicants/${selectedApplicant.id}/verify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -134,7 +137,7 @@ export default function PPDBAdminPage() {
 
       const json = await res.json();
       if (json.status === "success") {
-        setVerifySuccessMsg(json.message || "Status verifikasi berhasil diperbarui.");
+        setVerifySuccessMsg(json.message || t("spmb.admin.verify-success"));
 
         // Optimistic UI update
         setApplicants((prev) =>
@@ -161,10 +164,10 @@ export default function PPDBAdminPage() {
           setSelectedApplicant(null);
         }, 2000);
       } else {
-        setError(json.message || "Gagal memperbarui verifikasi.");
+        setError(json.message || t("spmb.admin.verify-error"));
       }
     } catch (err) {
-      setError("Terjadi kesalahan jaringan saat melakukan verifikasi.");
+      setError(t("spmb.admin.network-error-verify"));
     }
   };
 
@@ -177,18 +180,18 @@ export default function PPDBAdminPage() {
   });
 
   const getStatusChip = (status: string) => {
-    switch (status) {
-      case "Submitted":
-        return <Chip label="Menunggu Verifikasi" color="warning" className="rounded-xl font-bold" />;
-      case "Verified":
-        return <Chip label="Terverifikasi" color="info" className="rounded-xl font-bold" />;
-      case "Accepted":
-        return <Chip label="Diterima" color="success" className="rounded-xl font-bold" />;
-      case "Rejected":
-        return <Chip label="Ditolak" color="error" className="rounded-xl font-bold" />;
-      default:
-        return <Chip label={status} color="default" className="rounded-xl font-bold" />;
-    }
+    const label = spmbStatusLabel(status);
+    const color =
+      status === "Submitted"
+        ? "warning"
+        : status === "Verified"
+          ? "info"
+          : status === "Accepted"
+            ? "success"
+            : status === "Rejected"
+              ? "error"
+              : "default";
+    return <Chip label={label} color={color} className="rounded-xl font-bold" />;
   };
 
   const {
@@ -201,21 +204,21 @@ export default function PPDBAdminPage() {
     handlePageChange,
     handleLimitChange,
     handleSort,
-  } = useClientTable({ key: "ppdb_admin", data: filteredApplicants, defaultLimit: 10 });
+  } = useClientTable({ key: "spmb_admin", data: filteredApplicants, defaultLimit: 10 });
 
   return (
     <Box className="pb-10">
       <Grid container spacing={2.5} className="mb-8 w-full">
         <Grid size={{ xs: 12 }}>
           <Typography variant="h1" component="h1" className="mb-0">
-            Dasbor Operator PPDB Online
+            Dasbor Operator SPMB Online
           </Typography>
           <Breadcrumbs>
             <Link color="inherit" to="/home" className="hover:text-primary no-underline transition-colors">
               Beranda
             </Link>
             <Typography variant="body2" className="text-text-secondary">
-              Seleksi & Verifikasi PPDB
+              Seleksi & Verifikasi SPMB
             </Typography>
           </Breadcrumbs>
         </Grid>
@@ -306,10 +309,10 @@ export default function PPDBAdminPage() {
           textColor="primary"
           indicatorColor="primary"
         >
-          <Tab label="Semua Pendaftar" className="font-bold" />
-          <Tab label={`Menunggu Verifikasi (${stats.pending})`} className="font-bold" />
-          <Tab label="Terverifikasi & Diterima" className="font-bold" />
-          <Tab label="Ditolak" className="font-bold" />
+          <Tab label={t("spmb.admin.tab-all")} className="font-bold" />
+          <Tab label={t("spmb.admin.tab-pending", { count: stats.pending })} className="font-bold" />
+          <Tab label={t("spmb.admin.tab-verified")} className="font-bold" />
+          <Tab label={t("spmb.admin.tab-rejected")} className="font-bold" />
         </Tabs>
 
         <TableContainer component={Paper} className="overflow-hidden rounded-2xl border-none shadow-none">
@@ -325,7 +328,7 @@ export default function PPDBAdminPage() {
                     direction={sortBy === "full_name" ? sortDir : "asc"}
                     onClick={() => handleSort("full_name")}
                   >
-                    Nama Calon Siswa
+                    {t("spmb.admin.col-student-name")}
                   </TableSortLabel>
                 </TableCell>
                 <TableCell className="font-black text-slate-700" sortDirection={sortBy === "nik" ? sortDir : false}>
@@ -334,20 +337,20 @@ export default function PPDBAdminPage() {
                     direction={sortBy === "nik" ? sortDir : "asc"}
                     onClick={() => handleSort("nik")}
                   >
-                    NIK
+                    {t("spmb.admin.col-nik")}
                   </TableSortLabel>
                 </TableCell>
-                <TableCell className="font-black text-slate-700">Jalur Seleksi</TableCell>
+                <TableCell className="font-black text-slate-700">{t("spmb.admin.col-path")}</TableCell>
                 <TableCell className="font-black text-slate-700" sortDirection={sortBy === "status" ? sortDir : false}>
                   <TableSortLabel
                     active={sortBy === "status"}
                     direction={sortBy === "status" ? sortDir : "asc"}
                     onClick={() => handleSort("status")}
                   >
-                    Status
+                    {t("spmb.admin.col-status")}
                   </TableSortLabel>
                 </TableCell>
-                <TableCell className="font-black text-slate-700">Aksi</TableCell>
+                <TableCell className="font-black text-slate-700">{t("spmb.admin.col-actions")}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -376,7 +379,7 @@ export default function PPDBAdminPage() {
                   <TableRow key={app.id} hover className="border-b border-slate-50 last:border-0">
                     <TableCell className="font-bold text-slate-800">{app.full_name}</TableCell>
                     <TableCell className="font-mono text-slate-600">{app.nik}</TableCell>
-                    <TableCell className="text-slate-600">{app.admission_path?.path_name}</TableCell>
+                    <TableCell className="text-slate-600">{app.admission_path?.name}</TableCell>
                     <TableCell>{getStatusChip(app.status)}</TableCell>
                     <TableCell>
                       <Button
@@ -386,7 +389,7 @@ export default function PPDBAdminPage() {
                         onClick={() => handleOpenVerify(app)}
                         className="rounded-xl font-bold"
                       >
-                        Detail & Verifikasi
+                        {t("spmb.admin.detail-verify-btn")}
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -394,7 +397,7 @@ export default function PPDBAdminPage() {
               ) : (
                 <TableRow>
                   <TableCell colSpan={5} className="py-10 text-center font-bold text-slate-400">
-                    Tidak ada data pendaftar yang cocok dengan filter ini.
+                    {t("spmb.admin.empty-filter")}
                   </TableCell>
                 </TableRow>
               )}
@@ -407,7 +410,7 @@ export default function PPDBAdminPage() {
             onPageChange={(_, newPage) => handlePageChange(newPage + 1)}
             rowsPerPage={limit}
             onRowsPerPageChange={(e) => handleLimitChange(parseInt(e.target.value, 10))}
-            labelRowsPerPage="Baris per halaman:"
+            labelRowsPerPage={t("common-ui.rows-per-page")}
           />
         </TableContainer>
       </Card>
@@ -420,52 +423,50 @@ export default function PPDBAdminPage() {
         fullWidth
         classes={{ paper: "rounded-[32px] p-6" }}
       >
-        <DialogTitle className="text-2xl font-black text-slate-800">
-          Detail Calon Siswa & Formulir Verifikasi
-        </DialogTitle>
+        <DialogTitle className="text-2xl font-black text-slate-800">{t("spmb.admin.dialog-title")}</DialogTitle>
         <DialogContent dividers className="flex flex-col gap-6 border-slate-100 py-6">
           {selectedApplicant && (
             <Grid container spacing={3}>
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="body2" className="mb-1 font-bold text-slate-400 uppercase">
-                  Nama Lengkap
+                  {t("spmb.admin.label-full-name")}
                 </Typography>
                 <Typography variant="body1" className="mb-4 font-black text-slate-800">
                   {selectedApplicant.full_name}
                 </Typography>
 
                 <Typography variant="body2" className="mb-1 font-bold text-slate-400 uppercase">
-                  NIK
+                  {t("spmb.admin.col-nik")}
                 </Typography>
                 <Typography variant="body1" className="mb-4 font-mono text-slate-800">
                   {selectedApplicant.nik}
                 </Typography>
 
                 <Typography variant="body2" className="mb-1 font-bold text-slate-400 uppercase">
-                  Tempat, Tanggal Lahir
+                  {t("spmb.admin.label-birth")}
                 </Typography>
                 <Typography variant="body1" className="mb-4 text-slate-800">
                   {selectedApplicant.birth_place}, {selectedApplicant.birth_date}
                 </Typography>
 
                 <Typography variant="body2" className="mb-1 font-bold text-slate-400 uppercase">
-                  Orang Tua (Ayah / Ibu)
+                  {t("spmb.admin.label-parents")}
                 </Typography>
                 <Typography variant="body1" className="mb-4 text-slate-800">
-                  {selectedApplicant.parents?.father_name || "-"} / {selectedApplicant.parents?.mother_name || "-"}
+                  {selectedApplicant.parent?.father_name || "-"} / {selectedApplicant.parent?.mother_name || "-"}
                 </Typography>
 
                 <Typography variant="body2" className="mb-1 font-bold text-slate-400 uppercase">
-                  Nomor HP / Kontak
+                  {t("spmb.admin.label-phone")}
                 </Typography>
                 <Typography variant="body1" className="font-bold text-slate-800">
-                  {selectedApplicant.parents?.phone_number || "-"}
+                  {selectedApplicant.parent?.phone_number || "-"}
                 </Typography>
               </Grid>
 
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="h6" className="text-primary mb-3 font-black">
-                  Dokumen Pendukung
+                  {t("spmb.admin.documents-title")}
                 </Typography>
                 {selectedApplicant.documents && selectedApplicant.documents.length > 0 ? (
                   <Box className="flex flex-col gap-2">
@@ -479,7 +480,7 @@ export default function PPDBAdminPage() {
                             {doc.document_type}
                           </Typography>
                           <Typography variant="caption" className="font-mono text-slate-400">
-                            Uploaded
+                            {t("spmb.admin.uploaded-caption")}
                           </Typography>
                         </Box>
                         <Button
@@ -490,21 +491,21 @@ export default function PPDBAdminPage() {
                           startIcon={<DownloadIcon />}
                           className="font-bold"
                         >
-                          Lihat / Download
+                          {t("spmb.admin.view-download")}
                         </Button>
                       </Paper>
                     ))}
                   </Box>
                 ) : (
                   <Alert severity="info" className="rounded-xl">
-                    Belum ada dokumen yang diunggah oleh pendaftar ini.
+                    {t("spmb.admin.no-documents")}
                   </Alert>
                 )}
 
                 <Divider className="my-6" />
 
                 <Typography variant="h6" className="text-primary mb-4 font-black">
-                  Keputusan Seleksi
+                  {t("spmb.admin.decision-title")}
                 </Typography>
 
                 {verifySuccessMsg && (
@@ -515,22 +516,21 @@ export default function PPDBAdminPage() {
 
                 <Box className="flex flex-col gap-4">
                   <FormControl fullWidth variant="outlined">
-                    <InputLabel>Status Pendaftaran</InputLabel>
+                    <InputLabel>{t("spmb.admin.registration-status")}</InputLabel>
                     <Select
-                      label="Status Pendaftaran"
+                      label={t("spmb.admin.registration-status")}
                       value={verifyStatus}
                       onChange={(e) => setVerifyStatus(e.target.value)}
                     >
-                      <MenuItem value="Verified">Terverifikasi (Verifikasi Berkas OK)</MenuItem>
-                      <MenuItem value="Accepted">Diterima (Auto-Enroll ke database Siswa Aktif)</MenuItem>
-                      <MenuItem value="Rejected">Ditolak</MenuItem>
+                      <MenuItem value="Verified">{t("spmb.admin.menu-verified")}</MenuItem>
+                      <MenuItem value="Accepted">{t("spmb.admin.menu-accepted")}</MenuItem>
+                      <MenuItem value="Rejected">{t("spmb.admin.menu-rejected")}</MenuItem>
                     </Select>
                   </FormControl>
 
                   {verifyStatus === "Accepted" && (
                     <Alert severity="warning" className="rounded-xl font-semibold">
-                      Menerima pendaftar ini akan memicu transaksi di database untuk langsung membuat profil siswa aktif
-                      (NIS baru, NISN, status aktif).
+                      {t("spmb.admin.accepted-warning")}
                     </Alert>
                   )}
 
@@ -538,8 +538,8 @@ export default function PPDBAdminPage() {
                     fullWidth
                     multiline
                     rows={3}
-                    label="Catatan Verifikator"
-                    placeholder="Contoh: Berkas asli telah cocok, siap diproses lebih lanjut."
+                    label={t("spmb.admin.verifier-notes")}
+                    placeholder={t("spmb.admin.verifier-notes-placeholder")}
                     value={verifyNotes}
                     onChange={(e) => setVerifyNotes(e.target.value)}
                   />
@@ -555,7 +555,7 @@ export default function PPDBAdminPage() {
             onClick={() => setOpenVerifyDialog(false)}
             className="rounded-xl font-bold"
           >
-            Tutup
+            {t("spmb.admin.close-btn")}
           </Button>
           <Button
             variant="contained"
@@ -563,7 +563,7 @@ export default function PPDBAdminPage() {
             onClick={handleSubmitVerification}
             className="rounded-xl px-6 font-black shadow-lg"
           >
-            Simpan Keputusan
+            {t("spmb.admin.save-decision-btn")}
           </Button>
         </DialogActions>
       </Dialog>

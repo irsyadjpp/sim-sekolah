@@ -32,7 +32,7 @@ func (h *StudentHandler) GetAll(c *fiber.Ctx) error {
 	search := c.Query("search", "")
 	data, total, err := h.svc.GetAll(c.UserContext(), pagination, search)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data siswa", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data siswa", err)
 	}
 	return common.Paginated(c, "Data siswa berhasil diambil", data, pagination.Page, pagination.Limit, total)
 }
@@ -48,7 +48,7 @@ func (h *StudentHandler) GetAll(c *fiber.Ctx) error {
 func (h *StudentHandler) GetBySchool(c *fiber.Ctx) error {
 	data, err := h.svc.GetBySchoolID(c.UserContext(), c.Params("schoolId"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data siswa", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data siswa", err)
 	}
 	return common.Success(c, "Data siswa berhasil diambil", data)
 }
@@ -64,7 +64,7 @@ func (h *StudentHandler) GetBySchool(c *fiber.Ctx) error {
 func (h *StudentHandler) GetByID(c *fiber.Ctx) error {
 	data, err := h.svc.GetByID(c.UserContext(), c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "Siswa tidak ditemukan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Siswa tidak ditemukan", err)
 	}
 
 	// Trigger Audit Log
@@ -88,14 +88,14 @@ func (h *StudentHandler) GetByID(c *fiber.Ctx) error {
 func (h *StudentHandler) Create(c *fiber.Ctx) error {
 	var req CreateStudentRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.Create(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal membuat data siswa", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat data siswa", err)
 	}
 
 	// Trigger Audit Log
@@ -120,11 +120,11 @@ func (h *StudentHandler) Create(c *fiber.Ctx) error {
 func (h *StudentHandler) Update(c *fiber.Ctx) error {
 	var req UpdateStudentRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	data, err := h.svc.Update(c.UserContext(), c.Params("id"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal memperbarui data siswa", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui data siswa", err)
 	}
 
 	// Trigger Audit Log
@@ -146,7 +146,7 @@ func (h *StudentHandler) Update(c *fiber.Ctx) error {
 // @Router /students/{id} [delete]
 func (h *StudentHandler) Delete(c *fiber.Ctx) error {
 	if err := h.svc.Delete(c.UserContext(), c.Params("id")); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menghapus data siswa", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus data siswa", err)
 	}
 
 	// Trigger Audit Log
@@ -177,14 +177,14 @@ func (h *StudentHandler) UpsertParent(c *fiber.Ctx) error {
 	studentID := c.Params("id")
 	var req UpsertParentRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.UpsertParent(c.UserContext(), studentID, req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menyimpan data orang tua", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menyimpan data orang tua", err)
 	}
 
 	// Trigger Audit Log
@@ -207,7 +207,7 @@ func (h *StudentHandler) UpsertParent(c *fiber.Ctx) error {
 // @Router /students/{id}/parents/{parentId} [delete]
 func (h *StudentHandler) DeleteParent(c *fiber.Ctx) error {
 	if err := h.svc.DeleteParent(c.UserContext(), c.Params("id"), c.Params("parentId")); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menghapus data orang tua", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus data orang tua", err)
 	}
 
 	// Trigger Audit Log

@@ -13,13 +13,13 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	svc := NewLocalContextService(repo)
 	h := NewLocalContextHandler(svc)
 
-	group := router.Group("/local-contexts")
+	group := router.Group("/konteks-lokal")
 
 	// Semua butuh login
 	group.Use(middleware.Protected())
 
 	// Categories
-	group.Get("/categories", h.GetAllCategories)
+	group.Get("/kategori", h.GetAllCategories)
 
 	// Contexts
 	group.Get("/", h.GetAllContexts)

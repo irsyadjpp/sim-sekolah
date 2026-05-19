@@ -12,7 +12,7 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	svc := NewClassroomService(repo)
 	h := NewClassroomHandler(svc)
 
-	group := router.Group("/classrooms")
+	group := router.Group("/kelas")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAllClassrooms)

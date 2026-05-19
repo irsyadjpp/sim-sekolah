@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Box,
@@ -64,7 +65,7 @@ const MODULE_KEYS = [
   "school",
   "staff",
   "student",
-  "ppdb",
+  "spmb",
   "curriculum",
   "classroom",
   "presence",
@@ -98,7 +99,7 @@ const getPermissionName = (moduleKey: string, action: "view" | "create" | "edit"
     if (action === "edit") return "student:update";
     if (action === "delete") return "student:delete";
   }
-  if (moduleKey === "ppdb") {
+  if (moduleKey === "spmb") {
     if (action === "view") return "ppdb:view";
     if (action === "edit") return "ppdb:update";
     return null;
@@ -143,37 +144,6 @@ const getPermissionName = (moduleKey: string, action: "view" | "create" | "edit"
   return null;
 };
 
-const getModuleLabel = (key: string): string => {
-  switch (key) {
-    case "system":
-      return "Sistem & Analitik";
-    case "school":
-      return "Profil Sekolah";
-    case "staff":
-      return "Kepegawaian (Guru/Staf)";
-    case "student":
-      return "Kesiswaan (Data Murid)";
-    case "ppdb":
-      return "Penerimaan Siswa Baru (PPDB)";
-    case "curriculum":
-      return "Kurikulum & KSP";
-    case "classroom":
-      return "Rombel & Jadwal Kelas";
-    case "presence":
-      return "Presensi & Kehadiran";
-    case "modules":
-      return "Bahan & Modul Ajar";
-    case "assessment":
-      return "Asesmen & Nilai Raport";
-    case "counseling":
-      return "Bimbingan Konseling (EWS)";
-    case "report":
-      return "Cetak Rapor Digital";
-    default:
-      return key;
-  }
-};
-
 export default function RolePermissionList({
   selectedRoleId,
   selectedRoleName,
@@ -183,6 +153,29 @@ export default function RolePermissionList({
   loading,
   handleTogglePermission,
 }: RolePermissionListProps) {
+  const { t } = useTranslation();
+
+  const getModuleLabel = useCallback(
+    (key: string): string => {
+      const map: Record<string, string> = {
+        system: "access-roles.module-system",
+        school: "access-roles.module-school",
+        staff: "access-roles.module-staff",
+        student: "access-roles.module-student",
+        spmb: "access-roles.module-spmb",
+        curriculum: "access-roles.module-curriculum",
+        classroom: "access-roles.module-classroom",
+        presence: "access-roles.module-presence",
+        modules: "access-roles.module-modules",
+        assessment: "access-roles.module-assessment",
+        counseling: "access-roles.module-counseling",
+        report: "access-roles.module-report",
+      };
+      return map[key] ? t(map[key]) : key;
+    },
+    [t],
+  );
+
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>({
     type: "include",
     ids: new Set(),
@@ -212,7 +205,7 @@ export default function RolePermissionList({
         return {
           id: key,
           type: getModuleLabel(key),
-          configuration: "Semua Item Saat Ini & Masa Depan",
+          configuration: t("access-roles.config-all-items"),
           view: viewObj ? activeSet.has(viewObj.id) : null,
           create: createObj ? activeSet.has(createObj.id) : null,
           edit: editObj ? activeSet.has(editObj.id) : null,
@@ -224,27 +217,27 @@ export default function RolePermissionList({
   const columns: GridColDef<(typeof gridRows)[number]>[] = [
     {
       field: "id",
-      headerName: "ID",
+      headerName: t("access-roles.col-id"),
       width: 240,
       type: "string",
     },
     {
       field: "type",
-      headerName: "Modul / Sumber Daya",
+      headerName: t("access-roles.col-module"),
       align: "left",
       headerAlign: "left",
       width: 250,
     },
     {
       field: "configuration",
-      headerName: "Ruang Lingkup",
+      headerName: t("access-roles.col-scope"),
       align: "left",
       headerAlign: "left",
       width: 240,
     },
     {
       field: "view",
-      headerName: "Melihat (View)",
+      headerName: t("access-roles.col-view"),
       align: "left",
       headerAlign: "left",
       type: "boolean",
@@ -276,7 +269,7 @@ export default function RolePermissionList({
     },
     {
       field: "create",
-      headerName: "Membuat (Create)",
+      headerName: t("access-roles.col-create"),
       align: "left",
       headerAlign: "left",
       type: "boolean",
@@ -308,7 +301,7 @@ export default function RolePermissionList({
     },
     {
       field: "edit",
-      headerName: "Mengubah (Edit)",
+      headerName: t("access-roles.col-edit"),
       align: "left",
       headerAlign: "left",
       type: "boolean",
@@ -340,7 +333,7 @@ export default function RolePermissionList({
     },
     {
       field: "delete",
-      headerName: "Menghapus (Delete)",
+      headerName: t("access-roles.col-delete"),
       align: "left",
       headerAlign: "left",
       type: "boolean",
@@ -372,16 +365,21 @@ export default function RolePermissionList({
     },
     {
       field: "actions",
-      headerName: "Tindakan",
+      headerName: t("common-ui.actions"),
       type: "actions",
       minWidth: 80,
       flex: 1,
       align: "right",
       headerAlign: "right",
       getActions: () => [
-        <GridActionsCellItem key={1} icon={<NiPenSquare size="medium" />} label="Edit" showInMenu />,
-        <GridActionsCellItem key={2} icon={<NiDuplicate size="medium" />} label="Duplicate" showInMenu />,
-        <GridActionsCellItem key={0} icon={<NiCrossSquare size="medium" />} label="Delete" showInMenu />,
+        <GridActionsCellItem key={1} icon={<NiPenSquare size="medium" />} label={t("common-ui.edit")} showInMenu />,
+        <GridActionsCellItem
+          key={2}
+          icon={<NiDuplicate size="medium" />}
+          label={t("common-ui.duplicate")}
+          showInMenu
+        />,
+        <GridActionsCellItem key={0} icon={<NiCrossSquare size="medium" />} label={t("common-ui.delete")} showInMenu />,
       ],
     },
   ];
@@ -391,7 +389,7 @@ export default function RolePermissionList({
       <Toolbar className="min-h-auto border-none p-0">
         <Grid container spacing={5} className="m-0 mb-4 w-full">
           <FormControl variant="filled" size="medium" className="surface mb-0 flex-1 pt-0.25">
-            <InputLabel>Search</InputLabel>
+            <InputLabel>{t("common-ui.search")}</InputLabel>
             <QuickFilter
               render={() => (
                 <QuickFilterControl

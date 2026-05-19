@@ -13,7 +13,7 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	svc := NewLearningService(db, aiSvc)
 	h := NewLearningHandler(svc)
 
-	learning := router.Group("/learning")
+	learning := router.Group("/pembelajaran")
 	learning.Use(middleware.Protected())
 
 	learning.Get("/atp", h.GetAllATP)
@@ -21,6 +21,6 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	learning.Post("/atp", h.SaveATP)
 	learning.Delete("/atp/:id", h.DeleteATP)
 
-	learning.Post("/atp/:atpId/generate-module", h.GenerateModule)
-	learning.Post("/modules", h.SaveModule)
+	learning.Post("/atp/:atpId/buat-modul", h.GenerateModule)
+	learning.Post("/modul", h.SaveModule)
 }

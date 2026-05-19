@@ -15,7 +15,7 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 	svc := NewSubjectService(subRepo, elemRepo)
 	h := NewSubjectHandler(svc)
 
-	group := api.Group("/subjects")
+	group := api.Group("/mata-pelajaran")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAll)
@@ -26,8 +26,8 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 	group.Delete("/:id", auth.RoleMiddleware("SUPER_ADMIN"), h.Delete)
 
 	// Nested routes for Elements
-	group.Get("/:subjectId/elements", h.GetAllElements)
-	group.Post("/:subjectId/elements", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.CreateElement)
-	group.Put("/:subjectId/elements/:id", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.UpdateElement)
-	group.Delete("/:subjectId/elements/:id", auth.RoleMiddleware("SUPER_ADMIN"), h.DeleteElement)
+	group.Get("/:subjectId/elemen", h.GetAllElements)
+	group.Post("/:subjectId/elemen", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.CreateElement)
+	group.Put("/:subjectId/elemen/:id", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.UpdateElement)
+	group.Delete("/:subjectId/elemen/:id", auth.RoleMiddleware("SUPER_ADMIN"), h.DeleteElement)
 }

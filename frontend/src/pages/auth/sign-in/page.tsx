@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
@@ -26,11 +26,7 @@ import { DEFAULTS } from "@/config";
 import NiCrossSquare from "@/icons/nexture/ni-cross-square";
 import NiEyeClose from "@/icons/nexture/ni-eye-close";
 import NiEyeOpen from "@/icons/nexture/ni-eye-open";
-
-const validationSchema = yup.object({
-  email: yup.string().required("Bagian ini wajib diisi").email("Masukkan email yang valid"),
-  password: yup.string().required("Bagian ini wajib diisi"),
-});
+import { apiClient } from "@/lib/api-client";
 
 type InputErrorProps = {
   title: string;
@@ -54,6 +50,14 @@ const InputErrorTooltip = ({ title }: InputErrorProps) => {
 export default function Page() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const validationSchema = useMemo(
+    () =>
+      yup.object({
+        email: yup.string().required(t("validation.required")).email(t("validation.email")),
+        password: yup.string().required(t("validation.required")),
+      }),
+    [t],
+  );
   const [submitted, setSubmitted] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
@@ -75,22 +79,15 @@ export default function Page() {
     onSubmit: async (values) => {
       setApiError(null);
       try {
-        const response = await fetch(`${DEFAULTS.API_URL}/api/v1/auth/login`, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: values.email,
-            password: values.password,
-          }),
+        const response = await apiClient.post("/api/v1/auth/login", {
+          email: values.email,
+          password: values.password,
         });
 
-        const result = await response.json();
+        const result = response.data;
 
-        if (!response.ok || result.status !== "success") {
-          throw new Error(result.message || "Email atau kata sandi salah");
+        if (result.status !== "success") {
+          throw new Error(result.message || t("auth.email-password-wrong"));
         }
 
         // Check if 2FA verification is required
@@ -120,7 +117,8 @@ export default function Page() {
 
         navigate(DEFAULTS.appRoot);
       } catch (err: any) {
-        setApiError(err.message);
+        const errMsg = err.response?.data?.message || err.message || t("auth.email-password-wrong");
+        setApiError(errMsg);
       }
     },
     validateOnBlur: false,
@@ -136,21 +134,14 @@ export default function Page() {
     setVerifyingOtp(true);
     setApiError(null);
     try {
-      const response = await fetch(`${DEFAULTS.API_URL}/api/v1/auth/verify-2fa`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          temp_token: mfaPendingToken,
-          code: otpCode,
-        }),
+      const response = await apiClient.post("/api/v1/auth/verify-2fa", {
+        temp_token: mfaPendingToken,
+        code: otpCode,
       });
 
-      const result = await response.json();
+      const result = response.data;
 
-      if (!response.ok || result.status !== "success") {
+      if (result.status !== "success") {
         throw new Error(result.message || t("mfa.login-error"));
       }
 
@@ -168,7 +159,8 @@ export default function Page() {
 
       navigate(DEFAULTS.appRoot);
     } catch (err: any) {
-      setApiError(err.message);
+      const errMsg = err.response?.data?.message || err.message || t("mfa.login-error");
+      setApiError(errMsg);
     } finally {
       setVerifyingOtp(false);
     }
@@ -429,20 +421,20 @@ export default function Page() {
                         </Button>
                       </Box>
 
-                      <Divider className="text-text-secondary my-4 text-sm">PORTAL PPDB ONLINE</Divider>
+                      <Divider className="text-text-secondary my-4 text-sm">PORTAL SPMB ONLINE</Divider>
                       <Box className="mb-4 flex flex-col gap-2">
                         <Button
                           variant="outlined"
                           color="primary"
-                          onClick={() => navigate("/auth/ppdb/register")}
+                          onClick={() => navigate("/auth/spmb/register")}
                           className="w-full font-bold"
                         >
-                          Pendaftaran Siswa Baru (PPDB)
+                          Pendaftaran Murid Baru (SPMB)
                         </Button>
                         <Button
                           variant="outlined"
                           color="secondary"
-                          onClick={() => navigate("/auth/ppdb/status")}
+                          onClick={() => navigate("/auth/spmb/status")}
                           className="w-full font-bold"
                         >
                           Cek Status Pendaftaran & Upload Berkas

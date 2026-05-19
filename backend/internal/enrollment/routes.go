@@ -14,11 +14,11 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	svc := NewEnrollmentService(repo, classRepo)
 	h := NewEnrollmentHandler(svc)
 
-	group := router.Group("/classrooms/:classroomId/enrollments")
+	group := router.Group("/kelas/:classroomId/anggota")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetEnrollments)
 	group.Post("/", h.EnrollStudent)
-	group.Post("/bulk", h.BulkEnroll)
+	group.Post("/massal", h.BulkEnroll)
 	group.Delete("/:enrollmentId", h.UnenrollStudent)
 }

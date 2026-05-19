@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
@@ -41,6 +42,7 @@ import NiUsers from "@/icons/nexture/ni-users";
 import { cn } from "@/lib/utils";
 
 export default function Search() {
+  const { t } = useTranslation();
   const isMac = navigator.userAgent.includes("Mac");
 
   const [tooltipShow, setTooltipShow] = useState(false);
@@ -71,7 +73,12 @@ export default function Search() {
 
   return (
     <>
-      <Tooltip title={`Search (${isMac ? "cmd" : "ctrl"}+k)`} placement="bottom" arrow open={!open && tooltipShow}>
+      <Tooltip
+        title={t("common-ui.search-shortcut", { shortcut: isMac ? "cmd" : "ctrl" })}
+        placement="bottom"
+        arrow
+        open={!open && tooltipShow}
+      >
         <Button
           variant="text"
           size="large"
@@ -98,7 +105,7 @@ export default function Search() {
           <Input
             classes={{ input: "ps-0!" }}
             className="w-full py-7!"
-            placeholder="Search"
+            placeholder={t("common-ui.search")}
             startAdornment={
               <InputAdornment position="start">
                 <NiSearch size="medium" />
@@ -419,7 +426,7 @@ export default function Search() {
         </DialogContent>
         <DialogActions className="justify-center">
           <Button variant="text" size="tiny" color="primary">
-            Advanced Search
+            {t("common-ui.advanced-search")}
           </Button>
         </DialogActions>
       </Dialog>

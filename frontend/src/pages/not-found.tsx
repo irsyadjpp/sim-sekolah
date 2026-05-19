@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { Box, Button, Paper, Typography } from "@mui/material";
@@ -8,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { useThemeContext } from "@/theme/theme-provider";
 
 export default function Page() {
+  const { t } = useTranslation();
   const { isDarkMode } = useThemeContext();
 
   return (
@@ -29,13 +31,13 @@ export default function Page() {
 
             <Box className="flex flex-col items-center gap-4">
               <Typography variant="h1" component="h1">
-                Page not found!️
+                {t("not-found.title")}
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                Error Code: 404
+                {t("not-found.error-code")}
               </Typography>
-              <Button variant="outlined" startIcon={<NiHome />} to="/dashboards/default" component={Link}>
-                Home
+              <Button variant="outlined" startIcon={<NiHome />} to="/home/board/summary" component={Link}>
+                {t("not-found.back-home")}
               </Button>
             </Box>
           </Box>

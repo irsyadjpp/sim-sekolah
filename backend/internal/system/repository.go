@@ -288,7 +288,7 @@ func (r *systemRepository) InitViewsAndSeed(ctx context.Context) error {
 					ReferenceID: uuid.New(),
 					UserID:      userID,
 					Status:      "GAGAL",
-					ErrorLog:    "OOM Killer: LLM Local Llama-3 exceeded available 16GB RAM limit on intranet school server.",
+					ErrorLog:    "OOM Killer: LLM Lokal Llama-3 melebihi batas memori RAM 16GB pada server intranet sekolah.",
 					CreatedAt:   time.Now().Add(-15 * time.Minute),
 					UpdatedAt:   time.Now().Add(-14 * time.Minute),
 				},
@@ -304,6 +304,6 @@ func (r *systemRepository) InitViewsAndSeed(ctx context.Context) error {
 		}
 	}
 
-	logger.Info("Database views initialized and seeds completed successfully!")
+	logger.Info("Tampilan database diinisialisasi dan data awal berhasil diselesaikan!")
 	return nil
 }

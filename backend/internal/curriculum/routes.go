@@ -18,16 +18,16 @@ func SetupRoutes(router fiber.Router, db *gorm.DB, rdb *redis.Client) {
 	svc := NewCurriculumService(repo, ayRepo, queueSvc)
 	h := NewCurriculumHandler(svc)
 
-	group := router.Group("/curriculum-documents")
+	group := router.Group("/dokumen-kurikulum")
 	group.Use(middleware.Protected())
 
 	group.Post("/", h.InitializeDocument)
 	group.Get("/", h.GetDocuments)
 	group.Get("/:id", h.GetDocumentByID)
-	group.Get("/readiness", h.CheckReadiness)
-	group.Post("/chapters/trigger", h.TriggerChapterFormulation)
-	group.Get("/:id/chapters/:chapter_number", h.GetChapter)
-	group.Put("/chapters/:chapter_id", h.UpdateChapterContent)
-	group.Post("/:id/finalize", h.FinalizeDocument)
-	group.Get("/:id/export", h.ExportDocument)
+	group.Get("/kesiapan", h.CheckReadiness)
+	group.Post("/bab/pemicu", h.TriggerChapterFormulation)
+	group.Get("/:id/bab/:chapter_number", h.GetChapter)
+	group.Put("/bab/:chapter_id", h.UpdateChapterContent)
+	group.Post("/:id/finalisasi", h.FinalizeDocument)
+	group.Get("/:id/ekspor", h.ExportDocument)
 }

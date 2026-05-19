@@ -28,16 +28,21 @@ func (r *repository) Seed(ctx context.Context) error {
 	seeds := []struct {
 		Order int
 		Name  string
+		KKO   string
 	}{
-		{1, "Understand"},
-		{2, "Apply"},
-		{3, "Reflect"},
+		{1, "Mengaktifkan", "Mengingat, Memahami, Menghubungkan"},
+		{2, "Menyelidiki", "Menganalisis, Membandingkan, Mengevaluasi"},
+		{3, "Merefleksi", "Merancang, Membangun, Menghasilkan, Merefleksikan"},
 	}
 	for _, s := range seeds {
 		var count int64
 		r.db.Model(&CognitiveStage{}).Where("stage_name = ?", s.Name).Count(&count)
 		if count == 0 {
-			r.db.Create(&CognitiveStage{Order: s.Order, Name: s.Name})
+			r.db.Create(&CognitiveStage{
+				Order: s.Order,
+				Name:  s.Name,
+				KKO:   s.KKO,
+			})
 		}
 	}
 	return nil

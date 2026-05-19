@@ -37,7 +37,7 @@ import {
 import Logo from "@/components/logo/logo";
 import { DEFAULTS } from "@/config";
 
-export default function PPDBRegisterPage() {
+export default function SPMBRegisterPage() {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -45,9 +45,12 @@ export default function PPDBRegisterPage() {
   const [academicYears, setAcademicYears] = useState<any[]>([]);
   const [successData, setSuccessData] = useState<any | null>(null);
 
+  const selectedPath = admissionPaths.find((p) => p.id === formik.values.admission_path_id);
+  const isDomisili = selectedPath?.name === "Domisili";
+
   const steps = [
     { label: "Jalur & Akademik", icon: <SchoolIcon /> },
-    { label: "Identitas Siswa", icon: <PersonIcon /> },
+    { label: "Identitas Murid", icon: <PersonIcon /> },
     { label: "Alamat Domisili", icon: <LocationIcon /> },
     { label: "Orang Tua & Kontak", icon: <PhoneIcon /> },
   ];
@@ -61,19 +64,19 @@ export default function PPDBRegisterPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const pathRes = await fetch(`${DEFAULTS.API_URL}/api/v1/ppdb/admission-paths`);
+        const pathRes = await fetch(`${DEFAULTS.API_URL}/api/v1/spmb/admission-paths`);
         const pathJson = await pathRes.json();
         if (pathJson.status === "success") {
           setAdmissionPaths(pathJson.data || []);
         }
 
-        const yearRes = await fetch(`${DEFAULTS.API_URL}/api/v1/ppdb/academic-years`);
+        const yearRes = await fetch(`${DEFAULTS.API_URL}/api/v1/spmb/academic-years`);
         const yearJson = await yearRes.json();
         if (yearJson.status === "success") {
           setAcademicYears(yearJson.data || []);
         }
       } catch (err) {
-        console.error("Gagal memuat data awal PPDB", err);
+        console.error("Gagal memuat data awal SPMB", err);
       }
     };
     fetchData();
@@ -104,32 +107,55 @@ export default function PPDBRegisterPage() {
       mother_nik: "",
       mother_occupation: "",
       phone_number: "",
+      family_card_issue_date: "",
     },
     validationSchema: Yup.object({
       admission_path_id: Yup.string().required("Jalur masuk wajib dipilih"),
       academic_year_id: Yup.string().required("Tahun ajaran wajib dipilih"),
-      full_name: Yup.string().required("Nama lengkap calon siswa wajib diisi"),
-      nik: Yup.string().length(16, "NIK harus terdiri dari 16 digit").required("NIK calon siswa wajib diisi"),
+      full_name: Yup.string().required("Nama lengkap calon murid wajib diisi"),
+      nik: Yup.string().length(16, "NIK harus terdiri dari 16 digit").required("NIK calon murid wajib diisi"),
       gender: Yup.string().required("Jenis kelamin wajib dipilih"),
       birth_place: Yup.string().required("Tempat lahir wajib diisi"),
-      birth_date: Yup.string().required("Tanggal lahir wajib diisi"),
+      birth_date: Yup.string()
+        .required("Tanggal lahir wajib diisi")
+        .test("age-gate", "Usia calon murid kurang dari 5 tahun 6 bulan pada 1 Juli tahun berjalan", function (value) {
+          if (!value) return true;
+          const birth = new Date(value);
+          const currentYear = new Date().getFullYear();
+          const targetDate = new Date(currentYear, 6, 1);
+          const ageDiffMs = targetDate.getTime() - birth.getTime();
+          const ageDate = new Date(ageDiffMs);
+          const ageYears = Math.abs(ageDate.getUTCFullYear() - 1970);
+          const ageMonths = ageYears * 12 + ageDate.getUTCMonth();
+          return ageMonths >= 66;
+        }),
       religion: Yup.string().required("Agama wajib dipilih"),
       address: Yup.string().required("Alamat tempat tinggal wajib diisi"),
       village: Yup.string().required("Desa/Kelurahan wajib diisi"),
       district: Yup.string().required("Kecamatan wajib diisi"),
       phone_number: Yup.string().required("Nomor HP aktif wajib diisi untuk koordinasi"),
+      family_card_issue_date: Yup.string().test(
+        "kk-required",
+        "Tanggal terbit Kartu Keluarga wajib diisi untuk Jalur Domisili",
+        function (value) {
+          const { admission_path_id } = this.parent;
+          const path = admissionPaths.find((p) => p.id === admission_path_id);
+          if (path?.name === "Domisili" && !value) return false;
+          return true;
+        },
+      ),
     }),
     onSubmit: async (values) => {
       setError(null);
       try {
-        const res = await fetch(`${DEFAULTS.API_URL}/api/v1/ppdb/register`, {
+        const res = await fetch(`${DEFAULTS.API_URL}/api/v1/spmb/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            school_year_id: values.academic_year_id,
             admission_path_id: values.admission_path_id,
-            academic_year_id: values.academic_year_id,
             full_name: values.full_name,
             nik: values.nik,
             nisn: values.nisn,
@@ -137,24 +163,21 @@ export default function PPDBRegisterPage() {
             birth_place: values.birth_place,
             birth_date: values.birth_date,
             religion: values.religion,
-            address: {
-              address: values.address,
-              village: values.village,
-              district: values.district,
-              regency: values.regency,
-              province: values.province,
-              postal_code: values.postal_code,
-              distance_to_school: parseFloat(values.distance_to_school.toString()),
-            },
-            parents: {
-              father_name: values.father_name,
-              father_nik: values.father_nik,
-              father_occupation: values.father_occupation,
-              mother_name: values.mother_name,
-              mother_nik: values.mother_nik,
-              mother_occupation: values.mother_occupation,
-              phone_number: values.phone_number,
-            },
+            family_card_issue_date: values.family_card_issue_date || undefined,
+            address: values.address,
+            village: values.village,
+            district: values.district,
+            regency: values.regency,
+            province: values.province,
+            postal_code: values.postal_code,
+            distance_to_school_km: parseFloat(values.distance_to_school.toString()),
+            father_name: values.father_name,
+            father_nik: values.father_nik,
+            father_occupation: values.father_occupation,
+            mother_name: values.mother_name,
+            mother_nik: values.mother_nik,
+            mother_occupation: values.mother_occupation,
+            phone_number: values.phone_number,
           }),
         });
 
@@ -191,11 +214,18 @@ export default function PPDBRegisterPage() {
     }
     if (activeStep === 2) {
       const errors = await formik.validateForm();
-      if (errors.address || errors.village || errors.district) {
+      const path = admissionPaths.find((p) => p.id === formik.values.admission_path_id);
+      if (
+        errors.address ||
+        errors.village ||
+        errors.district ||
+        (path?.path_name === "Domisili" && errors.family_card_issue_date)
+      ) {
         formik.setTouched({
           address: true,
           village: true,
           district: true,
+          family_card_issue_date: true,
         });
         return;
       }
@@ -219,7 +249,7 @@ export default function PPDBRegisterPage() {
                 Pendaftaran Berhasil!
               </Typography>
               <Typography variant="body1" className="text-text-secondary">
-                Data calon siswa baru telah sukses disimpan dalam sistem PPDB Online UPT SDI Bonerate No. 85.
+                Data calon murid baru telah sukses disimpan dalam sistem SPMB Online UPT SDI Bonerate No. 85.
               </Typography>
             </Box>
 
@@ -254,14 +284,15 @@ export default function PPDBRegisterPage() {
 
             <Alert severity="warning" className="w-full rounded-2xl text-left font-semibold">
               <strong>PENTING:</strong> Catat dan simpan NIK di atas. Anda wajib melakukan upload dokumen pendukung (KK,
-              Akta Kelahiran, Ijazah) pada menu Cek Status Pendaftaran untuk menyelesaikan proses administrasi.
+              Akta Kelahiran, Rekomendasi Psikolog/Disabilitas jika diperlukan) pada menu Cek Status Pendaftaran untuk
+              menyelesaikan proses administrasi.
             </Alert>
 
             <Box className="flex w-full flex-col justify-center gap-4 sm:flex-row">
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => navigate("/auth/ppdb/status")}
+                onClick={() => navigate("/auth/spmb/status")}
                 className="rounded-2xl px-8 py-4 font-black shadow-xl"
               >
                 Upload Dokumen & Cek Status
@@ -294,10 +325,10 @@ export default function PPDBRegisterPage() {
 
           <Box className="flex flex-col">
             <Typography variant="h1" className="mb-1">
-              Pendaftaran Siswa Baru (PPDB Online)
+              Pendaftaran Murid Baru (SPMB Online)
             </Typography>
             <Typography variant="body1" className="text-text-secondary">
-              Lengkapi formulir pendaftaran calon peserta didik baru UPT SDI Bonerate No. 85 Kepulauan Selayar.
+              Lengkapi formulir pendaftaran calon murid baru UPT SDI Bonerate No. 85 Kepulauan Selayar.
             </Typography>
           </Box>
 
@@ -350,9 +381,9 @@ export default function PPDBRegisterPage() {
                     <Grid container spacing={3}>
                       <Grid size={{ xs: 12, md: 6 }}>
                         <FormControl fullWidth variant="outlined">
-                          <InputLabel>Jalur PPDB</InputLabel>
+                          <InputLabel>Jalur SPMB</InputLabel>
                           <Select
-                            label="Jalur PPDB"
+                            label="Jalur SPMB"
                             name="admission_path_id"
                             value={formik.values.admission_path_id}
                             onChange={formik.handleChange}
@@ -360,7 +391,7 @@ export default function PPDBRegisterPage() {
                           >
                             {admissionPaths.map((path) => (
                               <MenuItem key={path.id} value={path.id}>
-                                {path.path_name} (Kuota: {path.quota})
+                                {path.name}
                               </MenuItem>
                             ))}
                           </Select>
@@ -392,7 +423,7 @@ export default function PPDBRegisterPage() {
                       <Grid size={{ xs: 12, md: 6 }}>
                         <TextField
                           fullWidth
-                          label="Nama Lengkap Calon Siswa"
+                          label="Nama Lengkap Calon Murid"
                           name="full_name"
                           value={formik.values.full_name}
                           onChange={formik.handleChange}
@@ -403,7 +434,7 @@ export default function PPDBRegisterPage() {
                       <Grid size={{ xs: 12, md: 6 }}>
                         <TextField
                           fullWidth
-                          label="NIK Calon Siswa"
+                          label="NIK Calon Murid"
                           name="nik"
                           value={formik.values.nik}
                           onChange={formik.handleChange}
@@ -538,6 +569,23 @@ export default function PPDBRegisterPage() {
                           onChange={formik.handleChange}
                         />
                       </Grid>
+                      {isDomisili && (
+                        <Grid size={{ xs: 12, md: 6 }}>
+                          <TextField
+                            fullWidth
+                            type="date"
+                            label="Tanggal Terbit Kartu Keluarga"
+                            name="family_card_issue_date"
+                            InputLabelProps={{ shrink: true }}
+                            value={formik.values.family_card_issue_date}
+                            onChange={formik.handleChange}
+                            error={
+                              formik.touched.family_card_issue_date && Boolean(formik.errors.family_card_issue_date)
+                            }
+                            helperText={formik.touched.family_card_issue_date && formik.errors.family_card_issue_date}
+                          />
+                        </Grid>
+                      )}
                     </Grid>
                   )}
 

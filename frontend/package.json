@@ -32,6 +32,7 @@
     "@types/react-syntax-highlighter": "15.5.13",
     "@vidstack/react": "1.12.13",
     "autosuggest-highlight": "3.3.4",
+    "axios": "^1.16.1",
     "dayjs": "1.11.13",
     "ds-markdown": "0.2.2",
     "formik": "2.4.6",

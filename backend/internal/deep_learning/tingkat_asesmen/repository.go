@@ -30,8 +30,8 @@ func (r *repository) Seed(ctx context.Context) error {
 		Description string
 		PISA        string
 	}{
-		{"LOTS", "Lower Order Thinking Skills", "Level 1-3"},
-		{"HOTS", "Higher Order Thinking Skills", "Level 4-6"},
+		{"LOTS", "Kemampuan Berpikir Tingkat Rendah (LOTS)", "Level 1-3"},
+		{"HOTS", "Kemampuan Berpikir Tingkat Tinggi (HOTS)", "Level 4-6"},
 	}
 	for _, s := range seeds {
 		var count int64

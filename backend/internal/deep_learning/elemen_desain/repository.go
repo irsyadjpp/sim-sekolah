@@ -25,7 +25,7 @@ func (r *repository) GetAll() ([]DesignElement, error) {
 }
 
 func (r *repository) Seed(ctx context.Context) error {
-	seeds := []string{"Pedagogical Practices", "Learning Environment", "Digital Utilization", "Learning Partnerships"}
+	seeds := []string{"Praktik Pedagogis", "Lingkungan Pembelajaran", "Pemanfaatan Digital", "Kemitraan Pembelajaran"}
 	for _, name := range seeds {
 		var count int64
 		r.db.Model(&DesignElement{}).Where("design_element_name = ?", name).Count(&count)

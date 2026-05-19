@@ -12,7 +12,7 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	svc := NewTeachingAssignmentService(repo)
 	h := NewTeachingAssignmentHandler(svc)
 
-	group := router.Group("/classrooms/:classroomId/assignments")
+	group := router.Group("/kelas/:classroomId/tugas-mengajar")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAssignments)

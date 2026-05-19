@@ -5,14 +5,11 @@ import { Box, Breadcrumbs, Card, CardContent, Grid, Typography } from "@mui/mate
 
 export default function AccessHubPage() {
   const { t } = useTranslation();
-  const isIndo = localStorage.getItem("i18nextLng")?.startsWith("id");
 
   const cards = [
     {
-      title: isIndo ? "Manajemen Pengguna" : "User Management",
-      desc: isIndo
-        ? "Kelola akun pengguna, status aktif/non-aktif, pemblokiran akun, dan penugasan peran sistem."
-        : "Manage user accounts, active/inactive statuses, account locking, and system role assignments.",
+      titleKey: "access-hub.card-users-title",
+      descKey: "access-hub.card-users-desc",
       href: "/system/access/users",
       icon: (
         <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
@@ -27,10 +24,8 @@ export default function AccessHubPage() {
       bgColor: "rgba(59, 130, 246, 0.08)",
     },
     {
-      title: isIndo ? "Peran & Hak Akses" : "Roles & Permissions",
-      desc: isIndo
-        ? "Konfigurasikan peran pengguna (RBAC) dan sesuaikan matriks izin akses untuk setiap modul SIM Sekolah."
-        : "Configure user roles (RBAC) and customize access permission matrices for each SIM Sekolah module.",
+      titleKey: "access-hub.card-roles-title",
+      descKey: "access-hub.card-roles-desc",
       href: "/system/access/roles",
       icon: (
         <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
@@ -45,10 +40,8 @@ export default function AccessHubPage() {
       bgColor: "rgba(16, 185, 129, 0.08)",
     },
     {
-      title: isIndo ? "Audit Log Keamanan" : "Security Audit Log",
-      desc: isIndo
-        ? "Pantau catatan aktivitas secara real-time untuk mendeteksi pembacaan, perubahan data sensitif, dan log masuk."
-        : "Monitor real-time activity logs to track reads, updates to sensitive data, and system logins.",
+      titleKey: "access-hub.card-audit-title",
+      descKey: "access-hub.card-audit-desc",
       href: "/system/access/security",
       icon: (
         <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
@@ -66,33 +59,29 @@ export default function AccessHubPage() {
 
   return (
     <Box sx={{ pb: 6 }}>
-      {/* Breadcrumbs Header */}
       <Box sx={{ mb: 4 }}>
         <Typography variant="h1" component="h1" sx={{ fontWeight: "bold", mb: 1, fontSize: "2rem" }}>
-          {isIndo ? "Kontrol Akses & Keamanan" : "Access Control & Security"}
+          {t("access-hub.title")}
         </Typography>
         <Breadcrumbs>
           <Link to="/dashboards/default" style={{ textDecoration: "none", color: "inherit" }}>
-            Home
+            {t("common-ui.home")}
           </Link>
           <Link to="/system" style={{ textDecoration: "none", color: "inherit" }}>
-            Sistem
+            {t("common-ui.system")}
           </Link>
           <Typography color="text.secondary" variant="body2">
             {t("menu-access-rights")}
           </Typography>
         </Breadcrumbs>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 2, maxWidth: "700px" }}>
-          {isIndo
-            ? "Selamat datang di Pusat Kontrol Keamanan SIM Sekolah. Kelola akun pengguna, konfigurasikan tingkat otorisasi peran (RBAC), serta pantau audit log aktivitas sensitif secara tersentralisasi."
-            : "Welcome to the SIM Sekolah Security Control Center. Centralize user account management, configure role authorization levels (RBAC), and monitor sensitive activity audit logs."}
+          {t("access-hub.welcome")}
         </Typography>
       </Box>
 
-      {/* Access Cards Grid */}
       <Grid container spacing={4}>
-        {cards.map((card, idx) => (
-          <Grid key={idx} size={{ xs: 12, md: 4 }}>
+        {cards.map((card) => (
+          <Grid key={card.href} size={{ xs: 12, md: 4 }}>
             <Link to={card.href} style={{ textDecoration: "none", color: "inherit" }}>
               <Card
                 sx={{
@@ -117,13 +106,11 @@ export default function AccessHubPage() {
                   },
                 }}
               >
-                {/* Visual accent top edge */}
                 <Box
                   sx={{ position: "absolute", top: 0, left: 0, height: "4px", width: "100%", bgcolor: card.color }}
                 />
 
                 <CardContent sx={{ p: 4, display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                  {/* Icon Wrapper */}
                   <Box
                     sx={{
                       width: "60px",
@@ -140,17 +127,14 @@ export default function AccessHubPage() {
                     {card.icon}
                   </Box>
 
-                  {/* Title */}
                   <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1.5, color: "text.primary" }}>
-                    {card.title}
+                    {t(card.titleKey)}
                   </Typography>
 
-                  {/* Description */}
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 4, lineHeight: 1.6, flexGrow: 1 }}>
-                    {card.desc}
+                    {t(card.descKey)}
                   </Typography>
 
-                  {/* Action Link Indicator */}
                   <Box
                     className="action-btn"
                     sx={{
@@ -162,7 +146,7 @@ export default function AccessHubPage() {
                       transition: "all 0.2s ease-in-out",
                     }}
                   >
-                    {isIndo ? "Buka Pengaturan" : "Open Settings"}
+                    {t("common-ui.open-settings")}
                     <svg
                       width="18"
                       height="18"

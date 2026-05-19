@@ -62,8 +62,8 @@ ON CONFLICT (stage_name) DO NOTHING;
 
 -- 6. Seed dl_assessment_level
 INSERT INTO dl_assessment_level (id, level_code, description, pisa_level) VALUES
-  (uuid_generate_v4(), 'LOTS', 'Lower Order Thinking Skills', 'Level 1-3'),
-  (uuid_generate_v4(), 'HOTS', 'Higher Order Thinking Skills', 'Level 4-6')
+  (uuid_generate_v4(), 'LOTS', 'Kemampuan Berpikir Tingkat Rendah (LOTS)', 'Level 1-3'),
+  (uuid_generate_v4(), 'HOTS', 'Kemampuan Berpikir Tingkat Tinggi (HOTS)', 'Level 4-6')
 ON CONFLICT (level_code) DO NOTHING;
 
 -- 7. Seed master_local_context_category

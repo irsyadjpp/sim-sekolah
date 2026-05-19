@@ -34,9 +34,9 @@ import {
   Typography,
 } from "@mui/material";
 
-import { DEFAULTS } from "@/config";
 import { useClientTable } from "@/hooks/use-client-table";
 import { useConfirm } from "@/hooks/use-confirm";
+import { apiClient } from "@/lib/api-client";
 
 export default function GradesPage() {
   const confirm = useConfirm();
@@ -53,19 +53,14 @@ export default function GradesPage() {
   const fetchGradesAndPhases = async () => {
     setLoading(true);
     setError(null);
-    const token = localStorage.getItem("accessToken");
     try {
       const [gradeRes, phaseRes] = await Promise.all([
-        fetch(`${DEFAULTS.API_URL}/api/v1/grades`, {
-          headers: { Authorization: `Bearer ${token}` },
-        }),
-        fetch(`${DEFAULTS.API_URL}/api/v1/phases`, {
-          headers: { Authorization: `Bearer ${token}` },
-        }),
+        apiClient.get("/api/v1/grades"),
+        apiClient.get("/api/v1/phases"),
       ]);
 
-      const gradeJson = await gradeRes.json();
-      const phaseJson = await phaseRes.json();
+      const gradeJson = gradeRes.data;
+      const phaseJson = phaseRes.data;
 
       if (gradeJson.status === "success" && phaseJson.status === "success") {
         setGrades(gradeJson.data || []);
@@ -73,8 +68,8 @@ export default function GradesPage() {
       } else {
         setError("Gagal mengambil data tingkat kelas atau fase.");
       }
-    } catch (err) {
-      setError("Kesalahan koneksi saat menghubungi server.");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Kesalahan koneksi saat menghubungi server.");
     } finally {
       setLoading(false);
     }
@@ -101,26 +96,18 @@ export default function GradesPage() {
     onSubmit: async (values) => {
       setError(null);
       setSuccess(null);
-      const token = localStorage.getItem("accessToken");
-      const url = editingGrade
-        ? `${DEFAULTS.API_URL}/api/v1/grades/${editingGrade.id}`
-        : `${DEFAULTS.API_URL}/api/v1/grades`;
-      const method = editingGrade ? "PUT" : "POST";
+      const url = editingGrade ? `/api/v1/grades/${editingGrade.id}` : `/api/v1/grades`;
 
       try {
-        const res = await fetch(url, {
-          method,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            grade_level: parseInt(values.grade_level.toString()),
-            grade_name: values.grade_name,
-            phase_id: values.phase_id,
-          }),
-        });
-        const json = await res.json();
+        const payload = {
+          grade_level: parseInt(values.grade_level.toString()),
+          grade_name: values.grade_name,
+          phase_id: values.phase_id,
+        };
+
+        const res = editingGrade ? await apiClient.put(url, payload) : await apiClient.post(url, payload);
+
+        const json = res.data;
         if (json.status === "success") {
           setSuccess(editingGrade ? "Tingkat kelas berhasil diperbarui." : "Tingkat kelas baru berhasil dibuat.");
           setOpenFormDialog(false);
@@ -130,8 +117,8 @@ export default function GradesPage() {
         } else {
           setError(json.message || "Gagal menyimpan data tingkat kelas.");
         }
-      } catch (err) {
-        setError("Kesalahan koneksi saat menyimpan data.");
+      } catch (err: any) {
+        setError(err.response?.data?.message || "Kesalahan koneksi saat menyimpan data.");
       }
     },
   });
@@ -166,21 +153,17 @@ export default function GradesPage() {
     if (!isConfirmed) return;
     setError(null);
     setSuccess(null);
-    const token = localStorage.getItem("accessToken");
     try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/grades/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const json = await res.json();
+      const res = await apiClient.delete(`/api/v1/grades/${id}`);
+      const json = res.data;
       if (json.status === "success") {
         setSuccess("Tingkat kelas berhasil dihapus.");
         fetchGradesAndPhases();
       } else {
         setError(json.message || "Gagal menghapus tingkat kelas.");
       }
-    } catch (err) {
-      setError("Kesalahan koneksi saat menghapus tingkat kelas.");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Kesalahan koneksi saat menghapus tingkat kelas.");
     }
   };
 

@@ -12,8 +12,8 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	svc := NewAIService(repo)
 	h := NewAIHandler(svc)
 
-	group := router.Group("/ai")
+	group := router.Group("/kecerdasan-buatan")
 	group.Use(middleware.Protected())
 
-	group.Post("/generate-narrative", h.GenerateNarrative)
+	group.Post("/buat-narasi", h.GenerateNarrative)
 }

@@ -25,7 +25,7 @@ func NewScheduleHandler(svc ScheduleService) *ScheduleHandler {
 func (h *ScheduleHandler) GetByClassroom(c *fiber.Ctx) error {
 	data, err := h.svc.GetByClassroom(c.UserContext(), c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil jadwal kelas", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil jadwal kelas", err)
 	}
 	return common.Success(c, "Jadwal berhasil diambil", data)
 }
@@ -41,7 +41,7 @@ func (h *ScheduleHandler) GetByClassroom(c *fiber.Ctx) error {
 func (h *ScheduleHandler) GetByTeacher(c *fiber.Ctx) error {
 	data, err := h.svc.GetByTeacher(c.UserContext(), c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil jadwal guru", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil jadwal guru", err)
 	}
 	return common.Success(c, "Jadwal berhasil diambil", data)
 }
@@ -58,15 +58,15 @@ func (h *ScheduleHandler) GetByTeacher(c *fiber.Ctx) error {
 func (h *ScheduleHandler) Create(c *fiber.Ctx) error {
 	var req CreateScheduleRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	data, err := h.svc.Create(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal membuat jadwal", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat jadwal", err)
 	}
 	return common.Success(c, "Jadwal berhasil dibuat", data)
 }
@@ -81,7 +81,7 @@ func (h *ScheduleHandler) Create(c *fiber.Ctx) error {
 // @Router /schedules/{id} [delete]
 func (h *ScheduleHandler) Delete(c *fiber.Ctx) error {
 	if err := h.svc.Delete(c.UserContext(), c.Params("id")); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menghapus jadwal", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus jadwal", err)
 	}
 	return common.Success(c, "Jadwal berhasil dihapus", nil)
 }

@@ -26,7 +26,7 @@ func NewHandler(service SystemService, audit AuditService) *Handler {
 func (h *Handler) GetPimpinan(c *fiber.Ctx) error {
 	data, err := h.service.GetPimpinanDashboard(c.UserContext())
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data dasbor pimpinan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data dasbor pimpinan", err)
 	}
 	return common.Success(c, "Data dasbor pimpinan berhasil diambil", data)
 }
@@ -42,7 +42,7 @@ func (h *Handler) GetPimpinan(c *fiber.Ctx) error {
 func (h *Handler) GetGuru(c *fiber.Ctx) error {
 	data, err := h.service.GetGuruDashboard(c.UserContext())
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data dasbor guru", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data dasbor guru", err)
 	}
 	return common.Success(c, "Data dasbor guru berhasil diambil", data)
 }
@@ -58,7 +58,7 @@ func (h *Handler) GetGuru(c *fiber.Ctx) error {
 func (h *Handler) GetOperator(c *fiber.Ctx) error {
 	data, err := h.service.GetOperatorDashboard(c.UserContext())
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data dasbor operator", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data dasbor operator", err)
 	}
 	return common.Success(c, "Data dasbor operator berhasil diambil", data)
 }
@@ -82,7 +82,7 @@ func (h *Handler) GetAuditLogs(c *fiber.Ctx) error {
 
 	data, total, err := h.audit.GetAuditLogs(c.UserContext(), pagination.Page, pagination.Limit, search, actionFilter)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data audit log", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data audit log", err)
 	}
 	return common.Paginated(c, "Data audit log berhasil diambil", data, pagination.Page, pagination.Limit, total)
 }

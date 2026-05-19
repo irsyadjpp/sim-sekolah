@@ -12,7 +12,7 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	svc := NewProfileDimensionService(repo)
 	h := NewProfileDimensionHandler(svc)
 
-	group := router.Group("/profile-dimensions")
+	group := router.Group("/dimensi-profil")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAll)

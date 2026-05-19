@@ -1,4 +1,4 @@
-package ppdb
+package spmb
 
 import (
 	"context"
@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type PPDBRepository interface {
+type SPMBRepository interface {
 	GetAdmissionPaths(ctx context.Context) ([]AdmissionPath, error)
 	GetApplicants(ctx context.Context, limit, offset int, status string) ([]Applicant, int64, error)
 	GetApplicantByID(ctx context.Context, id string) (*Applicant, error)
@@ -24,19 +24,19 @@ type PPDBRepository interface {
 	GetDefaultSchoolID(ctx context.Context) (string, error)
 
 	SaveDocument(ctx context.Context, doc *ApplicantDocument) error
-	GetActiveAcademicYears(ctx context.Context) ([]PPDBAcademicYear, error)
+	GetActiveAcademicYears(ctx context.Context) ([]SPMBAcademicYear, error)
 }
 
-type ppdbRepository struct {
+type spmbRepository struct {
 	db *gorm.DB
 }
 
-func NewPPDBRepository(db *gorm.DB) PPDBRepository {
-	return &ppdbRepository{db: db}
+func NewSPMBRepository(db *gorm.DB) SPMBRepository {
+	return &spmbRepository{db: db}
 }
 
-func (r *ppdbRepository) GetAdmissionPaths(ctx context.Context) ([]AdmissionPath, error) {
-	cacheKey := "ppdb:admission_paths:active"
+func (r *spmbRepository) GetAdmissionPaths(ctx context.Context) ([]AdmissionPath, error) {
+	cacheKey := "spmb:admission_paths:active"
 	var paths []AdmissionPath
 
 	if cache.GlobalCache != nil {
@@ -53,7 +53,7 @@ func (r *ppdbRepository) GetAdmissionPaths(ctx context.Context) ([]AdmissionPath
 	return paths, err
 }
 
-func (r *ppdbRepository) GetApplicants(ctx context.Context, limit, offset int, status string) ([]Applicant, int64, error) {
+func (r *spmbRepository) GetApplicants(ctx context.Context, limit, offset int, status string) ([]Applicant, int64, error) {
 	var apps []Applicant
 	var total int64
 
@@ -63,15 +63,30 @@ func (r *ppdbRepository) GetApplicants(ctx context.Context, limit, offset int, s
 	}
 
 	query.Count(&total)
-	err := query.Preload("AdmissionPath").
+
+	orderClause := `
+		CASE 
+			WHEN trx_spmb_admission_path.name = 'Domisili' THEN 
+				CASE WHEN trx_spmb_applicant.birth_date <= (date_trunc('year', CURRENT_DATE) + interval '6 months' - interval '7 years') THEN 0 ELSE 1 END
+			ELSE 0
+		END ASC,
+		CASE 
+			WHEN trx_spmb_admission_path.name = 'Domisili' THEN trx_spmb_applicant.distance_to_school_km 
+			ELSE 0 
+		END ASC,
+		trx_spmb_applicant.created_at DESC
+	`
+
+	err := query.Joins("LEFT JOIN trx_spmb_admission_path ON trx_spmb_admission_path.id = trx_spmb_applicant.admission_path_id").
+		Preload("AdmissionPath").
 		Preload("SchoolYear").
-		Order("created_at DESC").
+		Order(orderClause).
 		Limit(limit).Offset(offset).Find(&apps).Error
 
 	return apps, total, err
 }
 
-func (r *ppdbRepository) GetApplicantByID(ctx context.Context, id string) (*Applicant, error) {
+func (r *spmbRepository) GetApplicantByID(ctx context.Context, id string) (*Applicant, error) {
 	var app Applicant
 	err := r.db.WithContext(ctx).
 		Preload("AdmissionPath").
@@ -85,7 +100,7 @@ func (r *ppdbRepository) GetApplicantByID(ctx context.Context, id string) (*Appl
 	return &app, nil
 }
 
-func (r *ppdbRepository) GetApplicantByNIK(ctx context.Context, nik string) (*Applicant, error) {
+func (r *spmbRepository) GetApplicantByNIK(ctx context.Context, nik string) (*Applicant, error) {
 	var app Applicant
 	err := r.db.WithContext(ctx).First(&app, "nik = ?", nik).Error
 	if err != nil {
@@ -94,12 +109,12 @@ func (r *ppdbRepository) GetApplicantByNIK(ctx context.Context, nik string) (*Ap
 	return &app, nil
 }
 
-func (r *ppdbRepository) CreateApplication(ctx context.Context, app *Applicant, parents *ApplicantParent) error {
+func (r *spmbRepository) CreateApplication(ctx context.Context, app *Applicant, parents *ApplicantParent) error {
 	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		// Generate registration number (Tahun + Seq)
 		var count int64
 		tx.Model(&Applicant{}).Where("EXTRACT(YEAR FROM created_at) = ?", time.Now().Year()).Count(&count)
-		app.RegistrationNo = fmt.Sprintf("PPDB-%d-%04d", time.Now().Year(), count+1)
+		app.RegistrationNo = fmt.Sprintf("SPMB-%d-%04d", time.Now().Year(), count+1)
 
 		if err := tx.Create(app).Error; err != nil {
 			return err
@@ -113,7 +128,7 @@ func (r *ppdbRepository) CreateApplication(ctx context.Context, app *Applicant, 
 	})
 }
 
-func (r *ppdbRepository) UpdateApplicationStatus(ctx context.Context, log *VerificationLog) error {
+func (r *spmbRepository) UpdateApplicationStatus(ctx context.Context, log *VerificationLog) error {
 	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		if err := tx.Model(&Applicant{}).Where("id = ?", log.ApplicantID).Update("status", log.StatusChangedTo).Error; err != nil {
 			return err
@@ -122,7 +137,7 @@ func (r *ppdbRepository) UpdateApplicationStatus(ctx context.Context, log *Verif
 	})
 }
 
-func (r *ppdbRepository) AcceptApplicant(ctx context.Context, app *Applicant, log *VerificationLog, studentObj *student.Student, parents []student.StudentParent) error {
+func (r *spmbRepository) AcceptApplicant(ctx context.Context, app *Applicant, log *VerificationLog, studentObj *student.Student, parents []student.StudentParent) error {
 	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		// Update Status Pendaftar
 		if err := tx.Model(app).Update("status", "Accepted").Error; err != nil {
@@ -151,19 +166,19 @@ func (r *ppdbRepository) AcceptApplicant(ctx context.Context, app *Applicant, lo
 	})
 }
 
-func (r *ppdbRepository) GetYearlyStudentCount(ctx context.Context, year int) (int64, error) {
+func (r *spmbRepository) GetYearlyStudentCount(ctx context.Context, year int) (int64, error) {
 	var count int64
 	err := r.db.WithContext(ctx).Table("students").Where("EXTRACT(YEAR FROM created_at) = ?", year).Count(&count).Error
 	return count, err
 }
 
-func (r *ppdbRepository) GetDefaultSchoolID(ctx context.Context) (string, error) {
+func (r *spmbRepository) GetDefaultSchoolID(ctx context.Context) (string, error) {
 	var schoolID string
 	err := r.db.WithContext(ctx).Table("schools").Select("id").Limit(1).Scan(&schoolID).Error
 	return schoolID, err
 }
 
-func (r *ppdbRepository) SaveDocument(ctx context.Context, doc *ApplicantDocument) error {
+func (r *spmbRepository) SaveDocument(ctx context.Context, doc *ApplicantDocument) error {
 	// Upsert dokumen (timpa jika dokumen dengan tipe yang sama diupload ulang)
 	var existing ApplicantDocument
 	err := r.db.WithContext(ctx).Where("applicant_id = ? AND document_type = ?", doc.ApplicantID, doc.DocumentType).First(&existing).Error
@@ -174,9 +189,9 @@ func (r *ppdbRepository) SaveDocument(ctx context.Context, doc *ApplicantDocumen
 	return r.db.WithContext(ctx).Create(doc).Error
 }
 
-func (r *ppdbRepository) GetActiveAcademicYears(ctx context.Context) ([]PPDBAcademicYear, error) {
-	cacheKey := "ppdb:academic_years:active"
-	var years []PPDBAcademicYear
+func (r *spmbRepository) GetActiveAcademicYears(ctx context.Context) ([]SPMBAcademicYear, error) {
+	cacheKey := "spmb:academic_years:active"
+	var years []SPMBAcademicYear
 
 	if cache.GlobalCache != nil {
 		if err := cache.GlobalCache.Get(ctx, cacheKey, &years); err == nil {

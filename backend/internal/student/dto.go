@@ -37,7 +37,7 @@ type CreateStudentRequest struct {
 	EnrollmentYear int    `json:"enrollment_year" example:"2026"`                // Tahun ajaran pendaftaran siswa
 	Curriculum     string `json:"curriculum" example:"Kurikulum Merdeka"`        // Jenis kurikulum yang diikuti
 	StudentStatus  string `json:"student_status" example:"AKTIF"`                // Status keaktifan (e.g. AKTIF, LULUS, MUTASI)
-	EntryPath      string `json:"entry_path" example:"PPDB REGULER"`             // Jalur masuk sekolah (e.g. ZONASI, REGULER)
+	EntryPath      string `json:"entry_path" example:"SPMB REGULER"`             // Jalur masuk sekolah (e.g. ZONASI, REGULER)
 	PreviousSchool string `json:"previous_school" example:"TK Pembina Bonerate"` // Nama asal sekolah tingkat sebelumnya
 	ExamNumber     string `json:"exam_number" example:"U-99887766"`              // Nomor ujian sekolah sebelumnya
 
@@ -80,7 +80,7 @@ type UpdateStudentRequest struct {
 	EnrollmentYear int    `json:"enrollment_year" example:"2026"`
 	Curriculum     string `json:"curriculum" example:"Kurikulum Merdeka"`
 	StudentStatus  string `json:"student_status" example:"AKTIF"`
-	EntryPath      string `json:"entry_path" example:"PPDB REGULER"`
+	EntryPath      string `json:"entry_path" example:"SPMB REGULER"`
 	PreviousSchool string `json:"previous_school" example:"TK Pembina Bonerate"`
 	ExamNumber     string `json:"exam_number" example:"U-99887766"`
 

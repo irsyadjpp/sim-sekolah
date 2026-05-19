@@ -18,15 +18,15 @@ func NewAIHandler(svc AIService) *AIHandler {
 func (h *AIHandler) GenerateNarrative(c *fiber.Ctx) error {
 	var req GenerateNarrativeRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	narrative, err := h.svc.GenerateNarrative(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal generate narasi AI", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal generate narasi AI", err)
 	}
 
 	return common.Success(c, "Narasi berhasil di-generate", GenerateNarrativeResponse{Narrative: narrative})

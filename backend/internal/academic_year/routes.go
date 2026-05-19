@@ -12,7 +12,7 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	svc := NewAcademicYearService(repo)
 	h := NewAcademicYearHandler(svc)
 
-	group := router.Group("/academic-years")
+	group := router.Group("/tahun-ajaran")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAllAcademicYears)
@@ -20,5 +20,5 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	group.Post("/", h.CreateAcademicYear)
 	group.Put("/:id", h.UpdateAcademicYear)
 	group.Delete("/:id", h.DeleteAcademicYear)
-	group.Patch("/:id/activate", h.SetActiveAcademicYear)
+	group.Patch("/:id/aktifkan", h.SetActiveAcademicYear)
 }

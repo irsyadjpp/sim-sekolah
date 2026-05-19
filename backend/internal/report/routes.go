@@ -25,19 +25,19 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	h := NewReportHandler(svc)
 
 	// List & Detail
-	router.Get("/classrooms/:classroomId/reports", middleware.Protected(), h.GetReportsByClassroom)
-	router.Post("/classrooms/:classroomId/reports/generate", middleware.Protected(), h.GenerateReports)
+	router.Get("/kelas/:classroomId/rapor", middleware.Protected(), h.GetReportsByClassroom)
+	router.Post("/kelas/:classroomId/rapor/buat", middleware.Protected(), h.GenerateReports)
 
-	report := router.Group("/reports")
+	report := router.Group("/rapor")
 	report.Use(middleware.Protected())
 
 	report.Get("/:id", h.GetReportDetail)
-	report.Put("/:id/notes", h.UpsertReportNotes)
-	report.Put("/:id/scores", h.UpsertReportScore)
+	report.Put("/:id/catatan", h.UpsertReportNotes)
+	report.Put("/:id/nilai", h.UpsertReportScore)
 	report.Put("/:id/p5", h.UpsertP5)
-	report.Put("/:id/deep-learning", h.UpsertDeepLearning)
-	report.Put("/:id/extracurricular", h.UpsertExtracurricular)
-	report.Put("/:id/attendance", h.UpsertAttendance)
-	report.Post("/:id/generate-ai-description", h.GenerateAIDescription)
-	report.Patch("/:id/finalize", h.FinalizeReport)
+	report.Put("/:id/pembelajaran-mendalam", h.UpsertDeepLearning)
+	report.Put("/:id/ekstrakurikuler", h.UpsertExtracurricular)
+	report.Put("/:id/kehadiran", h.UpsertAttendance)
+	report.Post("/:id/buat-deskripsi-ai", h.GenerateAIDescription)
+	report.Patch("/:id/finalisasi", h.FinalizeReport)
 }

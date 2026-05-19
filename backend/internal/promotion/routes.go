@@ -7,8 +7,8 @@ import (
 )
 
 func RegisterRoutes(router fiber.Router, h *PromotionHandler) {
-	group := router.Group("/academic", auth.Protected(), auth.RoleMiddleware("SUPER_ADMIN", "ADMIN"))
+	group := router.Group("/akademik", auth.Protected(), auth.RoleMiddleware("SUPER_ADMIN", "ADMIN"))
 
-	group.Post("/promotion", h.Promote)
-	group.Post("/graduation", h.Graduate)
+	group.Post("/kenaikan-kelas", h.Promote)
+	group.Post("/kelulusan", h.Graduate)
 }

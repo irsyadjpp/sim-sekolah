@@ -1,4 +1,4 @@
-package ppdb
+package spmb
 
 import (
 	"time"
@@ -20,7 +20,7 @@ type AdmissionPath struct {
 }
 
 func (AdmissionPath) TableName() string {
-	return "trx_ppdb_admission_path"
+	return "trx_spmb_admission_path"
 }
 
 type Applicant struct {
@@ -30,13 +30,14 @@ type Applicant struct {
 	AdmissionPathID uuid.UUID `gorm:"type:uuid;not null" json:"admission_path_id"`
 
 	// Identitas
-	FullName   string    `gorm:"type:varchar(150);not null" json:"full_name"`
-	NIK        string    `gorm:"type:varchar(16);not null;unique" json:"nik"`
-	NISN       string    `gorm:"type:varchar(20)" json:"nisn"`
-	BirthPlace string    `gorm:"type:varchar(100);not null" json:"birth_place"`
-	BirthDate  time.Time `gorm:"type:date;not null" json:"birth_date"`
-	Gender     string    `gorm:"type:varchar(1);not null" json:"gender"`
-	Religion   string    `gorm:"type:varchar(20);not null" json:"religion"`
+	FullName            string     `gorm:"type:varchar(150);not null" json:"full_name"`
+	NIK                 string     `gorm:"type:varchar(16);not null;unique" json:"nik"`
+	NISN                string     `gorm:"type:varchar(20)" json:"nisn"`
+	BirthPlace          string     `gorm:"type:varchar(100);not null" json:"birth_place"`
+	BirthDate           time.Time  `gorm:"type:date;not null" json:"birth_date"`
+	Gender              string     `gorm:"type:varchar(1);not null" json:"gender"`
+	Religion            string     `gorm:"type:varchar(20);not null" json:"religion"`
+	FamilyCardIssueDate *time.Time `gorm:"type:date" json:"family_card_issue_date"`
 
 	// Alamat
 	Address            string  `gorm:"type:text;not null" json:"address"`
@@ -58,7 +59,7 @@ type Applicant struct {
 	Documents     []ApplicantDocument         `gorm:"foreignKey:ApplicantID" json:"documents,omitempty"`
 }
 
-func (Applicant) TableName() string { return "trx_ppdb_applicant" }
+func (Applicant) TableName() string { return "trx_spmb_applicant" }
 
 type ApplicantParent struct {
 	ID               uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
@@ -72,7 +73,7 @@ type ApplicantParent struct {
 	PhoneNumber      string    `gorm:"type:varchar(20);not null" json:"phone_number"`
 }
 
-func (ApplicantParent) TableName() string { return "trx_ppdb_parent" }
+func (ApplicantParent) TableName() string { return "trx_spmb_parent" }
 
 type ApplicantDocument struct {
 	ID           uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
@@ -82,7 +83,7 @@ type ApplicantDocument struct {
 	UploadedAt   time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"uploaded_at"`
 }
 
-func (ApplicantDocument) TableName() string { return "trx_ppdb_document" }
+func (ApplicantDocument) TableName() string { return "trx_spmb_document" }
 
 type VerificationLog struct {
 	ID              uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
@@ -93,15 +94,15 @@ type VerificationLog struct {
 	CreatedAt       time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"created_at"`
 }
 
-func (VerificationLog) TableName() string { return "trx_ppdb_verification_log" }
+func (VerificationLog) TableName() string { return "trx_spmb_verification_log" }
 
-type PPDBAcademicYear struct {
+type SPMBAcademicYear struct {
 	ID       uuid.UUID `gorm:"primaryKey" json:"id"`
 	YearName string    `gorm:"column:year_name" json:"year_name"`
 	Semester string    `gorm:"column:semester" json:"semester"`
 	IsActive bool      `gorm:"column:is_active" json:"is_active"`
 }
 
-func (PPDBAcademicYear) TableName() string {
+func (SPMBAcademicYear) TableName() string {
 	return "master_academic_year"
 }

@@ -31,14 +31,14 @@ func NewAuthHandler(svc AuthService) *AuthHandler {
 func (h *AuthHandler) Register(c *fiber.Ctx) error {
 	var req RegisterRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	if err := h.svc.Register(c.UserContext(), req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Registration failed", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Pendaftaran gagal", err)
 	}
 
-	return common.Created(c, "Registration successful", nil)
+	return common.Created(c, "Pendaftaran berhasil", nil)
 }
 
 // LoginHandler godoc
@@ -52,16 +52,16 @@ func (h *AuthHandler) Register(c *fiber.Ctx) error {
 func (h *AuthHandler) Login(c *fiber.Ctx) error {
 	var req LoginRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	data, refreshToken, err := h.svc.Login(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusUnauthorized, "Login failed", err.Error())
+		return common.ErrorFromService(c, fiber.StatusUnauthorized, "Gagal masuk", err)
 	}
 
 	if mfaReq, ok := data["mfa_required"].(bool); ok && mfaReq {
-		return common.Success(c, "MFA verification required", data)
+		return common.Success(c, "Verifikasi MFA diperlukan", data)
 	}
 
 	// Trigger Audit Log for successful login
@@ -80,7 +80,7 @@ func (h *AuthHandler) Login(c *fiber.Ctx) error {
 		SameSite: "Lax",
 	})
 
-	return common.Success(c, "Login successful", data)
+	return common.Success(c, "Berhasil masuk", data)
 }
 
 // RefreshHandler godoc
@@ -93,7 +93,7 @@ func (h *AuthHandler) Login(c *fiber.Ctx) error {
 func (h *AuthHandler) Refresh(c *fiber.Ctx) error {
 	refreshToken := c.Cookies("refresh_token")
 	if refreshToken == "" {
-		return common.Error(c, fiber.StatusUnauthorized, "Refresh token is missing", "")
+		return common.Error(c, fiber.StatusUnauthorized, "Token penyegar tidak ditemukan", "")
 	}
 
 	data, newRefreshToken, err := h.svc.Refresh(c.UserContext(), refreshToken)
@@ -104,7 +104,7 @@ func (h *AuthHandler) Refresh(c *fiber.Ctx) error {
 			Expires:  time.Now().Add(-1 * time.Hour),
 			HTTPOnly: true,
 		})
-		return common.Error(c, fiber.StatusUnauthorized, "Failed to refresh token", err.Error())
+		return common.ErrorFromService(c, fiber.StatusUnauthorized, "Gagal menyegarkan token", err)
 	}
 
 	c.Cookie(&fiber.Cookie{
@@ -116,7 +116,7 @@ func (h *AuthHandler) Refresh(c *fiber.Ctx) error {
 		SameSite: "Lax",
 	})
 
-	return common.Success(c, "Token refreshed successfully", data)
+	return common.Success(c, "Token berhasil disegarkan", data)
 }
 
 // Note: Refresh method in service needs context update too
@@ -149,7 +149,7 @@ func (h *AuthHandler) Logout(c *fiber.Ctx) error {
 		SameSite: "Lax",
 	})
 
-	return common.Success(c, "Logout successful", nil)
+	return common.Success(c, "Berhasil keluar", nil)
 }
 
 // ForgotPasswordHandler godoc
@@ -163,14 +163,14 @@ func (h *AuthHandler) Logout(c *fiber.Ctx) error {
 func (h *AuthHandler) ForgotPassword(c *fiber.Ctx) error {
 	var req ForgotPasswordRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	if err := h.svc.ForgotPassword(c.UserContext(), req); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to process request", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memproses permintaan", err)
 	}
 
-	return common.Success(c, "If your email is registered, you will receive a reset link", nil)
+	return common.Success(c, "Jika email Anda terdaftar, Anda akan menerima tautan pemulihan", nil)
 }
 
 // ResetPasswordHandler godoc
@@ -184,14 +184,14 @@ func (h *AuthHandler) ForgotPassword(c *fiber.Ctx) error {
 func (h *AuthHandler) ResetPassword(c *fiber.Ctx) error {
 	var req ResetPasswordRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	if err := h.svc.ResetPassword(c.UserContext(), "", req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Failed to reset password", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Gagal mengatur ulang kata sandi", err)
 	}
 
-	return common.Success(c, "Password has been successfully reset", nil)
+	return common.Success(c, "Kata sandi berhasil diatur ulang", nil)
 }
 
 // GetMeHandler godoc
@@ -204,15 +204,15 @@ func (h *AuthHandler) ResetPassword(c *fiber.Ctx) error {
 func (h *AuthHandler) GetMe(c *fiber.Ctx) error {
 	userID, ok := c.Locals("user_id").(string)
 	if !ok {
-		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+		return common.Error(c, fiber.StatusUnauthorized, "Konteks pengguna hilang", "")
 	}
 
 	resp, err := h.svc.GetMe(c.UserContext(), userID)
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "User not found", err.Error())
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Pengguna tidak ditemukan", err)
 	}
 
-	return common.Success(c, "Profile retrieved", resp)
+	return common.Success(c, "Profil berhasil diambil", resp)
 }
 
 // UpdateMeHandler godoc
@@ -227,19 +227,19 @@ func (h *AuthHandler) GetMe(c *fiber.Ctx) error {
 func (h *AuthHandler) UpdateMe(c *fiber.Ctx) error {
 	userID, ok := c.Locals("user_id").(string)
 	if !ok {
-		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+		return common.Error(c, fiber.StatusUnauthorized, "Konteks pengguna hilang", "")
 	}
 
 	var req UpdateMeRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	if err := h.svc.UpdateMe(c.UserContext(), userID, req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Failed to update profile", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Gagal memperbarui profil", err)
 	}
 
-	return common.Success(c, "Profile updated successfully", nil)
+	return common.Success(c, "Profil berhasil diperbarui", nil)
 }
 
 // ChangePasswordHandler godoc
@@ -254,23 +254,23 @@ func (h *AuthHandler) UpdateMe(c *fiber.Ctx) error {
 func (h *AuthHandler) ChangePassword(c *fiber.Ctx) error {
 	userID, ok := c.Locals("user_id").(string)
 	if !ok {
-		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+		return common.Error(c, fiber.StatusUnauthorized, "Konteks pengguna hilang", "")
 	}
 
 	var req ChangePasswordRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	if err := h.svc.ChangePassword(c.UserContext(), userID, req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, err.Error(), "")
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Gagal memperbarui kata sandi", err)
 	}
 
-	return common.Success(c, "Password updated successfully", nil)
+	return common.Success(c, "Kata sandi berhasil diperbarui", nil)
 }
 
 // UploadPhotoHandler godoc
@@ -285,31 +285,31 @@ func (h *AuthHandler) ChangePassword(c *fiber.Ctx) error {
 func (h *AuthHandler) UploadPhoto(c *fiber.Ctx) error {
 	userID, ok := c.Locals("user_id").(string)
 	if !ok {
-		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+		return common.Error(c, fiber.StatusUnauthorized, "Konteks pengguna hilang", "")
 	}
 
 	file, err := c.FormFile("file")
 	if err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "File not found", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "File tidak ditemukan", err)
 	}
 
 	photoURL, err := h.svc.UploadPhoto(c.UserContext(), userID, file)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to upload photo", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengunggah foto", err)
 	}
 
-	return common.Success(c, "Photo uploaded successfully", fiber.Map{"photo_url": photoURL})
+	return common.Success(c, "Foto berhasil diunggah", fiber.Map{"photo_url": photoURL})
 }
 
 func (h *AuthHandler) Verify2FA(c *fiber.Ctx) error {
 	var req Verify2FARequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	data, refreshToken, err := h.svc.Verify2FA(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusUnauthorized, err.Error(), "")
+		return common.ErrorFromService(c, fiber.StatusUnauthorized, "Verifikasi 2FA gagal", err)
 	}
 
 	// Trigger Audit Log for successful MFA login
@@ -328,36 +328,36 @@ func (h *AuthHandler) Verify2FA(c *fiber.Ctx) error {
 		SameSite: "Lax",
 	})
 
-	return common.Success(c, "Login successful", data)
+	return common.Success(c, "Berhasil masuk", data)
 }
 
 func (h *AuthHandler) Setup2FA(c *fiber.Ctx) error {
 	userID, ok := c.Locals("user_id").(string)
 	if !ok {
-		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+		return common.Error(c, fiber.StatusUnauthorized, "Konteks pengguna hilang", "")
 	}
 
 	data, err := h.svc.Setup2FA(c.UserContext(), userID)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, err.Error(), "")
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memulai pengaturan 2FA", err)
 	}
 
-	return common.Success(c, "2FA setup initiated", data)
+	return common.Success(c, "Pengaturan 2FA dimulai", data)
 }
 
 func (h *AuthHandler) Enable2FA(c *fiber.Ctx) error {
 	userID, ok := c.Locals("user_id").(string)
 	if !ok {
-		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+		return common.Error(c, fiber.StatusUnauthorized, "Konteks pengguna hilang", "")
 	}
 
 	var req OTPVerificationRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	if err := h.svc.Enable2FA(c.UserContext(), userID, req.Code); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, err.Error(), "")
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Gagal mengaktifkan 2FA", err)
 	}
 
 	// Trigger Audit Log
@@ -365,22 +365,22 @@ func (h *AuthHandler) Enable2FA(c *fiber.Ctx) error {
 		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "MFA_ENABLE", "security", userID, c.IP())
 	}
 
-	return common.Success(c, "2FA enabled successfully", nil)
+	return common.Success(c, "2FA berhasil diaktifkan", nil)
 }
 
 func (h *AuthHandler) Disable2FA(c *fiber.Ctx) error {
 	userID, ok := c.Locals("user_id").(string)
 	if !ok {
-		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+		return common.Error(c, fiber.StatusUnauthorized, "Konteks pengguna hilang", "")
 	}
 
 	var req OTPVerificationRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	if err := h.svc.Disable2FA(c.UserContext(), userID, req.Code); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, err.Error(), "")
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Gagal menonaktifkan 2FA", err)
 	}
 
 	// Trigger Audit Log
@@ -388,27 +388,27 @@ func (h *AuthHandler) Disable2FA(c *fiber.Ctx) error {
 		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "MFA_DISABLE", "security", userID, c.IP())
 	}
 
-	return common.Success(c, "2FA disabled successfully", nil)
+	return common.Success(c, "2FA berhasil dinonaktifkan", nil)
 }
 
 func (h *AuthHandler) Impersonate(c *fiber.Ctx) error {
 	actorID, ok := c.Locals("user_id").(string)
 	if !ok {
-		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+		return common.Error(c, fiber.StatusUnauthorized, "Konteks pengguna hilang", "")
 	}
 
 	var req ImpersonateRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	if req.TargetUserID == "" {
-		return common.Error(c, fiber.StatusBadRequest, "Target user ID is required", "")
+		return common.Error(c, fiber.StatusBadRequest, "ID pengguna target wajib diisi", "")
 	}
 
 	token, err := h.svc.Impersonate(c.UserContext(), actorID, req.TargetUserID)
 	if err != nil {
-		return common.Error(c, fiber.StatusForbidden, err.Error(), "")
+		return common.ErrorFromService(c, fiber.StatusForbidden, "Penyamaran ditolak", err)
 	}
 
 	// Trigger Audit Log
@@ -419,7 +419,7 @@ func (h *AuthHandler) Impersonate(c *fiber.Ctx) error {
 		system.GlobalAuditService.LogEvent(auditCtx, req.TargetUserID, "IMPERSONATE_START", "auth", req.TargetUserID, c.IP())
 	}
 
-	return common.Success(c, "Impersonation started successfully", fiber.Map{
+	return common.Success(c, "Penyamaran berhasil dimulai", fiber.Map{
 		"token": token,
 	})
 }
@@ -434,11 +434,11 @@ func (h *AuthHandler) StopImpersonation(c *fiber.Ctx) error {
 	targetUserID, ok := c.Locals("user_id").(string)
 
 	if !isImpersonating || !ok {
-		return common.Error(c, fiber.StatusBadRequest, "No active impersonation session found", "")
+		return common.Error(c, fiber.StatusBadRequest, "Tidak ada sesi penyamaran aktif yang ditemukan", "")
 	}
 
 	if err := h.svc.StopImpersonation(c.UserContext(), tokenString); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to stop impersonation", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghentikan penyamaran", err)
 	}
 
 	// Trigger Audit Log
@@ -448,5 +448,5 @@ func (h *AuthHandler) StopImpersonation(c *fiber.Ctx) error {
 		system.GlobalAuditService.LogEvent(auditCtx, targetUserID, "IMPERSONATE_STOP", "auth", targetUserID, c.IP())
 	}
 
-	return common.Success(c, "Impersonation stopped successfully", nil)
+	return common.Success(c, "Penyamaran berhasil dihentikan", nil)
 }

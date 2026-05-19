@@ -14,7 +14,7 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 	svc := NewPhaseService(repo)
 	h := NewPhaseHandler(svc)
 
-	group := api.Group("/phases")
+	group := api.Group("/fase")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAll)

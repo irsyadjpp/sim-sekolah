@@ -32,7 +32,7 @@ func (h *PhaseHandler) GetAll(c *fiber.Ctx) error {
 	search := c.Query("search", "")
 	data, total, err := h.svc.GetAll(pagination, search)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data fase", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data fase", err)
 	}
 	return common.Paginated(c, "Data fase berhasil diambil", data, pagination.Page, pagination.Limit, total)
 }
@@ -48,7 +48,7 @@ func (h *PhaseHandler) GetAll(c *fiber.Ctx) error {
 func (h *PhaseHandler) GetByID(c *fiber.Ctx) error {
 	data, err := h.svc.GetByID(c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "Fase tidak ditemukan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Fase tidak ditemukan", err)
 	}
 	return common.Success(c, "Detail fase berhasil diambil", data)
 }
@@ -65,14 +65,14 @@ func (h *PhaseHandler) GetByID(c *fiber.Ctx) error {
 func (h *PhaseHandler) Create(c *fiber.Ctx) error {
 	var req CreatePhaseRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.Create(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal membuat fase", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat fase", err)
 	}
 
 	// Trigger Audit Log
@@ -97,14 +97,14 @@ func (h *PhaseHandler) Create(c *fiber.Ctx) error {
 func (h *PhaseHandler) Update(c *fiber.Ctx) error {
 	var req UpdatePhaseRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.Update(c.UserContext(), c.Params("id"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal memperbarui fase", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui fase", err)
 	}
 
 	// Trigger Audit Log
@@ -126,7 +126,7 @@ func (h *PhaseHandler) Update(c *fiber.Ctx) error {
 // @Router /phases/{id} [delete]
 func (h *PhaseHandler) Delete(c *fiber.Ctx) error {
 	if err := h.svc.Delete(c.UserContext(), c.Params("id")); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menghapus fase", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus fase", err)
 	}
 
 	// Trigger Audit Log

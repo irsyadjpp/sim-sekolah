@@ -24,7 +24,7 @@ func NewPermissionHandler(svc PermissionService) *PermissionHandler {
 func (h *PermissionHandler) GetAll(c *fiber.Ctx) error {
 	data, err := h.svc.GetAll(c.UserContext())
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data perizinan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data perizinan", err)
 	}
 	return common.Success(c, "Data perizinan berhasil diambil", data)
 }
@@ -40,7 +40,7 @@ func (h *PermissionHandler) GetAll(c *fiber.Ctx) error {
 func (h *PermissionHandler) GetByID(c *fiber.Ctx) error {
 	data, err := h.svc.GetByID(c.UserContext(), c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "Perizinan tidak ditemukan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Perizinan tidak ditemukan", err)
 	}
 	return common.Success(c, "Data perizinan berhasil diambil", data)
 }
@@ -57,11 +57,11 @@ func (h *PermissionHandler) GetByID(c *fiber.Ctx) error {
 func (h *PermissionHandler) Create(c *fiber.Ctx) error {
 	var req Permission
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	if err := h.svc.Create(c.UserContext(), &req); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal membuat perizinan baru", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat perizinan baru", err)
 	}
 	return common.Success(c, "Perizinan baru berhasil dibuat", req)
 }
@@ -76,7 +76,7 @@ func (h *PermissionHandler) Create(c *fiber.Ctx) error {
 // @Router /permissions/{id} [delete]
 func (h *PermissionHandler) Delete(c *fiber.Ctx) error {
 	if err := h.svc.Delete(c.UserContext(), c.Params("id")); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menghapus perizinan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus perizinan", err)
 	}
 	return common.Success(c, "Perizinan berhasil dihapus", nil)
 }
@@ -92,7 +92,7 @@ func (h *PermissionHandler) Delete(c *fiber.Ctx) error {
 func (h *PermissionHandler) GetPermissionsByRoleID(c *fiber.Ctx) error {
 	data, err := h.svc.GetPermissionsByRoleID(c.UserContext(), c.Params("role_id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data perizinan peran", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data perizinan peran", err)
 	}
 	return common.Success(c, "Data perizinan peran berhasil diambil", data)
 }
@@ -110,15 +110,15 @@ func (h *PermissionHandler) GetPermissionsByRoleID(c *fiber.Ctx) error {
 func (h *PermissionHandler) AssignPermissionsToRole(c *fiber.Ctx) error {
 	var req AssignPermissionsRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	err := h.svc.AssignPermissionsToRole(c.UserContext(), c.Params("role_id"), req.PermissionIDs)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal memetakan perizinan ke peran", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memetakan perizinan ke peran", err)
 	}
 	return common.Success(c, "Perizinan peran berhasil diperbarui dan disinkronkan ke cache", nil)
 }

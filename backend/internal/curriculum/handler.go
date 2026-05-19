@@ -30,21 +30,18 @@ func NewCurriculumHandler(svc CurriculumService) *CurriculumHandler {
 func (h *CurriculumHandler) InitializeDocument(c *fiber.Ctx) error {
 	var req InitializeCurriculumRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	doc, err := h.svc.InitializeDocument(c.Context(), req)
 	if err != nil {
-		if err.Error() == "curriculum document already exists for this academic year" {
-			return common.Error(c, fiber.StatusConflict, "Conflict", err.Error())
-		}
-		return common.Error(c, fiber.StatusInternalServerError, "Internal Server Error", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat dokumen kurikulum", err)
 	}
 
-	return common.Created(c, "Curriculum document initialized", doc)
+	return common.Created(c, "Dokumen kurikulum berhasil diinisialisasi", doc)
 }
 
 // GetDocuments godoc
@@ -60,9 +57,9 @@ func (h *CurriculumHandler) InitializeDocument(c *fiber.Ctx) error {
 func (h *CurriculumHandler) GetDocuments(c *fiber.Ctx) error {
 	docs, err := h.svc.GetDocuments(c.Context())
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Internal Server Error", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil dokumen kurikulum", err)
 	}
-	return common.Success(c, "Curriculum documents retrieved", docs)
+	return common.Success(c, "Dokumen kurikulum berhasil diambil", docs)
 }
 
 // GetDocumentByID godoc
@@ -80,15 +77,15 @@ func (h *CurriculumHandler) GetDocuments(c *fiber.Ctx) error {
 func (h *CurriculumHandler) GetDocumentByID(c *fiber.Ctx) error {
 	docID, err := uuid.Parse(c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid input", "invalid document id")
+		return common.Error(c, fiber.StatusBadRequest, "ID dokumen tidak valid", "invalid document id")
 	}
 
 	doc, err := h.svc.GetDocumentByID(c.Context(), docID)
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "Not Found", "document not found")
+		return common.Error(c, fiber.StatusNotFound, "Dokumen tidak ditemukan", "document not found")
 	}
 
-	return common.Success(c, "Curriculum document retrieved", doc)
+	return common.Success(c, "Dokumen kurikulum berhasil diambil", doc)
 }
 
 // CheckReadiness godoc
@@ -106,15 +103,15 @@ func (h *CurriculumHandler) CheckReadiness(c *fiber.Ctx) error {
 	schoolIDStr := c.Query("school_id")
 	schoolID, err := uuid.Parse(schoolIDStr)
 	if err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid input", "invalid school id")
+		return common.Error(c, fiber.StatusBadRequest, "ID sekolah tidak valid", "invalid school id")
 	}
 
 	res, err := h.svc.CheckReadiness(c.Context(), schoolID)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Internal Server Error", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memeriksa kesiapan data", err)
 	}
 
-	return common.Success(c, "Readiness checked", res)
+	return common.Success(c, "Kesiapan data berhasil diperiksa", res)
 }
 
 // TriggerChapterFormulation godoc
@@ -131,24 +128,24 @@ func (h *CurriculumHandler) CheckReadiness(c *fiber.Ctx) error {
 func (h *CurriculumHandler) TriggerChapterFormulation(c *fiber.Ctx) error {
 	var req TriggerChapterRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	userIDStr, _ := c.Locals("user_id").(string)
 	userID, err := uuid.Parse(userIDStr)
 	if err != nil {
-		return common.Error(c, fiber.StatusUnauthorized, "Unauthorized", "Invalid user token")
+		return common.Error(c, fiber.StatusUnauthorized, "Tidak terautentikasi", "Token pengguna tidak valid")
 	}
 
 	res, err := h.svc.TriggerChapterFormulation(c.Context(), userID, req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Internal Server Error", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengantrean perumusan bab", err)
 	}
 
-	return common.Success(c, "Chapter formulation queued", res)
+	return common.Success(c, "Perumusan bab berhasil diantrean", res)
 }
 
 // GetChapter godoc
@@ -166,20 +163,20 @@ func (h *CurriculumHandler) TriggerChapterFormulation(c *fiber.Ctx) error {
 func (h *CurriculumHandler) GetChapter(c *fiber.Ctx) error {
 	docID, err := uuid.Parse(c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid input", "invalid document id")
+		return common.Error(c, fiber.StatusBadRequest, "ID dokumen tidak valid", "invalid document id")
 	}
 
 	chapterNum, err := c.ParamsInt("chapter_number")
 	if err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid input", "invalid chapter number")
+		return common.Error(c, fiber.StatusBadRequest, "Nomor bab tidak valid", "invalid chapter number")
 	}
 
 	chapter, err := h.svc.GetChapter(c.Context(), docID, chapterNum)
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "Not Found", "chapter not found")
+		return common.Error(c, fiber.StatusNotFound, "Bab tidak ditemukan", "chapter not found")
 	}
 
-	return common.Success(c, "Chapter retrieved", chapter)
+	return common.Success(c, "Bab berhasil diambil", chapter)
 }
 
 // UpdateChapterContent godoc
@@ -197,22 +194,22 @@ func (h *CurriculumHandler) GetChapter(c *fiber.Ctx) error {
 func (h *CurriculumHandler) UpdateChapterContent(c *fiber.Ctx) error {
 	chapterID, err := uuid.Parse(c.Params("chapter_id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid input", "invalid chapter id")
+		return common.Error(c, fiber.StatusBadRequest, "ID bab tidak valid", "invalid chapter id")
 	}
 
 	var req UpdateChapterRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	if err := h.svc.UpdateChapterContent(c.Context(), chapterID, req); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Internal Server Error", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui bab", err)
 	}
 
-	return common.Success(c, "Chapter updated", nil)
+	return common.Success(c, "Bab berhasil diperbarui", nil)
 }
 
 // FinalizeDocument godoc
@@ -229,14 +226,14 @@ func (h *CurriculumHandler) UpdateChapterContent(c *fiber.Ctx) error {
 func (h *CurriculumHandler) FinalizeDocument(c *fiber.Ctx) error {
 	docID, err := uuid.Parse(c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid input", "invalid document id")
+		return common.Error(c, fiber.StatusBadRequest, "ID dokumen tidak valid", "invalid document id")
 	}
 
 	if err := h.svc.FinalizeDocument(c.Context(), docID); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Bad Request", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Gagal memfinalisasi dokumen", err)
 	}
 
-	return common.Success(c, "Document finalized", nil)
+	return common.Success(c, "Dokumen berhasil difinalisasi", nil)
 }
 
 // ExportDocument godoc
@@ -253,12 +250,12 @@ func (h *CurriculumHandler) FinalizeDocument(c *fiber.Ctx) error {
 func (h *CurriculumHandler) ExportDocument(c *fiber.Ctx) error {
 	docID, err := uuid.Parse(c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid input", "invalid document id")
+		return common.Error(c, fiber.StatusBadRequest, "ID dokumen tidak valid", "invalid document id")
 	}
 
 	// Mock PDF Export Logic
 	_ = docID
-	return common.Success(c, "PDF exported successfully", map[string]string{
+	return common.Success(c, "PDF berhasil diekspor", map[string]string{
 		"download_url": "https://storage.sim-sekolah.com/exports/curriculum.pdf",
 	})
 }

@@ -20,6 +20,7 @@ import (
 
 	"sim-sekolah/config"
 	_ "sim-sekolah/docs"
+	"sim-sekolah/internal/common"
 	"sim-sekolah/internal/system"
 	"sim-sekolah/pkg/cache"
 	"sim-sekolah/pkg/logger"
@@ -117,9 +118,14 @@ func main() {
 				code = e.Code
 			}
 
+			msg := common.UserMessage(err)
+			if msg == err.Error() && code == fiber.StatusNotFound {
+				msg = "Resource tidak ditemukan"
+			}
 			return c.Status(code).JSON(fiber.Map{
 				"success": false,
-				"message": err.Error(),
+				"message": msg,
+				"error":   err.Error(),
 			})
 		},
 	})

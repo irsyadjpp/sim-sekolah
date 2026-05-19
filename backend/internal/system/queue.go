@@ -96,7 +96,7 @@ func (q *QueueService) StartWorker(ctx context.Context) {
 
 	// Wait for all workers to shut down gracefully on context cancel
 	wg.Wait()
-	logger.Info("All system queue workers shut down successfully")
+	logger.Info("Semua antrean pekerja sistem berhasil dimatikan")
 }
 
 func (q *QueueService) runWorkerLoop(ctx context.Context, workerID int) {

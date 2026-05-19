@@ -32,9 +32,9 @@ func (h *CPHandler) GetAll(c *fiber.Ctx) error {
 	search := c.Query("search", "")
 	data, total, err := h.svc.GetAll(pagination, search)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to fetch learning outcomes", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil capaian pembelajaran", err)
 	}
-	return common.Paginated(c, "Learning outcomes retrieved successfully", data, pagination.Page, pagination.Limit, total)
+	return common.Paginated(c, "Capaian pembelajaran berhasil diambil", data, pagination.Page, pagination.Limit, total)
 }
 
 // GetByID godoc
@@ -48,9 +48,9 @@ func (h *CPHandler) GetAll(c *fiber.Ctx) error {
 func (h *CPHandler) GetByID(c *fiber.Ctx) error {
 	data, err := h.svc.GetByID(c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "Learning outcome not found", err.Error())
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Capaian pembelajaran tidak ditemukan", err)
 	}
-	return common.Success(c, "Learning outcome retrieved successfully", data)
+	return common.Success(c, "Capaian pembelajaran berhasil diambil", data)
 }
 
 // Create godoc
@@ -65,14 +65,14 @@ func (h *CPHandler) GetByID(c *fiber.Ctx) error {
 func (h *CPHandler) Create(c *fiber.Ctx) error {
 	var req CreateCPRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.Create(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to create learning outcome", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat capaian pembelajaran", err)
 	}
 
 	// Trigger Audit Log
@@ -81,7 +81,7 @@ func (h *CPHandler) Create(c *fiber.Ctx) error {
 		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "CREATE", "learning_outcome", data.ID.String(), c.IP())
 	}
 
-	return common.Created(c, "Learning outcome created successfully", data)
+	return common.Created(c, "Capaian pembelajaran berhasil dibuat", data)
 }
 
 // Update godoc
@@ -97,14 +97,14 @@ func (h *CPHandler) Create(c *fiber.Ctx) error {
 func (h *CPHandler) Update(c *fiber.Ctx) error {
 	var req UpdateCPRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.Update(c.UserContext(), c.Params("id"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to update learning outcome", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui capaian pembelajaran", err)
 	}
 
 	// Trigger Audit Log
@@ -113,7 +113,7 @@ func (h *CPHandler) Update(c *fiber.Ctx) error {
 		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "UPDATE", "learning_outcome", data.ID.String(), c.IP())
 	}
 
-	return common.Success(c, "Learning outcome updated successfully", data)
+	return common.Success(c, "Capaian pembelajaran berhasil diperbarui", data)
 }
 
 // Delete godoc
@@ -127,7 +127,7 @@ func (h *CPHandler) Update(c *fiber.Ctx) error {
 func (h *CPHandler) Delete(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if err := h.svc.Delete(c.UserContext(), id); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to delete learning outcome", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus capaian pembelajaran", err)
 	}
 
 	// Trigger Audit Log
@@ -136,7 +136,7 @@ func (h *CPHandler) Delete(c *fiber.Ctx) error {
 		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "DELETE", "learning_outcome", id, c.IP())
 	}
 
-	return common.Success(c, "Learning outcome deleted successfully", nil)
+	return common.Success(c, "Capaian pembelajaran berhasil dihapus", nil)
 }
 
 // ========================
@@ -154,9 +154,9 @@ func (h *CPHandler) Delete(c *fiber.Ctx) error {
 func (h *CPHandler) GetAllDetails(c *fiber.Ctx) error {
 	data, err := h.svc.GetAllDetails(c.Params("cpId"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to fetch learning outcome details", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil detail capaian pembelajaran", err)
 	}
-	return common.Success(c, "Learning outcome details retrieved successfully", data)
+	return common.Success(c, "Detail capaian pembelajaran berhasil diambil", data)
 }
 
 // CreateDetail godoc
@@ -172,16 +172,16 @@ func (h *CPHandler) GetAllDetails(c *fiber.Ctx) error {
 func (h *CPHandler) CreateDetail(c *fiber.Ctx) error {
 	var req CreateCPDetailRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.CreateDetail(c.UserContext(), c.Params("cpId"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to create detail", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat detail", err)
 	}
-	return common.Created(c, "Detail created successfully", data)
+	return common.Created(c, "Detail berhasil dibuat", data)
 }
 
 // UpdateDetail godoc
@@ -198,16 +198,16 @@ func (h *CPHandler) CreateDetail(c *fiber.Ctx) error {
 func (h *CPHandler) UpdateDetail(c *fiber.Ctx) error {
 	var req UpdateCPDetailRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.UpdateDetail(c.UserContext(), c.Params("cpId"), c.Params("id"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to update detail", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui detail", err)
 	}
-	return common.Success(c, "Detail updated successfully", data)
+	return common.Success(c, "Detail berhasil diperbarui", data)
 }
 
 // DeleteDetail godoc
@@ -221,31 +221,31 @@ func (h *CPHandler) UpdateDetail(c *fiber.Ctx) error {
 // @Router /learning-outcomes/{cpId}/details/{id} [delete]
 func (h *CPHandler) DeleteDetail(c *fiber.Ctx) error {
 	if err := h.svc.DeleteDetail(c.UserContext(), c.Params("cpId"), c.Params("id")); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to delete detail", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus detail", err)
 	}
-	return common.Success(c, "Detail deleted successfully", nil)
+	return common.Success(c, "Detail berhasil dihapus", nil)
 }
 
 // TP Handlers
 func (h *CPHandler) GetAllObjectives(c *fiber.Ctx) error {
 	data, err := h.svc.GetAllObjectives(c.Params("cpId"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to fetch objectives", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil tujuan pembelajaran", err)
 	}
-	return common.Success(c, "Objectives retrieved successfully", data)
+	return common.Success(c, "Tujuan pembelajaran berhasil diambil", data)
 }
 
 func (h *CPHandler) CreateObjective(c *fiber.Ctx) error {
 	var req CreateTPRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.CreateObjective(c.UserContext(), c.Params("cpId"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to create objective", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat tujuan pembelajaran", err)
 	}
 
 	// Trigger Audit Log
@@ -254,13 +254,13 @@ func (h *CPHandler) CreateObjective(c *fiber.Ctx) error {
 		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "CREATE", "learning_objective", data.ID.String(), c.IP())
 	}
 
-	return common.Created(c, "Objective created successfully", data)
+	return common.Created(c, "Tujuan pembelajaran berhasil dibuat", data)
 }
 
 func (h *CPHandler) DeleteObjective(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if err := h.svc.DeleteObjective(c.UserContext(), c.Params("cpId"), id); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to delete objective", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus tujuan pembelajaran", err)
 	}
 
 	// Trigger Audit Log
@@ -269,5 +269,5 @@ func (h *CPHandler) DeleteObjective(c *fiber.Ctx) error {
 		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "DELETE", "learning_objective", id, c.IP())
 	}
 
-	return common.Success(c, "Objective deleted successfully", nil)
+	return common.Success(c, "Tujuan pembelajaran berhasil dihapus", nil)
 }

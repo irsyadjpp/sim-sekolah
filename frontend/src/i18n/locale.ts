@@ -1,16 +1,13 @@
-import Cookies from "js-cookie";
+import { LocaleOption } from "@/constants";
 
-import { DEFAULTS } from "@/config";
-import { COOKIE_KEYS, LocaleOption } from "@/constants";
-import i18n from "@/i18n/i18n";
-
-// Get client locale from cookie
+/** UI dikunci permanen ke Bahasa Indonesia. */
 export function getClientLocale(): LocaleOption {
-  return (Cookies.get(COOKIE_KEYS.locale) as LocaleOption) || DEFAULTS.locale;
+  return "id";
 }
 
-// Set client locale in cookie
-export function setClientLocale(locale: LocaleOption) {
-  i18n.changeLanguage(locale);
-  Cookies.set(COOKIE_KEYS.locale, locale, { sameSite: "lax" });
+/** Memastikan preferensi bahasa tersimpan (i18n diinisialisasi di i18n.ts). */
+export function setClientLocale(locale: LocaleOption = "id") {
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem("i18nextLng", locale);
+  }
 }

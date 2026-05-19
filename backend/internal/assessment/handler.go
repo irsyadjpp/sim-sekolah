@@ -18,7 +18,7 @@ func NewAssessmentHandler(svc AssessmentService) *AssessmentHandler {
 func (h *AssessmentHandler) GetAssessments(c *fiber.Ctx) error {
 	data, err := h.svc.GetByTeachingAssignment(c.UserContext(), c.Params("assignmentId"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data asesmen", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data asesmen", err)
 	}
 	return common.Success(c, "Data asesmen berhasil diambil", data)
 }
@@ -27,7 +27,7 @@ func (h *AssessmentHandler) GetAssessments(c *fiber.Ctx) error {
 func (h *AssessmentHandler) GetAssessmentByID(c *fiber.Ctx) error {
 	data, err := h.svc.GetByID(c.UserContext(), c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "Asesmen tidak ditemukan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Asesmen tidak ditemukan", err)
 	}
 	return common.Success(c, "Detail asesmen berhasil diambil", data)
 }
@@ -36,19 +36,15 @@ func (h *AssessmentHandler) GetAssessmentByID(c *fiber.Ctx) error {
 func (h *AssessmentHandler) CreateAssessment(c *fiber.Ctx) error {
 	var req CreateAssessmentRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	data, err := h.svc.Create(c.UserContext(), c.Params("assignmentId"), req)
 	if err != nil {
-		status := fiber.StatusInternalServerError
-		if err.Error() == "forbidden: you don't have permission to modify this resource" {
-			status = fiber.StatusForbidden
-		}
-		return common.Error(c, status, "Gagal membuat asesmen", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat asesmen", err)
 	}
 	return common.Created(c, "Asesmen berhasil dibuat", data)
 }
@@ -57,16 +53,12 @@ func (h *AssessmentHandler) CreateAssessment(c *fiber.Ctx) error {
 func (h *AssessmentHandler) UpdateAssessment(c *fiber.Ctx) error {
 	var req UpdateAssessmentRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 
 	data, err := h.svc.Update(c.UserContext(), c.Params("id"), req)
 	if err != nil {
-		status := fiber.StatusInternalServerError
-		if err.Error() == "forbidden: you don't have permission to modify this resource" {
-			status = fiber.StatusForbidden
-		}
-		return common.Error(c, status, "Gagal memperbarui asesmen", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui asesmen", err)
 	}
 	return common.Success(c, "Asesmen berhasil diperbarui", data)
 }
@@ -74,11 +66,7 @@ func (h *AssessmentHandler) UpdateAssessment(c *fiber.Ctx) error {
 // DeleteAssessmentHandler godoc
 func (h *AssessmentHandler) DeleteAssessment(c *fiber.Ctx) error {
 	if err := h.svc.Delete(c.UserContext(), c.Params("id")); err != nil {
-		status := fiber.StatusInternalServerError
-		if err.Error() == "forbidden: you don't have permission to modify this resource" {
-			status = fiber.StatusForbidden
-		}
-		return common.Error(c, status, "Gagal menghapus asesmen", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus asesmen", err)
 	}
 	return common.Success(c, "Asesmen berhasil dihapus", nil)
 }
@@ -87,7 +75,7 @@ func (h *AssessmentHandler) DeleteAssessment(c *fiber.Ctx) error {
 func (h *AssessmentHandler) GetScores(c *fiber.Ctx) error {
 	data, err := h.svc.GetScores(c.UserContext(), c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil nilai", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil nilai", err)
 	}
 	return common.Success(c, "Data nilai berhasil diambil", data)
 }
@@ -96,18 +84,14 @@ func (h *AssessmentHandler) GetScores(c *fiber.Ctx) error {
 func (h *AssessmentHandler) UpsertScores(c *fiber.Ctx) error {
 	var req UpsertScoresRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	if err := h.svc.UpsertScores(c.UserContext(), c.Params("id"), req); err != nil {
-		status := fiber.StatusInternalServerError
-		if err.Error() == "forbidden: you don't have permission to modify this resource" {
-			status = fiber.StatusForbidden
-		}
-		return common.Error(c, status, "Gagal menyimpan nilai", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menyimpan nilai", err)
 	}
 	return common.Success(c, "Nilai berhasil disimpan", nil)
 }
@@ -122,7 +106,7 @@ func (h *AssessmentHandler) GetAttendances(c *fiber.Ctx) error {
 
 	data, err := h.svc.GetAttendances(c.UserContext(), classroomID, date)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data kehadiran", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data kehadiran", err)
 	}
 	return common.Success(c, "Data kehadiran berhasil diambil", data)
 }
@@ -137,14 +121,14 @@ func (h *AssessmentHandler) UpsertAttendances(c *fiber.Ctx) error {
 
 	var req UpsertAttendancesRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	if err := h.svc.UpsertAttendances(c.UserContext(), classroomID, date, req); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menyimpan data kehadiran", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menyimpan data kehadiran", err)
 	}
 	return common.Success(c, "Data kehadiran berhasil disimpan", nil)
 }

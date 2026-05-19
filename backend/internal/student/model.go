@@ -63,7 +63,7 @@ type Student struct {
 	EnrollmentYear int           `gorm:"type:smallint" json:"enrollment_year"` // Tahun masuk
 	Curriculum     string        `gorm:"type:varchar(50)" json:"curriculum"`   // Kurikulum
 	StudentStatus  StudentStatus `gorm:"type:varchar(20);default:'active'" json:"student_status"`
-	EntryPath      string        `gorm:"type:varchar(50)" json:"entry_path"`       // Jalur masuk (PPDB/Mutasi/dll)
+	EntryPath      string        `gorm:"type:varchar(50)" json:"entry_path"`       // Jalur masuk (SPMB/Mutasi/dll)
 	PreviousSchool string        `gorm:"type:varchar(255)" json:"previous_school"` // Asal sekolah
 	ExamNumber     string        `gorm:"type:varchar(30)" json:"exam_number"`      // Nomor peserta ujian
 

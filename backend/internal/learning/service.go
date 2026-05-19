@@ -41,7 +41,7 @@ func (s *learningService) SaveTeachingModule(ctx context.Context, module *Teachi
 	for _, activity := range module.Activities {
 		var stage tahapan_kognitif.CognitiveStage
 		if err := s.db.First(&stage, "id = ?", activity.StageID).Error; err == nil {
-			if stage.Name == "Merefleksi" || stage.Name == "Reflecting" {
+			if stage.Name == "Merefleksi" || stage.Name == "Reflecting" || stage.Name == "Menciptakan" || stage.Name == "Reflect" {
 				hasRefleksi = true
 				break
 			}

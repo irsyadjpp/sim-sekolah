@@ -21,7 +21,7 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 	svc := NewCPService(cpRepo, detailRepo, tpRepo, subRepo, phaseRepo, elemRepo)
 	h := NewCPHandler(svc)
 
-	group := api.Group("/learning-outcomes")
+	group := api.Group("/capaian-pembelajaran")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAll)
@@ -32,13 +32,13 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 	group.Delete("/:id", auth.RoleMiddleware("SUPER_ADMIN"), h.Delete)
 
 	// Nested Details
-	group.Get("/:cpId/details", h.GetAllDetails)
-	group.Post("/:cpId/details", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.CreateDetail)
-	group.Put("/:cpId/details/:id", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.UpdateDetail)
-	group.Delete("/:cpId/details/:id", auth.RoleMiddleware("SUPER_ADMIN"), h.DeleteDetail)
+	group.Get("/:cpId/detail", h.GetAllDetails)
+	group.Post("/:cpId/detail", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.CreateDetail)
+	group.Put("/:cpId/detail/:id", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.UpdateDetail)
+	group.Delete("/:cpId/detail/:id", auth.RoleMiddleware("SUPER_ADMIN"), h.DeleteDetail)
 
 	// TP (Tujuan Pembelajaran)
-	group.Get("/:cpId/objectives", h.GetAllObjectives)
-	group.Post("/:cpId/objectives", h.CreateObjective)
-	group.Delete("/:cpId/objectives/:id", h.DeleteObjective)
+	group.Get("/:cpId/tujuan-pembelajaran", h.GetAllObjectives)
+	group.Post("/:cpId/tujuan-pembelajaran", h.CreateObjective)
+	group.Delete("/:cpId/tujuan-pembelajaran/:id", h.DeleteObjective)
 }

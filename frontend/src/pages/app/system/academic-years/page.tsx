@@ -41,9 +41,9 @@ import {
   Typography,
 } from "@mui/material";
 
-import { DEFAULTS } from "@/config";
 import { useClientTable } from "@/hooks/use-client-table";
 import { useConfirm } from "@/hooks/use-confirm";
+import { apiClient } from "@/lib/api-client";
 
 export default function AcademicYearsPage() {
   const confirm = useConfirm();
@@ -59,19 +59,16 @@ export default function AcademicYearsPage() {
   const fetchAcademicYears = async () => {
     setLoading(true);
     setError(null);
-    const token = localStorage.getItem("accessToken");
     try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/academic-years`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const json = await res.json();
+      const res = await apiClient.get("/api/v1/academic-years");
+      const json = res.data;
       if (json.status === "success") {
         setAcademicYears(json.data || []);
       } else {
         setError(json.message || "Gagal mengambil data tahun ajaran.");
       }
-    } catch (err) {
-      setError("Kesalahan koneksi saat menghubungi server.");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Kesalahan koneksi saat menghubungi server.");
     } finally {
       setLoading(false);
     }
@@ -93,22 +90,12 @@ export default function AcademicYearsPage() {
     onSubmit: async (values) => {
       setError(null);
       setSuccess(null);
-      const token = localStorage.getItem("accessToken");
-      const url = editingYear
-        ? `${DEFAULTS.API_URL}/api/v1/academic-years/${editingYear.id}`
-        : `${DEFAULTS.API_URL}/api/v1/academic-years`;
-      const method = editingYear ? "PUT" : "POST";
+      const url = editingYear ? `/api/v1/academic-years/${editingYear.id}` : `/api/v1/academic-years`;
 
       try {
-        const res = await fetch(url, {
-          method,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(values),
-        });
-        const json = await res.json();
+        const res = editingYear ? await apiClient.put(url, values) : await apiClient.post(url, values);
+
+        const json = res.data;
         if (json.status === "success") {
           setSuccess(editingYear ? "Tahun ajaran berhasil diperbarui." : "Tahun ajaran baru berhasil dibuat.");
           setOpenFormDialog(false);
@@ -118,8 +105,8 @@ export default function AcademicYearsPage() {
         } else {
           setError(json.message || "Gagal menyimpan data tahun ajaran.");
         }
-      } catch (err) {
-        setError("Kesalahan koneksi saat menyimpan data.");
+      } catch (err: any) {
+        setError(err.response?.data?.message || "Kesalahan koneksi saat menyimpan data.");
       }
     },
   });
@@ -142,21 +129,17 @@ export default function AcademicYearsPage() {
   const handleActivate = async (id: string) => {
     setError(null);
     setSuccess(null);
-    const token = localStorage.getItem("accessToken");
     try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/academic-years/${id}/activate`, {
-        method: "PATCH",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const json = await res.json();
+      const res = await apiClient.patch(`/api/v1/academic-years/${id}/activate`);
+      const json = res.data;
       if (json.status === "success") {
         setSuccess("Tahun ajaran aktif berhasil diperbarui.");
         fetchAcademicYears();
       } else {
         setError(json.message || "Gagal mengaktifkan tahun ajaran.");
       }
-    } catch (err) {
-      setError("Kesalahan koneksi saat mengaktifkan tahun ajaran.");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Kesalahan koneksi saat mengaktifkan tahun ajaran.");
     }
   };
 
@@ -171,21 +154,17 @@ export default function AcademicYearsPage() {
     if (!isConfirmed) return;
     setError(null);
     setSuccess(null);
-    const token = localStorage.getItem("accessToken");
     try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/academic-years/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const json = await res.json();
+      const res = await apiClient.delete(`/api/v1/academic-years/${id}`);
+      const json = res.data;
       if (json.status === "success") {
         setSuccess("Tahun ajaran berhasil dihapus.");
         fetchAcademicYears();
       } else {
         setError(json.message || "Gagal menghapus tahun ajaran.");
       }
-    } catch (err) {
-      setError("Kesalahan koneksi saat menghapus tahun ajaran.");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Kesalahan koneksi saat menghapus tahun ajaran.");
     }
   };
 

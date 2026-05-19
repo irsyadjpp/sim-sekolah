@@ -13,10 +13,10 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	h := NewScheduleHandler(svc)
 
 	// Routes
-	router.Get("/classrooms/:id/schedules", middleware.Protected(), h.GetByClassroom)
-	router.Get("/teachers/:id/schedules", middleware.Protected(), h.GetByTeacher)
+	router.Get("/kelas/:id/jadwal", middleware.Protected(), h.GetByClassroom)
+	router.Get("/guru/:id/jadwal", middleware.Protected(), h.GetByTeacher)
 
-	schedules := router.Group("/schedules")
+	schedules := router.Group("/jadwal")
 	schedules.Use(middleware.Protected())
 	schedules.Post("/", h.Create)
 	schedules.Delete("/:id", h.Delete)

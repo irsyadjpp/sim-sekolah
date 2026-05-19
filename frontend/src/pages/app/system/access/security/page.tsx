@@ -71,7 +71,7 @@ export default function SecurityAuditPage() {
 
   const handleExportCSV = () => {
     if (logs.length === 0) {
-      alert("Tidak ada data untuk diekspor");
+      alert(t("audit.export-empty"));
       return;
     }
     const headers = ["Aktor", "Email", "Aksi", "Detail", "IP Address", "Waktu"];
@@ -242,51 +242,34 @@ export default function SecurityAuditPage() {
 
   // Human-readable descriptions mapping
   const getReadableDetails = (log: AuditLog) => {
-    const isIndo = localStorage.getItem("i18nextLng")?.startsWith("id");
     const entityLabel =
       log.entity === "student"
-        ? isIndo
-          ? "Profil Siswa"
-          : "Student Profile"
+        ? t("audit-log.entity-student")
         : log.entity === "student_parent"
-          ? isIndo
-            ? "Data Orang Tua Siswa"
-            : "Student Parent Data"
+          ? t("audit-log.entity-student-parent")
           : log.entity === "security"
-            ? isIndo
-              ? "Pengaturan 2FA"
-              : "2FA Settings"
+            ? t("audit-log.entity-security")
             : log.entity === "auth"
-              ? isIndo
-                ? "Sesi Otentikasi"
-                : "Auth Session"
+              ? t("audit-log.entity-auth")
               : log.entity;
 
     switch (log.action.toUpperCase()) {
       case "READ":
-        return isIndo
-          ? `Membuka detail ${entityLabel} (ID: ${log.entity_id})`
-          : `Opened details of ${entityLabel} (ID: ${log.entity_id})`;
+        return t("audit-log.action-read", { entity: entityLabel, id: log.entity_id });
       case "CREATE":
-        return isIndo
-          ? `Membuat rekaman ${entityLabel} baru (ID: ${log.entity_id})`
-          : `Created new ${entityLabel} record (ID: ${log.entity_id})`;
+        return t("audit-log.action-create", { entity: entityLabel, id: log.entity_id });
       case "UPDATE":
-        return isIndo
-          ? `Memperbarui ${entityLabel} (ID: ${log.entity_id})`
-          : `Updated ${entityLabel} (ID: ${log.entity_id})`;
+        return t("audit-log.action-update", { entity: entityLabel, id: log.entity_id });
       case "DELETE":
-        return isIndo
-          ? `Menghapus data ${entityLabel} (ID: ${log.entity_id})`
-          : `Deleted ${entityLabel} data (ID: ${log.entity_id})`;
+        return t("audit-log.action-delete", { entity: entityLabel, id: log.entity_id });
       case "LOGIN":
-        return isIndo ? `Berhasil login sistem melalui perangkat` : `Successfully signed into the system`;
+        return t("audit-log.login-success");
       case "MFA_ENABLE":
-        return isIndo ? `Mengaktifkan Autentikasi Dua Faktor (2FA)` : `Enabled Two-Factor Authentication (2FA)`;
+        return t("audit-log.mfa-enable");
       case "MFA_DISABLE":
-        return isIndo ? `Menonaktifkan Autentikasi Dua Faktor (2FA)` : `Disabled Two-Factor Authentication (2FA)`;
+        return t("audit-log.mfa-disable");
       default:
-        return `${log.action} on ${log.entity} (${log.entity_id})`;
+        return t("audit-log.action-default", { action: log.action, entity: log.entity, id: log.entity_id });
     }
   };
 
@@ -306,10 +289,10 @@ export default function SecurityAuditPage() {
         </Typography>
         <Breadcrumbs sx={{ mb: 2 }}>
           <Link to="/dashboards/default" style={{ textDecoration: "none", color: "inherit" }}>
-            Home
+            {t("common-ui.home")}
           </Link>
           <Link to="/system" style={{ textDecoration: "none", color: "inherit" }}>
-            Sistem
+            {t("common-ui.system")}
           </Link>
           <Typography color="text.secondary" variant="body2">
             {t("audit.title")}
@@ -455,14 +438,14 @@ export default function SecurityAuditPage() {
             {/* Column Visibility Select */}
             <Grid size={{ xs: 12, md: 4 }}>
               <FormControl fullWidth size="small">
-                <InputLabel>Pilih Kolom</InputLabel>
+                <InputLabel>{t("audit.select-columns")}</InputLabel>
                 <Select
                   multiple
                   value={visibleColumns}
                   onChange={(e) =>
                     setVisibleColumns(typeof e.target.value === "string" ? e.target.value.split(",") : e.target.value)
                   }
-                  input={<OutlinedInput label="Pilih Kolom" />}
+                  input={<OutlinedInput label={t("audit.select-columns")} />}
                   renderValue={(selected) => `Kolom (${selected.length})`}
                 >
                   <MenuItem value="actor">

@@ -273,7 +273,7 @@ func (s *authService) ForgotPassword(ctx context.Context, req ForgotPasswordRequ
 
 	logger.Info("Password reset link generated", slog.String("email", user.Email), slog.String("token", tokenStr))
 	// Log for development simulation
-	fmt.Printf("\n[EMAIL SIMULATION] Password Reset Link for %s: http://localhost:3000/auth/password-new?token=%s\n\n", user.Email, tokenStr)
+	logger.Info(fmt.Sprintf("[EMAIL SIMULATION] Password Reset Link for %s: http://localhost:3000/auth/password-new?token=%s", user.Email, tokenStr))
 
 	return nil
 }

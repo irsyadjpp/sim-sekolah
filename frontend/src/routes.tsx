@@ -40,6 +40,16 @@ const generateAppRoutesFromFiles = (): React.ReactElement[] => {
   const routes: React.ReactElement[] = [];
 
   for (const key in modules) {
+    // Lewati halaman demo template (bahasa Inggris) — tidak dipakai produksi
+    const demoPrefixes = [
+      "/pages/app/pages/",
+      "/pages/app/dashboards/",
+      "/pages/app/education/",
+      "/pages/landing-page/",
+    ];
+    if (demoPrefixes.some((prefix) => key.includes(prefix))) {
+      continue;
+    }
     if (key.startsWith("./pages/app/") && key.endsWith("/page.tsx")) {
       // Extract path, e.g., "./pages/app/dashboards/default/page.tsx" -> "/dashboards/default"
       let path = key.replace("./pages/app", "").replace("/page.tsx", "");
@@ -62,8 +72,8 @@ const generateAuthRoutes = (): React.ReactElement[] => {
     <Route key="set-verification" path="set-verification" element={lazyLoad("/auth/set-verification")} />,
     <Route key="terms-and-conditions" path="terms-and-conditions" element={lazyLoad("/auth/terms-and-conditions")} />,
     <Route key="privacy-policy" path="privacy-policy" element={lazyLoad("/auth/privacy-policy")} />,
-    <Route key="ppdb-register" path="ppdb/register" element={lazyLoad("/auth/ppdb/register")} />,
-    <Route key="ppdb-status" path="ppdb/status" element={lazyLoad("/auth/ppdb/status")} />,
+    <Route key="spmb-register" path="spmb/register" element={lazyLoad("/auth/spmb/register")} />,
+    <Route key="spmb-status" path="spmb/status" element={lazyLoad("/auth/spmb/status")} />,
   ];
 };
 

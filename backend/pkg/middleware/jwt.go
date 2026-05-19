@@ -28,7 +28,7 @@ func Protected() fiber.Handler {
 		if authHeader == "" {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"success": false,
-				"message": "Unauthorized",
+				"message": "Tidak terautentikasi",
 			})
 		}
 
@@ -39,7 +39,7 @@ func Protected() fiber.Handler {
 			if err == nil && blacklisted > 0 {
 				return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 					"status":  "error",
-					"message": "Token has been logged out",
+					"message": "Token telah logout",
 				})
 			}
 		}
@@ -51,7 +51,7 @@ func Protected() fiber.Handler {
 		if err != nil || !token.Valid {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"status":  "error",
-				"message": "Invalid token",
+				"message": "Token tidak valid",
 			})
 		}
 
@@ -59,7 +59,7 @@ func Protected() fiber.Handler {
 		if !ok {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"status":  "error",
-				"message": "Invalid token claims",
+				"message": "Klaim token tidak valid",
 			})
 		}
 

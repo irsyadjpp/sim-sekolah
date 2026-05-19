@@ -26,22 +26,22 @@ func NewPromotionHandler(svc PromotionService) *PromotionHandler {
 func (h *PromotionHandler) Promote(c *fiber.Ctx) error {
 	var req PromoteRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	operatorID, ok := c.Locals("user_id").(string)
 	if !ok || operatorID == "" {
-		return common.Error(c, fiber.StatusUnauthorized, "Unauthorized", "Operator ID missing")
+		return common.Error(c, fiber.StatusUnauthorized, "Tidak terautentikasi", "ID operator tidak ditemukan")
 	}
 
 	err := h.svc.PromoteStudents(c.UserContext(), req, operatorID)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to process class promotion", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memproses kenaikan kelas", err)
 	}
-	return common.Success(c, "Mass student class promotion processed successfully", nil)
+	return common.Success(c, "Kenaikan kelas massal berhasil diproses", nil)
 }
 
 // Graduate godoc
@@ -56,15 +56,15 @@ func (h *PromotionHandler) Promote(c *fiber.Ctx) error {
 func (h *PromotionHandler) Graduate(c *fiber.Ctx) error {
 	var req GraduateRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	err := h.svc.GraduateStudents(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Failed to process student graduation", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memproses kelulusan murid", err)
 	}
-	return common.Success(c, "Mass student graduation processed successfully", nil)
+	return common.Success(c, "Kelulusan massal berhasil diproses", nil)
 }

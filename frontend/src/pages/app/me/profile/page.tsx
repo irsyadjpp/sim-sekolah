@@ -16,7 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { DEFAULTS } from "@/config";
+import { apiClient } from "@/lib/api-client";
 import type { MeData } from "@/types/me";
 
 const ReadField = ({ label, value }: { label: string; value?: string | number | null }) => (
@@ -49,20 +49,17 @@ export default function ProfilePage() {
     // Fetch from API to update data
     const token = localStorage.getItem("accessToken");
     if (!token) return;
-    fetch(`${DEFAULTS.API_URL}/api/v1/auth/me`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((r: Response) => {
-        if (!r.ok) throw new Error("Gagal memuat profil.");
-        return r.json();
-      })
-      .then((json) => {
-        setMeData(json.data);
-        localStorage.setItem("-user-data", JSON.stringify(json.data));
+
+    apiClient
+      .get("/api/v1/auth/me")
+      .then((res) => {
+        setMeData(res.data.data);
+        localStorage.setItem("-user-data", JSON.stringify(res.data.data));
         setLoading(false);
       })
-      .catch((e: Error) => {
-        setError(e.message);
+      .catch((e: any) => {
+        const errMsg = e.response?.data?.message || e.message || "Gagal memuat profil.";
+        setError(errMsg);
         setLoading(false);
       });
   }, []);

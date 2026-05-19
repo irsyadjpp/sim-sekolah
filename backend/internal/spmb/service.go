@@ -1,4 +1,4 @@
-package ppdb
+package spmb
 
 import (
 	"bytes"
@@ -18,30 +18,30 @@ import (
 	"github.com/google/uuid"
 )
 
-type PPDBService interface {
-	Register(ctx context.Context, req RegisterPPDBRequest) (*Applicant, error)
+type SPMBService interface {
+	Register(ctx context.Context, req RegisterSPMBRequest) (*Applicant, error)
 	GetApplicants(ctx context.Context, pagination common.Pagination, status string) ([]Applicant, int64, error)
 	GetApplicantByID(ctx context.Context, id string) (*Applicant, error)
 	CheckStatusByNIK(ctx context.Context, nik string) (*Applicant, error)
 
 	UploadDocument(ctx context.Context, applicantID string, docType string, fileHeader *multipart.FileHeader) error
-	VerifyApplication(ctx context.Context, id string, req VerifyPPDBRequest) error
+	VerifyApplication(ctx context.Context, id string, req VerifySPMBRequest) error
 	GetAdmissionPaths(ctx context.Context) ([]AdmissionPath, error)
-	GetActiveAcademicYears(ctx context.Context) ([]PPDBAcademicYear, error)
+	GetActiveAcademicYears(ctx context.Context) ([]SPMBAcademicYear, error)
 }
 
-type ppdbService struct {
-	repo PPDBRepository
+type spmbService struct {
+	repo SPMBRepository
 }
 
-func NewPPDBService(repo PPDBRepository) PPDBService {
-	return &ppdbService{repo: repo}
+func NewSPMBService(repo SPMBRepository) SPMBService {
+	return &spmbService{repo: repo}
 }
 
-func (s *ppdbService) Register(ctx context.Context, req RegisterPPDBRequest) (*Applicant, error) {
+func (s *spmbService) Register(ctx context.Context, req RegisterSPMBRequest) (*Applicant, error) {
 	// 1. Cek apakah NIK sudah pernah mendaftar
 	if existing, err := s.repo.GetApplicantByNIK(ctx, req.NIK); err == nil && existing != nil {
-		return nil, errors.New("nik sudah terdaftar di sistem PPDB")
+		return nil, errors.New("nik sudah terdaftar di sistem SPMB")
 	}
 
 	syUUID, err := uuid.Parse(req.SchoolYearID)
@@ -59,25 +59,70 @@ func (s *ppdbService) Register(ctx context.Context, req RegisterPPDBRequest) (*A
 		return nil, errors.New("invalid birth_date format")
 	}
 
+	// Permendikdasmen No. 3 2025: Age validation on July 1st of current year
+	targetYear := time.Now().Year()
+	targetDate := time.Date(targetYear, 7, 1, 0, 0, 0, 0, time.UTC)
+	years := targetDate.Year() - birthDate.Year()
+	months := int(targetDate.Month()) - int(birthDate.Month())
+	days := targetDate.Day() - birthDate.Day()
+	totalMonths := years*12 + months
+	if days < 0 {
+		totalMonths--
+	}
+	if totalMonths < 66 { // 5.5 years = 66 months
+		return nil, errors.New("usia calon murid kurang dari 5 tahun 6 bulan pada 1 Juli tahun berjalan")
+	}
+
+	var cardIssueDate *time.Time
+	if req.FamilyCardIssueDate != "" {
+		parsed, err := time.Parse("2006-01-02", req.FamilyCardIssueDate)
+		if err != nil {
+			return nil, errors.New("format tanggal terbit KK tidak valid (harus YYYY-MM-DD)")
+		}
+		cardIssueDate = &parsed
+	}
+
+	// Validate KK for Domisili path
+	paths, err := s.repo.GetAdmissionPaths(ctx)
+	if err == nil {
+		var isDomisili bool
+		for _, p := range paths {
+			if p.ID == pathUUID && p.Name == "Domisili" {
+				isDomisili = true
+				break
+			}
+		}
+		if isDomisili {
+			if cardIssueDate == nil {
+				return nil, errors.New("tanggal terbit KK wajib diisi untuk Jalur Domisili")
+			}
+			oneYearAgo := time.Now().AddDate(-1, 0, 0)
+			if cardIssueDate.After(oneYearAgo) {
+				return nil, errors.New("tanggal terbit Kartu Keluarga harus minimal 1 tahun sebelum tanggal pendaftaran")
+			}
+		}
+	}
+
 	app := &Applicant{
-		ID:                 uuid.New(),
-		SchoolYearID:       syUUID,
-		AdmissionPathID:    pathUUID,
-		FullName:           req.FullName,
-		NIK:                req.NIK,
-		NISN:               req.NISN,
-		BirthPlace:         req.BirthPlace,
-		BirthDate:          birthDate,
-		Gender:             req.Gender,
-		Religion:           req.Religion,
-		Address:            req.Address,
-		Village:            req.Village,
-		District:           req.District,
-		Regency:            req.Regency,
-		Province:           req.Province,
-		PostalCode:         req.PostalCode,
-		DistanceToSchoolKm: req.DistanceToSchoolKm,
-		Status:             "Submitted",
+		ID:                  uuid.New(),
+		SchoolYearID:        syUUID,
+		AdmissionPathID:     pathUUID,
+		FullName:            req.FullName,
+		NIK:                 req.NIK,
+		NISN:                req.NISN,
+		BirthPlace:          req.BirthPlace,
+		BirthDate:           birthDate,
+		Gender:              req.Gender,
+		Religion:            req.Religion,
+		FamilyCardIssueDate: cardIssueDate,
+		Address:             req.Address,
+		Village:             req.Village,
+		District:            req.District,
+		Regency:             req.Regency,
+		Province:            req.Province,
+		PostalCode:          req.PostalCode,
+		DistanceToSchoolKm:  req.DistanceToSchoolKm,
+		Status:              "Submitted",
 	}
 
 	parents := &ApplicantParent{
@@ -98,19 +143,19 @@ func (s *ppdbService) Register(ctx context.Context, req RegisterPPDBRequest) (*A
 	return app, nil
 }
 
-func (s *ppdbService) GetApplicants(ctx context.Context, pagination common.Pagination, status string) ([]Applicant, int64, error) {
+func (s *spmbService) GetApplicants(ctx context.Context, pagination common.Pagination, status string) ([]Applicant, int64, error) {
 	return s.repo.GetApplicants(ctx, pagination.Limit, pagination.Offset, status)
 }
 
-func (s *ppdbService) GetApplicantByID(ctx context.Context, id string) (*Applicant, error) {
+func (s *spmbService) GetApplicantByID(ctx context.Context, id string) (*Applicant, error) {
 	return s.repo.GetApplicantByID(ctx, id)
 }
 
-func (s *ppdbService) CheckStatusByNIK(ctx context.Context, nik string) (*Applicant, error) {
+func (s *spmbService) CheckStatusByNIK(ctx context.Context, nik string) (*Applicant, error) {
 	return s.repo.GetApplicantByNIK(ctx, nik)
 }
 
-func (s *ppdbService) UploadDocument(ctx context.Context, applicantID string, docType string, fileHeader *multipart.FileHeader) error {
+func (s *spmbService) UploadDocument(ctx context.Context, applicantID string, docType string, fileHeader *multipart.FileHeader) error {
 	// Buka file
 	file, err := fileHeader.Open()
 	if err != nil {
@@ -171,7 +216,7 @@ func (s *ppdbService) UploadDocument(ctx context.Context, applicantID string, do
 	return s.repo.SaveDocument(ctx, doc)
 }
 
-func (s *ppdbService) VerifyApplication(ctx context.Context, id string, req VerifyPPDBRequest) error {
+func (s *spmbService) VerifyApplication(ctx context.Context, id string, req VerifySPMBRequest) error {
 	app, err := s.repo.GetApplicantByID(ctx, id)
 	if err != nil {
 		return errors.New("pendaftar tidak ditemukan")
@@ -223,7 +268,7 @@ func (s *ppdbService) VerifyApplication(ctx context.Context, id string, req Veri
 			Regency:       app.Regency,
 			Province:      app.Province,
 			PostalCode:    app.PostalCode,
-			EntryPath:     "PPDB", // Set default entry path
+			EntryPath:     "SPMB", // Set default entry path
 			StudentStatus: student.StatusActive,
 		}
 
@@ -259,10 +304,10 @@ func (s *ppdbService) VerifyApplication(ctx context.Context, id string, req Veri
 	return s.repo.UpdateApplicationStatus(ctx, log)
 }
 
-func (s *ppdbService) GetAdmissionPaths(ctx context.Context) ([]AdmissionPath, error) {
+func (s *spmbService) GetAdmissionPaths(ctx context.Context) ([]AdmissionPath, error) {
 	return s.repo.GetAdmissionPaths(ctx)
 }
 
-func (s *ppdbService) GetActiveAcademicYears(ctx context.Context) ([]PPDBAcademicYear, error) {
+func (s *spmbService) GetActiveAcademicYears(ctx context.Context) ([]SPMBAcademicYear, error) {
 	return s.repo.GetActiveAcademicYears(ctx)
 }

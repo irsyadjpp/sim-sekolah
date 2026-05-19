@@ -29,7 +29,7 @@ func Protected() fiber.Handler {
 		if authHeader == "" {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"success": false,
-				"message": "Unauthorized",
+				"message": "Tidak terautentikasi",
 			})
 		}
 
@@ -46,7 +46,7 @@ func Protected() fiber.Handler {
 		if err != nil {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"status":  "error",
-				"message": "Invalid token",
+				"message": "Token tidak valid",
 			})
 		}
 
@@ -55,7 +55,7 @@ func Protected() fiber.Handler {
 		if !ok || !token.Valid {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"status":  "error",
-				"message": "Invalid token claims",
+				"message": "Klaim token tidak valid",
 			})
 		}
 
@@ -82,7 +82,7 @@ func RoleMiddleware(allowedRoles ...string) fiber.Handler {
 		if !ok {
 			return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
 				"success": false,
-				"message": "Forbidden access: roles missing",
+				"message": "Akses ditolak: peran tidak ditemukan",
 			})
 		}
 
@@ -104,7 +104,7 @@ func RoleMiddleware(allowedRoles ...string) fiber.Handler {
 
 		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
 			"success": false,
-			"message": "Forbidden access",
+			"message": "Akses ditolak",
 		})
 	}
 }
@@ -116,7 +116,7 @@ func PermissionMiddleware(db *gorm.DB, permissionName string) fiber.Handler {
 		if !ok || len(userRoles) == 0 {
 			return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
 				"success": false,
-				"message": "Forbidden access: roles missing",
+				"message": "Akses ditolak: peran tidak ditemukan",
 			})
 		}
 
@@ -148,7 +148,7 @@ func PermissionMiddleware(db *gorm.DB, permissionName string) fiber.Handler {
 		if err != nil || count == 0 {
 			return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
 				"success": false,
-				"message": "Forbidden access: permission denied",
+				"message": "Akses ditolak: izin tidak memadai",
 			})
 		}
 

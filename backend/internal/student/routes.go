@@ -14,11 +14,11 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 	svc := NewStudentService(repo)
 	h := NewStudentHandler(svc)
 
-	group := api.Group("/students")
+	group := api.Group("/murid")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAll)
-	group.Get("/school/:schoolId", h.GetBySchool)
+	group.Get("/sekolah/:schoolId", h.GetBySchool)
 	group.Get("/:id", h.GetByID)
 
 	group.Post("/", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.Create)
@@ -26,6 +26,6 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 	group.Delete("/:id", auth.RoleMiddleware("SUPER_ADMIN"), h.Delete)
 
 	// Nested: Data Orang Tua
-	group.Post("/:id/parents", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.UpsertParent)
-	group.Delete("/:id/parents/:parentId", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.DeleteParent)
+	group.Post("/:id/orang-tua", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.UpsertParent)
+	group.Delete("/:id/orang-tua/:parentId", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.DeleteParent)
 }

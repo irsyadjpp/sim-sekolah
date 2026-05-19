@@ -124,7 +124,7 @@ export default function ListingPageContent() {
     <>
       <Grid size={12} className="flex flex-row gap-1.5">
         <FormControl variant="filled" size="medium" className="surface mb-0 flex-1">
-          <InputLabel>Search</InputLabel>
+          <InputLabel>{t("common-ui.search")}</InputLabel>
           <FilledInput
             value={search}
             onChange={handleSearchChange}

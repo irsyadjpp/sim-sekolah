@@ -18,7 +18,7 @@ func NewLocalContextHandler(svc LocalContextService) *LocalContextHandler {
 func (h *LocalContextHandler) GetAllCategories(c *fiber.Ctx) error {
 	data, err := h.svc.GetAllCategories()
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil kategori konteks", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil kategori konteks", err)
 	}
 	return common.Success(c, "Kategori konteks berhasil diambil", data)
 }
@@ -32,7 +32,7 @@ func (h *LocalContextHandler) GetAllContexts(c *fiber.Ctx) error {
 
 	data, total, err := h.svc.GetAll(pagination, search, categoryID, scopeType)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data konteks", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data konteks", err)
 	}
 
 	return common.Paginated(c, "Data konteks berhasil diambil", data, pagination.Page, pagination.Limit, total)
@@ -42,15 +42,15 @@ func (h *LocalContextHandler) GetAllContexts(c *fiber.Ctx) error {
 func (h *LocalContextHandler) CreateContext(c *fiber.Ctx) error {
 	var req CreateContextRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	data, err := h.svc.Create(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal membuat konteks", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat konteks", err)
 	}
 	return common.Created(c, "Konteks berhasil dibuat", data)
 }
@@ -60,15 +60,15 @@ func (h *LocalContextHandler) UpdateContext(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var req UpdateContextRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	data, err := h.svc.Update(c.UserContext(), id, req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal memperbarui konteks", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui konteks", err)
 	}
 	return common.Success(c, "Konteks berhasil diperbarui", data)
 }
@@ -77,7 +77,7 @@ func (h *LocalContextHandler) UpdateContext(c *fiber.Ctx) error {
 func (h *LocalContextHandler) DeleteContext(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if err := h.svc.Delete(c.UserContext(), id); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menghapus konteks", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus konteks", err)
 	}
 	return common.Success(c, "Konteks berhasil dihapus", nil)
 }

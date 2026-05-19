@@ -126,7 +126,7 @@ func (s *curriculumService) TriggerChapterFormulation(ctx context.Context, userI
 	}
 
 	return &TriggerChapterResponse{
-		Message: "Formulation task has been successfully queued",
+		Message: "Tugas perumusan berhasil dimasukkan ke antrean",
 		QueueID: queueID,
 		Status:  "QUEUED",
 	}, nil

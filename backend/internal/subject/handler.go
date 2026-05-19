@@ -44,7 +44,7 @@ func (h *SubjectHandler) GetAll(c *fiber.Ctx) error {
 
 	data, total, err := h.svc.GetAll(pagination, search, isActive)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data mata pelajaran", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data mata pelajaran", err)
 	}
 	return common.Paginated(c, "Data mata pelajaran berhasil diambil", data, pagination.Page, pagination.Limit, total)
 }
@@ -60,7 +60,7 @@ func (h *SubjectHandler) GetAll(c *fiber.Ctx) error {
 func (h *SubjectHandler) GetByID(c *fiber.Ctx) error {
 	data, err := h.svc.GetByID(c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "Mata pelajaran tidak ditemukan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Mata pelajaran tidak ditemukan", err)
 	}
 	return common.Success(c, "Detail mata pelajaran berhasil diambil", data)
 }
@@ -77,14 +77,14 @@ func (h *SubjectHandler) GetByID(c *fiber.Ctx) error {
 func (h *SubjectHandler) Create(c *fiber.Ctx) error {
 	var req CreateSubjectRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.Create(c.UserContext(), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal membuat mata pelajaran", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat mata pelajaran", err)
 	}
 
 	// Trigger Audit Log
@@ -109,14 +109,14 @@ func (h *SubjectHandler) Create(c *fiber.Ctx) error {
 func (h *SubjectHandler) Update(c *fiber.Ctx) error {
 	var req UpdateSubjectRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.Update(c.UserContext(), c.Params("id"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal memperbarui mata pelajaran", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui mata pelajaran", err)
 	}
 
 	// Trigger Audit Log
@@ -138,7 +138,7 @@ func (h *SubjectHandler) Update(c *fiber.Ctx) error {
 // @Router /subjects/{id} [delete]
 func (h *SubjectHandler) Delete(c *fiber.Ctx) error {
 	if err := h.svc.Delete(c.UserContext(), c.Params("id")); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menghapus mata pelajaran", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus mata pelajaran", err)
 	}
 
 	// Trigger Audit Log
@@ -165,7 +165,7 @@ func (h *SubjectHandler) Delete(c *fiber.Ctx) error {
 func (h *SubjectHandler) GetAllElements(c *fiber.Ctx) error {
 	data, err := h.svc.GetAllElements(c.Params("subjectId"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data elemen", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data elemen", err)
 	}
 	return common.Success(c, "Data elemen berhasil diambil", data)
 }
@@ -183,14 +183,14 @@ func (h *SubjectHandler) GetAllElements(c *fiber.Ctx) error {
 func (h *SubjectHandler) CreateElement(c *fiber.Ctx) error {
 	var req CreateSubjectElementRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.CreateElement(c.UserContext(), c.Params("subjectId"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal membuat elemen", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat elemen", err)
 	}
 	return common.Created(c, "Elemen berhasil dibuat", data)
 }
@@ -209,14 +209,14 @@ func (h *SubjectHandler) CreateElement(c *fiber.Ctx) error {
 func (h *SubjectHandler) UpdateElement(c *fiber.Ctx) error {
 	var req UpdateSubjectElementRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 	data, err := h.svc.UpdateElement(c.UserContext(), c.Params("subjectId"), c.Params("id"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal memperbarui elemen", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui elemen", err)
 	}
 	return common.Success(c, "Elemen berhasil diperbarui", data)
 }
@@ -232,7 +232,7 @@ func (h *SubjectHandler) UpdateElement(c *fiber.Ctx) error {
 // @Router /subjects/{subjectId}/elements/{id} [delete]
 func (h *SubjectHandler) DeleteElement(c *fiber.Ctx) error {
 	if err := h.svc.DeleteElement(c.UserContext(), c.Params("subjectId"), c.Params("id")); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal menghapus elemen", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus elemen", err)
 	}
 	return common.Success(c, "Elemen berhasil dihapus", nil)
 }

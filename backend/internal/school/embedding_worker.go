@@ -2,6 +2,7 @@ package school
 
 import (
 	"fmt"
+	"sim-sekolah/pkg/logger"
 )
 
 // TriggerContextEmbedding triggers the RAG ingestion process in the background.
@@ -26,6 +27,6 @@ func TriggerContextEmbedding(profil *School) {
 		)
 
 		// TODO: Call Embedding Service / RAG Pipeline
-		fmt.Printf("[RAG-WORKER] Triggering embedding for school profile: %s. Content length: %d\n", profil.SchoolName, len(contextText))
+		logger.Info(fmt.Sprintf("[RAG-WORKER] Triggering embedding for school profile: %s. Content length: %d", profil.SchoolName, len(contextText)))
 	}()
 }

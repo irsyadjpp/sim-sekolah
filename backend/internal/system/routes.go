@@ -17,7 +17,7 @@ func SetupRoutes(api fiber.Router, db *gorm.DB, rdb *redis.Client) {
 
 	h := NewHandler(svc, auditSvc)
 
-	group := api.Group("/dashboard")
+	group := api.Group("/dasbor")
 	group.Use(middleware.Protected())
 
 	group.Get("/pimpinan", h.GetPimpinan)
@@ -25,7 +25,7 @@ func SetupRoutes(api fiber.Router, db *gorm.DB, rdb *redis.Client) {
 	group.Get("/operator", h.GetOperator)
 
 	// API System Audit Logs
-	sysGroup := api.Group("/system")
+	sysGroup := api.Group("/sistem")
 	sysGroup.Use(middleware.Protected())
-	sysGroup.Get("/audit-logs", h.GetAuditLogs)
+	sysGroup.Get("/catatan-audit", h.GetAuditLogs)
 }

@@ -30,7 +30,7 @@ func (h *UserHandler) GetAll(c *fiber.Ctx) error {
 
 	data, total, err := h.svc.GetAll(c.UserContext(), pagination, search)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data user", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data user", err)
 	}
 	return common.Paginated(c, "Data user berhasil diambil", data, pagination.Page, pagination.Limit, total)
 }
@@ -46,7 +46,7 @@ func (h *UserHandler) GetAll(c *fiber.Ctx) error {
 func (h *UserHandler) GetByID(c *fiber.Ctx) error {
 	data, err := h.svc.GetByID(c.UserContext(), c.Params("id"))
 	if err != nil {
-		return common.Error(c, fiber.StatusNotFound, "User tidak ditemukan", err.Error())
+		return common.ErrorFromService(c, fiber.StatusNotFound, "User tidak ditemukan", err)
 	}
 	return common.Success(c, "Data user berhasil diambil", data)
 }
@@ -64,12 +64,12 @@ func (h *UserHandler) GetByID(c *fiber.Ctx) error {
 func (h *UserHandler) UpdateStatus(c *fiber.Ctx) error {
 	var req UpdateUserStatusRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 
 	data, err := h.svc.UpdateStatus(c.UserContext(), c.Params("id"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengupdate status user", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengupdate status user", err)
 	}
 	return common.Success(c, "Status user berhasil diupdate", data)
 }
@@ -87,15 +87,15 @@ func (h *UserHandler) UpdateStatus(c *fiber.Ctx) error {
 func (h *UserHandler) AssignRoles(c *fiber.Ctx) error {
 	var req AssignRoleRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	data, err := h.svc.AssignRoles(c.UserContext(), c.Params("id"), req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengassign role", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengassign role", err)
 	}
 	return common.Success(c, "Role berhasil diassign", data)
 }
@@ -113,14 +113,14 @@ func (h *UserHandler) AssignRoles(c *fiber.Ctx) error {
 func (h *UserHandler) ResetPassword(c *fiber.Ctx) error {
 	var req ResetPasswordRequest
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	if err := h.svc.ResetPassword(c.UserContext(), c.Params("id"), req); err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mereset password", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mereset password", err)
 	}
 	return common.Success(c, "Password berhasil direset", nil)
 }
@@ -135,7 +135,7 @@ func (h *UserHandler) ResetPassword(c *fiber.Ctx) error {
 func (h *UserHandler) GetAllRoles(c *fiber.Ctx) error {
 	data, err := h.svc.GetAllRoles(c.UserContext())
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data roles", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data roles", err)
 	}
 	return common.Success(c, "Data roles berhasil diambil", data)
 }

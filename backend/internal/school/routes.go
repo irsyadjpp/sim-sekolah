@@ -14,7 +14,7 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 	svc := NewSchoolService(repo)
 	h := NewSchoolHandler(svc)
 
-	group := api.Group("/schools")
+	group := api.Group("/sekolah")
 	group.Use(middleware.Protected())
 
 	group.Get("/", h.GetAll)

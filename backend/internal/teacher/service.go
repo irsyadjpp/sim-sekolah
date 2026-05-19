@@ -9,6 +9,7 @@ import (
 
 	"sim-sekolah/internal/auth"
 	"sim-sekolah/internal/common"
+	"sim-sekolah/pkg/logger"
 
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
@@ -120,8 +121,7 @@ func (s *teacherService) Create(ctx context.Context, req CreateTeacherRequest) (
 	// AUTO-CREATE USER ACCOUNT untuk Guru
 	// ============================================================
 	if err := s.createUserAccount(ctx, teacher); err != nil {
-		// Jika gagal buat user, log warning tapi tidak gagalkan pembuatan guru
-		fmt.Printf("[WARNING] Gagal membuat akun user untuk guru %s: %v\n", teacher.FullName, err)
+		logger.Warn(fmt.Sprintf("Gagal membuat akun user untuk guru %s", teacher.FullName), err)
 	}
 
 	return teacher, nil

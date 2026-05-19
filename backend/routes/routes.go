@@ -16,12 +16,12 @@ import (
 	"sim-sekolah/internal/local_context"
 	"sim-sekolah/internal/permission"
 	"sim-sekolah/internal/phase"
-	"sim-sekolah/internal/ppdb"
 	"sim-sekolah/internal/profile_dimension"
 	"sim-sekolah/internal/promotion"
 	"sim-sekolah/internal/report"
 	"sim-sekolah/internal/schedule"
 	"sim-sekolah/internal/school"
+	"sim-sekolah/internal/spmb"
 	"sim-sekolah/internal/student"
 	"sim-sekolah/internal/subject"
 	"sim-sekolah/internal/system"
@@ -80,8 +80,8 @@ func SetupRoutes(api fiber.Router, db *gorm.DB, rdb *redis.Client) {
 	// Integrasi AI
 	ai.SetupRoutes(api, db)
 
-	// PPDB
-	ppdb.SetupRoutes(api, db)
+	// SPMB
+	spmb.SetupRoutes(api, db)
 
 	// System Dashboard
 	system.SetupRoutes(api, db, rdb)

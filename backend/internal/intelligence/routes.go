@@ -7,18 +7,18 @@ import (
 )
 
 func RegisterRoutes(router fiber.Router, h *IntelligenceHandler) {
-	group := router.Group("/intelligence", auth.Protected())
+	group := router.Group("/kecerdasan-sistem", auth.Protected())
 
-	group.Get("/students/:student_id/360", h.GetStudent360)
-	group.Put("/students/:student_id/profile-ext", h.UpsertProfileExt)
-	group.Post("/anecdotal", h.CreateAnecdotal)
-	group.Get("/observation-tags", h.GetObservationTags)
+	group.Get("/murid/:student_id/360", h.GetStudent360)
+	group.Put("/murid/:student_id/profil-eksternal", h.UpsertProfileExt)
+	group.Post("/anekdot", h.CreateAnecdotal)
+	group.Get("/tag-observasi", h.GetObservationTags)
 
-	group.Post("/assessment-instruments", h.CreateInstrument)
-	group.Post("/assessment-instruments/:instrument_id/results", h.SubmitResults)
-	group.Get("/assessment-instruments/:instrument_id/results", h.GetResults)
+	group.Post("/instrumen-penilaian", h.CreateInstrument)
+	group.Post("/instrumen-penilaian/:instrument_id/hasil", h.SubmitResults)
+	group.Get("/instrumen-penilaian/:instrument_id/hasil", h.GetResults)
 
-	group.Get("/alerts", h.GetAlerts)
-	group.Put("/alerts/:alert_id/intervene", h.UpdateAlert)
-	group.Post("/alerts/trigger-cron", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN"), h.TriggerCron)
+	group.Get("/peringatan", h.GetAlerts)
+	group.Put("/peringatan/:alert_id/intervensi", h.UpdateAlert)
+	group.Post("/peringatan/pemicu-cron", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN"), h.TriggerCron)
 }

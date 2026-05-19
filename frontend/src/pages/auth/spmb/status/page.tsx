@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -26,8 +27,10 @@ import {
 
 import Logo from "@/components/logo/logo";
 import { DEFAULTS } from "@/config";
+import { spmbStatusLabel } from "@/i18n/spmb-status";
 
-export default function PPDBStatusPage() {
+export default function SPMBStatusPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [nik, setNik] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,23 +40,23 @@ export default function PPDBStatusPage() {
 
   const handleSearch = async () => {
     if (!nik || nik.length < 16) {
-      setError("Masukkan NIK yang valid (16 digit)");
+      setError(t("spmb.status-page.nik-invalid"));
       return;
     }
     setLoading(true);
     setError(null);
     setUploadMsg(null);
     try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/ppdb/check-status?nik=${nik}`);
+      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/spmb/check-status?nik=${nik}`);
       const json = await res.json();
       if (json.status === "success" && json.data) {
         setApplicant(json.data);
       } else {
         setApplicant(null);
-        setError(json.message || "Data pendaftar dengan NIK tersebut tidak ditemukan.");
+        setError(json.message || t("spmb.status-page.check-not-found"));
       }
     } catch (err) {
-      setError("Gagal menghubungi server. Silakan coba lagi.");
+      setError(t("spmb.status-page.check-server-error"));
     } finally {
       setLoading(false);
     }
@@ -68,48 +71,91 @@ export default function PPDBStatusPage() {
     formData.append("document_type", docType);
 
     try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/ppdb/applicants/${applicant.id}/documents`, {
+      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/spmb/applicants/${applicant.id}/documents`, {
         method: "POST",
         body: formData,
       });
 
       const json = await res.json();
       if (json.status === "success") {
-        setUploadMsg({ type: "success", text: `Dokumen ${docType} berhasil diunggah.` });
+        setUploadMsg({ type: "success", text: t("spmb.status-page.upload-success", { type: docType }) });
         // Refresh applicant data
-        const refreshRes = await fetch(`${DEFAULTS.API_URL}/api/v1/ppdb/check-status?nik=${nik}`);
+        const refreshRes = await fetch(`${DEFAULTS.API_URL}/api/v1/spmb/check-status?nik=${nik}`);
         const refreshJson = await refreshRes.json();
         if (refreshJson.status === "success") {
           setApplicant(refreshJson.data);
         }
       } else {
-        setUploadMsg({ type: "error", text: json.message || "Gagal mengunggah dokumen." });
+        setUploadMsg({ type: "error", text: json.message || t("spmb.status-page.upload-error") });
       }
     } catch (err) {
-      setUploadMsg({ type: "error", text: "Terjadi kesalahan koneksi saat mengunggah." });
+      setUploadMsg({ type: "error", text: t("spmb.status-page.upload-connection-error") });
     }
   };
 
   const getStatusChip = (status: string) => {
-    switch (status) {
-      case "Submitted":
-        return <Chip label="Menunggu Verifikasi" color="warning" className="rounded-xl font-bold" />;
-      case "Verified":
-        return <Chip label="Terverifikasi" color="info" className="rounded-xl font-bold" />;
-      case "Accepted":
-        return <Chip label="Diterima" color="success" className="rounded-xl font-bold" />;
-      case "Rejected":
-        return <Chip label="Ditolak" color="error" className="rounded-xl font-bold" />;
-      default:
-        return <Chip label={status} color="default" className="rounded-xl font-bold" />;
-    }
+    const label = spmbStatusLabel(status);
+    const color =
+      status === "Submitted"
+        ? "warning"
+        : status === "Verified"
+          ? "info"
+          : status === "Accepted"
+            ? "success"
+            : status === "Rejected"
+              ? "error"
+              : "default";
+    return <Chip label={label} color={color} className="rounded-xl font-bold" />;
   };
 
-  const documentTypes = [
-    { code: "KK", label: "Kartu Keluarga (KK)", desc: "Scan dokumen Kartu Keluarga format JPG/PNG/PDF" },
-    { code: "AKTA", label: "Akta Kelahiran", desc: "Scan akta kelahiran calon peserta didik baru" },
-    { code: "IJAZAH", label: "Ijazah / SKL", desc: "Scan Ijazah atau Surat Keterangan Lulus TK/PAUD (jika ada)" },
-  ];
+  const getDocumentTypes = () => {
+    const list = [
+      { code: "KK", label: t("spmb.status-page.doc-kk"), desc: t("spmb.status-page.doc-kk-desc") },
+      { code: "AKTA", label: t("spmb.status-page.doc-akta"), desc: t("spmb.status-page.doc-akta-desc") },
+    ];
+
+    if (applicant) {
+      if (applicant.birth_date) {
+        const birth = new Date(applicant.birth_date);
+        const currentYear = new Date().getFullYear();
+        const targetDate = new Date(currentYear, 6, 1);
+        const ageDiffMs = targetDate.getTime() - birth.getTime();
+        const ageDate = new Date(ageDiffMs);
+        const ageYears = Math.abs(ageDate.getUTCFullYear() - 1970);
+        const ageMonths = ageYears * 12 + ageDate.getUTCMonth();
+
+        if (ageMonths >= 66 && ageMonths < 72) {
+          list.push({
+            code: "REKOMENDASI_PSIKOLOG",
+            label: "Surat Rekomendasi Psikolog / Dewan Guru",
+            desc: t("spmb.status-page.age-requirement"),
+          });
+        }
+      }
+
+      if (applicant.admission_path?.name === "Afirmasi") {
+        list.push({
+          code: "KARTU_AFIRMASI",
+          label: "Kartu Penanganan Kemiskinan / Disabilitas",
+          desc: "Scan Kartu KIP / PKH / KKS / Kartu Disabilitas resmi (SKTM / KIS Ditolak)",
+        });
+      } else {
+        list.push({
+          code: "IJAZAH",
+          label: "Ijazah / SKL",
+          desc: "Scan Ijazah atau Surat Keterangan Lulus TK/PAUD (jika ada)",
+        });
+      }
+    } else {
+      list.push({
+        code: "IJAZAH",
+        label: "Ijazah / SKL",
+        desc: "Scan Ijazah atau Surat Keterangan Lulus TK/PAUD (jika ada)",
+      });
+    }
+
+    return list;
+  };
 
   const getDocStatus = (code: string) => {
     if (!applicant?.documents) return { uploaded: false, path: "" };
@@ -147,7 +193,7 @@ export default function PPDBStatusPage() {
             <Box className="flex items-center gap-4">
               <TextField
                 fullWidth
-                label="Masukkan 16 Digit NIK Calon Siswa"
+                label="Masukkan 16 Digit NIK Calon Murid"
                 placeholder="Contoh: 7306xxxxxxxxxxxx"
                 value={nik}
                 onChange={(e) => setNik(e.target.value)}
@@ -191,7 +237,7 @@ export default function PPDBStatusPage() {
                       JALUR SELEKSI
                     </Typography>
                     <Typography variant="body1" className="font-bold text-slate-800">
-                      {applicant.admission_path?.path_name}
+                      {applicant.admission_path?.name}
                     </Typography>
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6 }}>
@@ -213,7 +259,7 @@ export default function PPDBStatusPage() {
 
               {applicant.status === "Accepted" && (
                 <Alert severity="success" className="rounded-2xl font-bold">
-                  Selamat! Calon siswa telah dinyatakan DITERIMA di UPT SDI Bonerate No. 85. Data siswa aktif telah
+                  Selamat! Calon murid telah dinyatakan DITERIMA di UPT SDI Bonerate No. 85. Data murid aktif telah
                   di-generate otomatis oleh sistem.
                 </Alert>
               )}
@@ -233,7 +279,7 @@ export default function PPDBStatusPage() {
                 )}
 
                 <Box className="flex flex-col gap-4">
-                  {documentTypes.map((doc) => {
+                  {getDocumentTypes().map((doc) => {
                     const status = getDocStatus(doc.code);
                     return (
                       <Paper

@@ -18,7 +18,7 @@ func NewEnrollmentHandler(svc EnrollmentService) *EnrollmentHandler {
 func (h *EnrollmentHandler) GetEnrollments(c *fiber.Ctx) error {
 	data, err := h.svc.GetByClassroom(c.UserContext(), c.Params("classroomId"))
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mengambil data enrollment", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil data enrollment", err)
 	}
 	return common.Success(c, "Data enrollment berhasil diambil", data)
 }
@@ -29,15 +29,15 @@ func (h *EnrollmentHandler) EnrollStudent(c *fiber.Ctx) error {
 	var req CreateEnrollmentRequest
 
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	data, err := h.svc.Enroll(c.UserContext(), classroomID, req)
 	if err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Gagal mendaftarkan siswa", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Gagal mendaftarkan siswa", err)
 	}
 	return common.Created(c, "Siswa berhasil didaftarkan", data)
 }
@@ -48,15 +48,15 @@ func (h *EnrollmentHandler) BulkEnroll(c *fiber.Ctx) error {
 	var req BulkEnrollRequest
 
 	if err := c.BodyParser(&req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Request body tidak valid", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
 	}
 	if err := common.Validate.Struct(req); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", err.Error())
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
 	}
 
 	created, skipped, err := h.svc.BulkEnroll(c.UserContext(), classroomID, req)
 	if err != nil {
-		return common.Error(c, fiber.StatusInternalServerError, "Gagal mendaftarkan siswa", err.Error())
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mendaftarkan siswa", err)
 	}
 
 	return common.Created(c, "Bulk enrollment selesai", fiber.Map{
@@ -68,7 +68,7 @@ func (h *EnrollmentHandler) BulkEnroll(c *fiber.Ctx) error {
 // UnenrollStudentHandler godoc
 func (h *EnrollmentHandler) UnenrollStudent(c *fiber.Ctx) error {
 	if err := h.svc.Unenroll(c.UserContext(), c.Params("classroomId"), c.Params("enrollmentId")); err != nil {
-		return common.Error(c, fiber.StatusBadRequest, "Gagal menghapus enrollment", err.Error())
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Gagal menghapus enrollment", err)
 	}
 	return common.Success(c, "Siswa berhasil dikeluarkan dari kelas", nil)
 }

@@ -1,4 +1,4 @@
-package ppdb
+package spmb
 
 import (
 	"sim-sekolah/internal/auth"
@@ -9,11 +9,11 @@ import (
 )
 
 func SetupRoutes(router fiber.Router, db *gorm.DB) {
-	repo := NewPPDBRepository(db)
-	svc := NewPPDBService(repo)
-	h := NewPPDBHandler(svc)
+	repo := NewSPMBRepository(db)
+	svc := NewSPMBService(repo)
+	h := NewSPMBHandler(svc)
 
-	group := router.Group("/ppdb")
+	group := router.Group("/spmb")
 
 	// Public routes
 	group.Post("/register", h.Register)
