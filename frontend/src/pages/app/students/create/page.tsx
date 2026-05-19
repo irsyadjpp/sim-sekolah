@@ -56,12 +56,12 @@ export default function CreateStudentPage() {
   ];
 
   const religions = [
-    "Islam",
-    "Kristen",
-    "Katolik",
-    "Hindu",
-    "Buddha",
-    "Khonghucu",
+    t("students.religion-islam"),
+    t("students.religion-kristen"),
+    t("students.religion-katolik"),
+    t("students.religion-hindu"),
+    t("students.religion-buddha"),
+    t("students.religion-khonghucu"),
     t("student-form.label-religion-other", "Lainnya"),
   ];
 
@@ -216,8 +216,8 @@ export default function CreateStudentPage() {
                   value={formik.values.gender}
                   onChange={formik.handleChange}
                 >
-                  <MenuItem value="L">{t("L", "Laki-laki")}</MenuItem>
-                  <MenuItem value="P">{t("P", "Perempuan")}</MenuItem>
+                  <MenuItem value="L">{t("students.gender-male")}</MenuItem>
+                  <MenuItem value="P">{t("students.gender-female")}</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

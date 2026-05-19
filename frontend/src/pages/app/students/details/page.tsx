@@ -94,12 +94,12 @@ export default function StudentDetailsPage() {
   ];
 
   const religions = [
-    "Islam",
-    "Kristen",
-    "Katolik",
-    "Hindu",
-    "Buddha",
-    "Khonghucu",
+    t("students.religion-islam"),
+    t("students.religion-kristen"),
+    t("students.religion-katolik"),
+    t("students.religion-hindu"),
+    t("students.religion-buddha"),
+    t("students.religion-khonghucu"),
     t("student-form.label-religion-other", "Lainnya"),
   ];
 
@@ -255,7 +255,7 @@ export default function StudentDetailsPage() {
       if (res.ok) {
         navigate("/students");
       } else {
-        setError("Gagal menghapus data siswa.");
+        setError(t("students.delete-error"));
         setOpenDeleteDialog(false);
       }
     } catch (err) {

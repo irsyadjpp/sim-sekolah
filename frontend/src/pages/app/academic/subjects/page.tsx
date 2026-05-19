@@ -2,6 +2,7 @@
 import "react-quill-new/dist/quill.snow.css";
 
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -48,6 +49,7 @@ interface Subject {
 }
 
 export default function SubjectsPage() {
+  const { t } = useTranslation();
   const confirm = useConfirm();
   const navigate = useNavigate();
   const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -87,10 +89,10 @@ export default function SubjectsPage() {
 
   const handleDelete = async (id: string) => {
     const ok = await confirm({
-      title: "Hapus Mata Pelajaran",
-      message: "Yakin ingin menghapus mata pelajaran ini?",
-      confirmText: "Hapus",
-      cancelText: "Batal",
+      title: t("academic.subjects-delete-title"),
+      message: t("academic.subjects-delete-confirm"),
+      confirmText: t("common-ui.delete"),
+      cancelText: t("common-ui.cancel"),
     });
     if (!ok) return;
     const token = localStorage.getItem("accessToken");

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -39,6 +40,7 @@ interface Student {
 }
 
 export default function StudentsPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
@@ -79,22 +81,22 @@ export default function StudentsPage() {
     <Box>
       <Box className="mb-2 flex items-center justify-between">
         <Typography variant="h1" component="h1" className="mb-0">
-          Manajemen Siswa
+          {t("students.title")}
         </Typography>
         <Button variant="contained" startIcon={<NiPlus size="small" />} component={Link} to="/students/create">
-          Tambah Siswa
+          {t("students.add-button")}
         </Button>
       </Box>
       <Breadcrumbs className="mb-6">
-        <Link to="/home">Beranda</Link>
-        <Typography variant="body2">Siswa</Typography>
+        <Link to="/home">{t("students.breadcrumb-home")}</Link>
+        <Typography variant="body2">{t("students.breadcrumb-students")}</Typography>
       </Breadcrumbs>
 
       <Card className="mb-6 overflow-visible">
         <CardContent className="p-4">
           <TextField
             fullWidth
-            placeholder="Cari NISN atau Nama Siswa..."
+            placeholder={t("students.search-placeholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             size="small"
@@ -125,7 +127,7 @@ export default function StudentsPage() {
                   direction={sortBy === "nisn" ? sortDir : "asc"}
                   onClick={() => handleSort("nisn")}
                 >
-                  NISN
+                  {t("students.col-nisn")}
                 </TableSortLabel>
               </TableCell>
               <TableCell className="font-bold" sortDirection={sortBy === "full_name" ? sortDir : false}>
@@ -134,7 +136,7 @@ export default function StudentsPage() {
                   direction={sortBy === "full_name" ? sortDir : "asc"}
                   onClick={() => handleSort("full_name")}
                 >
-                  Nama Lengkap
+                  {t("students.col-full-name")}
                 </TableSortLabel>
               </TableCell>
               <TableCell className="font-bold" sortDirection={sortBy === "gender" ? sortDir : false}>
@@ -143,11 +145,11 @@ export default function StudentsPage() {
                   direction={sortBy === "gender" ? sortDir : "asc"}
                   onClick={() => handleSort("gender")}
                 >
-                  L/P
+                  {t("students.col-gender")}
                 </TableSortLabel>
               </TableCell>
               <TableCell className="font-bold" align="center">
-                Aksi
+                {t("students.col-actions")}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -176,7 +178,7 @@ export default function StudentsPage() {
             ) : (
               <TableRow>
                 <TableCell colSpan={4} align="center" className="py-10">
-                  Belum ada data siswa.
+                  {t("students.no-data")}
                 </TableCell>
               </TableRow>
             )}
@@ -189,7 +191,7 @@ export default function StudentsPage() {
           onPageChange={(_, newPage) => handlePageChange(newPage + 1)}
           rowsPerPage={limit}
           onRowsPerPageChange={(e) => handleLimitChange(parseInt(e.target.value, 10))}
-          labelRowsPerPage="Baris per halaman:"
+          labelRowsPerPage={t("students.rows-per-page")}
         />
       </TableContainer>
     </Box>

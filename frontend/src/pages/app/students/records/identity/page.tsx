@@ -1,29 +1,32 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { Breadcrumbs, Grid, Typography } from "@mui/material";
 
 export default function Page() {
+  const { t } = useTranslation();
+
   return (
     <Grid container spacing={5}>
       <Grid size={{ xs: 12 }} className="mb-2">
         <Typography variant="h1" component="h1" className="mb-0">
-          Identitas
+          {t("students.records.identity.title")}
         </Typography>
         <Breadcrumbs>
           <Link color="inherit" to="/dashboards/default">
-            Home
+            {t("common-ui.home")}
           </Link>
           <Link color="inherit" to="/students">
-            Kesiswaan
+            {t("students.breadcrumb")}
           </Link>
           <Link color="inherit" to="/students/records">
-            Data
+            {t("students.records.breadcrumb")}
           </Link>
-          <Typography variant="body2">Identitas</Typography>
+          <Typography variant="body2">{t("students.records.identity.title")}</Typography>
         </Breadcrumbs>
       </Grid>
       <Grid size={{ xs: 12 }}>
-        <Typography variant="body1">Halaman untuk Identitas masih dalam pengembangan.</Typography>
+        <Typography variant="body1">{t("students.records.under-development")}</Typography>
       </Grid>
     </Grid>
   );
