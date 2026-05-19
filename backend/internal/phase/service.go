@@ -1,0 +1,84 @@
+package phase
+
+import (
+	"context"
+	"sim-sekolah/internal/common"
+)
+
+// PhaseService mendefinisikan business logic untuk entitas Phase.
+type PhaseService interface {
+	GetAll(pagination common.Pagination, search string) ([]Phase, int64, error)
+	GetByID(id string) (*Phase, error)
+	Create(ctx context.Context, req CreatePhaseRequest) (*Phase, error)
+	Update(ctx context.Context, id string, req UpdatePhaseRequest) (*Phase, error)
+	Delete(ctx context.Context, id string) error
+}
+
+type phaseService struct {
+	repo PhaseRepository
+}
+
+// NewPhaseService membuat instance PhaseService baru dengan injected PhaseRepository.
+func NewPhaseService(repo PhaseRepository) PhaseService {
+	return &phaseService{repo: repo}
+}
+
+func (s *phaseService) GetAll(pagination common.Pagination, search string) ([]Phase, int64, error) {
+	return s.repo.GetAll(pagination.Limit, pagination.Offset, search)
+}
+
+func (s *phaseService) GetByID(id string) (*Phase, error) {
+	return s.repo.GetByID(id)
+}
+
+func (s *phaseService) Create(ctx context.Context, req CreatePhaseRequest) (*Phase, error) {
+	p := &Phase{
+		Code:        req.Code,
+		Name:        req.Name,
+		Description: req.Description,
+	}
+
+	if err := s.repo.Create(ctx, p); err != nil {
+		return nil, err
+	}
+
+	return p, nil
+}
+
+func (s *phaseService) Update(ctx context.Context, id string, req UpdatePhaseRequest) (*Phase, error) {
+	p, err := s.repo.GetByID(id)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := common.CheckOwnership(ctx, p.CreatedBy); err != nil {
+		return nil, err
+	}
+
+	if req.Code != "" {
+		p.Code = req.Code
+	}
+	if req.Name != "" {
+		p.Name = req.Name
+	}
+	p.Description = req.Description
+
+	if err := s.repo.Update(ctx, p); err != nil {
+		return nil, err
+	}
+
+	return p, nil
+}
+
+func (s *phaseService) Delete(ctx context.Context, id string) error {
+	p, err := s.repo.GetByID(id)
+	if err != nil {
+		return err
+	}
+
+	if err := common.CheckOwnership(ctx, p.CreatedBy); err != nil {
+		return err
+	}
+
+	return s.repo.Delete(ctx, id)
+}

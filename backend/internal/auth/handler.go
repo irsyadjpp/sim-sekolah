@@ -1,0 +1,392 @@
+package auth
+
+import (
+	"context"
+	"strings"
+	"time"
+
+	"sim-sekolah/internal/common"
+	"sim-sekolah/internal/system"
+
+	"github.com/gofiber/fiber/v2"
+)
+
+type AuthHandler struct {
+	svc AuthService
+}
+
+func NewAuthHandler(svc AuthService) *AuthHandler {
+	return &AuthHandler{svc: svc}
+}
+
+// RegisterHandler godoc
+// @Summary Register
+// @Description Endpoint untuk registrasi guru/staf secara mandiri. Default role: GURU
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Param request body RegisterRequest true "Register Request"
+// @Success 201 {object} common.Response
+// @Router /auth/register [post]
+func (h *AuthHandler) Register(c *fiber.Ctx) error {
+	var req RegisterRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	if err := h.svc.Register(c.UserContext(), req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Registration failed", err.Error())
+	}
+
+	return common.Created(c, "Registration successful", nil)
+}
+
+// LoginHandler godoc
+// @Summary Login
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Param request body LoginRequest true "Login Request"
+// @Success 200 {object} common.Response
+// @Router /auth/login [post]
+func (h *AuthHandler) Login(c *fiber.Ctx) error {
+	var req LoginRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	data, refreshToken, err := h.svc.Login(c.UserContext(), req)
+	if err != nil {
+		return common.Error(c, fiber.StatusUnauthorized, "Login failed", err.Error())
+	}
+
+	if mfaReq, ok := data["mfa_required"].(bool); ok && mfaReq {
+		return common.Success(c, "MFA verification required", data)
+	}
+
+	// Trigger Audit Log for successful login
+	if system.GlobalAuditService != nil {
+		if userResp, ok := data["user"].(MeResponse); ok {
+			system.GlobalAuditService.LogEvent(c.UserContext(), userResp.ID, "LOGIN", "auth", userResp.ID, c.IP())
+		}
+	}
+
+	c.Cookie(&fiber.Cookie{
+		Name:     "refresh_token",
+		Value:    refreshToken,
+		Expires:  time.Now().Add(time.Hour * 24 * 30),
+		HTTPOnly: true,
+		Secure:   true,
+		SameSite: "Lax",
+	})
+
+	return common.Success(c, "Login successful", data)
+}
+
+// RefreshHandler godoc
+// @Summary Refresh Token
+// @Description Memperbarui Access Token menggunakan Refresh Token dari HttpOnly Cookie
+// @Tags Auth
+// @Produce json
+// @Success 200 {object} common.Response
+// @Router /auth/refresh [post]
+func (h *AuthHandler) Refresh(c *fiber.Ctx) error {
+	refreshToken := c.Cookies("refresh_token")
+	if refreshToken == "" {
+		return common.Error(c, fiber.StatusUnauthorized, "Refresh token is missing", "")
+	}
+
+	data, newRefreshToken, err := h.svc.Refresh(c.UserContext(), refreshToken)
+	if err != nil {
+		c.Cookie(&fiber.Cookie{
+			Name:     "refresh_token",
+			Value:    "",
+			Expires:  time.Now().Add(-1 * time.Hour),
+			HTTPOnly: true,
+		})
+		return common.Error(c, fiber.StatusUnauthorized, "Failed to refresh token", err.Error())
+	}
+
+	c.Cookie(&fiber.Cookie{
+		Name:     "refresh_token",
+		Value:    newRefreshToken,
+		Expires:  time.Now().Add(time.Hour * 24 * 30),
+		HTTPOnly: true,
+		Secure:   true,
+		SameSite: "Lax",
+	})
+
+	return common.Success(c, "Token refreshed successfully", data)
+}
+
+// Note: Refresh method in service needs context update too
+
+// LogoutHandler godoc
+// @Summary Logout
+// @Description Menghapus Refresh Token dari database dan Cookie
+// @Tags Auth
+// @Produce json
+// @Success 200 {object} common.Response
+// @Router /auth/logout [post]
+func (h *AuthHandler) Logout(c *fiber.Ctx) error {
+	refreshToken := c.Cookies("refresh_token")
+
+	// Pass access token into context so the service can blacklist it in Redis
+	rawAccessToken := strings.TrimPrefix(c.Get("Authorization"), "Bearer ")
+	//nolint:staticcheck // SA1029: using built-in string type as key for backward compatibility across modules
+	ctx := context.WithValue(c.UserContext(), "access_token", rawAccessToken)
+
+	if refreshToken != "" {
+		_ = h.svc.Logout(ctx, refreshToken)
+	}
+
+	c.Cookie(&fiber.Cookie{
+		Name:     "refresh_token",
+		Value:    "",
+		Expires:  time.Now().Add(-1 * time.Hour),
+		HTTPOnly: true,
+		Secure:   true,
+		SameSite: "Lax",
+	})
+
+	return common.Success(c, "Logout successful", nil)
+}
+
+// ForgotPasswordHandler godoc
+// @Summary Forgot Password
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Param request body ForgotPasswordRequest true "Forgot Password Request"
+// @Success 200 {object} common.Response
+// @Router /auth/forgot-password [post]
+func (h *AuthHandler) ForgotPassword(c *fiber.Ctx) error {
+	var req ForgotPasswordRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	if err := h.svc.ForgotPassword(c.UserContext(), req); err != nil {
+		return common.Error(c, fiber.StatusInternalServerError, "Failed to process request", err.Error())
+	}
+
+	return common.Success(c, "If your email is registered, you will receive a reset link", nil)
+}
+
+// ResetPasswordHandler godoc
+// @Summary Reset Password
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Param request body ResetPasswordRequest true "Reset Password Request"
+// @Success 200 {object} common.Response
+// @Router /auth/reset-password [post]
+func (h *AuthHandler) ResetPassword(c *fiber.Ctx) error {
+	var req ResetPasswordRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	if err := h.svc.ResetPassword(c.UserContext(), "", req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Failed to reset password", err.Error())
+	}
+
+	return common.Success(c, "Password has been successfully reset", nil)
+}
+
+// GetMeHandler godoc
+// @Summary Get Current User Profile
+// @Tags Auth
+// @Produce json
+// @Security BearerAuth
+// @Success 200 {object} common.Response
+// @Router /auth/me [get]
+func (h *AuthHandler) GetMe(c *fiber.Ctx) error {
+	userID, ok := c.Locals("user_id").(string)
+	if !ok {
+		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+	}
+
+	resp, err := h.svc.GetMe(c.UserContext(), userID)
+	if err != nil {
+		return common.Error(c, fiber.StatusNotFound, "User not found", err.Error())
+	}
+
+	return common.Success(c, "Profile retrieved", resp)
+}
+
+// UpdateMeHandler godoc
+// @Summary Update Current User Profile
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Security BearerAuth
+// @Param request body UpdateMeRequest true "Update Request"
+// @Success 200 {object} common.Response
+// @Router /auth/me [put]
+func (h *AuthHandler) UpdateMe(c *fiber.Ctx) error {
+	userID, ok := c.Locals("user_id").(string)
+	if !ok {
+		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+	}
+
+	var req UpdateMeRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	if err := h.svc.UpdateMe(c.UserContext(), userID, req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Failed to update profile", err.Error())
+	}
+
+	return common.Success(c, "Profile updated successfully", nil)
+}
+
+// ChangePasswordHandler godoc
+// @Summary Change Password
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Security BearerAuth
+// @Param request body ChangePasswordRequest true "Change Password Request"
+// @Success 200 {object} common.Response
+// @Router /auth/change-password [post]
+func (h *AuthHandler) ChangePassword(c *fiber.Ctx) error {
+	userID, ok := c.Locals("user_id").(string)
+	if !ok {
+		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+	}
+
+	var req ChangePasswordRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	if err := common.Validate.Struct(req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Validation failed", err.Error())
+	}
+
+	if err := h.svc.ChangePassword(c.UserContext(), userID, req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, err.Error(), "")
+	}
+
+	return common.Success(c, "Password updated successfully", nil)
+}
+
+// UploadPhotoHandler godoc
+// @Summary Upload Profile Photo
+// @Tags Auth
+// @Accept multipart/form-data
+// @Produce json
+// @Security BearerAuth
+// @Param file formData file true "Profile Photo"
+// @Success 200 {object} common.Response
+// @Router /auth/me/photo [post]
+func (h *AuthHandler) UploadPhoto(c *fiber.Ctx) error {
+	userID, ok := c.Locals("user_id").(string)
+	if !ok {
+		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+	}
+
+	file, err := c.FormFile("file")
+	if err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "File not found", err.Error())
+	}
+
+	photoURL, err := h.svc.UploadPhoto(c.UserContext(), userID, file)
+	if err != nil {
+		return common.Error(c, fiber.StatusInternalServerError, "Failed to upload photo", err.Error())
+	}
+
+	return common.Success(c, "Photo uploaded successfully", fiber.Map{"photo_url": photoURL})
+}
+
+func (h *AuthHandler) Verify2FA(c *fiber.Ctx) error {
+	var req Verify2FARequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	data, refreshToken, err := h.svc.Verify2FA(c.UserContext(), req)
+	if err != nil {
+		return common.Error(c, fiber.StatusUnauthorized, err.Error(), "")
+	}
+
+	// Trigger Audit Log for successful MFA login
+	if system.GlobalAuditService != nil {
+		if userResp, ok := data["user"].(MeResponse); ok {
+			system.GlobalAuditService.LogEvent(c.UserContext(), userResp.ID, "LOGIN", "auth", userResp.ID, c.IP())
+		}
+	}
+
+	c.Cookie(&fiber.Cookie{
+		Name:     "refresh_token",
+		Value:    refreshToken,
+		Expires:  time.Now().Add(time.Hour * 24 * 30),
+		HTTPOnly: true,
+		Secure:   true,
+		SameSite: "Lax",
+	})
+
+	return common.Success(c, "Login successful", data)
+}
+
+func (h *AuthHandler) Setup2FA(c *fiber.Ctx) error {
+	userID, ok := c.Locals("user_id").(string)
+	if !ok {
+		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+	}
+
+	data, err := h.svc.Setup2FA(c.UserContext(), userID)
+	if err != nil {
+		return common.Error(c, fiber.StatusInternalServerError, err.Error(), "")
+	}
+
+	return common.Success(c, "2FA setup initiated", data)
+}
+
+func (h *AuthHandler) Enable2FA(c *fiber.Ctx) error {
+	userID, ok := c.Locals("user_id").(string)
+	if !ok {
+		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+	}
+
+	var req OTPVerificationRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	if err := h.svc.Enable2FA(c.UserContext(), userID, req.Code); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, err.Error(), "")
+	}
+
+	// Trigger Audit Log
+	if system.GlobalAuditService != nil {
+		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "MFA_ENABLE", "security", userID, c.IP())
+	}
+
+	return common.Success(c, "2FA enabled successfully", nil)
+}
+
+func (h *AuthHandler) Disable2FA(c *fiber.Ctx) error {
+	userID, ok := c.Locals("user_id").(string)
+	if !ok {
+		return common.Error(c, fiber.StatusUnauthorized, "User context missing", "")
+	}
+
+	var req OTPVerificationRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Invalid request body", err.Error())
+	}
+
+	if err := h.svc.Disable2FA(c.UserContext(), userID, req.Code); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, err.Error(), "")
+	}
+
+	// Trigger Audit Log
+	if system.GlobalAuditService != nil {
+		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "MFA_DISABLE", "security", userID, c.IP())
+	}
+
+	return common.Success(c, "2FA disabled successfully", nil)
+}

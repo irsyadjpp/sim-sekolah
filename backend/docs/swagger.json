@@ -1,0 +1,5060 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Dokumentasi API Terpadu SIM Sekolah SD Negeri.",
+        "title": "SIM Sekolah API",
+        "termsOfService": "http://example.com/terms/",
+        "contact": {
+            "name": "Developer Team",
+            "email": "admin@simsekolah.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/academic/graduation": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Promotion Management"
+                ],
+                "summary": "Graduate Students Massively",
+                "parameters": [
+                    {
+                        "description": "Graduation Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_promotion.GraduateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/academic/promotion": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Promotion Management"
+                ],
+                "summary": "Promote Students to Next Classroom",
+                "parameters": [
+                    {
+                        "description": "Promotion Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_promotion.PromoteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/change-password": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Change Password",
+                "parameters": [
+                    {
+                        "description": "Change Password Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_auth.ChangePasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/forgot-password": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Forgot Password",
+                "parameters": [
+                    {
+                        "description": "Forgot Password Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_auth.ForgotPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "parameters": [
+                    {
+                        "description": "Login Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_auth.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "description": "Menghapus Refresh Token dari database dan Cookie",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/me": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Get Current User Profile",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Update Current User Profile",
+                "parameters": [
+                    {
+                        "description": "Update Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_auth.UpdateMeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/me/photo": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Upload Profile Photo",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "Profile Photo",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "description": "Memperbarui Access Token menggunakan Refresh Token dari HttpOnly Cookie",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refresh Token",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "description": "Endpoint untuk registrasi guru/staf secara mandiri. Default role: GURU",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register",
+                "parameters": [
+                    {
+                        "description": "Register Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_auth.RegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/reset-password": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Reset Password",
+                "parameters": [
+                    {
+                        "description": "Reset Password Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_auth.ResetPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/classrooms/{id}/schedules": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Academic Schedule"
+                ],
+                "summary": "Get Schedules By Classroom",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Classroom ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/curriculum-documents": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get a list of all curriculum documents",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Curriculum"
+                ],
+                "summary": "Get all curriculum documents",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Creates a new curriculum document for the given academic year and school.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Curriculum"
+                ],
+                "summary": "Create a new curriculum document",
+                "parameters": [
+                    {
+                        "description": "Initialize Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_curriculum.InitializeCurriculumRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/curriculum-documents/chapters/trigger": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Queues a background job to formulate a curriculum chapter using AI",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Curriculum"
+                ],
+                "summary": "Trigger Chapter Formulation",
+                "parameters": [
+                    {
+                        "description": "Trigger Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_curriculum.TriggerChapterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/curriculum-documents/chapters/{chapter_id}": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Save manual corrections to a chapter",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Curriculum"
+                ],
+                "summary": "Update Chapter Content",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Chapter ID",
+                        "name": "chapter_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_curriculum.UpdateChapterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/curriculum-documents/readiness": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Check if the school data is 90% ready for curriculum formulation",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Curriculum"
+                ],
+                "summary": "Check school data readiness",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "school_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/curriculum-documents/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get a curriculum document with all its chapters",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Curriculum"
+                ],
+                "summary": "Get curriculum document by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Curriculum Document ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/curriculum-documents/{id}/chapters/{chapter_number}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retrieve HTML content for a specific chapter",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Curriculum"
+                ],
+                "summary": "Get Chapter Content",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Curriculum Document ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Chapter Number",
+                        "name": "chapter_number",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/curriculum-documents/{id}/export": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Mock export of the FINAL curriculum document",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Curriculum"
+                ],
+                "summary": "Export Document to PDF",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Curriculum Document ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/curriculum-documents/{id}/finalize": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Locks the document and marks it as FINAL",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Curriculum"
+                ],
+                "summary": "Finalize Curriculum Document",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Curriculum Document ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/learning-outcomes": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Learning Outcomes"
+                ],
+                "summary": "Get All Learning Outcomes",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search by text or code",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.PaginationResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Learning Outcomes"
+                ],
+                "summary": "Create Learning Outcome",
+                "parameters": [
+                    {
+                        "description": "Create Learning Outcome Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_cp.CreateCPRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/learning-outcomes/{cpId}/details": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Learning Outcome Details"
+                ],
+                "summary": "Get All Learning Outcome Details",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Learning Outcome ID (UUID)",
+                        "name": "cpId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Learning Outcome Details"
+                ],
+                "summary": "Create Learning Outcome Detail",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Learning Outcome ID (UUID)",
+                        "name": "cpId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Create Detail Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_cp.CreateCPDetailRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/learning-outcomes/{cpId}/details/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Learning Outcome Details"
+                ],
+                "summary": "Update Learning Outcome Detail",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Learning Outcome ID (UUID)",
+                        "name": "cpId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Detail ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Detail Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_cp.UpdateCPDetailRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Learning Outcome Details"
+                ],
+                "summary": "Delete Learning Outcome Detail",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Learning Outcome ID (UUID)",
+                        "name": "cpId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Detail ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/learning-outcomes/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Learning Outcomes"
+                ],
+                "summary": "Get Learning Outcome By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Learning Outcome ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Learning Outcomes"
+                ],
+                "summary": "Update Learning Outcome",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Learning Outcome ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Learning Outcome Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_cp.UpdateCPRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Learning Outcomes"
+                ],
+                "summary": "Delete Learning Outcome",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Learning Outcome ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/permissions": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Permission Management"
+                ],
+                "summary": "Get All Permissions",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Permission Management"
+                ],
+                "summary": "Create New Permission",
+                "parameters": [
+                    {
+                        "description": "Create Permission Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_permission.Permission"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/permissions/roles/{role_id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Permission Management"
+                ],
+                "summary": "Get Permissions By Role ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Role ID",
+                        "name": "role_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Permission Management"
+                ],
+                "summary": "Assign Permissions To Role",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Role ID",
+                        "name": "role_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Permissions to Assign",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_permission.AssignPermissionsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/permissions/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Permission Management"
+                ],
+                "summary": "Get Permission By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Permission ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Permission Management"
+                ],
+                "summary": "Delete Permission",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Permission ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/phases": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Phase"
+                ],
+                "summary": "Get All Phases",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search by name or code",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.PaginationResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Phase"
+                ],
+                "summary": "Create Phase",
+                "parameters": [
+                    {
+                        "description": "Create Phase Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_phase.CreatePhaseRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/phases/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Phase"
+                ],
+                "summary": "Get Phase By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Phase ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Phase"
+                ],
+                "summary": "Update Phase",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Phase ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Phase Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_phase.UpdatePhaseRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Phase"
+                ],
+                "summary": "Delete Phase",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Phase ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/schedules": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Academic Schedule"
+                ],
+                "summary": "Create Schedule",
+                "parameters": [
+                    {
+                        "description": "Schedule Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_schedule.CreateScheduleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/schedules/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Academic Schedule"
+                ],
+                "summary": "Delete Schedule",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Schedule ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/schools": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "School"
+                ],
+                "summary": "Get All Schools",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search by name or NPSN",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.PaginationResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "School"
+                ],
+                "summary": "Create School",
+                "parameters": [
+                    {
+                        "description": "Create School",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_school.CreateSchoolRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/schools/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "School"
+                ],
+                "summary": "Get School By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "School"
+                ],
+                "summary": "Update School",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update School",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_school.UpdateSchoolRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "School"
+                ],
+                "summary": "Delete School",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/students": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Get All Students",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search by name, NISN, or NIS",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.PaginationResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Create Student",
+                "parameters": [
+                    {
+                        "description": "Create Student",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_student.CreateStudentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/students/school/{schoolId}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Get Students By School",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "schoolId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/students/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Get Student By ID (lengkap dengan data orang tua)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Student ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Update Student",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Student ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Student",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_student.UpdateStudentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Delete Student",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Student ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/students/{id}/parents": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Tambah atau perbarui data orang tua (FATHER, MOTHER, GUARDIAN)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Upsert Parent Data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Student ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Parent Data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_student.UpsertParentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/students/{id}/parents/{parentId}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Delete Parent Data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Student ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Parent ID",
+                        "name": "parentId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/subjects": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject"
+                ],
+                "summary": "Get All Subjects",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search by name or code",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Filter by active status",
+                        "name": "is_active",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.PaginationResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject"
+                ],
+                "summary": "Create Subject",
+                "parameters": [
+                    {
+                        "description": "Create Subject Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_subject.CreateSubjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/subjects/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject"
+                ],
+                "summary": "Get Subject By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Subject ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject"
+                ],
+                "summary": "Update Subject",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Subject ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Subject Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_subject.UpdateSubjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject"
+                ],
+                "summary": "Delete Subject",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Subject ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/subjects/{subjectId}/elements": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject Element"
+                ],
+                "summary": "Get All Subject Elements",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Subject ID (UUID)",
+                        "name": "subjectId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject Element"
+                ],
+                "summary": "Create Subject Element",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Subject ID (UUID)",
+                        "name": "subjectId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Create Element Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_subject.CreateSubjectElementRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/subjects/{subjectId}/elements/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject Element"
+                ],
+                "summary": "Update Subject Element",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Subject ID (UUID)",
+                        "name": "subjectId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Element ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Element Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_subject.UpdateSubjectElementRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject Element"
+                ],
+                "summary": "Delete Subject Element",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Subject ID (UUID)",
+                        "name": "subjectId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Element ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/system/audit-logs": {
+            "get": {
+                "description": "Mengambil daftar catatan log audit aktivitas operasional sistem secara paginasi. Mendukung pencarian kueri berdasarkan nama/email pengguna dan penyaringan berdasarkan tipe aksi keamanan.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System \u0026 Dashboard"
+                ],
+                "summary": "Get System Audit Logs",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Nomor halaman aktif (default: 1)",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Jumlah entri log per halaman (default: 10)",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Kata kunci pencarian nama atau email aktor pengguna",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Penyaringan berdasarkan tipe aksi keamanan (e.g. LOGIN, UPDATE, DELETE)",
+                        "name": "action",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data audit log berhasil diambil secara terpaginasi",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/sim-sekolah_internal_common.PaginationResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/internal_system.AuditLog"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Gagal mengambil data audit log",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/system/dashboard/guru": {
+            "get": {
+                "description": "Mengambil data aktivitas operasional harian untuk dasbor Guru, termasuk tingkat kepatuhan pengerjaan Modul Ajar mandiri dan pemantauan perkembangan kognitif/sosial siswa di kelas yang diajarnya.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System \u0026 Dashboard"
+                ],
+                "summary": "Get Guru Dashboard Data",
+                "responses": {
+                    "200": {
+                        "description": "Data dasbor guru berhasil diambil",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Gagal mengambil data dasbor guru",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/system/dashboard/operator": {
+            "get": {
+                "description": "Mengambil statistik telemetri kesehatan perangkat keras (*hardware* server), utilisasi memori cache Redis, pool database PostgreSQL, dan ringkasan persentase sinkronisasi Dapodik untuk dasbor Operator Sistem.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System \u0026 Dashboard"
+                ],
+                "summary": "Get Operator Dashboard Data",
+                "responses": {
+                    "200": {
+                        "description": "Data dasbor operator berhasil diambil",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Gagal mengambil data dasbor operator",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/system/dashboard/pimpinan": {
+            "get": {
+                "description": "Mengambil data statistik makro sekolah untuk kebutuhan dasbor Pimpinan (Kepala Sekolah), termasuk tingkat kelulusan siswa, kepatuhan pengerjaan KSP, dan ringkasan diagram nilai kognitif siswa secara real-time.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System \u0026 Dashboard"
+                ],
+                "summary": "Get Pimpinan Dashboard Data",
+                "responses": {
+                    "200": {
+                        "description": "Data dasbor pimpinan berhasil diambil",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Gagal mengambil data dasbor pimpinan",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/teachers": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Ambil semua data guru dengan pencarian",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Get All Teachers",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search by name, NIP, email",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.PaginationResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Create Teacher",
+                "parameters": [
+                    {
+                        "description": "Create Teacher",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_teacher.CreateTeacherRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/teachers/school/{schoolId}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Get Teachers By School",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "schoolId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/teachers/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Get Teacher By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Teacher ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Update Teacher",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Teacher ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Teacher",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_teacher.UpdateTeacherRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Delete Teacher",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Teacher ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/teachers/{id}/schedules": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Academic Schedule"
+                ],
+                "summary": "Get Schedules By Teacher",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Teacher ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin User Management"
+                ],
+                "summary": "Get All Users",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search by name or username",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.PaginationResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/roles": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin User Management"
+                ],
+                "summary": "Get All Roles",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin User Management"
+                ],
+                "summary": "Get User By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}/reset-password": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin User Management"
+                ],
+                "summary": "Reset User Password",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "New Password",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_user.ResetPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}/roles": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin User Management"
+                ],
+                "summary": "Assign Roles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Roles to Assign",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_user.AssignRoleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}/status": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin User Management"
+                ],
+                "summary": "Update User Status",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Status Update Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_user.UpdateUserStatusRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/sim-sekolah_internal_common.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "internal_auth.ChangePasswordRequest": {
+            "type": "object",
+            "required": [
+                "current_password",
+                "new_password"
+            ],
+            "properties": {
+                "current_password": {
+                    "description": "Kata sandi aktif saat ini",
+                    "type": "string",
+                    "example": "sandiLama123"
+                },
+                "new_password": {
+                    "description": "Kata sandi baru minimal 8 karakter",
+                    "type": "string",
+                    "minLength": 8,
+                    "example": "sandiBaru99"
+                }
+            }
+        },
+        "internal_auth.ForgotPasswordRequest": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "description": "Alamat email terdaftar untuk pemulihan sandi",
+                    "type": "string",
+                    "example": "budi@sd.sch.id"
+                }
+            }
+        },
+        "internal_auth.LoginRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "description": "Alamat email resmi terdaftar",
+                    "type": "string",
+                    "example": "admin@simsekolah.com"
+                },
+                "password": {
+                    "description": "Kata sandi keamanan pengguna",
+                    "type": "string",
+                    "example": "password123"
+                }
+            }
+        },
+        "internal_auth.RegisterRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "full_name",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "description": "Alamat email resmi pendaftar",
+                    "type": "string",
+                    "example": "budi@sd.sch.id"
+                },
+                "full_name": {
+                    "description": "Nama lengkap guru atau staf sekolah",
+                    "type": "string",
+                    "example": "Budi Santoso"
+                },
+                "password": {
+                    "description": "Kata sandi keamanan minimal 6 karakter",
+                    "type": "string",
+                    "minLength": 6,
+                    "example": "budi1234"
+                },
+                "username": {
+                    "description": "Username unik untuk login ke sistem",
+                    "type": "string",
+                    "example": "budis"
+                }
+            }
+        },
+        "internal_auth.ResetPasswordRequest": {
+            "type": "object",
+            "required": [
+                "password",
+                "token"
+            ],
+            "properties": {
+                "password": {
+                    "description": "Kata sandi baru minimal 8 karakter",
+                    "type": "string",
+                    "minLength": 8,
+                    "example": "sandiBaru999"
+                },
+                "token": {
+                    "description": "Token unik pemulihan sandi yang dikirim lewat email",
+                    "type": "string",
+                    "example": "abcdef123456"
+                }
+            }
+        },
+        "internal_auth.UpdateMeRequest": {
+            "type": "object",
+            "properties": {
+                "content_type": {
+                    "description": "Lebar halaman kustomisasi antarmuka",
+                    "type": "string",
+                    "example": "fluid"
+                },
+                "email_notifications": {
+                    "description": "Pengaturan persetujuan notifikasi email",
+                    "type": "boolean",
+                    "example": false
+                },
+                "full_name": {
+                    "description": "Nama lengkap terbaru beserta gelar pendidikan",
+                    "type": "string",
+                    "example": "Budi Santoso, S.Pd"
+                },
+                "left_menu_type": {
+                    "description": "Model menu kiri kustomisasi antarmuka",
+                    "type": "string",
+                    "example": "compact"
+                },
+                "push_notifications": {
+                    "description": "Pengaturan persetujuan push notifikasi",
+                    "type": "boolean",
+                    "example": true
+                },
+                "theme_color": {
+                    "description": "Warna tema kustomisasi antarmuka",
+                    "type": "string",
+                    "example": "theme-purple"
+                },
+                "theme_mode": {
+                    "description": "Mode visual kustomisasi antarmuka",
+                    "type": "string",
+                    "example": "light"
+                },
+                "two_factor_enabled": {
+                    "description": "Pointer so we can differentiate false and nil (not sent)",
+                    "type": "boolean",
+                    "example": true
+                },
+                "username": {
+                    "description": "Username baru jika ingin diubah",
+                    "type": "string",
+                    "example": "budi_santoso"
+                }
+            }
+        },
+        "internal_cp.CreateCPDetailRequest": {
+            "type": "object",
+            "required": [
+                "detail_text",
+                "element_id",
+                "sequence_no"
+            ],
+            "properties": {
+                "detail_text": {
+                    "description": "Deskripsi target capaian sub-kompetensi",
+                    "type": "string",
+                    "example": "Pada akhir fase A, peserta didik..."
+                },
+                "element_id": {
+                    "description": "UUID Elemen CP dari mata pelajaran terkait",
+                    "type": "string",
+                    "example": "7e83162c-cbeb-4cd6-b027-2239a1ca481c"
+                },
+                "sequence_no": {
+                    "description": "Nomor urut alur pembelajaran (sequence)",
+                    "type": "integer",
+                    "minimum": 1,
+                    "example": 1
+                },
+                "sub_code": {
+                    "description": "Kode sub-kompetensi CP (e.g. CP.MAT.FA.01)",
+                    "type": "string",
+                    "example": "CP.MAT.FA.01"
+                }
+            }
+        },
+        "internal_cp.CreateCPRequest": {
+            "type": "object",
+            "required": [
+                "phase_id",
+                "subject_id",
+                "year_sk"
+            ],
+            "properties": {
+                "cp_code": {
+                    "description": "Kode unik dokumen CP (e.g. CP-MAT-FA)",
+                    "type": "string",
+                    "maxLength": 50,
+                    "example": "CP-MAT-FA"
+                },
+                "details": {
+                    "description": "Daftar rincian CP per sub-elemen kompetensi",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal_cp.CreateCPDetailRequest"
+                    }
+                },
+                "outcome_text": {
+                    "description": "Uraian deskripsi komprehensif Capaian Pembelajaran Fase",
+                    "type": "string",
+                    "example": "Peserta didik mampu memahami konsep..."
+                },
+                "phase_id": {
+                    "description": "UUID Fase kelas (e.g. Fase A, Fase B, Fase C untuk SD)",
+                    "type": "string",
+                    "example": "a425fa98-4362-4f74-9a33-8dcfbaeecc45"
+                },
+                "subject_id": {
+                    "description": "UUID Mata Pelajaran pengampu CP",
+                    "type": "string",
+                    "example": "c5d2f366-3ff2-422c-807a-44c618bef84f"
+                },
+                "year_sk": {
+                    "description": "Tahun berlakunya SK Kemendikbudristek untuk CP ini",
+                    "type": "string",
+                    "maxLength": 10,
+                    "example": "2024"
+                }
+            }
+        },
+        "internal_cp.UpdateCPDetailRequest": {
+            "type": "object",
+            "properties": {
+                "detail_text": {
+                    "type": "string",
+                    "example": "Pada akhir fase A, peserta didik..."
+                },
+                "element_id": {
+                    "type": "string",
+                    "example": "7e83162c-cbeb-4cd6-b027-2239a1ca481c"
+                },
+                "sequence_no": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "example": 1
+                },
+                "sub_code": {
+                    "type": "string",
+                    "example": "CP.MAT.FA.01"
+                }
+            }
+        },
+        "internal_cp.UpdateCPRequest": {
+            "type": "object",
+            "properties": {
+                "cp_code": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "example": "CP-MAT-FA"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal_cp.CreateCPDetailRequest"
+                    }
+                },
+                "outcome_text": {
+                    "type": "string",
+                    "example": "Peserta didik mampu memahami konsep..."
+                },
+                "phase_id": {
+                    "type": "string",
+                    "example": "a425fa98-4362-4f74-9a33-8dcfbaeecc45"
+                },
+                "subject_id": {
+                    "type": "string",
+                    "example": "c5d2f366-3ff2-422c-807a-44c618bef84f"
+                },
+                "year_sk": {
+                    "type": "string",
+                    "maxLength": 10,
+                    "example": "2024"
+                }
+            }
+        },
+        "internal_curriculum.InitializeCurriculumRequest": {
+            "type": "object",
+            "required": [
+                "academic_year_id",
+                "school_id"
+            ],
+            "properties": {
+                "academic_year_id": {
+                    "type": "string"
+                },
+                "school_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_curriculum.TriggerChapterRequest": {
+            "type": "object",
+            "required": [
+                "chapter_number",
+                "curriculum_document_id",
+                "title"
+            ],
+            "properties": {
+                "chapter_number": {
+                    "type": "integer"
+                },
+                "curriculum_document_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_curriculum.UpdateChapterRequest": {
+            "type": "object",
+            "required": [
+                "content"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_permission.AssignPermissionsRequest": {
+            "type": "object",
+            "required": [
+                "permission_ids"
+            ],
+            "properties": {
+                "permission_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "internal_permission.Permission": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "permission_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_phase.CreatePhaseRequest": {
+            "type": "object",
+            "required": [
+                "code",
+                "name"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "maxLength": 5
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 50
+                }
+            }
+        },
+        "internal_phase.UpdatePhaseRequest": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "maxLength": 5
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 50
+                }
+            }
+        },
+        "internal_promotion.GraduateRequest": {
+            "type": "object",
+            "required": [
+                "student_ids"
+            ],
+            "properties": {
+                "student_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "internal_promotion.PromoteRequest": {
+            "type": "object",
+            "required": [
+                "source_classroom_id",
+                "student_ids",
+                "target_classroom_id"
+            ],
+            "properties": {
+                "source_classroom_id": {
+                    "type": "string"
+                },
+                "student_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "target_classroom_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_schedule.CreateScheduleRequest": {
+            "type": "object",
+            "required": [
+                "classroom_id",
+                "day_of_week",
+                "end_time",
+                "start_time",
+                "teaching_assignment_id"
+            ],
+            "properties": {
+                "classroom_id": {
+                    "type": "string"
+                },
+                "day_of_week": {
+                    "type": "integer",
+                    "maximum": 7,
+                    "minimum": 1
+                },
+                "end_time": {
+                    "type": "string"
+                },
+                "start_time": {
+                    "type": "string"
+                },
+                "teaching_assignment_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_school.CreateSchoolRequest": {
+            "type": "object",
+            "required": [
+                "school_name"
+            ],
+            "properties": {
+                "accreditation": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "bos_status": {
+                    "type": "string"
+                },
+                "classroom_count": {
+                    "type": "integer"
+                },
+                "classroom_damaged_count": {
+                    "type": "integer"
+                },
+                "classroom_good_count": {
+                    "type": "integer"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "curriculum": {
+                    "type": "string"
+                },
+                "district": {
+                    "type": "string"
+                },
+                "education_form": {
+                    "type": "string"
+                },
+                "electricity_capacity": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "female_students": {
+                    "type": "integer"
+                },
+                "female_teachers": {
+                    "type": "integer"
+                },
+                "goal": {
+                    "type": "string"
+                },
+                "graduation_data": {
+                    "type": "string"
+                },
+                "infrastructure_summary": {
+                    "type": "string"
+                },
+                "internet_access": {
+                    "type": "string"
+                },
+                "lab_count": {
+                    "type": "integer"
+                },
+                "latitude": {
+                    "type": "number"
+                },
+                "library_count": {
+                    "type": "integer"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "male_students": {
+                    "type": "integer"
+                },
+                "male_teachers": {
+                    "type": "integer"
+                },
+                "mission": {
+                    "type": "string"
+                },
+                "npsn": {
+                    "type": "string",
+                    "maxLength": 20
+                },
+                "operating_hours": {
+                    "type": "string"
+                },
+                "operator_name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 30
+                },
+                "principal_name": {
+                    "type": "string"
+                },
+                "province": {
+                    "type": "string"
+                },
+                "regency": {
+                    "type": "string"
+                },
+                "rombel_count": {
+                    "type": "integer"
+                },
+                "school_name": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "signal_status": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "student_ratio": {
+                    "type": "string"
+                },
+                "student_religion": {
+                    "type": "string"
+                },
+                "sync_compliance": {
+                    "type": "string"
+                },
+                "sync_system": {
+                    "type": "string"
+                },
+                "teacher_certified_count": {
+                    "type": "string"
+                },
+                "teacher_honor_count": {
+                    "type": "integer"
+                },
+                "teacher_pns_count": {
+                    "type": "integer"
+                },
+                "teacher_qualified_count": {
+                    "type": "string"
+                },
+                "toilet_student_count": {
+                    "type": "integer"
+                },
+                "toilet_teacher_count": {
+                    "type": "integer"
+                },
+                "total_staff": {
+                    "type": "integer"
+                },
+                "total_students": {
+                    "type": "integer"
+                },
+                "total_teachers": {
+                    "type": "integer"
+                },
+                "vision": {
+                    "type": "string"
+                },
+                "vision_meaning": {
+                    "type": "string"
+                },
+                "water_source": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_school.UpdateSchoolRequest": {
+            "type": "object",
+            "properties": {
+                "accreditation": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "bos_status": {
+                    "type": "string"
+                },
+                "classroom_count": {
+                    "type": "integer"
+                },
+                "classroom_damaged_count": {
+                    "type": "integer"
+                },
+                "classroom_good_count": {
+                    "type": "integer"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "curriculum": {
+                    "type": "string"
+                },
+                "district": {
+                    "type": "string"
+                },
+                "education_form": {
+                    "type": "string"
+                },
+                "electricity_capacity": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "female_students": {
+                    "type": "integer"
+                },
+                "female_teachers": {
+                    "type": "integer"
+                },
+                "goal": {
+                    "type": "string"
+                },
+                "graduation_data": {
+                    "type": "string"
+                },
+                "infrastructure_summary": {
+                    "type": "string"
+                },
+                "internet_access": {
+                    "type": "string"
+                },
+                "lab_count": {
+                    "type": "integer"
+                },
+                "latitude": {
+                    "type": "number"
+                },
+                "library_count": {
+                    "type": "integer"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "male_students": {
+                    "type": "integer"
+                },
+                "male_teachers": {
+                    "type": "integer"
+                },
+                "mission": {
+                    "type": "string"
+                },
+                "npsn": {
+                    "type": "string",
+                    "maxLength": 20
+                },
+                "operating_hours": {
+                    "type": "string"
+                },
+                "operator_name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 30
+                },
+                "principal_name": {
+                    "type": "string"
+                },
+                "province": {
+                    "type": "string"
+                },
+                "regency": {
+                    "type": "string"
+                },
+                "rombel_count": {
+                    "type": "integer"
+                },
+                "school_name": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "signal_status": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "student_ratio": {
+                    "type": "string"
+                },
+                "student_religion": {
+                    "type": "string"
+                },
+                "sync_compliance": {
+                    "type": "string"
+                },
+                "sync_system": {
+                    "type": "string"
+                },
+                "teacher_certified_count": {
+                    "type": "string"
+                },
+                "teacher_honor_count": {
+                    "type": "integer"
+                },
+                "teacher_pns_count": {
+                    "type": "integer"
+                },
+                "teacher_qualified_count": {
+                    "type": "string"
+                },
+                "toilet_student_count": {
+                    "type": "integer"
+                },
+                "toilet_teacher_count": {
+                    "type": "integer"
+                },
+                "total_staff": {
+                    "type": "integer"
+                },
+                "total_students": {
+                    "type": "integer"
+                },
+                "total_teachers": {
+                    "type": "integer"
+                },
+                "vision": {
+                    "type": "string"
+                },
+                "vision_meaning": {
+                    "type": "string"
+                },
+                "water_source": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_student.CreateStudentRequest": {
+            "type": "object",
+            "required": [
+                "full_name",
+                "school_id"
+            ],
+            "properties": {
+                "birth_certificate": {
+                    "description": "Nomor registrasi Akta Kelahiran",
+                    "type": "string",
+                    "example": "1204/DISDUK/2015"
+                },
+                "birth_date": {
+                    "description": "Tanggal lahir format YYYY-MM-DD",
+                    "type": "string",
+                    "example": "2015-08-20"
+                },
+                "birth_place": {
+                    "description": "Tempat lahir siswa",
+                    "type": "string",
+                    "example": "Kepulauan Selayar"
+                },
+                "blood_type": {
+                    "description": "Kesehatan",
+                    "type": "string",
+                    "example": "O"
+                },
+                "child_order": {
+                    "description": "Anak ke-berapa dalam keluarga",
+                    "type": "integer",
+                    "example": 2
+                },
+                "coordinates": {
+                    "description": "Titik koordinat peta (Latitude, Longitude)",
+                    "type": "string",
+                    "example": "-7.3912,121.1293"
+                },
+                "curriculum": {
+                    "description": "Jenis kurikulum yang diikuti",
+                    "type": "string",
+                    "example": "Kurikulum Merdeka"
+                },
+                "disability": {
+                    "description": "Kategori disabilitas jika berkebutuhan khusus",
+                    "type": "string",
+                    "example": "TIDAK ADA"
+                },
+                "district": {
+                    "description": "Kecamatan",
+                    "type": "string",
+                    "example": "Pasimarannu"
+                },
+                "enrollment_year": {
+                    "description": "Data Sekolah",
+                    "type": "integer",
+                    "example": 2026
+                },
+                "entry_path": {
+                    "description": "Jalur masuk sekolah (e.g. ZONASI, REGULER)",
+                    "type": "string",
+                    "example": "PPDB REGULER"
+                },
+                "exam_number": {
+                    "description": "Nomor ujian sekolah sebelumnya",
+                    "type": "string",
+                    "example": "U-99887766"
+                },
+                "family_card_number": {
+                    "description": "Nomor Kartu Keluarga (KK)",
+                    "type": "string",
+                    "example": "7301021208100003"
+                },
+                "full_address": {
+                    "description": "Alamat",
+                    "type": "string",
+                    "example": "Jl. Bonerate Raya No. 4"
+                },
+                "full_name": {
+                    "description": "Identitas",
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "Rian Hidayat"
+                },
+                "gender": {
+                    "description": "Jenis kelamin: 'L' (Laki-laki) atau 'P' (Perempuan)",
+                    "type": "string",
+                    "enum": [
+                        "L",
+                        "P"
+                    ],
+                    "example": "L"
+                },
+                "height": {
+                    "description": "Tinggi badan dalam centimeter (cm)",
+                    "type": "number",
+                    "example": 125.5
+                },
+                "kip_number": {
+                    "description": "Nomor Kartu Indonesia Pintar (jika ada)",
+                    "type": "string",
+                    "example": "KIP-88776655"
+                },
+                "medical_history": {
+                    "description": "Riwayat penyakit bawaan atau kronis",
+                    "type": "string",
+                    "example": "Tidak ada riwayat penyakit kronis"
+                },
+                "nationality": {
+                    "description": "Kewarganegaraan",
+                    "type": "string",
+                    "example": "WNI"
+                },
+                "nik": {
+                    "description": "Kependudukan",
+                    "type": "string",
+                    "example": "7301022008150002"
+                },
+                "nis": {
+                    "description": "Nomor Induk Siswa lokal sekolah",
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "202601001"
+                },
+                "nisn": {
+                    "description": "Nomor Induk Siswa Nasional (10 digit)",
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "0151234567"
+                },
+                "photo_url": {
+                    "description": "URL berkas foto profil siswa",
+                    "type": "string",
+                    "example": "https://example.com/photos/rian.jpg"
+                },
+                "postal_code": {
+                    "description": "Kode Pos",
+                    "type": "string",
+                    "example": "92854"
+                },
+                "previous_school": {
+                    "description": "Nama asal sekolah tingkat sebelumnya",
+                    "type": "string",
+                    "example": "TK Pembina Bonerate"
+                },
+                "province": {
+                    "description": "Provinsi",
+                    "type": "string",
+                    "example": "Sulawesi Selatan"
+                },
+                "regency": {
+                    "description": "Kabupaten / Kota",
+                    "type": "string",
+                    "example": "Kepulauan Selayar"
+                },
+                "religion": {
+                    "description": "Agama siswa",
+                    "type": "string",
+                    "example": "Islam"
+                },
+                "rt_rw": {
+                    "description": "RT/RW domisili",
+                    "type": "string",
+                    "example": "001/002"
+                },
+                "school_id": {
+                    "description": "UUID Sekolah tempat siswa terdaftar",
+                    "type": "string",
+                    "example": "804b75d4-2822-48a7-8eba-3566f038f81f"
+                },
+                "siblings": {
+                    "description": "Jumlah saudara kandung",
+                    "type": "integer",
+                    "example": 3
+                },
+                "student_status": {
+                    "description": "Status keaktifan (e.g. AKTIF, LULUS, MUTASI)",
+                    "type": "string",
+                    "example": "AKTIF"
+                },
+                "village": {
+                    "description": "Kelurahan / Desa",
+                    "type": "string",
+                    "example": "Bonerate"
+                },
+                "weight": {
+                    "description": "Berat badan dalam kilogram (kg)",
+                    "type": "number",
+                    "example": 28.4
+                }
+            }
+        },
+        "internal_student.UpdateStudentRequest": {
+            "type": "object",
+            "properties": {
+                "birth_certificate": {
+                    "type": "string",
+                    "example": "1204/DISDUK/2015"
+                },
+                "birth_date": {
+                    "type": "string",
+                    "example": "2015-08-20"
+                },
+                "birth_place": {
+                    "type": "string",
+                    "example": "Kepulauan Selayar"
+                },
+                "blood_type": {
+                    "type": "string",
+                    "example": "O"
+                },
+                "child_order": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "coordinates": {
+                    "type": "string",
+                    "example": "-7.3912,121.1293"
+                },
+                "curriculum": {
+                    "type": "string",
+                    "example": "Kurikulum Merdeka"
+                },
+                "disability": {
+                    "type": "string",
+                    "example": "TIDAK ADA"
+                },
+                "district": {
+                    "type": "string",
+                    "example": "Pasimarannu"
+                },
+                "enrollment_year": {
+                    "type": "integer",
+                    "example": 2026
+                },
+                "entry_path": {
+                    "type": "string",
+                    "example": "PPDB REGULER"
+                },
+                "exam_number": {
+                    "type": "string",
+                    "example": "U-99887766"
+                },
+                "family_card_number": {
+                    "type": "string",
+                    "example": "7301021208100003"
+                },
+                "full_address": {
+                    "type": "string",
+                    "example": "Jl. Bonerate Raya No. 4"
+                },
+                "full_name": {
+                    "type": "string",
+                    "example": "Rian Hidayat"
+                },
+                "gender": {
+                    "type": "string",
+                    "enum": [
+                        "L",
+                        "P"
+                    ],
+                    "example": "L"
+                },
+                "height": {
+                    "type": "number",
+                    "example": 125.5
+                },
+                "kip_number": {
+                    "type": "string",
+                    "example": "KIP-88776655"
+                },
+                "medical_history": {
+                    "type": "string",
+                    "example": "Tidak ada riwayat penyakit kronis"
+                },
+                "nationality": {
+                    "type": "string",
+                    "example": "WNI"
+                },
+                "nik": {
+                    "type": "string",
+                    "example": "7301022008150002"
+                },
+                "nis": {
+                    "type": "string",
+                    "example": "202601001"
+                },
+                "nisn": {
+                    "type": "string",
+                    "example": "0151234567"
+                },
+                "photo_url": {
+                    "type": "string",
+                    "example": "https://example.com/photos/rian.jpg"
+                },
+                "postal_code": {
+                    "type": "string",
+                    "example": "92854"
+                },
+                "previous_school": {
+                    "type": "string",
+                    "example": "TK Pembina Bonerate"
+                },
+                "province": {
+                    "type": "string",
+                    "example": "Sulawesi Selatan"
+                },
+                "regency": {
+                    "type": "string",
+                    "example": "Kepulauan Selayar"
+                },
+                "religion": {
+                    "type": "string",
+                    "example": "Islam"
+                },
+                "rt_rw": {
+                    "type": "string",
+                    "example": "001/002"
+                },
+                "siblings": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "student_status": {
+                    "type": "string",
+                    "example": "AKTIF"
+                },
+                "village": {
+                    "type": "string",
+                    "example": "Bonerate"
+                },
+                "weight": {
+                    "type": "number",
+                    "example": 28.4
+                }
+            }
+        },
+        "internal_student.UpsertParentRequest": {
+            "type": "object",
+            "required": [
+                "full_name",
+                "parent_type"
+            ],
+            "properties": {
+                "education": {
+                    "description": "Tingkat pendidikan terakhir (e.g. SD, SMP, SMA, S1, S2)",
+                    "type": "string",
+                    "example": "S1"
+                },
+                "full_name": {
+                    "description": "Nama lengkap orang tua / wali sesuai identitas resmi",
+                    "type": "string",
+                    "example": "Ahmad Basri"
+                },
+                "income": {
+                    "description": "Penghasilan bulanan dalam Rupiah (e.g. 4500000)",
+                    "type": "integer",
+                    "example": 4500000
+                },
+                "nik": {
+                    "description": "Nomor Induk Kependudukan orang tua (16 digit)",
+                    "type": "string",
+                    "example": "7301021208750001"
+                },
+                "occupation": {
+                    "description": "Pekerjaan utama orang tua",
+                    "type": "string",
+                    "example": "Wiraswasta"
+                },
+                "parent_type": {
+                    "description": "Kategori wali: 'FATHER' (Ayah), 'MOTHER' (Ibu), atau 'GUARDIAN' (Wali)",
+                    "type": "string",
+                    "enum": [
+                        "FATHER",
+                        "MOTHER",
+                        "GUARDIAN"
+                    ],
+                    "example": "FATHER"
+                },
+                "phone": {
+                    "description": "Nomor telepon seluler aktif orang tua",
+                    "type": "string",
+                    "example": "081398765432"
+                }
+            }
+        },
+        "internal_subject.CreateCharacteristicPointRequest": {
+            "type": "object",
+            "required": [
+                "description"
+            ],
+            "properties": {
+                "description": {
+                    "description": "Deskripsi karakteristik CP mata pelajaran",
+                    "type": "string",
+                    "example": "Pemahaman konsep bilangan cacah dan pecahan"
+                },
+                "elements": {
+                    "description": "Daftar elemen sub-kompetensi mata pelajaran",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal_subject.CreateSubjectElementRequest"
+                    }
+                }
+            }
+        },
+        "internal_subject.CreateSubjectElementRequest": {
+            "type": "object",
+            "required": [
+                "element_name"
+            ],
+            "properties": {
+                "abbreviation": {
+                    "description": "Singkatan sub-elemen (e.g. BIL, GEO)",
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "BIL"
+                },
+                "description": {
+                    "description": "Uraian cakupan materi sub-elemen",
+                    "type": "string",
+                    "example": "Mencakup kemampuan mengurutkan, menjumlahkan..."
+                },
+                "element_name": {
+                    "description": "Nama sub-elemen CP (e.g. Bilangan, Geometri, Pengukuran)",
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "Bilangan Cacah"
+                }
+            }
+        },
+        "internal_subject.CreateSubjectRequest": {
+            "type": "object",
+            "required": [
+                "subject_name"
+            ],
+            "properties": {
+                "abbreviation": {
+                    "description": "Singkatan nama mata pelajaran (e.g. MTK, BIN)",
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "MTK"
+                },
+                "characteristic_points": {
+                    "description": "Elemen / Karakteristik CP yang diampu",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal_subject.CreateCharacteristicPointRequest"
+                    }
+                },
+                "characteristics": {
+                    "description": "Karakteristik umum pengajaran mata pelajaran",
+                    "type": "string",
+                    "example": "Pembelajaran berbasis eksplorasi..."
+                },
+                "goals": {
+                    "description": "Tujuan pembelajaran mata pelajaran",
+                    "type": "string",
+                    "example": "Membentuk pola pikir logis dan matematis..."
+                },
+                "is_active": {
+                    "description": "Status keaktifan mata pelajaran",
+                    "type": "boolean",
+                    "example": true
+                },
+                "level": {
+                    "description": "Tingkatan sekolah (SD, SMP, SMA)",
+                    "type": "string",
+                    "maxLength": 10,
+                    "example": "SD"
+                },
+                "rational": {
+                    "description": "Rasionalitas mata pelajaran dalam kurikulum merdeka",
+                    "type": "string",
+                    "example": "Kemampuan numerasi sangat krusial bagi..."
+                },
+                "subject_code": {
+                    "description": "Kode unik mata pelajaran (e.g. MAT-SD-A)",
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "MAT-SD-A"
+                },
+                "subject_name": {
+                    "description": "Nama resmi mata pelajaran",
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "Matematika"
+                }
+            }
+        },
+        "internal_subject.UpdateCharacteristicPointRequest": {
+            "type": "object",
+            "required": [
+                "description"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "Pemahaman konsep bilangan cacah dan pecahan"
+                },
+                "elements": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal_subject.UpdateSubjectElementRequest"
+                    }
+                },
+                "id": {
+                    "description": "UUID Karakteristik CP yang ingin diubah",
+                    "type": "string",
+                    "example": "a425fa98-4362-4f74-9a33-8dcfbaeecc45"
+                }
+            }
+        },
+        "internal_subject.UpdateSubjectElementRequest": {
+            "type": "object",
+            "required": [
+                "element_name"
+            ],
+            "properties": {
+                "abbreviation": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "BIL"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "Mencakup kemampuan mengurutkan, menjumlahkan..."
+                },
+                "element_name": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "Bilangan Cacah"
+                },
+                "id": {
+                    "description": "UUID Elemen CP yang ingin diubah",
+                    "type": "string",
+                    "example": "cfd0a60c-8f12-4e2c-a217-9ac5a14de76c"
+                }
+            }
+        },
+        "internal_subject.UpdateSubjectRequest": {
+            "type": "object",
+            "properties": {
+                "abbreviation": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "MTK"
+                },
+                "characteristic_points": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal_subject.UpdateCharacteristicPointRequest"
+                    }
+                },
+                "characteristics": {
+                    "type": "string",
+                    "example": "Pembelajaran berbasis eksplorasi..."
+                },
+                "goals": {
+                    "type": "string",
+                    "example": "Membentuk pola pikir logis dan matematis..."
+                },
+                "is_active": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "level": {
+                    "type": "string",
+                    "maxLength": 10,
+                    "example": "SD"
+                },
+                "rational": {
+                    "type": "string",
+                    "example": "Kemampuan numerasi sangat krusial bagi..."
+                },
+                "subject_code": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "MAT-SD-A"
+                },
+                "subject_name": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "Matematika"
+                }
+            }
+        },
+        "internal_system.AuditLog": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "description": "Jenis aksi keamanan: 'LOGIN', 'CREATE', 'UPDATE', 'DELETE', 'MFA_ENABLE'",
+                    "type": "string",
+                    "example": "UPDATE"
+                },
+                "created_at": {
+                    "description": "Waktu presisi saat kejadian berlangsung",
+                    "type": "string",
+                    "example": "2026-05-18T13:45:46Z"
+                },
+                "entity": {
+                    "description": "Nama tabel database atau objek yang dimodifikasi",
+                    "type": "string",
+                    "example": "students"
+                },
+                "entity_id": {
+                    "description": "ID kunci utama dari entitas target yang dimodifikasi",
+                    "type": "string",
+                    "example": "7e83162c-cbeb-4cd6-b027-2239a1ca481c"
+                },
+                "id": {
+                    "description": "UUID identifikasi unik entri audit log",
+                    "type": "string",
+                    "example": "a425fa98-4362-4f74-9a33-8dcfbaeecc45"
+                },
+                "ip_address": {
+                    "description": "Alamat IP klien pengirim permintaan",
+                    "type": "string",
+                    "example": "192.168.1.10"
+                },
+                "user_email": {
+                    "description": "Alamat email aktif dari aktor pengguna (opsional)",
+                    "type": "string",
+                    "example": "budi@sd.sch.id"
+                },
+                "user_full_name": {
+                    "description": "Joined fields",
+                    "type": "string",
+                    "example": "Budi Santoso"
+                },
+                "user_id": {
+                    "description": "ID pengguna (aktor) yang melakukan operasi",
+                    "type": "string",
+                    "example": "c5d2f366-3ff2-422c-807a-44c618bef84f"
+                }
+            }
+        },
+        "internal_teacher.CreateTeacherRequest": {
+            "type": "object",
+            "required": [
+                "full_name",
+                "school_id"
+            ],
+            "properties": {
+                "additional_position": {
+                    "description": "Tugas tambahan di luar mengajar (e.g. Kepala Laboratorium)",
+                    "type": "string",
+                    "example": "Kepala Perpustakaan"
+                },
+                "appointment_decree": {
+                    "description": "Nomor SK Pengangkatan pertama",
+                    "type": "string",
+                    "example": "800/234/SK-KADIS/2010"
+                },
+                "birth_date": {
+                    "description": "Tanggal lahir format YYYY-MM-DD",
+                    "type": "string",
+                    "example": "1985-05-12"
+                },
+                "birth_place": {
+                    "description": "Tempat lahir guru",
+                    "type": "string",
+                    "example": "Makassar"
+                },
+                "certificate_number": {
+                    "description": "Nomor sertifikasi pendidik jika tersertifikasi",
+                    "type": "string",
+                    "example": "10234/CERT/2012"
+                },
+                "district": {
+                    "description": "Nama kecamatan",
+                    "type": "string",
+                    "example": "Pasimarannu"
+                },
+                "email": {
+                    "description": "Alamat email resmi aktif",
+                    "type": "string",
+                    "maxLength": 100,
+                    "example": "budi@sd.sch.id"
+                },
+                "employment_status": {
+                    "description": "Status kepegawaian aktif",
+                    "type": "string",
+                    "enum": [
+                        "PNS",
+                        "PPPK",
+                        "Honorer",
+                        "GTY"
+                    ],
+                    "example": "PNS"
+                },
+                "full_address": {
+                    "description": "Kontak \u0026 Alamat",
+                    "type": "string",
+                    "example": "Jl. Trans Sulawesi No. 85"
+                },
+                "full_name": {
+                    "description": "Identitas",
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "Budi Santoso, S.Pd"
+                },
+                "gender": {
+                    "description": "Jenis kelamin: 'L' (Laki-laki) atau 'P' (Perempuan)",
+                    "type": "string",
+                    "enum": [
+                        "L",
+                        "P"
+                    ],
+                    "example": "L"
+                },
+                "graduation_year": {
+                    "description": "Tahun kelulusan kuliah",
+                    "type": "integer",
+                    "example": 2008
+                },
+                "hamlet": {
+                    "description": "Nama dusun / lingkungan",
+                    "type": "string",
+                    "example": "Dusun Bonerate"
+                },
+                "is_active": {
+                    "description": "Status keaktifan guru di sekolah",
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_certified": {
+                    "description": "Status sertifikasi pendidik",
+                    "type": "boolean",
+                    "example": true
+                },
+                "last_education": {
+                    "description": "Pendidikan",
+                    "type": "string",
+                    "example": "S1"
+                },
+                "major": {
+                    "description": "Jurusan pendidikan terakhir",
+                    "type": "string",
+                    "example": "Pendidikan Matematika"
+                },
+                "nationality": {
+                    "description": "Kewarganegaraan (e.g. WNI, WNA)",
+                    "type": "string",
+                    "example": "WNI"
+                },
+                "nik": {
+                    "description": "Nomor Induk Kependudukan (16 digit)",
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "7301021205850001"
+                },
+                "nip": {
+                    "description": "Kepegawaian",
+                    "type": "string",
+                    "maxLength": 30,
+                    "example": "198505122010011003"
+                },
+                "niy_nigk": {
+                    "description": "Nomor Induk Yayasan / GTY jika sekolah swasta",
+                    "type": "string",
+                    "example": "NIY-098765"
+                },
+                "nuptk": {
+                    "description": "Nomor Unik Pendidik dan Tenaga Kependidikan (16 digit)",
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "9876543210123456"
+                },
+                "phone": {
+                    "description": "Nomor telepon seluler aktif",
+                    "type": "string",
+                    "maxLength": 30,
+                    "example": "081234567890"
+                },
+                "photo_url": {
+                    "description": "URL berkas foto profil guru",
+                    "type": "string",
+                    "example": "https://example.com/photos/budi.jpg"
+                },
+                "postal_code": {
+                    "description": "Kode pos alamat domisili",
+                    "type": "string",
+                    "example": "92854"
+                },
+                "province": {
+                    "description": "Nama provinsi",
+                    "type": "string",
+                    "example": "Sulawesi Selatan"
+                },
+                "regency": {
+                    "description": "Nama kabupaten atau kota",
+                    "type": "string",
+                    "example": "Kepulauan Selayar"
+                },
+                "religion": {
+                    "description": "Agama guru",
+                    "type": "string",
+                    "example": "Islam"
+                },
+                "rt_rw": {
+                    "description": "Rukun Tetangga / Rukun Warga",
+                    "type": "string",
+                    "example": "002/001"
+                },
+                "salary_source": {
+                    "description": "Sumber gaji utama (APBN, APBD, Yayasan)",
+                    "type": "string",
+                    "example": "APBD Kabupaten"
+                },
+                "school_id": {
+                    "description": "UUID Sekolah tempat guru mengajar",
+                    "type": "string",
+                    "example": "804b75d4-2822-48a7-8eba-3566f038f81f"
+                },
+                "start_teaching_date": {
+                    "description": "Tanggal mulai mengajar pertama kali format YYYY-MM-DD",
+                    "type": "string",
+                    "example": "2010-01-02"
+                },
+                "teaching_hours": {
+                    "description": "Total jam mengajar tatap muka per minggu",
+                    "type": "integer",
+                    "example": 24
+                },
+                "teaching_preference": {
+                    "description": "Narasi AI",
+                    "type": "string",
+                    "example": "Sangat sabar dan menyukai pembelajaran berbasis gamifikasi"
+                },
+                "teaching_subject": {
+                    "description": "Mata pelajaran utama yang diampu",
+                    "type": "string",
+                    "example": "Matematika"
+                },
+                "university_name": {
+                    "description": "Nama perguruan tinggi kelulusan",
+                    "type": "string",
+                    "example": "Universitas Negeri Makassar"
+                },
+                "village": {
+                    "description": "Nama desa atau kelurahan",
+                    "type": "string",
+                    "example": "Bonerate"
+                }
+            }
+        },
+        "internal_teacher.UpdateTeacherRequest": {
+            "type": "object",
+            "properties": {
+                "additional_position": {
+                    "type": "string",
+                    "example": "Kepala Perpustakaan"
+                },
+                "appointment_decree": {
+                    "type": "string",
+                    "example": "800/234/SK-KADIS/2010"
+                },
+                "birth_date": {
+                    "description": "Tanggal lahir YYYY-MM-DD",
+                    "type": "string",
+                    "example": "1985-05-12"
+                },
+                "birth_place": {
+                    "description": "Tempat lahir",
+                    "type": "string",
+                    "example": "Makassar"
+                },
+                "certificate_number": {
+                    "type": "string",
+                    "example": "10234/CERT/2012"
+                },
+                "district": {
+                    "type": "string",
+                    "example": "Pasimarannu"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "budi@sd.sch.id"
+                },
+                "employment_status": {
+                    "type": "string",
+                    "enum": [
+                        "PNS",
+                        "PPPK",
+                        "Honorer",
+                        "GTY"
+                    ],
+                    "example": "PNS"
+                },
+                "full_address": {
+                    "description": "Kontak \u0026 Alamat",
+                    "type": "string",
+                    "example": "Jl. Trans Sulawesi No. 85"
+                },
+                "full_name": {
+                    "description": "Identitas",
+                    "type": "string",
+                    "example": "Budi Santoso, S.Pd, M.Pd"
+                },
+                "gender": {
+                    "description": "Jenis kelamin",
+                    "type": "string",
+                    "enum": [
+                        "L",
+                        "P"
+                    ],
+                    "example": "L"
+                },
+                "graduation_year": {
+                    "type": "integer",
+                    "example": 2008
+                },
+                "hamlet": {
+                    "type": "string",
+                    "example": "Dusun Bonerate"
+                },
+                "is_active": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_certified": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "last_education": {
+                    "description": "Pendidikan",
+                    "type": "string",
+                    "example": "S1"
+                },
+                "major": {
+                    "type": "string",
+                    "example": "Pendidikan Matematika"
+                },
+                "nationality": {
+                    "description": "Kewarganegaraan",
+                    "type": "string",
+                    "example": "WNI"
+                },
+                "nik": {
+                    "description": "Nomor Induk Kependudukan",
+                    "type": "string",
+                    "example": "7301021205850001"
+                },
+                "nip": {
+                    "description": "Kepegawaian",
+                    "type": "string",
+                    "example": "198505122010011003"
+                },
+                "niy_nigk": {
+                    "description": "Nomor NIY/NIGK",
+                    "type": "string",
+                    "example": "NIY-098765"
+                },
+                "nuptk": {
+                    "description": "Nomor NUPTK (16 digit)",
+                    "type": "string",
+                    "example": "9876543210123456"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "081234567890"
+                },
+                "photo_url": {
+                    "description": "Foto profil URL",
+                    "type": "string",
+                    "example": "https://example.com/photos/budi.jpg"
+                },
+                "postal_code": {
+                    "type": "string",
+                    "example": "92854"
+                },
+                "province": {
+                    "type": "string",
+                    "example": "Sulawesi Selatan"
+                },
+                "regency": {
+                    "type": "string",
+                    "example": "Kepulauan Selayar"
+                },
+                "religion": {
+                    "description": "Agama",
+                    "type": "string",
+                    "example": "Islam"
+                },
+                "rt_rw": {
+                    "type": "string",
+                    "example": "002/001"
+                },
+                "salary_source": {
+                    "type": "string",
+                    "example": "APBD Kabupaten"
+                },
+                "start_teaching_date": {
+                    "type": "string",
+                    "example": "2010-01-02"
+                },
+                "teaching_hours": {
+                    "type": "integer",
+                    "example": 24
+                },
+                "teaching_preference": {
+                    "description": "Narasi AI",
+                    "type": "string",
+                    "example": "Sangat sabar dan menyukai pembelajaran berbasis gamifikasi"
+                },
+                "teaching_subject": {
+                    "type": "string",
+                    "example": "Matematika"
+                },
+                "university_name": {
+                    "type": "string",
+                    "example": "Universitas Negeri Makassar"
+                },
+                "village": {
+                    "type": "string",
+                    "example": "Bonerate"
+                }
+            }
+        },
+        "internal_user.AssignRoleRequest": {
+            "type": "object",
+            "required": [
+                "role_names"
+            ],
+            "properties": {
+                "role_names": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "internal_user.ResetPasswordRequest": {
+            "type": "object",
+            "required": [
+                "new_password"
+            ],
+            "properties": {
+                "new_password": {
+                    "type": "string",
+                    "minLength": 6
+                }
+            }
+        },
+        "internal_user.UpdateUserStatusRequest": {
+            "type": "object",
+            "properties": {
+                "account_non_expired": {
+                    "type": "boolean"
+                },
+                "account_non_locked": {
+                    "type": "boolean"
+                },
+                "credentials_non_expired": {
+                    "type": "boolean"
+                },
+                "is_enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sim-sekolah_internal_common.PaginationResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "limit": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "total_pages": {
+                    "type": "integer"
+                },
+                "total_rows": {
+                    "type": "integer"
+                }
+            }
+        },
+        "sim-sekolah_internal_common.Response": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "error": {},
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

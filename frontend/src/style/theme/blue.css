@@ -1,0 +1,34 @@
+/* --------------------------- */
+/* Theme Blue */
+/* --------------------------- */
+
+@layer base {
+  .theme-blue {
+    /* PRIMARY - NEW BASE (#0064D2) */
+    --primary: 212 100% 41%;
+    --primary-light: 212 100% 52%;
+    --primary-dark: 212 100% 30%;
+
+    /* SECONDARY - adjusted harmony */
+    --secondary: 220 75% 45%;
+    --secondary-light: 220 75% 55%;
+    --secondary-dark: 220 75% 35%;
+
+    /* ACCENTS - balanced for accessibility */
+    --accent-1: 265 85% 65%; /* purple soft */
+    --accent-2: 315 75% 58%; /* pink soft */
+    --accent-3: 0 85% 66%; /* red stable */
+    --accent-4: 32 85% 62%; /* orange warm */
+
+    color-scheme: light;
+  }
+
+  .theme-blue.dark {
+    color-scheme: dark;
+
+    /* slightly lift primary for dark mode visibility */
+    --primary: 212 100% 55%;
+    --primary-light: 212 100% 65%;
+    --primary-dark: 212 100% 40%;
+  }
+}

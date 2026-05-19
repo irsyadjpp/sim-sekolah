@@ -1,0 +1,3385 @@
+basePath: /api/v1
+definitions:
+  internal_auth.ChangePasswordRequest:
+    properties:
+      current_password:
+        description: Kata sandi aktif saat ini
+        example: sandiLama123
+        type: string
+      new_password:
+        description: Kata sandi baru minimal 8 karakter
+        example: sandiBaru99
+        minLength: 8
+        type: string
+    required:
+    - current_password
+    - new_password
+    type: object
+  internal_auth.ForgotPasswordRequest:
+    properties:
+      email:
+        description: Alamat email terdaftar untuk pemulihan sandi
+        example: budi@sd.sch.id
+        type: string
+    required:
+    - email
+    type: object
+  internal_auth.LoginRequest:
+    properties:
+      email:
+        description: Alamat email resmi terdaftar
+        example: admin@simsekolah.com
+        type: string
+      password:
+        description: Kata sandi keamanan pengguna
+        example: password123
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  internal_auth.RegisterRequest:
+    properties:
+      email:
+        description: Alamat email resmi pendaftar
+        example: budi@sd.sch.id
+        type: string
+      full_name:
+        description: Nama lengkap guru atau staf sekolah
+        example: Budi Santoso
+        type: string
+      password:
+        description: Kata sandi keamanan minimal 6 karakter
+        example: budi1234
+        minLength: 6
+        type: string
+      username:
+        description: Username unik untuk login ke sistem
+        example: budis
+        type: string
+    required:
+    - email
+    - full_name
+    - password
+    - username
+    type: object
+  internal_auth.ResetPasswordRequest:
+    properties:
+      password:
+        description: Kata sandi baru minimal 8 karakter
+        example: sandiBaru999
+        minLength: 8
+        type: string
+      token:
+        description: Token unik pemulihan sandi yang dikirim lewat email
+        example: abcdef123456
+        type: string
+    required:
+    - password
+    - token
+    type: object
+  internal_auth.UpdateMeRequest:
+    properties:
+      content_type:
+        description: Lebar halaman kustomisasi antarmuka
+        example: fluid
+        type: string
+      email_notifications:
+        description: Pengaturan persetujuan notifikasi email
+        example: false
+        type: boolean
+      full_name:
+        description: Nama lengkap terbaru beserta gelar pendidikan
+        example: Budi Santoso, S.Pd
+        type: string
+      left_menu_type:
+        description: Model menu kiri kustomisasi antarmuka
+        example: compact
+        type: string
+      push_notifications:
+        description: Pengaturan persetujuan push notifikasi
+        example: true
+        type: boolean
+      theme_color:
+        description: Warna tema kustomisasi antarmuka
+        example: theme-purple
+        type: string
+      theme_mode:
+        description: Mode visual kustomisasi antarmuka
+        example: light
+        type: string
+      two_factor_enabled:
+        description: Pointer so we can differentiate false and nil (not sent)
+        example: true
+        type: boolean
+      username:
+        description: Username baru jika ingin diubah
+        example: budi_santoso
+        type: string
+    type: object
+  internal_cp.CreateCPDetailRequest:
+    properties:
+      detail_text:
+        description: Deskripsi target capaian sub-kompetensi
+        example: Pada akhir fase A, peserta didik...
+        type: string
+      element_id:
+        description: UUID Elemen CP dari mata pelajaran terkait
+        example: 7e83162c-cbeb-4cd6-b027-2239a1ca481c
+        type: string
+      sequence_no:
+        description: Nomor urut alur pembelajaran (sequence)
+        example: 1
+        minimum: 1
+        type: integer
+      sub_code:
+        description: Kode sub-kompetensi CP (e.g. CP.MAT.FA.01)
+        example: CP.MAT.FA.01
+        type: string
+    required:
+    - detail_text
+    - element_id
+    - sequence_no
+    type: object
+  internal_cp.CreateCPRequest:
+    properties:
+      cp_code:
+        description: Kode unik dokumen CP (e.g. CP-MAT-FA)
+        example: CP-MAT-FA
+        maxLength: 50
+        type: string
+      details:
+        description: Daftar rincian CP per sub-elemen kompetensi
+        items:
+          $ref: '#/definitions/internal_cp.CreateCPDetailRequest'
+        type: array
+      outcome_text:
+        description: Uraian deskripsi komprehensif Capaian Pembelajaran Fase
+        example: Peserta didik mampu memahami konsep...
+        type: string
+      phase_id:
+        description: UUID Fase kelas (e.g. Fase A, Fase B, Fase C untuk SD)
+        example: a425fa98-4362-4f74-9a33-8dcfbaeecc45
+        type: string
+      subject_id:
+        description: UUID Mata Pelajaran pengampu CP
+        example: c5d2f366-3ff2-422c-807a-44c618bef84f
+        type: string
+      year_sk:
+        description: Tahun berlakunya SK Kemendikbudristek untuk CP ini
+        example: "2024"
+        maxLength: 10
+        type: string
+    required:
+    - phase_id
+    - subject_id
+    - year_sk
+    type: object
+  internal_cp.UpdateCPDetailRequest:
+    properties:
+      detail_text:
+        example: Pada akhir fase A, peserta didik...
+        type: string
+      element_id:
+        example: 7e83162c-cbeb-4cd6-b027-2239a1ca481c
+        type: string
+      sequence_no:
+        example: 1
+        minimum: 1
+        type: integer
+      sub_code:
+        example: CP.MAT.FA.01
+        type: string
+    type: object
+  internal_cp.UpdateCPRequest:
+    properties:
+      cp_code:
+        example: CP-MAT-FA
+        maxLength: 50
+        type: string
+      details:
+        items:
+          $ref: '#/definitions/internal_cp.CreateCPDetailRequest'
+        type: array
+      outcome_text:
+        example: Peserta didik mampu memahami konsep...
+        type: string
+      phase_id:
+        example: a425fa98-4362-4f74-9a33-8dcfbaeecc45
+        type: string
+      subject_id:
+        example: c5d2f366-3ff2-422c-807a-44c618bef84f
+        type: string
+      year_sk:
+        example: "2024"
+        maxLength: 10
+        type: string
+    type: object
+  internal_curriculum.InitializeCurriculumRequest:
+    properties:
+      academic_year_id:
+        type: string
+      school_id:
+        type: string
+    required:
+    - academic_year_id
+    - school_id
+    type: object
+  internal_curriculum.TriggerChapterRequest:
+    properties:
+      chapter_number:
+        type: integer
+      curriculum_document_id:
+        type: string
+      title:
+        type: string
+    required:
+    - chapter_number
+    - curriculum_document_id
+    - title
+    type: object
+  internal_curriculum.UpdateChapterRequest:
+    properties:
+      content:
+        type: string
+    required:
+    - content
+    type: object
+  internal_permission.AssignPermissionsRequest:
+    properties:
+      permission_ids:
+        items:
+          type: string
+        type: array
+    required:
+    - permission_ids
+    type: object
+  internal_permission.Permission:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      permission_name:
+        type: string
+    type: object
+  internal_phase.CreatePhaseRequest:
+    properties:
+      code:
+        maxLength: 5
+        type: string
+      description:
+        type: string
+      name:
+        maxLength: 50
+        type: string
+    required:
+    - code
+    - name
+    type: object
+  internal_phase.UpdatePhaseRequest:
+    properties:
+      code:
+        maxLength: 5
+        type: string
+      description:
+        type: string
+      name:
+        maxLength: 50
+        type: string
+    type: object
+  internal_promotion.GraduateRequest:
+    properties:
+      student_ids:
+        items:
+          type: string
+        type: array
+    required:
+    - student_ids
+    type: object
+  internal_promotion.PromoteRequest:
+    properties:
+      source_classroom_id:
+        type: string
+      student_ids:
+        items:
+          type: string
+        type: array
+      target_classroom_id:
+        type: string
+    required:
+    - source_classroom_id
+    - student_ids
+    - target_classroom_id
+    type: object
+  internal_schedule.CreateScheduleRequest:
+    properties:
+      classroom_id:
+        type: string
+      day_of_week:
+        maximum: 7
+        minimum: 1
+        type: integer
+      end_time:
+        type: string
+      start_time:
+        type: string
+      teaching_assignment_id:
+        type: string
+    required:
+    - classroom_id
+    - day_of_week
+    - end_time
+    - start_time
+    - teaching_assignment_id
+    type: object
+  internal_school.CreateSchoolRequest:
+    properties:
+      accreditation:
+        type: string
+      address:
+        type: string
+      bos_status:
+        type: string
+      classroom_count:
+        type: integer
+      classroom_damaged_count:
+        type: integer
+      classroom_good_count:
+        type: integer
+      country:
+        type: string
+      curriculum:
+        type: string
+      district:
+        type: string
+      education_form:
+        type: string
+      electricity_capacity:
+        type: integer
+      email:
+        maxLength: 100
+        type: string
+      female_students:
+        type: integer
+      female_teachers:
+        type: integer
+      goal:
+        type: string
+      graduation_data:
+        type: string
+      infrastructure_summary:
+        type: string
+      internet_access:
+        type: string
+      lab_count:
+        type: integer
+      latitude:
+        type: number
+      library_count:
+        type: integer
+      longitude:
+        type: number
+      male_students:
+        type: integer
+      male_teachers:
+        type: integer
+      mission:
+        type: string
+      npsn:
+        maxLength: 20
+        type: string
+      operating_hours:
+        type: string
+      operator_name:
+        type: string
+      phone:
+        maxLength: 30
+        type: string
+      principal_name:
+        type: string
+      province:
+        type: string
+      regency:
+        type: string
+      rombel_count:
+        type: integer
+      school_name:
+        maxLength: 255
+        type: string
+      signal_status:
+        type: string
+      status:
+        type: string
+      student_ratio:
+        type: string
+      student_religion:
+        type: string
+      sync_compliance:
+        type: string
+      sync_system:
+        type: string
+      teacher_certified_count:
+        type: string
+      teacher_honor_count:
+        type: integer
+      teacher_pns_count:
+        type: integer
+      teacher_qualified_count:
+        type: string
+      toilet_student_count:
+        type: integer
+      toilet_teacher_count:
+        type: integer
+      total_staff:
+        type: integer
+      total_students:
+        type: integer
+      total_teachers:
+        type: integer
+      vision:
+        type: string
+      vision_meaning:
+        type: string
+      water_source:
+        type: string
+    required:
+    - school_name
+    type: object
+  internal_school.UpdateSchoolRequest:
+    properties:
+      accreditation:
+        type: string
+      address:
+        type: string
+      bos_status:
+        type: string
+      classroom_count:
+        type: integer
+      classroom_damaged_count:
+        type: integer
+      classroom_good_count:
+        type: integer
+      country:
+        type: string
+      curriculum:
+        type: string
+      district:
+        type: string
+      education_form:
+        type: string
+      electricity_capacity:
+        type: integer
+      email:
+        maxLength: 100
+        type: string
+      female_students:
+        type: integer
+      female_teachers:
+        type: integer
+      goal:
+        type: string
+      graduation_data:
+        type: string
+      infrastructure_summary:
+        type: string
+      internet_access:
+        type: string
+      lab_count:
+        type: integer
+      latitude:
+        type: number
+      library_count:
+        type: integer
+      longitude:
+        type: number
+      male_students:
+        type: integer
+      male_teachers:
+        type: integer
+      mission:
+        type: string
+      npsn:
+        maxLength: 20
+        type: string
+      operating_hours:
+        type: string
+      operator_name:
+        type: string
+      phone:
+        maxLength: 30
+        type: string
+      principal_name:
+        type: string
+      province:
+        type: string
+      regency:
+        type: string
+      rombel_count:
+        type: integer
+      school_name:
+        maxLength: 255
+        type: string
+      signal_status:
+        type: string
+      status:
+        type: string
+      student_ratio:
+        type: string
+      student_religion:
+        type: string
+      sync_compliance:
+        type: string
+      sync_system:
+        type: string
+      teacher_certified_count:
+        type: string
+      teacher_honor_count:
+        type: integer
+      teacher_pns_count:
+        type: integer
+      teacher_qualified_count:
+        type: string
+      toilet_student_count:
+        type: integer
+      toilet_teacher_count:
+        type: integer
+      total_staff:
+        type: integer
+      total_students:
+        type: integer
+      total_teachers:
+        type: integer
+      vision:
+        type: string
+      vision_meaning:
+        type: string
+      water_source:
+        type: string
+    type: object
+  internal_student.CreateStudentRequest:
+    properties:
+      birth_certificate:
+        description: Nomor registrasi Akta Kelahiran
+        example: 1204/DISDUK/2015
+        type: string
+      birth_date:
+        description: Tanggal lahir format YYYY-MM-DD
+        example: "2015-08-20"
+        type: string
+      birth_place:
+        description: Tempat lahir siswa
+        example: Kepulauan Selayar
+        type: string
+      blood_type:
+        description: Kesehatan
+        example: O
+        type: string
+      child_order:
+        description: Anak ke-berapa dalam keluarga
+        example: 2
+        type: integer
+      coordinates:
+        description: Titik koordinat peta (Latitude, Longitude)
+        example: -7.3912,121.1293
+        type: string
+      curriculum:
+        description: Jenis kurikulum yang diikuti
+        example: Kurikulum Merdeka
+        type: string
+      disability:
+        description: Kategori disabilitas jika berkebutuhan khusus
+        example: TIDAK ADA
+        type: string
+      district:
+        description: Kecamatan
+        example: Pasimarannu
+        type: string
+      enrollment_year:
+        description: Data Sekolah
+        example: 2026
+        type: integer
+      entry_path:
+        description: Jalur masuk sekolah (e.g. ZONASI, REGULER)
+        example: PPDB REGULER
+        type: string
+      exam_number:
+        description: Nomor ujian sekolah sebelumnya
+        example: U-99887766
+        type: string
+      family_card_number:
+        description: Nomor Kartu Keluarga (KK)
+        example: "7301021208100003"
+        type: string
+      full_address:
+        description: Alamat
+        example: Jl. Bonerate Raya No. 4
+        type: string
+      full_name:
+        description: Identitas
+        example: Rian Hidayat
+        maxLength: 255
+        type: string
+      gender:
+        description: 'Jenis kelamin: ''L'' (Laki-laki) atau ''P'' (Perempuan)'
+        enum:
+        - L
+        - P
+        example: L
+        type: string
+      height:
+        description: Tinggi badan dalam centimeter (cm)
+        example: 125.5
+        type: number
+      kip_number:
+        description: Nomor Kartu Indonesia Pintar (jika ada)
+        example: KIP-88776655
+        type: string
+      medical_history:
+        description: Riwayat penyakit bawaan atau kronis
+        example: Tidak ada riwayat penyakit kronis
+        type: string
+      nationality:
+        description: Kewarganegaraan
+        example: WNI
+        type: string
+      nik:
+        description: Kependudukan
+        example: "7301022008150002"
+        type: string
+      nis:
+        description: Nomor Induk Siswa lokal sekolah
+        example: "202601001"
+        maxLength: 20
+        type: string
+      nisn:
+        description: Nomor Induk Siswa Nasional (10 digit)
+        example: "0151234567"
+        maxLength: 20
+        type: string
+      photo_url:
+        description: URL berkas foto profil siswa
+        example: https://example.com/photos/rian.jpg
+        type: string
+      postal_code:
+        description: Kode Pos
+        example: "92854"
+        type: string
+      previous_school:
+        description: Nama asal sekolah tingkat sebelumnya
+        example: TK Pembina Bonerate
+        type: string
+      province:
+        description: Provinsi
+        example: Sulawesi Selatan
+        type: string
+      regency:
+        description: Kabupaten / Kota
+        example: Kepulauan Selayar
+        type: string
+      religion:
+        description: Agama siswa
+        example: Islam
+        type: string
+      rt_rw:
+        description: RT/RW domisili
+        example: 001/002
+        type: string
+      school_id:
+        description: UUID Sekolah tempat siswa terdaftar
+        example: 804b75d4-2822-48a7-8eba-3566f038f81f
+        type: string
+      siblings:
+        description: Jumlah saudara kandung
+        example: 3
+        type: integer
+      student_status:
+        description: Status keaktifan (e.g. AKTIF, LULUS, MUTASI)
+        example: AKTIF
+        type: string
+      village:
+        description: Kelurahan / Desa
+        example: Bonerate
+        type: string
+      weight:
+        description: Berat badan dalam kilogram (kg)
+        example: 28.4
+        type: number
+    required:
+    - full_name
+    - school_id
+    type: object
+  internal_student.UpdateStudentRequest:
+    properties:
+      birth_certificate:
+        example: 1204/DISDUK/2015
+        type: string
+      birth_date:
+        example: "2015-08-20"
+        type: string
+      birth_place:
+        example: Kepulauan Selayar
+        type: string
+      blood_type:
+        example: O
+        type: string
+      child_order:
+        example: 2
+        type: integer
+      coordinates:
+        example: -7.3912,121.1293
+        type: string
+      curriculum:
+        example: Kurikulum Merdeka
+        type: string
+      disability:
+        example: TIDAK ADA
+        type: string
+      district:
+        example: Pasimarannu
+        type: string
+      enrollment_year:
+        example: 2026
+        type: integer
+      entry_path:
+        example: PPDB REGULER
+        type: string
+      exam_number:
+        example: U-99887766
+        type: string
+      family_card_number:
+        example: "7301021208100003"
+        type: string
+      full_address:
+        example: Jl. Bonerate Raya No. 4
+        type: string
+      full_name:
+        example: Rian Hidayat
+        type: string
+      gender:
+        enum:
+        - L
+        - P
+        example: L
+        type: string
+      height:
+        example: 125.5
+        type: number
+      kip_number:
+        example: KIP-88776655
+        type: string
+      medical_history:
+        example: Tidak ada riwayat penyakit kronis
+        type: string
+      nationality:
+        example: WNI
+        type: string
+      nik:
+        example: "7301022008150002"
+        type: string
+      nis:
+        example: "202601001"
+        type: string
+      nisn:
+        example: "0151234567"
+        type: string
+      photo_url:
+        example: https://example.com/photos/rian.jpg
+        type: string
+      postal_code:
+        example: "92854"
+        type: string
+      previous_school:
+        example: TK Pembina Bonerate
+        type: string
+      province:
+        example: Sulawesi Selatan
+        type: string
+      regency:
+        example: Kepulauan Selayar
+        type: string
+      religion:
+        example: Islam
+        type: string
+      rt_rw:
+        example: 001/002
+        type: string
+      siblings:
+        example: 3
+        type: integer
+      student_status:
+        example: AKTIF
+        type: string
+      village:
+        example: Bonerate
+        type: string
+      weight:
+        example: 28.4
+        type: number
+    type: object
+  internal_student.UpsertParentRequest:
+    properties:
+      education:
+        description: Tingkat pendidikan terakhir (e.g. SD, SMP, SMA, S1, S2)
+        example: S1
+        type: string
+      full_name:
+        description: Nama lengkap orang tua / wali sesuai identitas resmi
+        example: Ahmad Basri
+        type: string
+      income:
+        description: Penghasilan bulanan dalam Rupiah (e.g. 4500000)
+        example: 4500000
+        type: integer
+      nik:
+        description: Nomor Induk Kependudukan orang tua (16 digit)
+        example: "7301021208750001"
+        type: string
+      occupation:
+        description: Pekerjaan utama orang tua
+        example: Wiraswasta
+        type: string
+      parent_type:
+        description: 'Kategori wali: ''FATHER'' (Ayah), ''MOTHER'' (Ibu), atau ''GUARDIAN''
+          (Wali)'
+        enum:
+        - FATHER
+        - MOTHER
+        - GUARDIAN
+        example: FATHER
+        type: string
+      phone:
+        description: Nomor telepon seluler aktif orang tua
+        example: "081398765432"
+        type: string
+    required:
+    - full_name
+    - parent_type
+    type: object
+  internal_subject.CreateCharacteristicPointRequest:
+    properties:
+      description:
+        description: Deskripsi karakteristik CP mata pelajaran
+        example: Pemahaman konsep bilangan cacah dan pecahan
+        type: string
+      elements:
+        description: Daftar elemen sub-kompetensi mata pelajaran
+        items:
+          $ref: '#/definitions/internal_subject.CreateSubjectElementRequest'
+        type: array
+    required:
+    - description
+    type: object
+  internal_subject.CreateSubjectElementRequest:
+    properties:
+      abbreviation:
+        description: Singkatan sub-elemen (e.g. BIL, GEO)
+        example: BIL
+        maxLength: 20
+        type: string
+      description:
+        description: Uraian cakupan materi sub-elemen
+        example: Mencakup kemampuan mengurutkan, menjumlahkan...
+        type: string
+      element_name:
+        description: Nama sub-elemen CP (e.g. Bilangan, Geometri, Pengukuran)
+        example: Bilangan Cacah
+        maxLength: 255
+        type: string
+    required:
+    - element_name
+    type: object
+  internal_subject.CreateSubjectRequest:
+    properties:
+      abbreviation:
+        description: Singkatan nama mata pelajaran (e.g. MTK, BIN)
+        example: MTK
+        maxLength: 20
+        type: string
+      characteristic_points:
+        description: Elemen / Karakteristik CP yang diampu
+        items:
+          $ref: '#/definitions/internal_subject.CreateCharacteristicPointRequest'
+        type: array
+      characteristics:
+        description: Karakteristik umum pengajaran mata pelajaran
+        example: Pembelajaran berbasis eksplorasi...
+        type: string
+      goals:
+        description: Tujuan pembelajaran mata pelajaran
+        example: Membentuk pola pikir logis dan matematis...
+        type: string
+      is_active:
+        description: Status keaktifan mata pelajaran
+        example: true
+        type: boolean
+      level:
+        description: Tingkatan sekolah (SD, SMP, SMA)
+        example: SD
+        maxLength: 10
+        type: string
+      rational:
+        description: Rasionalitas mata pelajaran dalam kurikulum merdeka
+        example: Kemampuan numerasi sangat krusial bagi...
+        type: string
+      subject_code:
+        description: Kode unik mata pelajaran (e.g. MAT-SD-A)
+        example: MAT-SD-A
+        maxLength: 20
+        type: string
+      subject_name:
+        description: Nama resmi mata pelajaran
+        example: Matematika
+        maxLength: 255
+        type: string
+    required:
+    - subject_name
+    type: object
+  internal_subject.UpdateCharacteristicPointRequest:
+    properties:
+      description:
+        example: Pemahaman konsep bilangan cacah dan pecahan
+        type: string
+      elements:
+        items:
+          $ref: '#/definitions/internal_subject.UpdateSubjectElementRequest'
+        type: array
+      id:
+        description: UUID Karakteristik CP yang ingin diubah
+        example: a425fa98-4362-4f74-9a33-8dcfbaeecc45
+        type: string
+    required:
+    - description
+    type: object
+  internal_subject.UpdateSubjectElementRequest:
+    properties:
+      abbreviation:
+        example: BIL
+        maxLength: 20
+        type: string
+      description:
+        example: Mencakup kemampuan mengurutkan, menjumlahkan...
+        type: string
+      element_name:
+        example: Bilangan Cacah
+        maxLength: 255
+        type: string
+      id:
+        description: UUID Elemen CP yang ingin diubah
+        example: cfd0a60c-8f12-4e2c-a217-9ac5a14de76c
+        type: string
+    required:
+    - element_name
+    type: object
+  internal_subject.UpdateSubjectRequest:
+    properties:
+      abbreviation:
+        example: MTK
+        maxLength: 20
+        type: string
+      characteristic_points:
+        items:
+          $ref: '#/definitions/internal_subject.UpdateCharacteristicPointRequest'
+        type: array
+      characteristics:
+        example: Pembelajaran berbasis eksplorasi...
+        type: string
+      goals:
+        example: Membentuk pola pikir logis dan matematis...
+        type: string
+      is_active:
+        example: true
+        type: boolean
+      level:
+        example: SD
+        maxLength: 10
+        type: string
+      rational:
+        example: Kemampuan numerasi sangat krusial bagi...
+        type: string
+      subject_code:
+        example: MAT-SD-A
+        maxLength: 20
+        type: string
+      subject_name:
+        example: Matematika
+        maxLength: 255
+        type: string
+    type: object
+  internal_system.AuditLog:
+    properties:
+      action:
+        description: 'Jenis aksi keamanan: ''LOGIN'', ''CREATE'', ''UPDATE'', ''DELETE'',
+          ''MFA_ENABLE'''
+        example: UPDATE
+        type: string
+      created_at:
+        description: Waktu presisi saat kejadian berlangsung
+        example: "2026-05-18T13:45:46Z"
+        type: string
+      entity:
+        description: Nama tabel database atau objek yang dimodifikasi
+        example: students
+        type: string
+      entity_id:
+        description: ID kunci utama dari entitas target yang dimodifikasi
+        example: 7e83162c-cbeb-4cd6-b027-2239a1ca481c
+        type: string
+      id:
+        description: UUID identifikasi unik entri audit log
+        example: a425fa98-4362-4f74-9a33-8dcfbaeecc45
+        type: string
+      ip_address:
+        description: Alamat IP klien pengirim permintaan
+        example: 192.168.1.10
+        type: string
+      user_email:
+        description: Alamat email aktif dari aktor pengguna (opsional)
+        example: budi@sd.sch.id
+        type: string
+      user_full_name:
+        description: Joined fields
+        example: Budi Santoso
+        type: string
+      user_id:
+        description: ID pengguna (aktor) yang melakukan operasi
+        example: c5d2f366-3ff2-422c-807a-44c618bef84f
+        type: string
+    type: object
+  internal_teacher.CreateTeacherRequest:
+    properties:
+      additional_position:
+        description: Tugas tambahan di luar mengajar (e.g. Kepala Laboratorium)
+        example: Kepala Perpustakaan
+        type: string
+      appointment_decree:
+        description: Nomor SK Pengangkatan pertama
+        example: 800/234/SK-KADIS/2010
+        type: string
+      birth_date:
+        description: Tanggal lahir format YYYY-MM-DD
+        example: "1985-05-12"
+        type: string
+      birth_place:
+        description: Tempat lahir guru
+        example: Makassar
+        type: string
+      certificate_number:
+        description: Nomor sertifikasi pendidik jika tersertifikasi
+        example: 10234/CERT/2012
+        type: string
+      district:
+        description: Nama kecamatan
+        example: Pasimarannu
+        type: string
+      email:
+        description: Alamat email resmi aktif
+        example: budi@sd.sch.id
+        maxLength: 100
+        type: string
+      employment_status:
+        description: Status kepegawaian aktif
+        enum:
+        - PNS
+        - PPPK
+        - Honorer
+        - GTY
+        example: PNS
+        type: string
+      full_address:
+        description: Kontak & Alamat
+        example: Jl. Trans Sulawesi No. 85
+        type: string
+      full_name:
+        description: Identitas
+        example: Budi Santoso, S.Pd
+        maxLength: 255
+        type: string
+      gender:
+        description: 'Jenis kelamin: ''L'' (Laki-laki) atau ''P'' (Perempuan)'
+        enum:
+        - L
+        - P
+        example: L
+        type: string
+      graduation_year:
+        description: Tahun kelulusan kuliah
+        example: 2008
+        type: integer
+      hamlet:
+        description: Nama dusun / lingkungan
+        example: Dusun Bonerate
+        type: string
+      is_active:
+        description: Status keaktifan guru di sekolah
+        example: true
+        type: boolean
+      is_certified:
+        description: Status sertifikasi pendidik
+        example: true
+        type: boolean
+      last_education:
+        description: Pendidikan
+        example: S1
+        type: string
+      major:
+        description: Jurusan pendidikan terakhir
+        example: Pendidikan Matematika
+        type: string
+      nationality:
+        description: Kewarganegaraan (e.g. WNI, WNA)
+        example: WNI
+        type: string
+      nik:
+        description: Nomor Induk Kependudukan (16 digit)
+        example: "7301021205850001"
+        maxLength: 20
+        type: string
+      nip:
+        description: Kepegawaian
+        example: "198505122010011003"
+        maxLength: 30
+        type: string
+      niy_nigk:
+        description: Nomor Induk Yayasan / GTY jika sekolah swasta
+        example: NIY-098765
+        type: string
+      nuptk:
+        description: Nomor Unik Pendidik dan Tenaga Kependidikan (16 digit)
+        example: "9876543210123456"
+        maxLength: 20
+        type: string
+      phone:
+        description: Nomor telepon seluler aktif
+        example: "081234567890"
+        maxLength: 30
+        type: string
+      photo_url:
+        description: URL berkas foto profil guru
+        example: https://example.com/photos/budi.jpg
+        type: string
+      postal_code:
+        description: Kode pos alamat domisili
+        example: "92854"
+        type: string
+      province:
+        description: Nama provinsi
+        example: Sulawesi Selatan
+        type: string
+      regency:
+        description: Nama kabupaten atau kota
+        example: Kepulauan Selayar
+        type: string
+      religion:
+        description: Agama guru
+        example: Islam
+        type: string
+      rt_rw:
+        description: Rukun Tetangga / Rukun Warga
+        example: 002/001
+        type: string
+      salary_source:
+        description: Sumber gaji utama (APBN, APBD, Yayasan)
+        example: APBD Kabupaten
+        type: string
+      school_id:
+        description: UUID Sekolah tempat guru mengajar
+        example: 804b75d4-2822-48a7-8eba-3566f038f81f
+        type: string
+      start_teaching_date:
+        description: Tanggal mulai mengajar pertama kali format YYYY-MM-DD
+        example: "2010-01-02"
+        type: string
+      teaching_hours:
+        description: Total jam mengajar tatap muka per minggu
+        example: 24
+        type: integer
+      teaching_preference:
+        description: Narasi AI
+        example: Sangat sabar dan menyukai pembelajaran berbasis gamifikasi
+        type: string
+      teaching_subject:
+        description: Mata pelajaran utama yang diampu
+        example: Matematika
+        type: string
+      university_name:
+        description: Nama perguruan tinggi kelulusan
+        example: Universitas Negeri Makassar
+        type: string
+      village:
+        description: Nama desa atau kelurahan
+        example: Bonerate
+        type: string
+    required:
+    - full_name
+    - school_id
+    type: object
+  internal_teacher.UpdateTeacherRequest:
+    properties:
+      additional_position:
+        example: Kepala Perpustakaan
+        type: string
+      appointment_decree:
+        example: 800/234/SK-KADIS/2010
+        type: string
+      birth_date:
+        description: Tanggal lahir YYYY-MM-DD
+        example: "1985-05-12"
+        type: string
+      birth_place:
+        description: Tempat lahir
+        example: Makassar
+        type: string
+      certificate_number:
+        example: 10234/CERT/2012
+        type: string
+      district:
+        example: Pasimarannu
+        type: string
+      email:
+        example: budi@sd.sch.id
+        type: string
+      employment_status:
+        enum:
+        - PNS
+        - PPPK
+        - Honorer
+        - GTY
+        example: PNS
+        type: string
+      full_address:
+        description: Kontak & Alamat
+        example: Jl. Trans Sulawesi No. 85
+        type: string
+      full_name:
+        description: Identitas
+        example: Budi Santoso, S.Pd, M.Pd
+        type: string
+      gender:
+        description: Jenis kelamin
+        enum:
+        - L
+        - P
+        example: L
+        type: string
+      graduation_year:
+        example: 2008
+        type: integer
+      hamlet:
+        example: Dusun Bonerate
+        type: string
+      is_active:
+        example: true
+        type: boolean
+      is_certified:
+        example: true
+        type: boolean
+      last_education:
+        description: Pendidikan
+        example: S1
+        type: string
+      major:
+        example: Pendidikan Matematika
+        type: string
+      nationality:
+        description: Kewarganegaraan
+        example: WNI
+        type: string
+      nik:
+        description: Nomor Induk Kependudukan
+        example: "7301021205850001"
+        type: string
+      nip:
+        description: Kepegawaian
+        example: "198505122010011003"
+        type: string
+      niy_nigk:
+        description: Nomor NIY/NIGK
+        example: NIY-098765
+        type: string
+      nuptk:
+        description: Nomor NUPTK (16 digit)
+        example: "9876543210123456"
+        type: string
+      phone:
+        example: "081234567890"
+        type: string
+      photo_url:
+        description: Foto profil URL
+        example: https://example.com/photos/budi.jpg
+        type: string
+      postal_code:
+        example: "92854"
+        type: string
+      province:
+        example: Sulawesi Selatan
+        type: string
+      regency:
+        example: Kepulauan Selayar
+        type: string
+      religion:
+        description: Agama
+        example: Islam
+        type: string
+      rt_rw:
+        example: 002/001
+        type: string
+      salary_source:
+        example: APBD Kabupaten
+        type: string
+      start_teaching_date:
+        example: "2010-01-02"
+        type: string
+      teaching_hours:
+        example: 24
+        type: integer
+      teaching_preference:
+        description: Narasi AI
+        example: Sangat sabar dan menyukai pembelajaran berbasis gamifikasi
+        type: string
+      teaching_subject:
+        example: Matematika
+        type: string
+      university_name:
+        example: Universitas Negeri Makassar
+        type: string
+      village:
+        example: Bonerate
+        type: string
+    type: object
+  internal_user.AssignRoleRequest:
+    properties:
+      role_names:
+        items:
+          type: string
+        minItems: 1
+        type: array
+    required:
+    - role_names
+    type: object
+  internal_user.ResetPasswordRequest:
+    properties:
+      new_password:
+        minLength: 6
+        type: string
+    required:
+    - new_password
+    type: object
+  internal_user.UpdateUserStatusRequest:
+    properties:
+      account_non_expired:
+        type: boolean
+      account_non_locked:
+        type: boolean
+      credentials_non_expired:
+        type: boolean
+      is_enabled:
+        type: boolean
+    type: object
+  sim-sekolah_internal_common.PaginationResponse:
+    properties:
+      data: {}
+      limit:
+        type: integer
+      message:
+        type: string
+      page:
+        type: integer
+      status:
+        type: string
+      total_pages:
+        type: integer
+      total_rows:
+        type: integer
+    type: object
+  sim-sekolah_internal_common.Response:
+    properties:
+      data: {}
+      error: {}
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: admin@simsekolah.com
+    name: Developer Team
+  description: Dokumentasi API Terpadu SIM Sekolah SD Negeri.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://example.com/terms/
+  title: SIM Sekolah API
+  version: "1.0"
+paths:
+  /academic/graduation:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Graduation Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_promotion.GraduateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Graduate Students Massively
+      tags:
+      - Admin Promotion Management
+  /academic/promotion:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Promotion Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_promotion.PromoteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Promote Students to Next Classroom
+      tags:
+      - Admin Promotion Management
+  /auth/change-password:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Change Password Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_auth.ChangePasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Change Password
+      tags:
+      - Auth
+  /auth/forgot-password:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Forgot Password Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_auth.ForgotPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Forgot Password
+      tags:
+      - Auth
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Login Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_auth.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Login
+      tags:
+      - Auth
+  /auth/logout:
+    post:
+      description: Menghapus Refresh Token dari database dan Cookie
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Logout
+      tags:
+      - Auth
+  /auth/me:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Current User Profile
+      tags:
+      - Auth
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Update Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_auth.UpdateMeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Current User Profile
+      tags:
+      - Auth
+  /auth/me/photo:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: Profile Photo
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Upload Profile Photo
+      tags:
+      - Auth
+  /auth/refresh:
+    post:
+      description: Memperbarui Access Token menggunakan Refresh Token dari HttpOnly
+        Cookie
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Refresh Token
+      tags:
+      - Auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: 'Endpoint untuk registrasi guru/staf secara mandiri. Default role:
+        GURU'
+      parameters:
+      - description: Register Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_auth.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Register
+      tags:
+      - Auth
+  /auth/reset-password:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Reset Password Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_auth.ResetPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Reset Password
+      tags:
+      - Auth
+  /classrooms/{id}/schedules:
+    get:
+      parameters:
+      - description: Classroom ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Schedules By Classroom
+      tags:
+      - Academic Schedule
+  /curriculum-documents:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of all curriculum documents
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get all curriculum documents
+      tags:
+      - Curriculum
+    post:
+      consumes:
+      - application/json
+      description: Creates a new curriculum document for the given academic year and
+        school.
+      parameters:
+      - description: Initialize Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_curriculum.InitializeCurriculumRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a new curriculum document
+      tags:
+      - Curriculum
+  /curriculum-documents/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get a curriculum document with all its chapters
+      parameters:
+      - description: Curriculum Document ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get curriculum document by ID
+      tags:
+      - Curriculum
+  /curriculum-documents/{id}/chapters/{chapter_number}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve HTML content for a specific chapter
+      parameters:
+      - description: Curriculum Document ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Chapter Number
+        in: path
+        name: chapter_number
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Chapter Content
+      tags:
+      - Curriculum
+  /curriculum-documents/{id}/export:
+    get:
+      consumes:
+      - application/json
+      description: Mock export of the FINAL curriculum document
+      parameters:
+      - description: Curriculum Document ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Export Document to PDF
+      tags:
+      - Curriculum
+  /curriculum-documents/{id}/finalize:
+    post:
+      consumes:
+      - application/json
+      description: Locks the document and marks it as FINAL
+      parameters:
+      - description: Curriculum Document ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Finalize Curriculum Document
+      tags:
+      - Curriculum
+  /curriculum-documents/chapters/{chapter_id}:
+    put:
+      consumes:
+      - application/json
+      description: Save manual corrections to a chapter
+      parameters:
+      - description: Chapter ID
+        in: path
+        name: chapter_id
+        required: true
+        type: string
+      - description: Update Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_curriculum.UpdateChapterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Chapter Content
+      tags:
+      - Curriculum
+  /curriculum-documents/chapters/trigger:
+    post:
+      consumes:
+      - application/json
+      description: Queues a background job to formulate a curriculum chapter using
+        AI
+      parameters:
+      - description: Trigger Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_curriculum.TriggerChapterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Trigger Chapter Formulation
+      tags:
+      - Curriculum
+  /curriculum-documents/readiness:
+    get:
+      consumes:
+      - application/json
+      description: Check if the school data is 90% ready for curriculum formulation
+      parameters:
+      - description: School ID
+        in: query
+        name: school_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Check school data readiness
+      tags:
+      - Curriculum
+  /learning-outcomes:
+    get:
+      parameters:
+      - default: 1
+        description: Page
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search by text or code
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.PaginationResponse'
+      security:
+      - BearerAuth: []
+      summary: Get All Learning Outcomes
+      tags:
+      - Learning Outcomes
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Create Learning Outcome Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_cp.CreateCPRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Learning Outcome
+      tags:
+      - Learning Outcomes
+  /learning-outcomes/{cpId}/details:
+    get:
+      parameters:
+      - description: Learning Outcome ID (UUID)
+        in: path
+        name: cpId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Learning Outcome Details
+      tags:
+      - Learning Outcome Details
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Learning Outcome ID (UUID)
+        in: path
+        name: cpId
+        required: true
+        type: string
+      - description: Create Detail Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_cp.CreateCPDetailRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Learning Outcome Detail
+      tags:
+      - Learning Outcome Details
+  /learning-outcomes/{cpId}/details/{id}:
+    delete:
+      parameters:
+      - description: Learning Outcome ID (UUID)
+        in: path
+        name: cpId
+        required: true
+        type: string
+      - description: Detail ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Learning Outcome Detail
+      tags:
+      - Learning Outcome Details
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Learning Outcome ID (UUID)
+        in: path
+        name: cpId
+        required: true
+        type: string
+      - description: Detail ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Detail Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_cp.UpdateCPDetailRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Learning Outcome Detail
+      tags:
+      - Learning Outcome Details
+  /learning-outcomes/{id}:
+    delete:
+      parameters:
+      - description: Learning Outcome ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Learning Outcome
+      tags:
+      - Learning Outcomes
+    get:
+      parameters:
+      - description: Learning Outcome ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Learning Outcome By ID
+      tags:
+      - Learning Outcomes
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Learning Outcome ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Learning Outcome Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_cp.UpdateCPRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Learning Outcome
+      tags:
+      - Learning Outcomes
+  /permissions:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Permissions
+      tags:
+      - Admin Permission Management
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Create Permission Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_permission.Permission'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create New Permission
+      tags:
+      - Admin Permission Management
+  /permissions/{id}:
+    delete:
+      parameters:
+      - description: Permission ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Permission
+      tags:
+      - Admin Permission Management
+    get:
+      parameters:
+      - description: Permission ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Permission By ID
+      tags:
+      - Admin Permission Management
+  /permissions/roles/{role_id}:
+    get:
+      parameters:
+      - description: Role ID
+        in: path
+        name: role_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Permissions By Role ID
+      tags:
+      - Admin Permission Management
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Role ID
+        in: path
+        name: role_id
+        required: true
+        type: string
+      - description: Permissions to Assign
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_permission.AssignPermissionsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Assign Permissions To Role
+      tags:
+      - Admin Permission Management
+  /phases:
+    get:
+      parameters:
+      - default: 1
+        description: Page
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search by name or code
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.PaginationResponse'
+      security:
+      - BearerAuth: []
+      summary: Get All Phases
+      tags:
+      - Phase
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Create Phase Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_phase.CreatePhaseRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Phase
+      tags:
+      - Phase
+  /phases/{id}:
+    delete:
+      parameters:
+      - description: Phase ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Phase
+      tags:
+      - Phase
+    get:
+      parameters:
+      - description: Phase ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Phase By ID
+      tags:
+      - Phase
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Phase ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Phase Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_phase.UpdatePhaseRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Phase
+      tags:
+      - Phase
+  /schedules:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Schedule Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_schedule.CreateScheduleRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Schedule
+      tags:
+      - Academic Schedule
+  /schedules/{id}:
+    delete:
+      parameters:
+      - description: Schedule ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Schedule
+      tags:
+      - Academic Schedule
+  /schools:
+    get:
+      parameters:
+      - default: 1
+        description: Page
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search by name or NPSN
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.PaginationResponse'
+      security:
+      - BearerAuth: []
+      summary: Get All Schools
+      tags:
+      - School
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Create School
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_school.CreateSchoolRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create School
+      tags:
+      - School
+  /schools/{id}:
+    delete:
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete School
+      tags:
+      - School
+    get:
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get School By ID
+      tags:
+      - School
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update School
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_school.UpdateSchoolRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update School
+      tags:
+      - School
+  /students:
+    get:
+      parameters:
+      - default: 1
+        description: Page
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search by name, NISN, or NIS
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.PaginationResponse'
+      security:
+      - BearerAuth: []
+      summary: Get All Students
+      tags:
+      - Student
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Create Student
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_student.CreateStudentRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Student
+      tags:
+      - Student
+  /students/{id}:
+    delete:
+      parameters:
+      - description: Student ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Student
+      tags:
+      - Student
+    get:
+      parameters:
+      - description: Student ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Student By ID (lengkap dengan data orang tua)
+      tags:
+      - Student
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Student ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Student
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_student.UpdateStudentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Student
+      tags:
+      - Student
+  /students/{id}/parents:
+    post:
+      consumes:
+      - application/json
+      description: Tambah atau perbarui data orang tua (FATHER, MOTHER, GUARDIAN)
+      parameters:
+      - description: Student ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Parent Data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_student.UpsertParentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Upsert Parent Data
+      tags:
+      - Student
+  /students/{id}/parents/{parentId}:
+    delete:
+      parameters:
+      - description: Student ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Parent ID
+        in: path
+        name: parentId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Parent Data
+      tags:
+      - Student
+  /students/school/{schoolId}:
+    get:
+      parameters:
+      - description: School ID
+        in: path
+        name: schoolId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Students By School
+      tags:
+      - Student
+  /subjects:
+    get:
+      parameters:
+      - default: 1
+        description: Page
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search by name or code
+        in: query
+        name: search
+        type: string
+      - description: Filter by active status
+        in: query
+        name: is_active
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.PaginationResponse'
+      security:
+      - BearerAuth: []
+      summary: Get All Subjects
+      tags:
+      - Subject
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Create Subject Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_subject.CreateSubjectRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Subject
+      tags:
+      - Subject
+  /subjects/{id}:
+    delete:
+      parameters:
+      - description: Subject ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Subject
+      tags:
+      - Subject
+    get:
+      parameters:
+      - description: Subject ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Subject By ID
+      tags:
+      - Subject
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Subject ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Subject Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_subject.UpdateSubjectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Subject
+      tags:
+      - Subject
+  /subjects/{subjectId}/elements:
+    get:
+      parameters:
+      - description: Subject ID (UUID)
+        in: path
+        name: subjectId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Subject Elements
+      tags:
+      - Subject Element
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Subject ID (UUID)
+        in: path
+        name: subjectId
+        required: true
+        type: string
+      - description: Create Element Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_subject.CreateSubjectElementRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Subject Element
+      tags:
+      - Subject Element
+  /subjects/{subjectId}/elements/{id}:
+    delete:
+      parameters:
+      - description: Subject ID (UUID)
+        in: path
+        name: subjectId
+        required: true
+        type: string
+      - description: Element ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Subject Element
+      tags:
+      - Subject Element
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Subject ID (UUID)
+        in: path
+        name: subjectId
+        required: true
+        type: string
+      - description: Element ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Element Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_subject.UpdateSubjectElementRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Subject Element
+      tags:
+      - Subject Element
+  /system/audit-logs:
+    get:
+      description: Mengambil daftar catatan log audit aktivitas operasional sistem
+        secara paginasi. Mendukung pencarian kueri berdasarkan nama/email pengguna
+        dan penyaringan berdasarkan tipe aksi keamanan.
+      parameters:
+      - description: 'Nomor halaman aktif (default: 1)'
+        in: query
+        name: page
+        type: integer
+      - description: 'Jumlah entri log per halaman (default: 10)'
+        in: query
+        name: limit
+        type: integer
+      - description: Kata kunci pencarian nama atau email aktor pengguna
+        in: query
+        name: search
+        type: string
+      - description: Penyaringan berdasarkan tipe aksi keamanan (e.g. LOGIN, UPDATE,
+          DELETE)
+        in: query
+        name: action
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Data audit log berhasil diambil secara terpaginasi
+          schema:
+            allOf:
+            - $ref: '#/definitions/sim-sekolah_internal_common.PaginationResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/internal_system.AuditLog'
+                  type: array
+              type: object
+        "500":
+          description: Gagal mengambil data audit log
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Get System Audit Logs
+      tags:
+      - System & Dashboard
+  /system/dashboard/guru:
+    get:
+      description: Mengambil data aktivitas operasional harian untuk dasbor Guru,
+        termasuk tingkat kepatuhan pengerjaan Modul Ajar mandiri dan pemantauan perkembangan
+        kognitif/sosial siswa di kelas yang diajarnya.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Data dasbor guru berhasil diambil
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "500":
+          description: Gagal mengambil data dasbor guru
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Get Guru Dashboard Data
+      tags:
+      - System & Dashboard
+  /system/dashboard/operator:
+    get:
+      description: Mengambil statistik telemetri kesehatan perangkat keras (*hardware*
+        server), utilisasi memori cache Redis, pool database PostgreSQL, dan ringkasan
+        persentase sinkronisasi Dapodik untuk dasbor Operator Sistem.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Data dasbor operator berhasil diambil
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "500":
+          description: Gagal mengambil data dasbor operator
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Get Operator Dashboard Data
+      tags:
+      - System & Dashboard
+  /system/dashboard/pimpinan:
+    get:
+      description: Mengambil data statistik makro sekolah untuk kebutuhan dasbor Pimpinan
+        (Kepala Sekolah), termasuk tingkat kelulusan siswa, kepatuhan pengerjaan KSP,
+        dan ringkasan diagram nilai kognitif siswa secara real-time.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Data dasbor pimpinan berhasil diambil
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+        "500":
+          description: Gagal mengambil data dasbor pimpinan
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      summary: Get Pimpinan Dashboard Data
+      tags:
+      - System & Dashboard
+  /teachers:
+    get:
+      description: Ambil semua data guru dengan pencarian
+      parameters:
+      - default: 1
+        description: Page
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search by name, NIP, email
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.PaginationResponse'
+      security:
+      - BearerAuth: []
+      summary: Get All Teachers
+      tags:
+      - Teacher
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Create Teacher
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_teacher.CreateTeacherRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Teacher
+      tags:
+      - Teacher
+  /teachers/{id}:
+    delete:
+      parameters:
+      - description: Teacher ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Teacher
+      tags:
+      - Teacher
+    get:
+      parameters:
+      - description: Teacher ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Teacher By ID
+      tags:
+      - Teacher
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Teacher ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Teacher
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_teacher.UpdateTeacherRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Teacher
+      tags:
+      - Teacher
+  /teachers/{id}/schedules:
+    get:
+      parameters:
+      - description: Teacher ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Schedules By Teacher
+      tags:
+      - Academic Schedule
+  /teachers/school/{schoolId}:
+    get:
+      parameters:
+      - description: School ID
+        in: path
+        name: schoolId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Teachers By School
+      tags:
+      - Teacher
+  /users:
+    get:
+      parameters:
+      - default: 1
+        description: Page
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search by name or username
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.PaginationResponse'
+      security:
+      - BearerAuth: []
+      summary: Get All Users
+      tags:
+      - Admin User Management
+  /users/{id}:
+    get:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get User By ID
+      tags:
+      - Admin User Management
+  /users/{id}/reset-password:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: New Password
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_user.ResetPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Reset User Password
+      tags:
+      - Admin User Management
+  /users/{id}/roles:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Roles to Assign
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_user.AssignRoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Assign Roles
+      tags:
+      - Admin User Management
+  /users/{id}/status:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Status Update Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_user.UpdateUserStatusRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Update User Status
+      tags:
+      - Admin User Management
+  /users/roles:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/sim-sekolah_internal_common.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Roles
+      tags:
+      - Admin User Management
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

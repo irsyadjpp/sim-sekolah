@@ -1,0 +1,5 @@
+# Global Monorepo Gitignore
+.DS_Store
+.idea/
+.vscode/
+*.log

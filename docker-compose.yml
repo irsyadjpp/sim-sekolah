@@ -1,0 +1,141 @@
+services:
+  # 1. PostgreSQL: Master Data & Context Chunks
+  postgres:
+    image: postgres:16.5
+    container_name: sim_sekolah_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: sim_sekolah_terpadu
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U admin -d sim_sekolah_terpadu" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. Qdrant: Vector Database for RAG (Meaningful Context)
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: sim_sekolah_vector
+    restart: always
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  # 3. Neo4j: Knowledge Graph (Relasi Materi & Siswa)
+  neo4j:
+    image: neo4j:5-community
+    container_name: sim_sekolah_graph
+    restart: always
+    ports:
+      - "7474:7474" # HTTP Dashboard
+      - "7687:7687" # Bolt Protocol
+    environment:
+      NEO4J_AUTH: neo4j/password123
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+
+  # 6. RustFS: S3-Compatible Object Storage (Files, Media, Dokumen)
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: sim_sekolah_storage
+    restart: always
+    ports:
+      - "9000:9000" # S3 API
+      - "9001:9001" # Web Console
+    environment:
+      RUSTFS_ACCESS_KEY: minioadmin
+      RUSTFS_SECRET_KEY: minioadmin123
+      RUSTFS_VOLUMES: /data
+    volumes:
+      - rustfs_data:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/rustfs/health/live" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 7. Backend: Go Fiber API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sim_sekolah_backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - APP_NAME=SIM Sekolah Terpadu
+      - APP_ENV=production
+      - APP_PORT=8080
+      - DATABASE_URL=postgres://admin:password123@postgres:5432/sim_sekolah_terpadu?sslmode=disable
+      - RABBITMQ_URL=${RABBITMQ_URL}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=${REDIS_DB}
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=password123
+      - JWT_SECRET=4f9d7c2b1a8e6f5d9c3b7e1a2f4c8d6e9b1f3a7c5d8e2f6a1b9c4d7e8f2a6c1
+      - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
+      - OTEL_EXPORTER_OTLP_ENDPOINT=otel-collector:4317
+    depends_on:
+      postgres:
+        condition: service_healthy
+      neo4j:
+        condition: service_started
+      otel-collector:
+        condition: service_started
+
+  # 8. Observability Stack: Logs, Metrics, Tracing
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./monitoring/otel-collector/config.yaml:/etc/otel-collector-config.yaml
+    environment:
+      - GRAFANA_CLOUD_OTLP_ENDPOINT=${GRAFANA_CLOUD_OTLP_ENDPOINT}
+      - GRAFANA_CLOUD_BASIC_AUTH_HEADER=${GRAFANA_CLOUD_BASIC_AUTH_HEADER}
+    ports:
+      - "1888:1888"   # pprof extension
+      - "8888:8888"   # Prometheus metrics exposed by the collector
+      - "8889:8889"   # Prometheus exporter metrics
+      - "13133:13133" # health_check extension
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP http receiver
+      - "55679:55679" # zpages extension
+    restart: always
+
+  # 9. Frontend: React Vite SPA served via Nginx
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sim_sekolah_frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+networks:
+  default:
+    external: true
+    name: sim_sekolah_network
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  neo4j_data:
+  neo4j_logs:
+  rustfs_data:

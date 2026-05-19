@@ -1,0 +1,6 @@
+DELETE FROM trx_ppdb_admission_path WHERE id IN (
+  'a8b411d3-356a-49c9-8d76-92b005123401',
+  'a8b411d3-356a-49c9-8d76-92b005123402',
+  'a8b411d3-356a-49c9-8d76-92b005123403',
+  'a8b411d3-356a-49c9-8d76-92b005123404'
+);

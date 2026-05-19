@@ -1,0 +1,9 @@
+langchain
+langchain-community
+langchain-openai
+qdrant-client
+psycopg2-binary
+neo4j
+pika
+python-dotenv
+unstructured
