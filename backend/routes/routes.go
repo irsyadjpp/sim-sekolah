@@ -5,6 +5,7 @@ import (
 	"sim-sekolah/internal/ai"
 	"sim-sekolah/internal/assessment"
 	"sim-sekolah/internal/auth"
+	"sim-sekolah/internal/character_intervention"
 	"sim-sekolah/internal/classroom"
 	"sim-sekolah/internal/cp"
 	"sim-sekolah/internal/curriculum"
@@ -20,6 +21,8 @@ import (
 	"sim-sekolah/internal/learning_principle"
 	"sim-sekolah/internal/local_context"
 	"sim-sekolah/internal/olah_aspect"
+	"sim-sekolah/internal/parent_partnership"
+	"sim-sekolah/internal/peer_assessment"
 	"sim-sekolah/internal/permission"
 	"sim-sekolah/internal/phase"
 	"sim-sekolah/internal/play_based_learning"
@@ -63,6 +66,11 @@ func SetupRoutes(api fiber.Router, db *gorm.DB, rdb *redis.Client) {
 	individual_learning_plan.SetupRoutes(api, db)
 	differentiated_instruction.SetupRoutes(api, db)
 	play_based_learning.SetupRoutes(api, db)
+
+	// Phase 4 - Optimization
+	parent_partnership.SetupRoutes(api, db)
+	character_intervention.SetupRoutes(api, db)
+	peer_assessment.SetupRoutes(api, db)
 
 	// Konteks Lokal
 	local_context.SetupRoutes(api, db)
