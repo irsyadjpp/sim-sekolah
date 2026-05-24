@@ -40,3 +40,22 @@ type LocalContext struct {
 func (LocalContext) TableName() string {
 	return "master_local_context"
 }
+
+// LocalContextUtilization represents tracking of context usage
+type LocalContextUtilization struct {
+	ID              uuid.UUID  `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	ContextID       uuid.UUID  `gorm:"type:uuid;not null;index" json:"context_id"`
+	SubjectID       *uuid.UUID `gorm:"type:uuid;index" json:"subject_id"`
+	ModuleID        *uuid.UUID `gorm:"type:uuid;index" json:"module_id"`
+	UtilizationType string     `gorm:"type:varchar(30);not null" json:"utilization_type"` // EXAMPLE, CASE_STUDY, PROJECT_BASE, RESOURCE
+	Description     string     `gorm:"type:text" json:"description"`
+
+	common.Auditable
+
+	// Relations
+	Context LocalContext `gorm:"foreignKey:ContextID" json:"context,omitempty"`
+}
+
+func (LocalContextUtilization) TableName() string {
+	return "trx_local_context_utilization"
+}
