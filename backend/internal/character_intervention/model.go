@@ -3,6 +3,8 @@ package character_intervention
 import (
 	"time"
 
+	"github.com/lib/pq"
+
 	"sim-sekolah/internal/common"
 
 	"github.com/google/uuid"
@@ -86,17 +88,17 @@ const (
 
 // CharacterIntervention represents master intervention strategies
 type CharacterIntervention struct {
-	ID                 uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
-	InterventionName   string    `gorm:"type:varchar(100);not null" json:"intervention_name"`
-	CharacterDimension string    `gorm:"type:varchar(50);not null" json:"character_dimension"`
-	TargetAgeGroup     string    `gorm:"type:varchar(20)" json:"target_age_group"`
-	InterventionType   string    `gorm:"type:varchar(50);not null" json:"intervention_type"`
-	Description        string    `gorm:"type:text;not null" json:"description"`
-	Strategies         []string  `gorm:"type:text[]" json:"strategies"`
-	Resources          []string  `gorm:"type:text[]" json:"resources"`
-	DurationWeeks      int       `gorm:"default:4" json:"duration_weeks"`
-	SuccessCriteria    []string  `gorm:"type:text[]" json:"success_criteria"`
-	IsActive           bool      `gorm:"default:true" json:"is_active"`
+	ID                 uuid.UUID      `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	InterventionName   string         `gorm:"type:varchar(100);not null" json:"intervention_name"`
+	CharacterDimension string         `gorm:"type:varchar(50);not null" json:"character_dimension"`
+	TargetAgeGroup     string         `gorm:"type:varchar(20)" json:"target_age_group"`
+	InterventionType   string         `gorm:"type:varchar(50);not null" json:"intervention_type"`
+	Description        string         `gorm:"type:text;not null" json:"description"`
+	Strategies         pq.StringArray `gorm:"type:jsonb" json:"strategies"`
+	Resources          pq.StringArray `gorm:"type:jsonb" json:"resources"`
+	DurationWeeks      int            `gorm:"default:4" json:"duration_weeks"`
+	SuccessCriteria    pq.StringArray `gorm:"type:jsonb" json:"success_criteria"`
+	IsActive           bool           `gorm:"default:true" json:"is_active"`
 
 	common.Auditable
 }
@@ -107,18 +109,18 @@ func (CharacterIntervention) TableName() string {
 
 // StudentCharacterIntervention represents student-specific intervention assignments
 type StudentCharacterIntervention struct {
-	ID                   uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
-	StudentID            uuid.UUID `gorm:"type:uuid;not null" json:"student_id"`
-	InterventionID       uuid.UUID `gorm:"type:uuid;not null" json:"intervention_id"`
-	TeacherID            uuid.UUID `gorm:"type:uuid;not null" json:"teacher_id"`
-	AssignmentDate       time.Time `gorm:"type:date;not null;default:CURRENT_DATE" json:"assignment_date"`
-	TargetStartDate      time.Time `gorm:"type:date;not null" json:"target_start_date"`
-	TargetEndDate        time.Time `gorm:"type:date;not null" json:"target_end_date"`
-	CurrentStatus        string    `gorm:"type:varchar(20);default:ACTIVE" json:"current_status"`
-	PriorityLevel        string    `gorm:"type:varchar(20);default:MEDIUM" json:"priority_level"`
-	BaselineAssessment   string    `gorm:"type:text" json:"baseline_assessment"`
-	CustomizedStrategies []string  `gorm:"type:text[]" json:"customized_strategies"`
-	Notes                string    `gorm:"type:text" json:"notes"`
+	ID                   uuid.UUID      `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	StudentID            uuid.UUID      `gorm:"type:uuid;not null" json:"student_id"`
+	InterventionID       uuid.UUID      `gorm:"type:uuid;not null" json:"intervention_id"`
+	TeacherID            uuid.UUID      `gorm:"type:uuid;not null" json:"teacher_id"`
+	AssignmentDate       time.Time      `gorm:"type:date;not null;default:CURRENT_DATE" json:"assignment_date"`
+	TargetStartDate      time.Time      `gorm:"type:date;not null" json:"target_start_date"`
+	TargetEndDate        time.Time      `gorm:"type:date;not null" json:"target_end_date"`
+	CurrentStatus        string         `gorm:"type:varchar(20);default:ACTIVE" json:"current_status"`
+	PriorityLevel        string         `gorm:"type:varchar(20);default:MEDIUM" json:"priority_level"`
+	BaselineAssessment   string         `gorm:"type:text" json:"baseline_assessment"`
+	CustomizedStrategies pq.StringArray `gorm:"type:jsonb" json:"customized_strategies"`
+	Notes                string         `gorm:"type:text" json:"notes"`
 
 	common.Auditable
 }
@@ -129,17 +131,17 @@ func (StudentCharacterIntervention) TableName() string {
 
 // CharacterInterventionProgress tracks intervention progress
 type CharacterInterventionProgress struct {
-	ID                   uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
-	AssignmentID         uuid.UUID `gorm:"type:uuid;not null" json:"assignment_id"`
-	ObservationDate      time.Time `gorm:"type:date;not null;default:CURRENT_DATE" json:"observation_date"`
-	ObserverID           uuid.UUID `gorm:"type:uuid;not null" json:"observer_id"`
-	ProgressRating       string    `gorm:"type:varchar(20)" json:"progress_rating"`
-	BehavioralIndicators []string  `gorm:"type:text[]" json:"behavioral_indicators"`
-	SpecificAchievements []string  `gorm:"type:text[]" json:"specific_achievements"`
-	Challenges           []string  `gorm:"type:text[]" json:"challenges"`
-	SupportProvided      string    `gorm:"type:text" json:"support_provided"`
-	NextSteps            []string  `gorm:"type:text[]" json:"next_steps"`
-	Notes                string    `gorm:"type:text" json:"notes"`
+	ID                   uuid.UUID      `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	AssignmentID         uuid.UUID      `gorm:"type:uuid;not null" json:"assignment_id"`
+	ObservationDate      time.Time      `gorm:"type:date;not null;default:CURRENT_DATE" json:"observation_date"`
+	ObserverID           uuid.UUID      `gorm:"type:uuid;not null" json:"observer_id"`
+	ProgressRating       string         `gorm:"type:varchar(20)" json:"progress_rating"`
+	BehavioralIndicators pq.StringArray `gorm:"type:jsonb" json:"behavioral_indicators"`
+	SpecificAchievements pq.StringArray `gorm:"type:jsonb" json:"specific_achievements"`
+	Challenges           pq.StringArray `gorm:"type:jsonb" json:"challenges"`
+	SupportProvided      string         `gorm:"type:text" json:"support_provided"`
+	NextSteps            pq.StringArray `gorm:"type:jsonb" json:"next_steps"`
+	Notes                string         `gorm:"type:text" json:"notes"`
 
 	common.Auditable
 }
@@ -174,16 +176,16 @@ func (InterventionRecommendation) TableName() string {
 
 // CharacterMilestone tracks character development milestones
 type CharacterMilestone struct {
-	ID                   uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
-	StudentID            uuid.UUID `gorm:"type:uuid;not null" json:"student_id"`
-	CharacterDimension   string    `gorm:"type:varchar(50);not null" json:"character_dimension"`
-	MilestoneDescription string    `gorm:"type:text;not null" json:"milestone_description"`
-	MilestoneDate        time.Time `gorm:"type:date;not null;default:CURRENT_DATE" json:"milestone_date"`
-	AchievementLevel     string    `gorm:"type:varchar(20);not null" json:"achievement_level"`
-	Evidence             []string  `gorm:"type:text[]" json:"evidence"`
-	ObserverID           uuid.UUID `gorm:"type:uuid;not null" json:"observer_id"`
-	CelebrationMethod    string    `gorm:"type:varchar(50)" json:"celebration_method"`
-	Notes                string    `gorm:"type:text" json:"notes"`
+	ID                   uuid.UUID      `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	StudentID            uuid.UUID      `gorm:"type:uuid;not null" json:"student_id"`
+	CharacterDimension   string         `gorm:"type:varchar(50);not null" json:"character_dimension"`
+	MilestoneDescription string         `gorm:"type:text;not null" json:"milestone_description"`
+	MilestoneDate        time.Time      `gorm:"type:date;not null;default:CURRENT_DATE" json:"milestone_date"`
+	AchievementLevel     string         `gorm:"type:varchar(20);not null" json:"achievement_level"`
+	Evidence             pq.StringArray `gorm:"type:jsonb" json:"evidence"`
+	ObserverID           uuid.UUID      `gorm:"type:uuid;not null" json:"observer_id"`
+	CelebrationMethod    string         `gorm:"type:varchar(50)" json:"celebration_method"`
+	Notes                string         `gorm:"type:text" json:"notes"`
 
 	common.Auditable
 }

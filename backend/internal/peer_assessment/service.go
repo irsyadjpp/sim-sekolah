@@ -948,8 +948,8 @@ func (s *peerAssessmentService) CreateGuideline(ctx context.Context, req CreateP
 		Title:             req.Title,
 		Content:           req.Content,
 		Examples:          req.Examples,
-		DoS:               req.DoS,
-		DontS:             req.DontS,
+		Dos:               req.Dos,
+		Donts:             req.Donts,
 		DisplayOrder:      req.DisplayOrder,
 		IsActive:          true,
 	}
@@ -985,11 +985,11 @@ func (s *peerAssessmentService) UpdateGuideline(ctx context.Context, id string, 
 	if req.Examples != nil {
 		guideline.Examples = req.Examples
 	}
-	if req.DoS != nil {
-		guideline.DoS = req.DoS
+	if req.Dos != nil {
+		guideline.Dos = req.Dos
 	}
-	if req.DontS != nil {
-		guideline.DontS = req.DontS
+	if req.Donts != nil {
+		guideline.Donts = req.Donts
 	}
 	if req.DisplayOrder != 0 {
 		guideline.DisplayOrder = req.DisplayOrder
@@ -1169,8 +1169,8 @@ func (s *peerAssessmentService) guidelineToResponse(guideline *PeerAssessmentGui
 		Title:             guideline.Title,
 		Content:           guideline.Content,
 		Examples:          guideline.Examples,
-		DoS:               guideline.DoS,
-		DontS:             guideline.DontS,
+		Dos:               guideline.Dos,
+		Donts:             guideline.Donts,
 		DisplayOrder:      guideline.DisplayOrder,
 		IsActive:          guideline.IsActive,
 		CreatedAt:         guideline.CreatedAt,

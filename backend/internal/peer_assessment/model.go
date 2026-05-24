@@ -3,6 +3,8 @@ package peer_assessment
 import (
 	"time"
 
+	"github.com/lib/pq"
+
 	"sim-sekolah/internal/common"
 
 	"github.com/google/uuid"
@@ -99,7 +101,7 @@ type SelfAssessment struct {
 	Context         string     `gorm:"type:varchar(100)" json:"context"`     // Which activity/project this is for
 	Responses       string     `gorm:"type:jsonb;not null" json:"responses"` // Student's self-assessment responses
 	SelfReflection  string     `gorm:"type:text" json:"self_reflection"`
-	GoalsSet        []string   `gorm:"type:text[]" json:"goals_set"`
+	GoalsSet        []string   `gorm:"type:jsonb" json:"goals_set"`
 	ConfidenceLevel string     `gorm:"type:varchar(20)" json:"confidence_level"`
 	TeacherFeedback string     `gorm:"type:text" json:"teacher_feedback"`
 
@@ -122,7 +124,7 @@ type PeerAssessment struct {
 	Responses            string     `gorm:"type:jsonb;not null" json:"responses"` // Peer's assessment responses
 	PositiveFeedback     string     `gorm:"type:text" json:"positive_feedback"`
 	ConstructiveFeedback string     `gorm:"type:text" json:"constructive_feedback"`
-	Suggestions          []string   `gorm:"type:text[]" json:"suggestions"`
+	Suggestions          []string   `gorm:"type:jsonb" json:"suggestions"`
 	RelationshipContext  string     `gorm:"type:varchar(50)" json:"relationship_context"` // GROUP_MEMBER, CLASSMATE, PROJECT_PARTNER
 	TeacherReviewStatus  string     `gorm:"type:varchar(20);default:PENDING" json:"teacher_review_status"`
 	TeacherNotes         string     `gorm:"type:text" json:"teacher_notes"`
@@ -147,7 +149,7 @@ type GroupAssessment struct {
 	GroupResponses          string     `gorm:"type:jsonb;not null" json:"group_responses"` // Group-level assessment responses
 	IndividualContributions string     `gorm:"type:jsonb" json:"individual_contributions"` // Individual contribution tracking
 	CollaborationRating     string     `gorm:"type:varchar(20)" json:"collaboration_rating"`
-	GroupGoals              []string   `gorm:"type:text[]" json:"group_goals"`
+	GroupGoals              []string   `gorm:"type:jsonb" json:"group_goals"`
 	GroupReflection         string     `gorm:"type:text" json:"group_reflection"`
 	TeacherFeedback         string     `gorm:"type:text" json:"teacher_feedback"`
 
@@ -160,14 +162,14 @@ func (GroupAssessment) TableName() string {
 
 // GroupAssessmentMember represents individual member contributions in group assessments
 type GroupAssessmentMember struct {
-	ID                     uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
-	GroupAssessmentID      uuid.UUID `gorm:"type:uuid;not null" json:"group_assessment_id"`
-	StudentID              uuid.UUID `gorm:"type:uuid;not null" json:"student_id"`
-	Role                   string    `gorm:"type:varchar(50)" json:"role"`
-	ParticipationRating    string    `gorm:"type:varchar(20)" json:"participation_rating"`
-	PeerFeedbackReceived   []string  `gorm:"type:text[]" json:"peer_feedback_received"`
-	SelfContributionRating string    `gorm:"type:varchar(20)" json:"self_contribution_rating"`
-	ContributionNotes      string    `gorm:"type:text" json:"contribution_notes"`
+	ID                     uuid.UUID      `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	GroupAssessmentID      uuid.UUID      `gorm:"type:uuid;not null" json:"group_assessment_id"`
+	StudentID              uuid.UUID      `gorm:"type:uuid;not null" json:"student_id"`
+	Role                   string         `gorm:"type:varchar(50)" json:"role"`
+	ParticipationRating    string         `gorm:"type:varchar(20)" json:"participation_rating"`
+	PeerFeedbackReceived   pq.StringArray `gorm:"type:jsonb" json:"peer_feedback_received"`
+	SelfContributionRating string         `gorm:"type:varchar(20)" json:"self_contribution_rating"`
+	ContributionNotes      string         `gorm:"type:text" json:"contribution_notes"`
 
 	common.Auditable
 }
@@ -178,16 +180,16 @@ func (GroupAssessmentMember) TableName() string {
 
 // PeerAssessmentGuideline represents age-appropriate peer assessment guidelines for SD
 type PeerAssessmentGuideline struct {
-	ID                uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
-	Phase             string    `gorm:"type:varchar(20);not null" json:"phase"`
-	GuidelineCategory string    `gorm:"type:varchar(50);not null" json:"guideline_category"` // GIVING_FEEDBACK, RECEIVING_FEEDBACK, SELF_REFLECTION
-	Title             string    `gorm:"type:varchar(100);not null" json:"title"`
-	Content           string    `gorm:"type:text;not null" json:"content"`
-	Examples          []string  `gorm:"type:text[]" json:"examples"`
-	DoS               []string  `gorm:"type:text[]" json:"do_s"`
-	DontS             []string  `gorm:"type:text[]" json="dont_s"`
-	DisplayOrder      int       `gorm:"default:0" json:"display_order"`
-	IsActive          bool      `gorm:"default:true" json:"is_active"`
+	ID                uuid.UUID      `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	Phase             string         `gorm:"type:varchar(20);not null" json:"phase"`
+	GuidelineCategory string         `gorm:"type:varchar(50);not null" json:"guideline_category"` // GIVING_FEEDBACK, RECEIVING_FEEDBACK, SELF_REFLECTION
+	Title             string         `gorm:"type:varchar(100);not null" json:"title"`
+	Content           string         `gorm:"type:text;not null" json:"content"`
+	Examples          pq.StringArray `json:"examples"`
+	Dos               pq.StringArray `json:"dos"`
+	Donts             pq.StringArray `json:"donts"`
+	DisplayOrder      int            `gorm:"default:0" json:"display_order"`
+	IsActive          bool           `gorm:"default:true" json:"is_active"`
 
 	common.Auditable
 }

@@ -162,7 +162,7 @@ type ParentMeeting struct {
 	Status           string     `gorm:"type:varchar(20);default:SCHEDULED" json:"status"`
 	AttendanceStatus string     `gorm:"type:varchar(20)" json:"attendance_status"`
 	Summary          string     `gorm:"type:text" json:"summary"`
-	ActionItems      []string   `gorm:"type:text[]" json:"action_items"`
+	ActionItems      []string   `gorm:"type:jsonb" json:"action_items"`
 	NextMeetingDate  *time.Time `gorm:"type:timestamp" json:"next_meeting_date"`
 
 	common.Auditable

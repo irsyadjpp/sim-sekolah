@@ -235,8 +235,8 @@ type CreatePeerAssessmentGuidelineRequest struct {
 	Title             string   `json:"title" binding:"required"`
 	Content           string   `json:"content" binding:"required"`
 	Examples          []string `json:"examples"`
-	DoS               []string `json:"do_s"`
-	DontS             []string `json:"dont_s"`
+	Dos               []string `json:"dos"`
+	Donts             []string `json:"donts"`
 	DisplayOrder      int      `json:"display_order"`
 	IsActive          *bool    `json:"is_active"`
 }
@@ -247,8 +247,8 @@ type UpdatePeerAssessmentGuidelineRequest struct {
 	Title             string   `json:"title" binding:"omitempty"`
 	Content           string   `json:"content" binding:"omitempty"`
 	Examples          []string `json:"examples"`
-	DoS               []string `json:"do_s"`
-	DontS             []string `json:"dont_s"`
+	Dos               []string `json:"dos"`
+	Donts             []string `json:"donts"`
 	DisplayOrder      int      `json:"display_order"`
 	IsActive          *bool    `json:"is_active"`
 }
@@ -260,8 +260,8 @@ type PeerAssessmentGuidelineResponse struct {
 	Title             string    `json:"title"`
 	Content           string    `json:"content"`
 	Examples          []string  `json:"examples"`
-	DoS               []string  `json:"do_s"`
-	DontS             []string  `json:"dont_s"`
+	Dos               []string  `json:"dos"`
+	Donts             []string  `json:"donts"`
 	DisplayOrder      int       `json:"display_order"`
 	IsActive          bool      `json:"is_active"`
 	CreatedAt         time.Time `json:"created_at"`
