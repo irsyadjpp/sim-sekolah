@@ -259,3 +259,148 @@ func (h *CurriculumHandler) ExportDocument(c *fiber.Ctx) error {
 		"download_url": "https://storage.sim-sekolah.com/exports/curriculum.pdf",
 	})
 }
+
+// UpdateCurriculumType godoc
+// @Summary      Update Curriculum Type
+// @Description  Updates the curriculum type of a document (INTRAKURIKULER, KOKURIKULER, EKSTRAKURIKULER)
+// @Tags         Curriculum
+// @Accept       json
+// @Produce      json
+// @Param        id path string true "Curriculum Document ID"
+// @Param        request body UpdateCurriculumTypeRequest true "Update Request"
+// @Success      200  {object}  common.Response
+// @Failure      400  {object}  common.Response
+// @Router       /curriculum-documents/{id}/type [put]
+// @Security     BearerAuth
+func (h *CurriculumHandler) UpdateCurriculumType(c *fiber.Ctx) error {
+	docID, err := uuid.Parse(c.Params("id"))
+	if err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "ID dokumen tidak valid", "invalid document id")
+	}
+
+	var req UpdateCurriculumTypeRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+	if err := common.Validate.Struct(req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
+	}
+
+	if err := h.svc.UpdateCurriculumType(c.Context(), docID, req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengupdate tipe kurikulum", err)
+	}
+
+	return common.Success(c, "Tipe kurikulum berhasil diupdate", nil)
+}
+
+// Co-curricular Activities Handlers
+
+// GetAllKokurikulerActivities godoc
+func (h *CurriculumHandler) GetAllKokurikulerActivities(c *fiber.Ctx) error {
+	activities, err := h.svc.GetAllKokurikulerActivities(c.Context())
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil aktivitas kokurikuler", err)
+	}
+	return common.Success(c, "Aktivitas kokurikuler berhasil diambil", activities)
+}
+
+// GetKokurikulerActivityByID godoc
+func (h *CurriculumHandler) GetKokurikulerActivityByID(c *fiber.Ctx) error {
+	activity, err := h.svc.GetKokurikulerActivityByID(c.Context(), c.Params("id"))
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Aktivitas kokurikuler tidak ditemukan", err)
+	}
+	return common.Success(c, "Aktivitas kokurikuler berhasil diambil", activity)
+}
+
+// CreateKokurikulerActivity godoc
+func (h *CurriculumHandler) CreateKokurikulerActivity(c *fiber.Ctx) error {
+	var req CreateKokurikulerActivityRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+
+	activity, err := h.svc.CreateKokurikulerActivity(c.Context(), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat aktivitas kokurikuler", err)
+	}
+	return common.Created(c, "Aktivitas kokurikuler berhasil dibuat", activity)
+}
+
+// UpdateKokurikulerActivity godoc
+func (h *CurriculumHandler) UpdateKokurikulerActivity(c *fiber.Ctx) error {
+	var req UpdateKokurikulerActivityRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+
+	activity, err := h.svc.UpdateKokurikulerActivity(c.Context(), c.Params("id"), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengupdate aktivitas kokurikuler", err)
+	}
+	return common.Success(c, "Aktivitas kokurikuler berhasil diupdate", activity)
+}
+
+// DeleteKokurikulerActivity godoc
+func (h *CurriculumHandler) DeleteKokurikulerActivity(c *fiber.Ctx) error {
+	if err := h.svc.DeleteKokurikulerActivity(c.Context(), c.Params("id")); err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus aktivitas kokurikuler", err)
+	}
+	return common.Success(c, "Aktivitas kokurikuler berhasil dihapus", nil)
+}
+
+// Extra-curricular Activities Handlers
+
+// GetAllEkstrakurikulerActivities godoc
+func (h *CurriculumHandler) GetAllEkstrakurikulerActivities(c *fiber.Ctx) error {
+	activities, err := h.svc.GetAllEkstrakurikulerActivities(c.Context())
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil aktivitas ekstrakurikuler", err)
+	}
+	return common.Success(c, "Aktivitas ekstrakurikuler berhasil diambil", activities)
+}
+
+// GetEkstrakurikulerActivityByID godoc
+func (h *CurriculumHandler) GetEkstrakurikulerActivityByID(c *fiber.Ctx) error {
+	activity, err := h.svc.GetEkstrakurikulerActivityByID(c.Context(), c.Params("id"))
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Aktivitas ekstrakurikuler tidak ditemukan", err)
+	}
+	return common.Success(c, "Aktivitas ekstrakurikuler berhasil diambil", activity)
+}
+
+// CreateEkstrakurikulerActivity godoc
+func (h *CurriculumHandler) CreateEkstrakurikulerActivity(c *fiber.Ctx) error {
+	var req CreateEkstrakurikulerActivityRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+
+	activity, err := h.svc.CreateEkstrakurikulerActivity(c.Context(), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat aktivitas ekstrakurikuler", err)
+	}
+	return common.Created(c, "Aktivitas ekstrakurikuler berhasil dibuat", activity)
+}
+
+// UpdateEkstrakurikulerActivity godoc
+func (h *CurriculumHandler) UpdateEkstrakurikulerActivity(c *fiber.Ctx) error {
+	var req UpdateEkstrakurikulerActivityRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+
+	activity, err := h.svc.UpdateEkstrakurikulerActivity(c.Context(), c.Params("id"), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengupdate aktivitas ekstrakurikuler", err)
+	}
+	return common.Success(c, "Aktivitas ekstrakurikuler berhasil diupdate", activity)
+}
+
+// DeleteEkstrakurikulerActivity godoc
+func (h *CurriculumHandler) DeleteEkstrakurikulerActivity(c *fiber.Ctx) error {
+	if err := h.svc.DeleteEkstrakurikulerActivity(c.Context(), c.Params("id")); err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus aktivitas ekstrakurikuler", err)
+	}
+	return common.Success(c, "Aktivitas ekstrakurikuler berhasil dihapus", nil)
+}

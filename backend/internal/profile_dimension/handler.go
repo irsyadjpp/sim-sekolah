@@ -43,6 +43,10 @@ func (h *ProfileDimensionHandler) Create(c *fiber.Ctx) error {
 	}
 	data, err := h.svc.Create(c.UserContext(), req)
 	if err != nil {
+		// Check if it's a validation error
+		if err.Error() == "kode dimensi profil tidak valid. Hanya 8 dimensi profil lulusan Deep Learning yang diperbolehkan: DIM_KEIMANAN, DIM_KEWARGAAN, DIM_PENALARAN, DIM_KREATIVITAS, DIM_KOLABORASI, DIM_KEMANDIRIAN, DIM_KESEHATAN, DIM_KOMUNIKASI" {
+			return common.ErrorFromService(c, fiber.StatusBadRequest, err.Error(), err)
+		}
 		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat dimensi profil", err)
 	}
 	return common.Created(c, "Dimensi profil berhasil dibuat", data)
@@ -58,6 +62,10 @@ func (h *ProfileDimensionHandler) Update(c *fiber.Ctx) error {
 	}
 	data, err := h.svc.Update(c.UserContext(), c.Params("id"), req)
 	if err != nil {
+		// Check if it's a validation error
+		if err.Error() == "kode dimensi profil tidak valid. Hanya 8 dimensi profil lulusan Deep Learning yang diperbolehkan: DIM_KEIMANAN, DIM_KEWARGAAN, DIM_PENALARAN, DIM_KREATIVITAS, DIM_KOLABORASI, DIM_KEMANDIRIAN, DIM_KESEHATAN, DIM_KOMUNIKASI" {
+			return common.ErrorFromService(c, fiber.StatusBadRequest, err.Error(), err)
+		}
 		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui dimensi profil", err)
 	}
 	return common.Success(c, "Dimensi profil berhasil diperbarui", data)

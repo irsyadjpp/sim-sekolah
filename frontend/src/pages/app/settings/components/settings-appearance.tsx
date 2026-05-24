@@ -13,8 +13,8 @@ interface Props {
 }
 
 export default function SettingsAppearance({ meData, onUpdated }: Props) {
-  const { themeMode, themeColor, setThemeMode, setThemeColor } = useThemeContext();
-  const { contentType, leftMenuType, setContentType, setLeftMenuType } = useLayoutContext();
+  const { mode: themeMode, theme: themeColor, setMode: setThemeMode, setTheme: setThemeColor } = useThemeContext();
+  const { contentType, leftMenuType, setContentType, setLeftMenuType } = useLayoutContext() as any;
 
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<{ text: string; error: boolean } | null>(null);
@@ -48,7 +48,7 @@ export default function SettingsAppearance({ meData, onUpdated }: Props) {
 
       // Update global context directly
       setThemeMode(localThemeMode as any);
-      setThemeColor(localThemeColor);
+      setThemeColor(localThemeColor as any);
       setContentType(localContentType as any);
       setLeftMenuType(localLeftMenuType as any);
 

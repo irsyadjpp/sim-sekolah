@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -15,7 +14,6 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
-  Grid,
   IconButton,
   InputLabel,
   MenuItem,
@@ -24,11 +22,8 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableContainer,
-  TableHead,
   TableHead,
   TablePagination,
-  TableRow,
   TableRow,
   TableSortLabel,
   TextField,
@@ -79,31 +74,7 @@ export default function SummativePage() {
 
   const token = localStorage.getItem("accessToken");
 
-  // Load classrooms on mount
-  useEffect(() => {
-    fetchClassrooms();
-  }, []);
-
-  // Load assignments when classroom changes
-  useEffect(() => {
-    if (selectedClassroomId) {
-      fetchAssignments(selectedClassroomId);
-    } else {
-      setAssignments([]);
-      setSelectedAssignmentId("");
-    }
-  }, [selectedClassroomId]);
-
-  // Load assessments when assignment changes
-  useEffect(() => {
-    if (selectedAssignmentId) {
-      fetchAssessments(selectedAssignmentId);
-    } else {
-      setAssessments([]);
-    }
-  }, [selectedAssignmentId]);
-
-  const fetchClassrooms = async () => {
+  const fetchClassrooms = useCallback(async () => {
     try {
       const res = await fetch(`${DEFAULTS.API_URL}/api/v1/classrooms?limit=100`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -118,46 +89,76 @@ export default function SummativePage() {
     } catch (err: any) {
       console.error(err);
     }
-  };
+  }, [token]);
 
-  const fetchAssignments = async (classId: string) => {
-    try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/classrooms/${classId}/assignments`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const json = await res.json();
-      if (json.status === "success" && json.data) {
-        setAssignments(json.data);
-        if (json.data.length > 0) {
-          setSelectedAssignmentId(json.data[0].id);
+  const fetchAssignments = useCallback(
+    async (classId: string) => {
+      try {
+        const res = await fetch(`${DEFAULTS.API_URL}/api/v1/classrooms/${classId}/assignments`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const json = await res.json();
+        if (json.status === "success" && json.data) {
+          setAssignments(json.data);
+          if (json.data.length > 0) {
+            setSelectedAssignmentId(json.data[0].id);
+          }
         }
+      } catch (err: any) {
+        console.error(err);
       }
-    } catch (err: any) {
-      console.error(err);
-    }
-  };
+    },
+    [token],
+  );
 
-  const fetchAssessments = async (assignId: string) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(`${DEFAULTS.API_URL}/api/v1/teaching-assignments/${assignId}/assessments`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const json = await res.json();
-      if (json.status === "success") {
-        const data: Assessment[] = json.data || [];
-        // Filter only SUMATIF
-        setAssessments(data.filter((a) => a.assessment_type === "SUMATIF"));
-      } else {
-        setError(json.message);
+  const fetchAssessments = useCallback(
+    async (assignId: string) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch(`${DEFAULTS.API_URL}/api/v1/teaching-assignments/${assignId}/assessments`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const json = await res.json();
+        if (json.status === "success") {
+          const data: Assessment[] = json.data || [];
+          // Filter only SUMATIF
+          setAssessments(data.filter((a) => a.assessment_type === "SUMATIF"));
+        } else {
+          setError(json.message);
+        }
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+    },
+    [token, setError],
+  );
+
+  // Load classrooms on mount
+  useEffect(() => {
+    fetchClassrooms();
+  }, [fetchClassrooms]);
+
+  // Load assignments when classroom changes
+  useEffect(() => {
+    if (selectedClassroomId) {
+      fetchAssignments(selectedClassroomId);
+    } else {
+      setAssignments([]);
+      setSelectedAssignmentId("");
     }
-  };
+  }, [selectedClassroomId, fetchAssignments]);
+
+  // Load assessments when assignment changes
+  useEffect(() => {
+    if (selectedAssignmentId) {
+      fetchAssessments(selectedAssignmentId);
+    } else {
+      setAssessments([]);
+    }
+  }, [selectedAssignmentId, fetchAssessments]);
 
   const handleCreate = async () => {
     if (!newAssessmentName || !newAssessmentDate) {

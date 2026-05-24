@@ -17,13 +17,9 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 
 	// Design Element
 	edRepo := elemen_desain.NewRepository(db)
-	group.Get("/elemen-desain", func(c *fiber.Ctx) error {
-		data, err := edRepo.GetAll()
-		if err != nil {
-			return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil elemen desain", err)
-		}
-		return common.Success(c, "Elemen desain berhasil diambil", data)
-	})
+	edService := elemen_desain.NewService(edRepo)
+	edHandler := elemen_desain.NewHandler(edService)
+	edHandler.RegisterRoutes(group)
 
 	// Cognitive Stage
 	tkRepo := tahapan_kognitif.NewRepository(db)

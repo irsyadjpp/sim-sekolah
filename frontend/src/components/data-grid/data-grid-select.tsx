@@ -22,6 +22,7 @@ export default function DataGridSelect(props: DataGridSelectProps) {
   return (
     <FormControl size="small" variant="standard" fullWidth className="outlined edit-select">
       <Select
+        variant="standard"
         defaultValue={value}
         label="Small"
         IconComponent={NiChevronDownSmall}

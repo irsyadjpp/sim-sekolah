@@ -2,6 +2,9 @@ package phase
 
 import (
 	"context"
+	"errors"
+	"strings"
+
 	"sim-sekolah/internal/common"
 )
 
@@ -12,6 +15,7 @@ type PhaseService interface {
 	Create(ctx context.Context, req CreatePhaseRequest) (*Phase, error)
 	Update(ctx context.Context, id string, req UpdatePhaseRequest) (*Phase, error)
 	Delete(ctx context.Context, id string) error
+	ValidateSDPhase(phaseCode string) error
 }
 
 type phaseService struct {
@@ -32,6 +36,11 @@ func (s *phaseService) GetByID(id string) (*Phase, error) {
 }
 
 func (s *phaseService) Create(ctx context.Context, req CreatePhaseRequest) (*Phase, error) {
+	// Validate that the phase is SD-only
+	if err := s.ValidateSDPhase(req.Code); err != nil {
+		return nil, err
+	}
+
 	p := &Phase{
 		Code:        req.Code,
 		Name:        req.Name,
@@ -56,6 +65,10 @@ func (s *phaseService) Update(ctx context.Context, id string, req UpdatePhaseReq
 	}
 
 	if req.Code != "" {
+		// Validate that the new phase code is SD-only
+		if err := s.ValidateSDPhase(req.Code); err != nil {
+			return nil, err
+		}
 		p.Code = req.Code
 	}
 	if req.Name != "" {
@@ -81,4 +94,27 @@ func (s *phaseService) Delete(ctx context.Context, id string) error {
 	}
 
 	return s.repo.Delete(ctx, id)
+}
+
+// ValidateSDPhase validates that a phase code is valid for Sekolah Dasar (SD)
+// Only Fase A, B, C are valid for SD (Kelas 1-6)
+func (s *phaseService) ValidateSDPhase(phaseCode string) error {
+	// Normalize phase code to uppercase for comparison
+	normalizedCode := strings.ToUpper(strings.TrimSpace(phaseCode))
+
+	// Define valid SD phases
+	validSDPhases := map[string]bool{
+		"FAS-A": true,
+		"FAS-B": true,
+		"FAS-C": true,
+		"A":     true, // Alternative short codes
+		"B":     true,
+		"C":     true,
+	}
+
+	if !validSDPhases[normalizedCode] {
+		return errors.New("fase ini tidak relevan untuk Sekolah Dasar. Hanya Fase A (Kelas 1-2), Fase B (Kelas 3-4), dan Fase C (Kelas 5-6) yang diperbolehkan")
+	}
+
+	return nil
 }

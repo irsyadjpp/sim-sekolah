@@ -3,27 +3,22 @@ import { useTranslation } from "react-i18next";
 
 import { Box, Breadcrumbs, Link, Paper, Typography } from "@mui/material";
 
-import ListingPageContent from "@/components/layout/listing-page-content";
 import NiArchive from "@/icons/nexture/ni-archive";
 
 export default function QuestionBankPage() {
   const { t } = useTranslation();
 
   return (
-    <ListingPageContent
-      title={t("menu-question-bank")}
-      breadcrumb={
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/home">
-            {t("menu-home")}
-          </Link>
-          <Link underline="hover" color="inherit" href="/academic/evaluation/formative">
-            {t("menu-assessment")}
-          </Link>
-          <Typography color="text.primary">{t("menu-question-bank")}</Typography>
-        </Breadcrumbs>
-      }
-    >
+    <Box className="flex w-full flex-col gap-6">
+      <Breadcrumbs aria-label="breadcrumb" className="mb-4">
+        <Link underline="hover" color="inherit" href="/home">
+          {t("menu-home")}
+        </Link>
+        <Link underline="hover" color="inherit" href="/academic/evaluation/formative">
+          {t("menu-assessment")}
+        </Link>
+        <Typography color="text.primary">{t("menu-question-bank")}</Typography>
+      </Breadcrumbs>
       <Box className="flex flex-col gap-6">
         <Paper
           elevation={0}
@@ -41,6 +36,6 @@ export default function QuestionBankPage() {
           </Typography>
         </Paper>
       </Box>
-    </ListingPageContent>
+    </Box>
   );
 }

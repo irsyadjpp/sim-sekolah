@@ -30,4 +30,23 @@ func SetupRoutes(router fiber.Router, db *gorm.DB, rdb *redis.Client) {
 	group.Put("/bab/:chapter_id", h.UpdateChapterContent)
 	group.Post("/:id/finalisasi", h.FinalizeDocument)
 	group.Get("/:id/ekspor", h.ExportDocument)
+	group.Put("/:id/tipe", h.UpdateCurriculumType)
+
+	// Co-curricular activities routes
+	kokurikulerGroup := router.Group("/kokurikuler")
+	kokurikulerGroup.Use(middleware.Protected())
+	kokurikulerGroup.Get("/", h.GetAllKokurikulerActivities)
+	kokurikulerGroup.Get("/:id", h.GetKokurikulerActivityByID)
+	kokurikulerGroup.Post("/", h.CreateKokurikulerActivity)
+	kokurikulerGroup.Put("/:id", h.UpdateKokurikulerActivity)
+	kokurikulerGroup.Delete("/:id", h.DeleteKokurikulerActivity)
+
+	// Extra-curricular activities routes
+	ekstrakurikulerGroup := router.Group("/ekstrakurikuler")
+	ekstrakurikulerGroup.Use(middleware.Protected())
+	ekstrakurikulerGroup.Get("/", h.GetAllEkstrakurikulerActivities)
+	ekstrakurikulerGroup.Get("/:id", h.GetEkstrakurikulerActivityByID)
+	ekstrakurikulerGroup.Post("/", h.CreateEkstrakurikulerActivity)
+	ekstrakurikulerGroup.Put("/:id", h.UpdateEkstrakurikulerActivity)
+	ekstrakurikulerGroup.Delete("/:id", h.DeleteEkstrakurikulerActivity)
 }

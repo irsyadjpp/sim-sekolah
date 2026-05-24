@@ -17,7 +17,7 @@ export const useConfirm = () => useContext(ConfirmContext);
 export const ConfirmProvider = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<ConfirmOptions | null>(null);
-  const resolveRef = useRef<(value: boolean) => void>();
+  const resolveRef = useRef<(value: boolean) => void>(null as any);
 
   const confirm = (opts: ConfirmOptions): Promise<boolean> => {
     setOptions(opts);

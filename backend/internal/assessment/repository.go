@@ -23,6 +23,15 @@ type AssessmentRepository interface {
 	// Attendance
 	GetAttendancesByClassroomAndDate(ctx context.Context, classroomID string, date string) ([]DailyAttendance, error)
 	UpsertAttendances(ctx context.Context, attendances []DailyAttendance) error
+
+	// SD Assessment Criteria
+	GetAllSDAssessmentCriteria(ctx context.Context) ([]SDAssessmentCriteria, error)
+	GetSDAssessmentCriteriaByID(ctx context.Context, id string) (*SDAssessmentCriteria, error)
+	GetSDAssessmentCriteriaByType(ctx context.Context, assessmentType string) ([]SDAssessmentCriteria, error)
+	GetSDAssessmentCriteriaByPhase(ctx context.Context, phaseID string) ([]SDAssessmentCriteria, error)
+	CreateSDAssessmentCriteria(ctx context.Context, data *SDAssessmentCriteria) error
+	UpdateSDAssessmentCriteria(ctx context.Context, data *SDAssessmentCriteria) error
+	DeleteSDAssessmentCriteria(ctx context.Context, id string) error
 }
 
 type assessmentRepository struct {
@@ -75,10 +84,8 @@ func (r *assessmentRepository) GetScoresByAssessment(ctx context.Context, assess
 }
 
 func (r *assessmentRepository) UpsertScores(ctx context.Context, assessmentID string, scores []AssessmentScore) error {
-	// Gunakan transaksi untuk memastikan semua nilai tersimpan atau gagal bersamaan
 	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		for _, score := range scores {
-			// 1. STATE MACHINE VALIDATION: Verifikasi status siswa aktif
 			var studentStatus string
 			err := tx.Table("master_student").
 				Select("student_status").
@@ -94,7 +101,6 @@ func (r *assessmentRepository) UpsertScores(ctx context.Context, assessmentID st
 			if score.ID == uuid.Nil {
 				score.ID = uuid.New()
 			}
-			// Upsert menggunakan ON CONFLICT clause
 			err = tx.Clauses(clause.OnConflict{
 				Columns:   []clause.Column{{Name: "assessment_id"}, {Name: "student_id"}},
 				DoUpdates: clause.AssignmentColumns([]string{"score", "notes"}),
@@ -119,7 +125,6 @@ func (r *assessmentRepository) GetAttendancesByClassroomAndDate(ctx context.Cont
 func (r *assessmentRepository) UpsertAttendances(ctx context.Context, attendances []DailyAttendance) error {
 	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		for _, att := range attendances {
-			// 1. STATE MACHINE VALIDATION: Verifikasi status siswa aktif
 			var studentStatus string
 			err := tx.Table("master_student").
 				Select("student_status").
@@ -145,4 +150,55 @@ func (r *assessmentRepository) UpsertAttendances(ctx context.Context, attendance
 		}
 		return nil
 	})
+}
+
+// SD Assessment Criteria Methods
+func (r *assessmentRepository) GetAllSDAssessmentCriteria(ctx context.Context) ([]SDAssessmentCriteria, error) {
+	var criteria []SDAssessmentCriteria
+	err := r.db.WithContext(ctx).
+		Where("deleted_at IS NULL").
+		Order("assessment_type ASC, criteria_name ASC").
+		Find(&criteria).Error
+	return criteria, err
+}
+
+func (r *assessmentRepository) GetSDAssessmentCriteriaByID(ctx context.Context, id string) (*SDAssessmentCriteria, error) {
+	var criterion SDAssessmentCriteria
+	err := r.db.WithContext(ctx).
+		Where("id = ? AND deleted_at IS NULL", id).
+		First(&criterion).Error
+	if err != nil {
+		return nil, err
+	}
+	return &criterion, nil
+}
+
+func (r *assessmentRepository) GetSDAssessmentCriteriaByType(ctx context.Context, assessmentType string) ([]SDAssessmentCriteria, error) {
+	var criteria []SDAssessmentCriteria
+	err := r.db.WithContext(ctx).
+		Where("deleted_at IS NULL AND assessment_type = ?", assessmentType).
+		Order("criteria_name ASC").
+		Find(&criteria).Error
+	return criteria, err
+}
+
+func (r *assessmentRepository) GetSDAssessmentCriteriaByPhase(ctx context.Context, phaseID string) ([]SDAssessmentCriteria, error) {
+	var criteria []SDAssessmentCriteria
+	err := r.db.WithContext(ctx).
+		Where("deleted_at IS NULL AND phase_id = ?", phaseID).
+		Order("assessment_type ASC, criteria_name ASC").
+		Find(&criteria).Error
+	return criteria, err
+}
+
+func (r *assessmentRepository) CreateSDAssessmentCriteria(ctx context.Context, data *SDAssessmentCriteria) error {
+	return r.db.WithContext(ctx).Create(data).Error
+}
+
+func (r *assessmentRepository) UpdateSDAssessmentCriteria(ctx context.Context, data *SDAssessmentCriteria) error {
+	return r.db.WithContext(ctx).Save(data).Error
+}
+
+func (r *assessmentRepository) DeleteSDAssessmentCriteria(ctx context.Context, id string) error {
+	return r.db.WithContext(ctx).Delete(&SDAssessmentCriteria{}, "id = ?", id).Error
 }

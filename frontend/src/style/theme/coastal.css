@@ -1,0 +1,49 @@
+/* --------------------------- */
+/* Theme Coastal */
+/* --------------------------- */
+
+@layer base {
+  .theme-coastal {
+    /* PRIMARY - Sea Blue (#004655 -> #005f73) */
+    --primary: 195 100% 17%;
+    --primary-light: 195 100% 23%;
+    --primary-dark: 195 100% 12%;
+
+    /* SECONDARY - Teal/Turquoise (#2b6958 -> #aeedd7) */
+    --secondary: 165 41% 29%;
+    --secondary-light: 165 67% 81%;
+    --secondary-dark: 165 41% 20%;
+
+    /* ACCENTS - Coastal-inspired colors */
+    --accent-1: 165 53% 73%; /* Teal soft (#94D2BD) */
+    --accent-1-light: 165 53% 83%;
+    --accent-1-dark: 165 53% 60%;
+
+    --accent-2: 35 100% 18%; /* Sandy brown (#5a3800) */
+    --accent-2-light: 35 100% 24%;
+    --accent-2-dark: 35 100% 12%;
+
+    --accent-3: 195 70% 45%; /* Ocean blue */
+    --accent-3-light: 195 70% 55%;
+    --accent-3-dark: 195 70% 35%;
+
+    --accent-4: 25 85% 60%; /* Coral/sunset */
+    --accent-4-light: 25 85% 70%;
+    --accent-4-dark: 25 85% 50%;
+
+    color-scheme: light;
+  }
+
+  .theme-coastal.dark {
+    color-scheme: dark;
+
+    /* Dark mode adjustments for better visibility */
+    --primary: 195 100% 35%;
+    --primary-light: 195 100% 45%;
+    --primary-dark: 195 100% 25%;
+
+    --secondary: 165 41% 45%;
+    --secondary-light: 165 67% 85%;
+    --secondary-dark: 165 41% 35%;
+  }
+}

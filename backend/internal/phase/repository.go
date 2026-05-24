@@ -147,6 +147,7 @@ func (r *phaseRepository) Delete(ctx context.Context, id string) error {
 }
 
 func (r *phaseRepository) Seed(ctx context.Context) error {
+	// SD-only phases - Fase A, B, C for Sekolah Dasar
 	seeds := []struct {
 		Code string
 		Name string
@@ -155,9 +156,7 @@ func (r *phaseRepository) Seed(ctx context.Context) error {
 		{"FAS-A", "Fase A", "Kelas 1-2 SD/Sederajat"},
 		{"FAS-B", "Fase B", "Kelas 3-4 SD/Sederajat"},
 		{"FAS-C", "Fase C", "Kelas 5-6 SD/Sederajat"},
-		{"FAS-D", "Fase D", "Kelas 7-9 SMP/Sederajat"},
-		{"FAS-E", "Fase E", "Kelas 10 SMA/Sederajat"},
-		{"FAS-F", "Fase F", "Kelas 11-12 SMA/Sederajat"},
+		// Removed Fase D, E, F as they are for SMP/SMA, not relevant for SD
 	}
 
 	for _, s := range seeds {
@@ -171,5 +170,9 @@ func (r *phaseRepository) Seed(ctx context.Context) error {
 			})
 		}
 	}
+
+	// Delete any non-SD phases that might exist (cleanup)
+	r.db.Where("phase_code IN (?)", []string{"FAS-D", "FAS-E", "FAS-F"}).Delete(&Phase{})
+
 	return nil
 }

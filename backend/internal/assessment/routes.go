@@ -19,6 +19,7 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	assessment := router.Group("/penilaian")
 	assessment.Use(middleware.Protected())
 
+	assessment.Get("/age-appropriate-types", h.GetAgeAppropriateTypes)
 	assessment.Get("/:id", h.GetAssessmentByID)
 	assessment.Put("/:id", h.UpdateAssessment)
 	assessment.Delete("/:id", h.DeleteAssessment)
@@ -30,4 +31,15 @@ func SetupRoutes(router fiber.Router, db *gorm.DB) {
 	// Daily Attendance endpoints
 	router.Get("/kelas/:classroomId/kehadiran", middleware.Protected(), h.GetAttendances)
 	router.Post("/kelas/:classroomId/kehadiran", middleware.Protected(), h.UpsertAttendances)
+
+	// SD Assessment Criteria endpoints
+	sdCriteria := router.Group("/sd-assessment-criteria")
+	sdCriteria.Use(middleware.Protected())
+
+	sdCriteria.Get("", h.GetAllSDAssessmentCriteria)
+	sdCriteria.Get("/type/:type", h.GetSDAssessmentCriteriaByType)
+	sdCriteria.Get("/phase/:phaseId", h.GetSDAssessmentCriteriaByPhase)
+	sdCriteria.Post("", h.CreateSDAssessmentCriteria)
+	sdCriteria.Put("/:id", h.UpdateSDAssessmentCriteria)
+	sdCriteria.Delete("/:id", h.DeleteSDAssessmentCriteria)
 }

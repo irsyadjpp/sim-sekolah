@@ -10,14 +10,19 @@ import (
 	"sim-sekolah/internal/curriculum"
 	"sim-sekolah/internal/deep_learning"
 	"sim-sekolah/internal/enrollment"
+	"sim-sekolah/internal/foundational_skills"
 	"sim-sekolah/internal/grade"
 	"sim-sekolah/internal/intelligence"
 	"sim-sekolah/internal/learning"
+	"sim-sekolah/internal/learning_experience"
+	"sim-sekolah/internal/learning_principle"
 	"sim-sekolah/internal/local_context"
+	"sim-sekolah/internal/olah_aspect"
 	"sim-sekolah/internal/permission"
 	"sim-sekolah/internal/phase"
 	"sim-sekolah/internal/profile_dimension"
 	"sim-sekolah/internal/promotion"
+	"sim-sekolah/internal/reading_literacy"
 	"sim-sekolah/internal/report"
 	"sim-sekolah/internal/schedule"
 	"sim-sekolah/internal/school"
@@ -45,6 +50,11 @@ func SetupRoutes(api fiber.Router, db *gorm.DB, rdb *redis.Client) {
 	profile_dimension.SetupRoutes(api, db)
 	deep_learning.SetupRoutes(api, db)
 	curriculum.SetupRoutes(api, db, rdb)
+	olah_aspect.SetupRoutes(api, db)
+	learning_principle.SetupRoutes(api, db)
+	learning_experience.SetupRoutes(api, db)
+	foundational_skills.SetupRoutes(api, db)
+	reading_literacy.SetupRoutes(api, db)
 
 	// Konteks Lokal
 	local_context.SetupRoutes(api, db)

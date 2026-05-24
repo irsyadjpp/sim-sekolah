@@ -11,11 +11,56 @@ import (
 	"github.com/google/uuid"
 )
 
+// SD Age-Appropriate Assessment Types
+const (
+	// Fase A Assessment Types (Kelas 1-2)
+	AssessmentTypeFaseAObservation = "FASE_A_OBSERVATION" // Observation-based, play-based
+	AssessmentTypeFaseAPortfolio   = "FASE_A_PORTFOLIO"   // Portfolio assessment
+
+	// Fase B Assessment Types (Kelas 3-4)
+	AssessmentTypeFaseBPerformance = "FASE_B_PERFORMANCE" // Performance tasks
+	AssessmentTypeFaseBProject     = "FASE_B_PROJECT"     // Simple projects
+
+	// Fase C Assessment Types (Kelas 5-6)
+	AssessmentTypeFaseCProjectComplex = "FASE_C_PROJECT_COMPLEX" // Complex projects
+	AssessmentTypeFaseCCollaborative  = "FASE_C_COLLABORATIVE"   // Collaborative assessment
+	AssessmentTypeFaseCPeerAssessment = "FASE_C_PEER_ASSESSMENT" // Peer assessment
+)
+
+// GetAgeAppropriateTypeDescription returns Indonesian description of assessment type
+func GetAgeAppropriateTypeDescription(assessmentType string) string {
+	descriptions := map[string]string{
+		AssessmentTypeFaseAObservation:    "Observasi Berbasis Bermain (Fase A)",
+		AssessmentTypeFaseAPortfolio:      "Portofolio (Fase A)",
+		AssessmentTypeFaseBPerformance:    "Tugas Kinerja (Fase B)",
+		AssessmentTypeFaseBProject:        "Proyek Sederhana (Fase B)",
+		AssessmentTypeFaseCProjectComplex: "Proyek Kompleks (Fase C)",
+		AssessmentTypeFaseCCollaborative:  "Asesmen Kolaboratif (Fase C)",
+		AssessmentTypeFaseCPeerAssessment: "Asesmen Teman Sebaya (Fase C)",
+	}
+	return descriptions[assessmentType]
+}
+
+// IsValidAgeAppropriateType validates age-appropriate assessment type
+func IsValidAgeAppropriateType(assessmentType string) bool {
+	validTypes := map[string]bool{
+		AssessmentTypeFaseAObservation:    true,
+		AssessmentTypeFaseAPortfolio:      true,
+		AssessmentTypeFaseBPerformance:    true,
+		AssessmentTypeFaseBProject:        true,
+		AssessmentTypeFaseCProjectComplex: true,
+		AssessmentTypeFaseCCollaborative:  true,
+		AssessmentTypeFaseCPeerAssessment: true,
+	}
+	return validTypes[assessmentType]
+}
+
 type Assessment struct {
 	ID                   uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
 	TeachingAssignmentID uuid.UUID `gorm:"type:uuid;not null" json:"teaching_assignment_id"`
 	AssessmentName       string    `gorm:"type:varchar(100);not null" json:"assessment_name"`
 	AssessmentType       string    `gorm:"type:varchar(20);not null" json:"assessment_type"` // Formatif, Sumatif, Proyek, UTS, UAS
+	AgeAppropriateType   string    `gorm:"type:varchar(30)" json:"age_appropriate_type"`     // SD-specific assessment types
 	AssessmentDate       time.Time `gorm:"type:date;not null" json:"assessment_date"`
 	CreatedAt            time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"created_at"`
 
@@ -127,4 +172,21 @@ type AcademicScore struct {
 
 func (AcademicScore) TableName() string {
 	return "trx_academic_score"
+}
+
+// SDAssessmentCriteria represents SD-specific assessment criteria per phase and type
+type SDAssessmentCriteria struct {
+	ID             uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	AssessmentType string    `gorm:"column:assessment_type;not null" json:"assessment_type"` // Age-appropriate type
+	PhaseID        uuid.UUID `gorm:"column:phase_id" json:"phase_id"`                        // Fase A, B, C
+	CriteriaName   string    `gorm:"column:criteria_name;not null" json:"criteria_name"`
+	Description    string    `gorm:"column:description;not null" json:"description"`
+	RubricElements string    `gorm:"column:rubric_elements;type:jsonb" json:"rubric_elements"` // JSON rubric
+	IsActive       bool      `gorm:"column:is_active;default:true" json:"is_active"`
+
+	common.Auditable
+}
+
+func (SDAssessmentCriteria) TableName() string {
+	return "master_sd_assessment_criteria"
 }

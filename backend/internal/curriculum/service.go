@@ -20,6 +20,21 @@ type CurriculumService interface {
 	GetChapter(ctx context.Context, docID uuid.UUID, chapterNumber int) (*CurriculumChapter, error)
 	UpdateChapterContent(ctx context.Context, chapterID uuid.UUID, req UpdateChapterRequest) error
 	FinalizeDocument(ctx context.Context, docID uuid.UUID) error
+	UpdateCurriculumType(ctx context.Context, docID uuid.UUID, req UpdateCurriculumTypeRequest) error
+
+	// Co-curricular Activities
+	GetAllKokurikulerActivities(ctx context.Context) ([]KokurikulerActivity, error)
+	GetKokurikulerActivityByID(ctx context.Context, id string) (*KokurikulerActivity, error)
+	CreateKokurikulerActivity(ctx context.Context, req CreateKokurikulerActivityRequest) (*KokurikulerActivity, error)
+	UpdateKokurikulerActivity(ctx context.Context, id string, req UpdateKokurikulerActivityRequest) (*KokurikulerActivity, error)
+	DeleteKokurikulerActivity(ctx context.Context, id string) error
+
+	// Extra-curricular Activities
+	GetAllEkstrakurikulerActivities(ctx context.Context) ([]EkstrakurikulerActivity, error)
+	GetEkstrakurikulerActivityByID(ctx context.Context, id string) (*EkstrakurikulerActivity, error)
+	CreateEkstrakurikulerActivity(ctx context.Context, req CreateEkstrakurikulerActivityRequest) (*EkstrakurikulerActivity, error)
+	UpdateEkstrakurikulerActivity(ctx context.Context, id string, req UpdateEkstrakurikulerActivityRequest) (*EkstrakurikulerActivity, error)
+	DeleteEkstrakurikulerActivity(ctx context.Context, id string) error
 }
 
 type curriculumService struct {
@@ -51,9 +66,21 @@ func (s *curriculumService) InitializeDocument(ctx context.Context, req Initiali
 	}
 
 	doc := &CurriculumDocument{
-		AcademicYearID: req.AcademicYearID,
-		SchoolID:       req.SchoolID,
-		Status:         "DRAFT",
+		AcademicYearID:           req.AcademicYearID,
+		SchoolID:                 req.SchoolID,
+		Status:                   "DRAFT",
+		CurriculumType:           req.CurriculumType,
+		CurriculumClassification: req.CurriculumClassification,
+	}
+
+	// Validate curriculum type if provided
+	if req.CurriculumType != "" && !IsValidCurriculumType(req.CurriculumType) {
+		return nil, errors.New("tipe kurikulum tidak valid")
+	}
+
+	// Validate classification if provided
+	if req.CurriculumClassification != "" && !IsValidCurriculumClassification(req.CurriculumClassification) {
+		return nil, errors.New("klasifikasi kurikulum tidak valid")
 	}
 
 	if err := s.repo.CreateDocument(ctx, doc); err != nil {
@@ -150,4 +177,149 @@ func (s *curriculumService) FinalizeDocument(ctx context.Context, docID uuid.UUI
 	}
 
 	return s.repo.UpdateDocumentStatus(ctx, docID, "FINAL")
+}
+
+func (s *curriculumService) UpdateCurriculumType(ctx context.Context, docID uuid.UUID, req UpdateCurriculumTypeRequest) error {
+	// Validate curriculum type
+	if !IsValidCurriculumType(req.CurriculumType) {
+		return errors.New("tipe kurikulum tidak valid")
+	}
+
+	return s.repo.UpdateCurriculumType(ctx, docID, req.CurriculumType)
+}
+
+// Co-curricular Activities Methods
+func (s *curriculumService) GetAllKokurikulerActivities(ctx context.Context) ([]KokurikulerActivity, error) {
+	return s.repo.GetAllKokurikulerActivities(ctx)
+}
+
+func (s *curriculumService) GetKokurikulerActivityByID(ctx context.Context, id string) (*KokurikulerActivity, error) {
+	return s.repo.GetKokurikulerActivityByID(ctx, id)
+}
+
+func (s *curriculumService) CreateKokurikulerActivity(ctx context.Context, req CreateKokurikulerActivityRequest) (*KokurikulerActivity, error) {
+	isActive := true
+	if req.IsActive != nil {
+		isActive = *req.IsActive
+	}
+
+	activity := &KokurikulerActivity{
+		ID:                   uuid.New(),
+		CurriculumDocumentID: uuid.MustParse(req.CurriculumDocumentID),
+		ActivityName:         req.ActivityName,
+		Description:          req.Description,
+		Schedule:             req.Schedule,
+		IsActive:             isActive,
+	}
+
+	if req.LinkedSubjectID != "" {
+		activity.LinkedSubjectID = uuid.MustParse(req.LinkedSubjectID)
+	}
+
+	if err := s.repo.CreateKokurikulerActivity(ctx, activity); err != nil {
+		return nil, err
+	}
+	return activity, nil
+}
+
+func (s *curriculumService) UpdateKokurikulerActivity(ctx context.Context, id string, req UpdateKokurikulerActivityRequest) (*KokurikulerActivity, error) {
+	activity, err := s.repo.GetKokurikulerActivityByID(ctx, id)
+	if err != nil {
+		return nil, errors.New("aktivitas kokurikuler tidak ditemukan")
+	}
+
+	if req.ActivityName != "" {
+		activity.ActivityName = req.ActivityName
+	}
+	if req.LinkedSubjectID != "" {
+		activity.LinkedSubjectID = uuid.MustParse(req.LinkedSubjectID)
+	}
+	if req.Description != "" {
+		activity.Description = req.Description
+	}
+	if req.Schedule != "" {
+		activity.Schedule = req.Schedule
+	}
+	if req.IsActive != nil {
+		activity.IsActive = *req.IsActive
+	}
+
+	if err := s.repo.UpdateKokurikulerActivity(ctx, activity); err != nil {
+		return nil, err
+	}
+	return activity, nil
+}
+
+func (s *curriculumService) DeleteKokurikulerActivity(ctx context.Context, id string) error {
+	return s.repo.DeleteKokurikulerActivity(ctx, id)
+}
+
+// Extra-curricular Activities Methods
+func (s *curriculumService) GetAllEkstrakurikulerActivities(ctx context.Context) ([]EkstrakurikulerActivity, error) {
+	return s.repo.GetAllEkstrakurikulerActivities(ctx)
+}
+
+func (s *curriculumService) GetEkstrakurikulerActivityByID(ctx context.Context, id string) (*EkstrakurikulerActivity, error) {
+	return s.repo.GetEkstrakurikulerActivityByID(ctx, id)
+}
+
+func (s *curriculumService) CreateEkstrakurikulerActivity(ctx context.Context, req CreateEkstrakurikulerActivityRequest) (*EkstrakurikulerActivity, error) {
+	isActive := true
+	if req.IsActive != nil {
+		isActive = *req.IsActive
+	}
+
+	activity := &EkstrakurikulerActivity{
+		ID:                   uuid.New(),
+		CurriculumDocumentID: uuid.MustParse(req.CurriculumDocumentID),
+		ActivityName:         req.ActivityName,
+		ActivityCategory:     req.ActivityCategory,
+		Description:          req.Description,
+		Schedule:             req.Schedule,
+		IsActive:             isActive,
+	}
+
+	if req.InstructorID != "" {
+		activity.InstructorID = uuid.MustParse(req.InstructorID)
+	}
+
+	if err := s.repo.CreateEkstrakurikulerActivity(ctx, activity); err != nil {
+		return nil, err
+	}
+	return activity, nil
+}
+
+func (s *curriculumService) UpdateEkstrakurikulerActivity(ctx context.Context, id string, req UpdateEkstrakurikulerActivityRequest) (*EkstrakurikulerActivity, error) {
+	activity, err := s.repo.GetEkstrakurikulerActivityByID(ctx, id)
+	if err != nil {
+		return nil, errors.New("aktivitas ekstrakurikuler tidak ditemukan")
+	}
+
+	if req.ActivityName != "" {
+		activity.ActivityName = req.ActivityName
+	}
+	if req.ActivityCategory != "" {
+		activity.ActivityCategory = req.ActivityCategory
+	}
+	if req.Description != "" {
+		activity.Description = req.Description
+	}
+	if req.Schedule != "" {
+		activity.Schedule = req.Schedule
+	}
+	if req.InstructorID != "" {
+		activity.InstructorID = uuid.MustParse(req.InstructorID)
+	}
+	if req.IsActive != nil {
+		activity.IsActive = *req.IsActive
+	}
+
+	if err := s.repo.UpdateEkstrakurikulerActivity(ctx, activity); err != nil {
+		return nil, err
+	}
+	return activity, nil
+}
+
+func (s *curriculumService) DeleteEkstrakurikulerActivity(ctx context.Context, id string) error {
+	return s.repo.DeleteEkstrakurikulerActivity(ctx, id)
 }

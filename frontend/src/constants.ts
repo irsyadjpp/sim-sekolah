@@ -6,6 +6,7 @@ export const THEME_OPTIONS = {
   BLUE: "theme-blue",
   GREEN: "theme-green",
   ORANGE: "theme-orange",
+  COASTAL: "theme-coastal",
 } as const;
 
 export type ThemeVariant = (typeof THEME_OPTIONS)[keyof typeof THEME_OPTIONS];

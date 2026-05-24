@@ -72,6 +72,10 @@ func (h *PhaseHandler) Create(c *fiber.Ctx) error {
 	}
 	data, err := h.svc.Create(c.UserContext(), req)
 	if err != nil {
+		// Check if it's an SD validation error
+		if err.Error() == "fase ini tidak relevan untuk Sekolah Dasar. Hanya Fase A (Kelas 1-2), Fase B (Kelas 3-4), dan Fase C (Kelas 5-6) yang diperbolehkan" {
+			return common.ErrorFromService(c, fiber.StatusBadRequest, err.Error(), err)
+		}
 		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat fase", err)
 	}
 
@@ -104,6 +108,10 @@ func (h *PhaseHandler) Update(c *fiber.Ctx) error {
 	}
 	data, err := h.svc.Update(c.UserContext(), c.Params("id"), req)
 	if err != nil {
+		// Check if it's an SD validation error
+		if err.Error() == "fase ini tidak relevan untuk Sekolah Dasar. Hanya Fase A (Kelas 1-2), Fase B (Kelas 3-4), dan Fase C (Kelas 5-6) yang diperbolehkan" {
+			return common.ErrorFromService(c, fiber.StatusBadRequest, err.Error(), err)
+		}
 		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal memperbarui fase", err)
 	}
 

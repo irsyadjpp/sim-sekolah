@@ -56,29 +56,29 @@ func (r *profileDimensionRepository) Delete(ctx context.Context, id string) erro
 }
 
 func (r *profileDimensionRepository) Seed(ctx context.Context) error {
-	dimensions := []struct {
-		Code string
-		Name string
-	}{
-		{"DP-01", "Keimanan, Bertakwa Kepada Tuhan YME, dan Berakhlak Mulia"},
-		{"DP-02", "Berkebinekaan Global"},
-		{"DP-03", "Bergotong Royong"},
-		{"DP-04", "Mandiri"},
-		{"DP-05", "Bernalar Kritis"},
-		{"DP-06", "Kreatif"},
-		{"DP-07", "Kesehatan"},
-		{"DP-08", "Komunikasi"},
-	}
+	// Use the 8 standard dimensions from Deep Learning framework
+	standardDimensions := GetStandardDimensions()
 
-	for _, d := range dimensions {
+	for _, dimension := range standardDimensions {
 		var count int64
-		r.db.Model(&ProfileDimension{}).Where("dimension_code = ?", d.Code).Count(&count)
+		r.db.Model(&ProfileDimension{}).Where("dimension_code = ?", dimension.DimensionCode).Count(&count)
 		if count == 0 {
-			r.db.Create(&ProfileDimension{
-				DimensionCode: d.Code,
-				DimensionName: d.Name,
-			})
+			r.db.Create(&dimension)
 		}
 	}
+
+	// Delete any non-standard dimensions that might exist (cleanup)
+	// This removes old Pancasila-based dimensions if they exist
+	r.db.Where("dimension_code NOT IN (?)", []string{
+		DimensionCodeKeimanan,
+		DimensionCodeKewargaan,
+		DimensionCodePenalaran,
+		DimensionCodeKreativitas,
+		DimensionCodeKolaborasi,
+		DimensionCodeKemandirian,
+		DimensionCodeKesehatan,
+		DimensionCodeKomunikasi,
+	}).Delete(&ProfileDimension{})
+
 	return nil
 }

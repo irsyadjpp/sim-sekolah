@@ -431,7 +431,7 @@ export default function RolePermissionList({
         initialState={{
           columns: { columnVisibilityModel: { id: false } },
         }}
-        pagination={false}
+        hideFooterPagination
         hideFooter
         getRowSpacing={getRowSpacing}
         rowHeight={68}
@@ -471,7 +471,7 @@ export default function RolePermissionList({
           filterPanelDeleteIcon: NiCross,
           filterPanelRemoveAllIcon: NiBinEmpty,
           baseSelect: (props: any) => {
-            const propsCasted = props as SelectProps;
+            const propsCasted = props as unknown as SelectProps;
             return (
               <FormControl size="small" variant="outlined">
                 <InputLabel>{props.label}</InputLabel>

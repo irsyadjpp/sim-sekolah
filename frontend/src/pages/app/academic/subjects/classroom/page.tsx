@@ -413,7 +413,7 @@ export default function ClassroomsPage() {
 
   const handleUnenrollStudent = async (enrollmentId: string) => {
     if (!selectedClassroomForEnrollment) return;
-    if (!confirm("Apakah Anda yakin ingin mengeluarkan siswa ini dari kelas?")) return;
+    if (!window.confirm("Apakah Anda yakin ingin mengeluarkan siswa ini dari kelas?")) return;
     setDialogLoading(true);
     setDialogError(null);
     setDialogSuccess(null);
@@ -602,7 +602,7 @@ export default function ClassroomsPage() {
                         onClick={() => handleOpenAssignments(c)}
                         className="rounded-xl border border-slate-100 p-2 transition-all hover:bg-slate-50"
                       >
-                        <AssignmentIcon size="small" />
+                        <AssignmentIcon fontSize="small" />
                       </IconButton>
                       <IconButton
                         size="small"
@@ -611,7 +611,7 @@ export default function ClassroomsPage() {
                         onClick={() => handleOpenEnrollments(c)}
                         className="rounded-xl border border-slate-100 p-2 transition-all hover:bg-slate-50"
                       >
-                        <PeopleIcon size="small" />
+                        <PeopleIcon fontSize="small" />
                       </IconButton>
                       <IconButton
                         size="small"
@@ -878,7 +878,7 @@ export default function ClassroomsPage() {
                           <TableCell className="font-medium text-slate-600">{a.teacher?.full_name}</TableCell>
                           <TableCell align="center">
                             <IconButton color="error" size="small" onClick={() => handleDeleteAssignment(a.id)}>
-                              <DeleteIcon size="small" />
+                              <DeleteIcon fontSize="small" />
                             </IconButton>
                           </TableCell>
                         </TableRow>
@@ -1028,7 +1028,7 @@ export default function ClassroomsPage() {
                           <TableCell className="font-bold text-slate-800">{e.student?.full_name}</TableCell>
                           <TableCell align="center">
                             <IconButton color="error" size="small" onClick={() => handleUnenrollStudent(e.id)}>
-                              <DeleteIcon size="small" />
+                              <DeleteIcon fontSize="small" />
                             </IconButton>
                           </TableCell>
                         </TableRow>

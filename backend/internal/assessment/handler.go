@@ -132,3 +132,77 @@ func (h *AssessmentHandler) UpsertAttendances(c *fiber.Ctx) error {
 	}
 	return common.Success(c, "Data kehadiran berhasil disimpan", nil)
 }
+
+// GetAgeAppropriateTypes godoc
+func (h *AssessmentHandler) GetAgeAppropriateTypes(c *fiber.Ctx) error {
+	data := h.svc.GetAgeAppropriateTypes()
+	return common.Success(c, "Tipe asesmen SD berhasil diambil", data)
+}
+
+// SD Assessment Criteria Handlers
+
+// GetAllSDAssessmentCriteria godoc
+func (h *AssessmentHandler) GetAllSDAssessmentCriteria(c *fiber.Ctx) error {
+	data, err := h.svc.GetAllSDAssessmentCriteria(c.UserContext())
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil kriteria asesmen SD", err)
+	}
+	return common.Success(c, "Kriteria asesmen SD berhasil diambil", data)
+}
+
+// GetSDAssessmentCriteriaByType godoc
+func (h *AssessmentHandler) GetSDAssessmentCriteriaByType(c *fiber.Ctx) error {
+	assessmentType := c.Params("type")
+	data, err := h.svc.GetSDAssessmentCriteriaByType(c.UserContext(), assessmentType)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil kriteria asesmen SD berdasarkan tipe", err)
+	}
+	return common.Success(c, "Kriteria asesmen SD berhasil diambil", data)
+}
+
+// GetSDAssessmentCriteriaByPhase godoc
+func (h *AssessmentHandler) GetSDAssessmentCriteriaByPhase(c *fiber.Ctx) error {
+	phaseID := c.Params("phaseId")
+	data, err := h.svc.GetSDAssessmentCriteriaByPhase(c.UserContext(), phaseID)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengambil kriteria asesmen SD berdasarkan fase", err)
+	}
+	return common.Success(c, "Kriteria asesmen SD berhasil diambil", data)
+}
+
+// CreateSDAssessmentCriteria godoc
+func (h *AssessmentHandler) CreateSDAssessmentCriteria(c *fiber.Ctx) error {
+	var req CreateSDAssessmentCriteriaRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
+	}
+
+	data, err := h.svc.CreateSDAssessmentCriteria(c.UserContext(), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal membuat kriteria asesmen SD", err)
+	}
+	return common.Created(c, "Kriteria asesmen SD berhasil dibuat", data)
+}
+
+// UpdateSDAssessmentCriteria godoc
+func (h *AssessmentHandler) UpdateSDAssessmentCriteria(c *fiber.Ctx) error {
+	id := c.Params("id")
+	var req UpdateSDAssessmentCriteriaRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Request body tidak valid", err)
+	}
+
+	data, err := h.svc.UpdateSDAssessmentCriteria(c.UserContext(), id, req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengupdate kriteria asesmen SD", err)
+	}
+	return common.Success(c, "Kriteria asesmen SD berhasil diupdate", data)
+}
+
+// DeleteSDAssessmentCriteria godoc
+func (h *AssessmentHandler) DeleteSDAssessmentCriteria(c *fiber.Ctx) error {
+	if err := h.svc.DeleteSDAssessmentCriteria(c.UserContext(), c.Params("id")); err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal menghapus kriteria asesmen SD", err)
+	}
+	return common.Success(c, "Kriteria asesmen SD berhasil dihapus", nil)
+}

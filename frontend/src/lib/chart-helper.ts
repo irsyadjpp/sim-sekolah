@@ -95,14 +95,14 @@ export const tooltipHooksToDataset = ({
     return axesTooltip.map(({ seriesItems, axisFormattedValue, axisValue }) => ({
       id: crypto.randomUUID(),
       title: {
-        label: axisFormattedValue ?? axisValue,
+        label: String(axisFormattedValue ?? axisValue),
       },
       values: seriesItems.map(({ color, formattedLabel, formattedValue, value }) => ({
         id: crypto.randomUUID(),
         showMark: true,
         color,
         label: formattedLabel,
-        value: formattedValue ?? value,
+        value: String(formattedValue ?? value),
       })),
     }));
   }

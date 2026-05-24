@@ -2,6 +2,9 @@ package profile_dimension
 
 import (
 	"context"
+	"errors"
+	"strings"
+
 	"sim-sekolah/internal/common"
 )
 
@@ -11,6 +14,7 @@ type ProfileDimensionService interface {
 	Create(ctx context.Context, req CreateProfileDimensionRequest) (*ProfileDimension, error)
 	Update(ctx context.Context, id string, req UpdateProfileDimensionRequest) (*ProfileDimension, error)
 	Delete(ctx context.Context, id string) error
+	ValidateStandardDimensionCode(code string) error
 }
 
 type profileDimensionService struct {
@@ -30,6 +34,11 @@ func (s *profileDimensionService) GetByID(id string) (*ProfileDimension, error) 
 }
 
 func (s *profileDimensionService) Create(ctx context.Context, req CreateProfileDimensionRequest) (*ProfileDimension, error) {
+	// Validate that the dimension code is one of the 8 standard dimensions
+	if err := s.ValidateStandardDimensionCode(req.DimensionCode); err != nil {
+		return nil, err
+	}
+
 	d := &ProfileDimension{
 		DimensionCode: req.DimensionCode,
 		DimensionName: req.DimensionName,
@@ -58,6 +67,10 @@ func (s *profileDimensionService) Update(ctx context.Context, id string, req Upd
 	}
 
 	if req.DimensionCode != "" {
+		// Validate that the new dimension code is one of the 8 standard dimensions
+		if err := s.ValidateStandardDimensionCode(req.DimensionCode); err != nil {
+			return nil, err
+		}
 		d.DimensionCode = req.DimensionCode
 	}
 	if req.DimensionName != "" {
@@ -87,4 +100,29 @@ func (s *profileDimensionService) Delete(ctx context.Context, id string) error {
 	}
 
 	return s.repo.Delete(ctx, id)
+}
+
+// ValidateStandardDimensionCode validates that the dimension code is one of the 8 standard profile dimensions
+// from the Deep Learning framework
+func (s *profileDimensionService) ValidateStandardDimensionCode(code string) error {
+	// Normalize code to uppercase for comparison
+	normalizedCode := strings.ToUpper(strings.TrimSpace(code))
+
+	// Define valid dimension codes according to Deep Learning framework
+	validDimensionCodes := map[string]bool{
+		DimensionCodeKeimanan:    true,
+		DimensionCodeKewargaan:   true,
+		DimensionCodePenalaran:   true,
+		DimensionCodeKreativitas: true,
+		DimensionCodeKolaborasi:  true,
+		DimensionCodeKemandirian: true,
+		DimensionCodeKesehatan:   true,
+		DimensionCodeKomunikasi:  true,
+	}
+
+	if !validDimensionCodes[normalizedCode] {
+		return errors.New("kode dimensi profil tidak valid. Hanya 8 dimensi profil lulusan Deep Learning yang diperbolehkan: DIM_KEIMANAN, DIM_KEWARGAAN, DIM_PENALARAN, DIM_KREATIVITAS, DIM_KOLABORASI, DIM_KEMANDIRIAN, DIM_KESEHATAN, DIM_KOMUNIKASI")
+	}
+
+	return nil
 }

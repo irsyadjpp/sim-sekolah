@@ -53,6 +53,13 @@ export const leftMenuItems: MenuItem[] = [
       },
       { id: "characteristics", label: "menu-data-local", icon: "NiMap", href: "/local-context" },
       { id: "ksp-doc", label: "menu-ksp-builder", icon: "NiPen", href: "/academic/ksp" },
+      { id: "kokurikuler", label: "menu-kokurikuler", icon: "NiCalendar", href: "/academic/curriculum/kokurikuler" },
+      {
+        id: "ekstrakurikuler",
+        label: "menu-ekstrakurikuler",
+        icon: "NiBriefcase",
+        href: "/academic/curriculum/ekstrakurikuler",
+      },
     ],
   },
   {
@@ -78,6 +85,51 @@ export const leftMenuItems: MenuItem[] = [
     ],
   },
   {
+    id: "sd-spesifik",
+    icon: "NiUsers",
+    label: "menu-sd-specifics",
+    href: "/academic/foundational-skills",
+    color: "text-primary",
+    children: [
+      {
+        id: "foundational-skills",
+        label: "menu-foundational-skills",
+        icon: "NiBook",
+        href: "/academic/foundational-skills",
+        children: [
+          {
+            id: "foundational-skills-assessment",
+            label: "menu-foundational-assessment",
+            href: "/academic/foundational-skills/assessment",
+          },
+          {
+            id: "foundational-skills-progress",
+            label: "menu-foundational-progress",
+            href: "/academic/foundational-skills/progress",
+          },
+        ],
+      },
+      {
+        id: "reading-literacy",
+        label: "menu-reading-literacy",
+        icon: "NiArchive",
+        href: "/academic/reading-literacy",
+        children: [
+          {
+            id: "reading-literacy-assessment",
+            label: "menu-reading-assessment",
+            href: "/academic/reading-literacy/assessment",
+          },
+          {
+            id: "reading-literacy-progression",
+            label: "menu-reading-progression",
+            href: "/academic/reading-literacy/progression",
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: "asesmen",
     icon: "NiPen",
     label: "menu-assessment",
@@ -85,8 +137,14 @@ export const leftMenuItems: MenuItem[] = [
     color: "text-primary",
     children: [
       { id: "question-bank", label: "menu-question-bank", icon: "NiArchive", href: "/academic/evaluation/bank" },
-      { id: "formative", label: "menu-formative-value", icon: "NiActivity", href: "/academic/evaluation/formative" },
+      { id: "formative", label: "menu-formative-value", icon: "NiChartBar", href: "/academic/evaluation/formative" },
       { id: "summative", label: "menu-summative-value", icon: "NiStar", href: "/academic/evaluation/summative" },
+      {
+        id: "sd-criteria",
+        label: "menu-sd-assessment-criteria",
+        icon: "NiCheckFull",
+        href: "/academic/evaluation/criteria",
+      },
     ],
   },
   {
@@ -114,7 +172,7 @@ export const leftMenuBottomItems: MenuItem[] = [
       { id: "access-rights", label: "menu-access-rights", icon: "NiLock", href: "/system/access" },
       { id: "academic-year", label: "menu-academic-year-cycle", icon: "NiCalendar", href: "/system/academic-years" },
       { id: "grade-level", label: "menu-grade-master", icon: "NiLayout", href: "/system/grades" },
-      { id: "system-status", label: "menu-data-index", icon: "NiActivity", href: "/system/engine" },
+      { id: "system-status", label: "menu-data-index", icon: "NiChartBar", href: "/system/engine" },
     ],
   },
   { id: "guide", label: "menu-guide", href: "/docs", icon: "NiBook", color: "text-primary" },
