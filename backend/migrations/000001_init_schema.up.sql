@@ -71,9 +71,9 @@ CREATE TABLE IF NOT EXISTS cur_cp_detail (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS cur_learning_objective (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -82,9 +82,9 @@ CREATE TABLE IF NOT EXISTS cur_learning_objective (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS cur_learning_outcome (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -96,9 +96,9 @@ CREATE TABLE IF NOT EXISTS cur_learning_outcome (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS dl_assessment_level (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -108,9 +108,9 @@ CREATE TABLE IF NOT EXISTS dl_assessment_level (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS dl_cognitive_stage (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -120,9 +120,9 @@ CREATE TABLE IF NOT EXISTS dl_cognitive_stage (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS dl_design_element (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -132,9 +132,9 @@ CREATE TABLE IF NOT EXISTS dl_design_element (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS master_academic_year (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -173,9 +173,9 @@ CREATE TABLE IF NOT EXISTS master_local_context (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS master_local_context_category (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -185,9 +185,9 @@ CREATE TABLE IF NOT EXISTS master_local_context_category (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS master_phase (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -197,9 +197,9 @@ CREATE TABLE IF NOT EXISTS master_phase (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS master_profile_dimension (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -210,9 +210,9 @@ CREATE TABLE IF NOT EXISTS master_profile_dimension (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS master_school (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -333,9 +333,9 @@ CREATE TABLE IF NOT EXISTS master_subject (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS master_subject_characteristic (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -344,9 +344,9 @@ CREATE TABLE IF NOT EXISTS master_subject_characteristic (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS master_subject_element (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -359,9 +359,9 @@ CREATE TABLE IF NOT EXISTS master_subject_element (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS master_teacher (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -432,9 +432,9 @@ CREATE TABLE IF NOT EXISTS trx_academic_score (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS trx_assessment (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -453,9 +453,9 @@ CREATE TABLE IF NOT EXISTS trx_assessment_p5 (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS trx_assessment_score (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -471,9 +471,9 @@ CREATE TABLE IF NOT EXISTS trx_atp (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS trx_atp_detail (
     atp_id uuid NOT NULL,
@@ -491,9 +491,9 @@ CREATE TABLE IF NOT EXISTS trx_attendance (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS trx_enrollment (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -586,9 +586,9 @@ CREATE TABLE IF NOT EXISTS trx_project_module (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS trx_question_bank (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -599,9 +599,9 @@ CREATE TABLE IF NOT EXISTS trx_question_bank (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS trx_report (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
@@ -666,9 +666,9 @@ CREATE TABLE IF NOT EXISTS trx_teaching_module (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     deleted_at timestamp with time zone,
-    created_by text,
-    updated_by text,
-    deleted_by text
+    created_by uuid,
+    updated_by uuid,
+    deleted_by uuid
 );
 CREATE TABLE IF NOT EXISTS trx_teaching_module_activity (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,

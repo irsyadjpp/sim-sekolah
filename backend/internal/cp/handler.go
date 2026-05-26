@@ -257,6 +257,36 @@ func (h *CPHandler) CreateObjective(c *fiber.Ctx) error {
 	return common.Created(c, "Tujuan pembelajaran berhasil dibuat", data)
 }
 
+func (h *CPHandler) GetObjectiveByID(c *fiber.Ctx) error {
+	data, err := h.svc.GetObjectiveByID(c.Params("id"))
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusNotFound, "Tujuan pembelajaran tidak ditemukan", err)
+	}
+	return common.Success(c, "Tujuan pembelajaran berhasil diambil", data)
+}
+
+func (h *CPHandler) UpdateObjective(c *fiber.Ctx) error {
+	var req UpdateTPRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+	if err := common.Validate.Struct(req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
+	}
+	data, err := h.svc.UpdateObjective(c.UserContext(), c.Params("cpId"), c.Params("id"), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengupdate tujuan pembelajaran", err)
+	}
+
+	// Trigger Audit Log
+	userID, _ := c.Locals("user_id").(string)
+	if system.GlobalAuditService != nil && data != nil {
+		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "UPDATE", "learning_objective", data.ID.String(), c.IP())
+	}
+
+	return common.Success(c, "Tujuan pembelajaran berhasil diupdate", data)
+}
+
 func (h *CPHandler) DeleteObjective(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if err := h.svc.DeleteObjective(c.UserContext(), c.Params("cpId"), id); err != nil {

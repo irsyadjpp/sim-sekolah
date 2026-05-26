@@ -37,5 +37,17 @@ type UpdateCPDetailRequest struct {
 }
 
 type CreateTPRequest struct {
-	Description string `json:"description" validate:"required" example:"Peserta didik mampu menjumlahkan dua bilangan cacah hingga 20"` // Deskripsi Tujuan Pembelajaran (TP) yang diturunkan dari CP
+	Description     string  `json:"description" validate:"required" example:"Peserta didik mampu menjumlahkan dua bilangan cacah hingga 20"`
+	Sequence        int     `json:"sequence" validate:"omitempty,min=1" example:"1"`                               // Urutan TP
+	DifficultyLevel string  `json:"difficulty_level" validate:"omitempty,oneof=EASY MEDIUM HARD" example:"MEDIUM"` // Tingkat kesulitan
+	CognitiveDomain string  `json:"cognitive_domain" validate:"omitempty,oneof=C1 C2 C3 C4 C5 C6" example:"C3"`    // Domain kognitif Bloom's
+	EstimatedHours  float64 `json:"estimated_hours" validate:"omitempty,min=0" example:"2.0"`                      // Estimasi waktu (jam)
+}
+
+type UpdateTPRequest struct {
+	Description     string  `json:"description" validate:"omitempty" example:"Peserta didik mampu menjumlahkan dua bilangan cacah hingga 20"`
+	Sequence        int     `json:"sequence" validate:"omitempty,min=1" example:"1"`
+	DifficultyLevel string  `json:"difficulty_level" validate:"omitempty,oneof=EASY MEDIUM HARD" example:"MEDIUM"`
+	CognitiveDomain string  `json:"cognitive_domain" validate:"omitempty,oneof=C1 C2 C3 C4 C5 C6" example:"C3"`
+	EstimatedHours  float64 `json:"estimated_hours" validate:"omitempty,min=0" example:"2.0"`
 }

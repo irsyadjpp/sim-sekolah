@@ -39,6 +39,8 @@ func SetupRoutes(api fiber.Router, db *gorm.DB) {
 
 	// TP (Tujuan Pembelajaran)
 	group.Get("/:cpId/tujuan-pembelajaran", h.GetAllObjectives)
-	group.Post("/:cpId/tujuan-pembelajaran", h.CreateObjective)
-	group.Delete("/:cpId/tujuan-pembelajaran/:id", h.DeleteObjective)
+	group.Get("/:cpId/tujuan-pembelajaran/:id", h.GetObjectiveByID)
+	group.Post("/:cpId/tujuan-pembelajaran", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.CreateObjective)
+	group.Put("/:cpId/tujuan-pembelajaran/:id", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.UpdateObjective)
+	group.Delete("/:cpId/tujuan-pembelajaran/:id", auth.RoleMiddleware("SUPER_ADMIN", "ADMIN_SEKOLAH"), h.DeleteObjective)
 }

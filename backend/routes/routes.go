@@ -7,37 +7,49 @@ import (
 	"sim-sekolah/internal/auth"
 	"sim-sekolah/internal/character_intervention"
 	"sim-sekolah/internal/classroom"
+	"sim-sekolah/internal/communication"
 	"sim-sekolah/internal/cp"
 	"sim-sekolah/internal/curriculum"
+	"sim-sekolah/internal/database_monitoring"
 	"sim-sekolah/internal/deep_learning"
 	"sim-sekolah/internal/differentiated_instruction"
+	"sim-sekolah/internal/document_repository"
 	"sim-sekolah/internal/enrollment"
 	"sim-sekolah/internal/foundational_skills"
 	"sim-sekolah/internal/grade"
 	"sim-sekolah/internal/individual_learning_plan"
 	"sim-sekolah/internal/intelligence"
+	"sim-sekolah/internal/intervention"
 	"sim-sekolah/internal/learning"
 	"sim-sekolah/internal/learning_experience"
 	"sim-sekolah/internal/learning_principle"
+	"sim-sekolah/internal/lesson_planning"
 	"sim-sekolah/internal/local_context"
+	"sim-sekolah/internal/numeracy"
+	"sim-sekolah/internal/offline"
 	"sim-sekolah/internal/olah_aspect"
+	"sim-sekolah/internal/p5"
 	"sim-sekolah/internal/parent_partnership"
 	"sim-sekolah/internal/peer_assessment"
 	"sim-sekolah/internal/permission"
 	"sim-sekolah/internal/phase"
 	"sim-sekolah/internal/play_based_learning"
+	"sim-sekolah/internal/portfolio"
 	"sim-sekolah/internal/profile_dimension"
 	"sim-sekolah/internal/promotion"
 	"sim-sekolah/internal/reading_literacy"
 	"sim-sekolah/internal/report"
+	"sim-sekolah/internal/rubric"
 	"sim-sekolah/internal/schedule"
 	"sim-sekolah/internal/school"
 	"sim-sekolah/internal/spmb"
 	"sim-sekolah/internal/student"
 	"sim-sekolah/internal/subject"
+	"sim-sekolah/internal/supervision"
 	"sim-sekolah/internal/system"
 	"sim-sekolah/internal/teacher"
 	"sim-sekolah/internal/teaching_assignment"
+	"sim-sekolah/internal/teaching_reflection"
 	"sim-sekolah/internal/user"
 
 	"github.com/gofiber/fiber/v2"
@@ -61,6 +73,10 @@ func SetupRoutes(api fiber.Router, db *gorm.DB, rdb *redis.Client) {
 	learning_experience.SetupRoutes(api, db)
 	foundational_skills.SetupRoutes(api, db)
 	reading_literacy.SetupRoutes(api, db)
+	numeracy.SetupRoutes(api, db)
+	portfolio.SetupRoutes(api, db)
+	communication.SetupRoutes(api, db)
+	offline.SetupRoutes(api, db)
 
 	// Phase 3 - Deep Learning Enhancements
 	individual_learning_plan.SetupRoutes(api, db)
@@ -96,18 +112,32 @@ func SetupRoutes(api fiber.Router, db *gorm.DB, rdb *redis.Client) {
 
 	// Penilaian / Asesmen
 	assessment.SetupRoutes(api, db)
+	rubric.SetupRoutes(api, db)
+
+	// Phase 3 - Academic Quality & Supervision
+	supervision.SetupRoutes(api, db)
+	teaching_reflection.SetupRoutes(api, db)
+	intervention.SetupRoutes(api, db)
 
 	// Rapor
 	report.SetupRoutes(api, db)
 
 	// Pembelajaran (Phase 5)
 	learning.SetupRoutes(api, db)
+	lesson_planning.SetupRoutes(api, db)
+	p5.SetupRoutes(api, db)
 
 	// Integrasi AI
 	ai.SetupRoutes(api, db)
 
 	// SPMB
 	spmb.SetupRoutes(api, db)
+
+	// Phase 5 - Database Optimization & Monitoring
+	database_monitoring.SetupRoutes(api, db)
+
+	// Phase 4 - Advanced Features
+	document_repository.SetupRoutes(api, db)
 
 	// System Dashboard
 	system.SetupRoutes(api, db, rdb)

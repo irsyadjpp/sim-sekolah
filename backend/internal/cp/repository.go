@@ -206,7 +206,9 @@ func (r *cpDetailRepository) Delete(ctx context.Context, id string) error {
 // LearningObjectiveRepository
 type LearningObjectiveRepository interface {
 	GetAllByCP(cpID string) ([]LearningObjective, error)
+	GetByID(id string) (*LearningObjective, error)
 	Create(ctx context.Context, data *LearningObjective) error
+	Update(ctx context.Context, data *LearningObjective) error
 	Delete(ctx context.Context, id string) error
 }
 
@@ -220,12 +222,29 @@ func NewLearningObjectiveRepository(db *gorm.DB) LearningObjectiveRepository {
 
 func (r *learningObjectiveRepository) GetAllByCP(cpID string) ([]LearningObjective, error) {
 	var objectives []LearningObjective
-	err := r.db.Where("learning_outcome_id = ?", cpID).Order("created_at ASC").Find(&objectives).Error
+	err := r.db.Where("learning_outcome_id = ?", cpID).Order("sequence ASC, created_at ASC").Find(&objectives).Error
 	return objectives, err
+}
+
+func (r *learningObjectiveRepository) GetByID(id string) (*LearningObjective, error) {
+	var objective LearningObjective
+	err := r.db.Where("id = ?", id).First(&objective).Error
+	if err != nil {
+		return nil, err
+	}
+	return &objective, nil
 }
 
 func (r *learningObjectiveRepository) Create(ctx context.Context, data *LearningObjective) error {
 	err := r.db.WithContext(ctx).Create(data).Error
+	if err == nil && cache.GlobalCache != nil {
+		_ = cache.GlobalCache.DeletePattern(context.Background(), "cp:list:*")
+	}
+	return err
+}
+
+func (r *learningObjectiveRepository) Update(ctx context.Context, data *LearningObjective) error {
+	err := r.db.WithContext(ctx).Save(data).Error
 	if err == nil && cache.GlobalCache != nil {
 		_ = cache.GlobalCache.DeletePattern(context.Background(), "cp:list:*")
 	}

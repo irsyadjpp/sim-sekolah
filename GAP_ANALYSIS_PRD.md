@@ -342,6 +342,113 @@ The following advanced features exist in the current system but are not specifie
 
 ---
 
+## ADDITIONAL HIDDEN GAP ANALYSIS
+
+Based on pedagogical requirements for SD Kurikulum Merdeka, Deep Learning, and the specific context of UPT SDI Bonerate No. 85 in Kepulauan Selayar, the following critical gaps have been identified:
+
+### MODULE 18 — LEARNING EVIDENCE & PEDAGOGICAL TRACEABILITY
+
+| Feature                        | PRD Requirement                                  | Existing System   | Gap Status | Notes                                       |
+| ------------------------------ | -------------------------------------------- | ----------------- | ---------- | ------------------------------------------- |
+| Learning Evidence Repository   | Evidence storage linked to CP/TP/project     | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada centralized evidence repository   |
+| Evidence-to-Competency Mapping | Evidence mapped to competency progression    | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada linkage evidence → CP/TP/Profile  |
+| Assessment Evidence Tracking   | Photo/video/document assessment evidence     | ⚠️ PARTIAL        | ⚠️ PARTIAL | Artifact concept ada tapi belum terstruktur |
+| Learning Artifact Validation   | Teacher validation for evidence authenticity | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada approval workflow                 |
+| Evidence Timeline              | Longitudinal evidence timeline               | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada chronological learning evidence   |
+
+**Gap:** Critical for Kurikulum Merdeka Deep Learning implementation requiring evidence-based assessment
+
+---
+
+### MODULE 19 — LONGITUDINAL STUDENT GROWTH
+
+| Feature                         | Requirement                        | Existing System   | Gap Status | Notes                              |
+| ------------------------------- | ---------------------------------- | ----------------- | ---------- | ---------------------------------- |
+| Multi-Year Growth Tracking      | Kelas 1–6 growth progression       | ❌ NOT IMPLEMENTED | ❌ GAP      | Existing masih semester-based      |
+| Development Curve Analytics     | Academic & character growth curve  | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada developmental trajectory |
+| Competency Progression Timeline | CP/TP competency evolution         | ⚠️ PARTIAL        | ⚠️ PARTIAL | Snapshot competency ada            |
+| Longitudinal Portfolio          | Continuous student journey         | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada student journey engine   |
+| Student Growth Narrative        | Narrative perkembangan multi-tahun | ❌ NOT IMPLEMENTED | ❌ GAP      | AI narrative masih raport-based    |
+
+**Gap:** Critical for SD growth-based pedagogy and multi-year student development tracking
+
+---
+
+### MODULE 20 — REMEDIAL & ENRICHMENT ENGINE
+
+| Feature                 | Requirement                          | Existing System   | Gap Status | Notes                                      |
+| ----------------------- | ------------------------------------ | ----------------- | ---------- | ------------------------------------------ |
+| Remedial Workflow       | Structured remedial assignment flow  | ❌ NOT IMPLEMENTED | ❌ GAP      | Intervention ada tapi belum workflow-based |
+| Enrichment Workflow     | Advanced student enrichment pathway  | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada enrichment engine                |
+| Intervention Assignment | Assign intervention activity         | ⚠️ PARTIAL        | ⚠️ PARTIAL | ILP partially covers this                  |
+| Intervention Monitoring | Progress monitoring per intervention | ⚠️ PARTIAL        | ⚠️ PARTIAL | Basic monitoring exists                    |
+| Adaptive Remediation    | AI-assisted remedial recommendation  | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada adaptive engine                  |
+| Remedial Analytics      | Remedial effectiveness tracking      | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada analytics khusus remedial        |
+
+**Gap:** Important for personalized learning and intervention effectiveness tracking
+
+---
+
+### MODULE 21 — TEACHER WORKLOAD & TEACHING ANALYTICS
+
+| Feature                          | Requirement                      | Existing System   | Gap Status | Notes                                     |
+| -------------------------------- | -------------------------------- | ----------------- | ---------- | ----------------------------------------- |
+| Teacher Workload Analytics       | Teaching load calculation        | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada workload engine                 |
+| Assessment Load Tracking         | Assessment burden analytics      | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada assessment distribution         |
+| Intervention Load Tracking       | Monitoring intervention workload | ❌ NOT IMPLEMENTED | ❌ GAP      | Penting untuk wali kelas                  |
+| Teaching Effectiveness Analytics | Learning outcome effectiveness   | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada teacher impact analytics        |
+| Reflective Teaching Analytics    | Reflection quality monitoring    | ❌ NOT IMPLEMENTED | ❌ GAP      | Deep learning reflection belum dianalisis |
+| Teacher Burnout Indicator        | Workload & fatigue signal        | ❌ NOT IMPLEMENTED | ❌ GAP      | Sangat penting untuk sustainability       |
+
+**Gap:** Critical for teacher sustainability and teaching quality improvement
+
+---
+
+### MODULE 22 — OFFLINE-FIRST & RURAL READINESS
+
+| Feature                       | Requirement                           | Existing System   | Gap Status | Notes                            |
+| ----------------------------- | ------------------------------------- | ----------------- | ---------- | -------------------------------- |
+| Offline Data Entry            | Offline assessment & attendance       | ❌ NOT IMPLEMENTED | ❌ GAP      | Sangat penting untuk kepulauan   |
+| Sync Engine                   | Intermittent internet synchronization | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada offline sync strategy  |
+| Conflict Resolution           | Data merge conflict management        | ❌ NOT IMPLEMENTED | ❌ GAP      | Critical untuk offline-first     |
+| Lightweight Mode              | Low bandwidth optimization            | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada bandwidth optimization |
+| Mobile-First Teacher Workflow | HP-centric teacher operation          | ⚠️ PARTIAL        | ⚠️ PARTIAL | Responsive UI belum cukup        |
+| Progressive Web App (PWA)     | Installable offline-ready app         | ❌ NOT IMPLEMENTED | ❌ GAP      | Sangat direkomendasikan          |
+
+**Gap:** 🔴 CRITICAL - Essential for UPT SDI Bonerate No. 85 in Kepulauan Selayar with limited internet connectivity
+
+---
+
+### MODULE 23 — NATIONAL EDUCATION INTEROPERABILITY
+
+| Feature                     | Requirement                       | Existing System   | Gap Status | Notes                            |
+| --------------------------- | --------------------------------- | ----------------- | ---------- | -------------------------------- |
+| Dapodik Readiness           | Dapodik-compatible export/import  | ❌ NOT IMPLEMENTED | ❌ GAP      | Penting untuk operasional nyata  |
+| ARKAS Compatibility         | Financial/report interoperability | ❌ NOT IMPLEMENTED | ❌ GAP      | Optional future integration      |
+| Raport Nasional Export      | National report format            | ⚠️ PARTIAL        | ⚠️ PARTIAL | Basic raport exists              |
+| National Assessment Mapping | ANBK competency mapping           | ❌ NOT IMPLEMENTED | ❌ GAP      | Penting untuk numerasi           |
+| Education Data API          | Standardized educational API      | ❌ NOT IMPLEMENTED | ❌ GAP      | Belum ada interoperability layer |
+| EMIS/PDUM Integration Ready | Future ministry interoperability  | ❌ NOT IMPLEMENTED | ❌ GAP      | Future-proofing needed           |
+
+**Gap:** Medium priority for national interoperability, critical for Dapodik integration
+
+---
+
+## UPDATED CRITICAL GAP PRIORITY MATRIX
+
+### 🔴 NEW CRITICAL GAPS (Highest Priority)
+
+| Module                      | Severity    | Reason                                | Context Priority |
+| --------------------------- | ----------- | ------------------------------------- | ---------------- |
+| Numerasi Engine             | 🔴 CRITICAL | Core national competency requirement | Phase 2+ |
+| Offline-First Readiness     | 🔴 CRITICAL | Kepulauan Selayar operational reality | Phase 1+ |
+| Longitudinal Student Growth | 🔴 CRITICAL | SD growth-based pedagogy              | Phase 2+ |
+| Portfolio & Evidence System | 🔴 CRITICAL | Deep Learning evidence requirement      | Phase 2+ |
+| Parent Engagement           | 🔴 CRITICAL | SD ecosystem requirement              | Phase 2+ |
+| Teacher Workload Analytics   | 🔴 CRITICAL | Teacher sustainability & effectiveness  | Phase 2+ |
+
+---
+
 ## GAP SUMMARY MATRIX
 
 ### Critical Gaps (High Priority)
@@ -699,13 +806,20 @@ The existing system includes many specialized tables not specified in the DDD, d
 3. **❌ Communication Schema Missing** - No announcement/messaging/notifications tables
 4. **❌ Analytics Schema Missing** - No dedicated analytics/ai_recommendations tables
 5. **❌ Rubric Tables Missing** - No rubric/rubric_criteria tables
+6. **❌ Project Schema Missing** - No comprehensive project-based learning schema
+7. **❌ Supervision Schema Missing** - No academic supervision database structure
+8. **❌ Document Schema Missing** - No centralized document repository
+9. **❌ Question Bank Schema Missing** - No assessment item management
 
 ### Medium Database Gaps (Medium Priority)
 1. **⚠️ Schema Organization** - Flat structure vs PostgreSQL schemas
 2. **⚠️ Lesson Plans Table** - Missing dedicated lesson plan storage
 3. **⚠️ Governance Enhancement** - Missing activity_logs, data_access_logs
-4. **⚠️ Indexing Strategy** - Performance optimization needed
-5. **⚠️ Partitioning** - Not implemented for large tables
+4. **⚠️ Character Schema Reorganization** - Existing character tables need dedicated schema
+5. **⚠️ Notification Schema** - Basic messaging exists, no comprehensive notification system
+6. **⚠️ AI Schema Structure** - AI features exist but need structured ML operations schema
+7. **⚠️ Indexing Strategy** - Performance optimization needed
+8. **⚠️ Partitioning** - Not implemented for large tables
 
 ### Low Database Gaps (Low Priority)
 1. **⚠️ Common Columns Consistency** - created_by, updated_by, deleted_by, is_deleted inconsistent
@@ -724,6 +838,104 @@ The existing system includes **60+ specialized tables** not in the DDD, providin
 
 ---
 
+## ADDITIONAL DATABASE SCHEMA RECOMMENDATIONS
+
+Based on the hidden gap analysis for Kurikulum Merdeka Deep Learning and the specific context of UPT SDI Bonerate No. 85, the following additional schema structures are recommended:
+
+### NEW SCHEMA: project/ (Project-Based Learning)
+Supports P5 (Profil Pelajar Pancasila) projects, Kokurikuler activities, and Deep Learning projects:
+
+| Table Name | Purpose | Gap Status |
+|------------|---------|------------|
+| project.projects | Project registration and metadata | ❌ GAP |
+| project.project_teams | Team formation and membership | ❌ GAP |
+| project.project_milestones | Project phase tracking | ❌ GAP |
+| project.project_deliverables | Artifact and outcome tracking | ❌ GAP |
+| project.project_reflections | Student reflection entries | ❌ GAP |
+| project.project_assessments | Project evaluation criteria | ❌ GAP |
+
+**Gap:** Current project management is minimal; comprehensive project schema needed for Deep Learning and P5 implementation
+
+### NEW SCHEMA: character/ (Character Development)
+Supports character education, Pancasila values, and student development:
+
+| Table Name | Purpose | Gap Status |
+|------------|---------|------------|
+| character.character_profiles | Student character baseline | ⚠️ PARTIAL (exists in student profile) |
+| character.character_observations | Behavioral observation tracking | ⚠️ PARTIAL (anecdotal records exist) |
+| character.character_interventions | Character improvement programs | ⚠️ PARTIAL (character_intervention exists) |
+| character.character_growth | Longitudinal character development | ❌ GAP |
+| character.character_assessments | Character evaluation rubrics | ❌ GAP |
+
+**Gap:** Existing character intervention tables need reorganization into dedicated character schema
+
+### NEW SCHEMA: supervision/ (Academic Supervision)
+Supports principal supervision, teacher monitoring, and quality assurance:
+
+| Table Name | Purpose | Gap Status |
+|------------|---------|------------|
+| supervision.supervision_cycles | Supervision period scheduling | ❌ GAP |
+| supervision.supervision_templates | Standardized observation forms | ❌ GAP |
+| supervision.teacher_observations | Classroom observation records | ❌ GAP |
+| supervision.supervision_feedback | Feedback and follow-up actions | ❌ GAP |
+| supervision.supervision_analytics | Supervision effectiveness metrics | ❌ GAP |
+
+**Gap:** Academic supervision module completely missing from database
+
+### NEW SCHEMA: document/ (Document Repository)
+Supports accreditation, compliance, and document management:
+
+| Table Name | Purpose | Gap Status |
+|------------|---------|------------|
+| document.documents | Document metadata and storage | ❌ GAP |
+| document.document_categories | Classification system | ❌ GAP |
+| document.document_versions | Version control | ❌ GAP |
+| document.document_approvals | Approval workflow | ❌ GAP |
+| document.document_access | Access control | ❌ GAP |
+
+**Gap:** No centralized document repository for accreditation and compliance
+
+### NEW SCHEMA: qb/ (Question Bank)
+Supports assessment question management and item banking:
+
+| Table Name | Purpose | Gap Status |
+|------------|---------|------------|
+| qb.questions | Question repository | ❌ GAP |
+| qb.question_categories | Subject/topic classification | ❌ GAP |
+| qb.question_difficulty | Difficulty level calibration | ❌ GAP |
+| qb.question_tags | Metadata tagging system | ❌ GAP |
+| qb.question_usage | Usage analytics and performance | ❌ GAP |
+
+**Gap:** No question bank system for assessment item management
+
+### NEW SCHEMA: notification/ (Notification System)
+Enhanced notification management beyond basic messaging:
+
+| Table Name | Purpose | Gap Status |
+|------------|---------|------------|
+| notification.notification_templates | Standardized notification formats | ❌ GAP |
+| notification.notification_rules | Automated notification triggers | ❌ GAP |
+| notification.notification_preferences | User notification settings | ❌ GAP |
+| notification.notification_history | Notification audit trail | ❌ GAP |
+| notification.notification_channels | Multi-channel delivery (SMS, email, push) | ❌ GAP |
+
+**Gap:** Basic messaging exists but no comprehensive notification system
+
+### NEW SCHEMA: ai/ (AI & Machine Learning)
+Structured AI/ML features and model management:
+
+| Table Name | Purpose | Gap Status |
+|------------|---------|------------|
+| ai.ml_models | Model versioning and management | ⚠️ PARTIAL (basic AI integration exists) |
+| ai.training_data | Training dataset management | ❌ GAP |
+| ai.predictions | AI prediction tracking | ❌ GAP |
+| ai.feature_flags | AI feature toggles | ❌ GAP |
+| ai.performance_metrics | Model performance monitoring | ❌ GAP |
+
+**Gap:** AI features exist but need structured schema for production ML operations
+
+---
+
 ## DATABASE RECOMMENDATIONS
 
 ### Immediate Database Actions (Next 1-2 Months)
@@ -731,6 +943,7 @@ The existing system includes **60+ specialized tables** not in the DDD, providin
 2. **Create Portfolio Tables** - Implement portfolios, portfolio_artifacts tables
 3. **Add Communication Schema** - Create announcements, messages, notifications tables
 4. **Implement Rubric Tables** - Add rubrics, rubric_criteria tables
+5. **Create Project Schema** - Implement project-based learning tables for P5 and Deep Learning
 
 ### Short-term Database Actions (Next 3-6 Months)
 1. **Schema Migration Planning** - Evaluate migration from prefix-based to schema-based organization
@@ -738,6 +951,9 @@ The existing system includes **60+ specialized tables** not in the DDD, providin
 3. **Enhance Governance** - Add activity_logs, data_access_logs tables
 4. **Indexing Optimization** - Implement strategic indexing for performance
 5. **Analytics Schema** - Create dedicated analytics tables
+6. **Implement Supervision Schema** - Create academic supervision database structure
+7. **Create Document Schema** - Implement centralized document repository
+8. **Add Question Bank Schema** - Implement assessment item management system
 
 ### Long-term Database Actions (Next 6-12 Months)
 1. **Partitioning Implementation** - Implement table partitioning for large datasets
@@ -745,6 +961,9 @@ The existing system includes **60+ specialized tables** not in the DDD, providin
 3. **Data Encryption** - Implement encryption for sensitive fields
 4. **Event Tracking Schema** - Create comprehensive event logging
 5. **Read Replica Setup** - Implement read replicas for performance scaling
+6. **Character Schema Reorganization** - Restructure existing character tables into dedicated schema
+7. **Notification Schema Enhancement** - Build comprehensive notification system
+8. **AI Schema Structure** - Implement structured ML operations schema
 
 ---
 
@@ -775,36 +994,196 @@ The existing database is **well-positioned** for current operations but requires
 
 ### Immediate Actions (Next 1-2 Months)
 1. **Implement Numerasi Module & Database Schema** - This is a critical PRD requirement completely missing (both backend and database)
-2. **Develop Portfolio System & Database Tables** - Essential for student development tracking
+2. **Develop Portfolio System & Database Tables** - Essential for student development tracking and evidence repository
 3. **Build Communication Module & Database Schema** - Announcement and messaging for parent engagement
 4. **Complete TP & ATP Management** - Finish curriculum management workflow
 5. **Create Rubric Database Tables** - Add rubrics and rubric_criteria tables for assessment standardization
+6. **Implement Project-Based Learning Schema** - Support P5 projects and Deep Learning activities
+7. **Implement Offline-First Readiness** - Critical for Kepulauan Selayar operational reality
 
 ### Short-term Actions (Next 3-6 Months)
 1. **Enhance Kokurikuler Project Management** - Activity tracking and reflection
-2. **Develop Teacher Dashboard** - Dedicated analytics for teachers
+2. **Develop Teacher Dashboard** - Dedicated analytics for teachers including workload analytics
 3. **Implement Parent Dashboard/App** - Parent engagement portal
 4. **Add Assignment Management** - Complete learning workflow
-5. **Build Academic Supervision Module** - Quality assurance framework
-6. **Database Schema Optimization** - Evaluate migration to schema-based organization, enhance indexing strategy
-7. **Create Analytics Database Schema** - Implement dedicated analytics and AI recommendations tables
+5. **Build Academic Supervision Module** - Quality assurance framework with database schema
+6. **Implement Longitudinal Student Growth Tracking** - Multi-year growth progression system
+7. **Develop Learning Evidence Repository** - Evidence-to-competency mapping system
+8. **Database Schema Optimization** - Evaluate migration to schema-based organization, enhance indexing strategy
+9. **Create Analytics Database Schema** - Implement dedicated analytics and AI recommendations tables
+10. **Build Document Repository** - Accreditation support and document management
 
 ### Long-term Actions (Next 6-12 Months)
 1. **Implement AI & Coding Features** - Computational thinking, AI literacy
 2. **Develop Smart School Features** - Gamification, adaptive learning
-3. **Build Document Repository** - Accreditation support
-4. **Enhance Analytics** - Predictive analytics, recommendation engine
-5. **Implement Permission Governance** - School-specific access control workflows (single-school context)
-6. **Database Partitioning Implementation** - Implement partitioning for large datasets (assessment_results, audit_logs)
-7. **Database Security Enhancement** - Implement data encryption and row-level security
+3. **Enhance Analytics** - Predictive analytics, recommendation engine
+4. **Implement Permission Governance** - School-specific access control workflows (single-school context)
+5. **Build Question Bank System** - Assessment item management and item banking
+6. **Implement Reflective Teaching Analytics** - Teaching effectiveness and quality monitoring
+7. **Develop Remedial & Enrichment Engine** - Adaptive learning intervention system
+8. **Database Partitioning Implementation** - Implement partitioning for large datasets (assessment_results, audit_logs)
+9. **Database Security Enhancement** - Implement data encryption and row-level security
+10. **National Education Interoperability** - Dapodik integration and national assessment mapping
+
+---
+
+## COMPREHENSIVE IMPLEMENTATION PHASES
+
+This implementation plan organizes all identified gaps (original PRD gaps + additional hidden gaps) into logical phases with clear priorities for UPT SDI Bonerate No. 85 Kepulauan Selayar.
+
+### PHASE 0: Foundation & Critical Infrastructure (0-2 Months)
+**Priority:** 🔴 CRITICAL
+**Objective:** Address operational constraints and core missing functionality
+
+| Component | Tasks | Database Requirements | Risk Level |
+|-----------|-------|----------------------|------------|
+| **Offline-First Readiness** | Offline data entry, sync engine, conflict resolution, PWA implementation | sync_state, conflict_resolution tables | HIGH |
+| **Numerasi Module** | Numerasi indicators, assessments, growth tracking | numeracy_indicators, numeracy_assessments, numeracy_growth | HIGH |
+| **Portfolio System** | Student portfolios, artifact management, evidence repository | portfolios, portfolio_artifacts, learning_evidence | MEDIUM |
+| **Communication Module** | Announcements, messaging, notifications | announcements, messages, notifications | MEDIUM |
+
+**Deliverables:**
+- Offline-capable PWA application
+- Complete numerasi assessment system
+- Basic portfolio and evidence repository
+- Parent-teacher communication system
+
+---
+
+### PHASE 1: Core Curriculum Enhancement (2-4 Months)
+**Priority:** 🔴 HIGH
+**Objective:** Complete core curriculum workflow and assessment standardization
+
+| Component | Tasks | Database Requirements | Risk Level |
+|-----------|-------|----------------------|------------|
+| **TP & ATP Management** | Complete curriculum workflow, ATP detail management | Enhance existing ATP tables | MEDIUM |
+| **Rubric System** | Rubric creation, criteria definition, assessment standardization | rubrics, rubric_criteria | MEDIUM |
+| **Lesson Planning** | Dedicated lesson plan storage, template system | lesson_plans, lesson_plan_templates | LOW |
+| **Project-Based Learning** | P5 project management, team formation, milestone tracking | project.projects, project_teams, project_milestones | MEDIUM |
+
+**Deliverables:**
+- Complete TP/ATP curriculum management
+- Standardized assessment rubrics
+- Lesson planning system
+- P5 project management framework
+
+---
+
+### PHASE 2: Student Development & Analytics (4-7 Months)
+**Priority:** 🔴 HIGH
+**Objective:** Enable longitudinal tracking and data-driven decision making
+
+| Component | Tasks | Database Requirements | Risk Level |
+|-----------|-------|----------------------|------------|
+| **Longitudinal Growth Tracking** | Multi-year growth curves, competency progression timelines | student_growth_records, growth_analytics | MEDIUM |
+| **Learning Evidence System** | Evidence-to-competency mapping, artifact validation, evidence timeline | learning_evidence, evidence_competency_mapping | MEDIUM |
+| **Analytics Schema** | Learning analytics, AI recommendations, event logging | learning_analytics, ai_recommendations, event_logs | MEDIUM |
+| **Teacher Workload Analytics** | Teaching load calculation, assessment burden, intervention tracking | teacher_workload, assessment_distribution | MEDIUM |
+
+**Deliverables:**
+- Student growth trajectory system
+- Evidence-based assessment tracking
+- Comprehensive learning analytics
+- Teacher workload monitoring
+
+---
+
+### PHASE 3: Academic Quality & Supervision (7-10 Months)
+**Priority:** 🟡 MEDIUM
+**Objective:** Implement quality assurance and continuous improvement
+
+| Component | Tasks | Database Requirements | Risk Level |
+|-----------|-------|----------------------|------------|
+| **Academic Supervision** | Classroom observation, supervision cycles, feedback workflow | supervision.supervision_cycles, teacher_observations, supervision_feedback | MEDIUM |
+| **Reflective Teaching Analytics** | Reflection quality monitoring, teaching effectiveness | teaching_reflections, effectiveness_metrics | LOW |
+| **Character Development Enhancement** | Character growth tracking, structured character schema | character.character_growth, character_assessments | LOW |
+| **Remedial & Enrichment Engine** | Adaptive intervention system, enrichment pathways | remedial_workflows, enrichment_pathways | MEDIUM |
+
+**Deliverables:**
+- Academic supervision framework
+- Teaching quality analytics
+- Enhanced character development system
+- Adaptive learning intervention engine
+
+---
+
+### PHASE 4: Advanced Features & Interoperability (10-14 Months)
+**Priority:** 🟢 MEDIUM-LOW
+**Objective:** Add advanced features and external system integration
+
+| Component | Tasks | Database Requirements | Risk Level |
+|-----------|-------|----------------------|------------|
+| **Document Repository** | Centralized document management, accreditation support | document.documents, document_versions, document_approvals | LOW |
+| **Question Bank System** | Assessment item management, difficulty calibration | qb.questions, qb.question_difficulty, qb.usage_analytics | LOW |
+| **National Education Interoperability** | Dapodik integration, national assessment mapping | dapodik_mapping, national_assessment_standards | MEDIUM |
+| **AI/ML Enhancement** | Structured ML operations, model versioning | ai.ml_models, ai.predictions, performance_metrics | LOW |
+| **Notification System** | Comprehensive notification management, multi-channel delivery | notification.notification_templates, notification_rules, notification_history | LOW |
+
+**Deliverables:**
+- Document management system
+- Question bank for assessments
+- Dapodik integration
+- Production-ready AI/ML system
+- Advanced notification system
+
+---
+
+### PHASE 5: Database Optimization & Future-Proofing (12-18 Months)
+**Priority:** 🟢 LOW
+**Objective:** Optimize performance and prepare for future scalability
+
+| Component | Tasks | Database Requirements | Risk Level |
+|-----------|-------|----------------------|------------|
+| **Schema Migration** - Optional | Evaluate and migrate to PostgreSQL schemas | Schema reorganization | HIGH (disruption risk) |
+| **Partitioning Implementation** | Table partitioning for large datasets | Partition strategy for assessment_results, audit_logs | MEDIUM |
+| **Indexing Optimization** | Strategic indexing for performance | Composite indexes, partial indexes | LOW |
+| **Security Enhancement** | Data encryption, row-level security | Encryption implementation, RLS policies | MEDIUM |
+| **Read Replica Setup** | Performance scaling with read replicas | Database replication configuration | MEDIUM |
+
+**Deliverables:**
+- Optimized database performance
+- Enhanced security posture
+- Scalability improvements
+- Production-ready database architecture
+
+---
+
+### PHASE PRIORITY RATIONALE
+
+**Why Phase 0 (Offline-First) First?**
+- UPT SDI Bonerate No. 85 in Kepulauan Selayar has limited internet connectivity
+- Offline capability is essential for daily operations
+- Foundation for all other features to be usable in the context
+
+**Why Numerasi & Portfolio in Phase 0?**
+- Core PRD requirements completely missing
+- Critical for Kurikulum Merdeka compliance
+- Foundation for assessment and evidence-based learning
+
+**Why Supervision in Phase 3?**
+- Requires foundational systems (assessment, curriculum, analytics)
+- Quality assurance is important but not blocking initial operations
+- Builds upon teacher workload analytics from Phase 2
+
+**Why Database Optimization in Phase 5?**
+- Performance issues unlikely with single-school deployment initially
+- Schema migration carries high disruption risk
+- Can be deferred until system stabilizes
+
+**Risk Mitigation:**
+- Phase 0-1 focus on critical operational gaps
+- Phase 2-3 focus on pedagogical enhancement
+- Phase 4-5 focus on optimization and future-proofing
+- Each phase can be delivered independently
+- Continuous deployment allows incremental value delivery
 
 ---
 
 ## CONCLUSION
 
-The existing SIM Sekolah system has a **solid foundation** with approximately **65% of PRD features** implemented or partially implemented (excluding multi-tenant and subscription features which are not applicable for single-school deployment). The system particularly excels in areas not explicitly detailed in the PRD, such as advanced Deep Learning implementation, Intelligence/Early Warning Systems, and sophisticated AI integration.
+The existing SIM Sekolah system has a **solid foundation** with approximately **65% of PRD features** implemented or partially implemented (excluding multi-tenant and subscription features which are not applicable for single-school deployment). However, after comprehensive analysis including additional hidden gaps for Kurikulum Merdeka Deep Learning and the specific context of UPT SDI Bonerate No. 85, the actual feature coverage for SD implementation is closer to **55-60%** when accounting for the additional critical gaps identified. The system particularly excels in areas not explicitly detailed in the PRD, such as advanced Deep Learning implementation, Intelligence/Early Warning Systems, and sophisticated AI integration.
 
-**Deployment Context:** This analysis and implementation roadmap is specifically designed for **UPT SDI Bonerate No. 85 Kepulauan Selayar** as a single-school deployment. Multi-tenant architecture and subscription management features mentioned in the original PRD are not required and have been excluded from scope.
+**Deployment Context:** This analysis and implementation roadmap is specifically designed for **UPT SDI Bonerate No. 85 Kepulauan Selayar** as a single-school deployment. Multi-tenant architecture and subscription management features mentioned in the original PRD are not required and have been excluded from scope. The analysis has been enhanced with additional hidden gaps critical for SD Kurikulum Merdeka implementation and rural/remote deployment contexts.
 
 ### Application Layer Assessment:
 
@@ -816,13 +1195,19 @@ The existing SIM Sekolah system has a **solid foundation** with approximately **
 - Excellent security and audit trail
 - Age-appropriate SD-specific assessment
 - Single-school optimized architecture
+- 60+ specialized features not in original PRD (competitive advantages)
 
-**Critical Gaps to Address:**
+**Critical Gaps to Address (Updated):**
 1. **Numerasi Module** - Completely missing, core PRD requirement
 2. **Portfolio System** - Essential for student development tracking
 3. **Communication Features** - Announcement, messaging, parent app
 4. **TP & ATP Management** - Complete curriculum workflow
 5. **Academic Supervision** - Quality assurance framework
+6. **Offline-First Readiness** - 🔴 CRITICAL for Kepulauan Selayar operations
+7. **Longitudinal Student Growth** - Multi-year growth tracking
+8. **Learning Evidence Repository** - Evidence-to-competency mapping
+9. **Teacher Workload Analytics** - Teacher sustainability
+10. **Remedial & Enrichment Engine** - Adaptive intervention system
 
 ### Database Layer Assessment:
 
@@ -835,12 +1220,17 @@ The existing SIM Sekolah system has a **solid foundation** with approximately **
 - UUID primary keys, soft delete support, basic audit trail
 - Migration strategy with golang-migrate
 
-**Critical Database Gaps to Address:**
+**Critical Database Gaps to Address (Updated):**
 1. **Numeracy Schema** - Entire numeracy domain tables missing (numeracy_indicators, numeracy_assessments, numeracy_growth)
 2. **Portfolio Schema** - No portfolio/learning portfolio tables
 3. **Communication Schema** - No announcement/messaging/notifications tables
 4. **Analytics Schema** - No dedicated analytics/ai_recommendations tables
 5. **Rubric System** - Missing rubrics and rubric_criteria tables
+6. **Project Schema** - No comprehensive project-based learning schema
+7. **Supervision Schema** - No academic supervision database structure
+8. **Document Schema** - No centralized document repository
+9. **Question Bank Schema** - No assessment item management
+10. **Additional Schema Gaps** - character, notification, AI schemas need enhancement
 
 **Database Architecture Gaps:**
 - Schema organization: Current flat structure vs recommended PostgreSQL schemas
@@ -859,15 +1249,15 @@ The system includes several advanced features beyond the PRD scope, which provid
 - 60+ specialized database tables not in DDD
 
 **Overall Assessment:**
-The existing system is **well-positioned** to meet PRD requirements for UPT SDI Bonerate No. 85 with focused development on the identified gaps. The over-implemented features provide a strong foundation for differentiation and should be leveraged rather than removed. 
+The existing system is **well-positioned** to meet PRD requirements for UPT SDI Bonerate No. 85 with focused development on the identified gaps. The over-implemented features provide a strong foundation for differentiation and should be leveraged rather than removed. However, the additional hidden gaps identified (offline-first readiness, longitudinal tracking, evidence systems, etc.) are critical for successful SD Kurikulum Merdeka implementation in the specific context of Kepulauan Selayar. 
 
 **Key Recommendations:**
-1. **Prioritize Critical Gaps:** Focus immediately on Numerasi, Portfolio, and Communication modules (both application and database layers)
-2. **Leverage Existing Strengths:** Build upon the advanced deep learning, intelligence, and local context frameworks
-3. **Database Enhancement:** Address critical database schema gaps while optimizing for performance and scalability
-4. **Incremental Approach:** Implement changes incrementally to maintain system stability
-5. **Single-School Focus:** Maintain single-school optimization while ensuring future scalability
+1. **Prioritize Phase 0 Critical Gaps:** Focus immediately on Offline-First, Numerasi, Portfolio, and Communication modules
+2. **Context-Specific Implementation:** Address rural/remote deployment constraints for Kepulauan Selayar
+3. **Leverage Existing Strengths:** Build upon the advanced deep learning, intelligence, and local context frameworks
+4. **Database Enhancement:** Address critical database schema gaps while optimizing for performance
+5. **Incremental Phased Approach:** Implement changes in structured phases to maintain system stability
+6. **Single-School Focus:** Maintain single-school optimization while ensuring future scalability
+7. **Pedagogical Alignment:** Ensure all features align with Kurikulum Merdeka Deep Learning principles
 
-Prioritizing the critical gaps, especially Numerasi and Portfolio modules (both backend and database), will bring the system into closer alignment with PRD requirements while maintaining its competitive advantages for single-school deployment.
-
-@tambahan.md revisis GAP_ANALYSIS_PRD.md dengan menambahkan dari tambahan.md tersebut. kemudian buatkan priority pengerjaan dan phasenya.
+Prioritizing Phase 0 critical gaps, especially Offline-First Readiness for the operational context of Kepulauan Selayar and the core Numerasi and Portfolio modules, will bring the system into closer alignment with both PRD requirements and the practical needs of UPT SDI Bonerate No. 85 while maintaining its competitive advantages for single-school deployment.

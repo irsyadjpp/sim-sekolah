@@ -29,7 +29,9 @@ type CPService interface {
 
 	// TP (Tujuan Pembelajaran)
 	GetAllObjectives(cpID string) ([]LearningObjective, error)
+	GetObjectiveByID(objectiveID string) (*LearningObjective, error)
 	CreateObjective(ctx context.Context, cpID string, req CreateTPRequest) (*LearningObjective, error)
+	UpdateObjective(ctx context.Context, cpID, objectiveID string, req UpdateTPRequest) (*LearningObjective, error)
 	DeleteObjective(ctx context.Context, cpID, objectiveID string) error
 }
 
@@ -298,13 +300,66 @@ func (s *cpService) GetAllObjectives(cpID string) ([]LearningObjective, error) {
 	return s.tpRepo.GetAllByCP(cpID)
 }
 
+func (s *cpService) GetObjectiveByID(objectiveID string) (*LearningObjective, error) {
+	return s.tpRepo.GetByID(objectiveID)
+}
+
 func (s *cpService) CreateObjective(ctx context.Context, cpID string, req CreateTPRequest) (*LearningObjective, error) {
-	cpUUID, _ := uuid.Parse(cpID)
+	cpUUID, err := uuid.Parse(cpID)
+	if err != nil {
+		return nil, fmt.Errorf("invalid CP ID: %w", err)
+	}
+
 	tp := &LearningObjective{
 		LearningOutcomeID: cpUUID,
 		Description:       req.Description,
+		Sequence:          req.Sequence,
+		DifficultyLevel:   req.DifficultyLevel,
+		CognitiveDomain:   req.CognitiveDomain,
+		EstimatedHours:    req.EstimatedHours,
 	}
+
+	// Set default values if not provided
+	if tp.Sequence == 0 {
+		tp.Sequence = 1
+	}
+	if tp.DifficultyLevel == "" {
+		tp.DifficultyLevel = DifficultyLevelMedium
+	}
+	if tp.EstimatedHours == 0 {
+		tp.EstimatedHours = 1.0
+	}
+
 	if err := s.tpRepo.Create(ctx, tp); err != nil {
+		return nil, err
+	}
+	return tp, nil
+}
+
+func (s *cpService) UpdateObjective(ctx context.Context, cpID, objectiveID string, req UpdateTPRequest) (*LearningObjective, error) {
+	tp, err := s.tpRepo.GetByID(objectiveID)
+	if err != nil {
+		return nil, fmt.Errorf("objective not found: %w", err)
+	}
+
+	// Update fields if provided
+	if req.Description != "" {
+		tp.Description = req.Description
+	}
+	if req.Sequence != 0 {
+		tp.Sequence = req.Sequence
+	}
+	if req.DifficultyLevel != "" {
+		tp.DifficultyLevel = req.DifficultyLevel
+	}
+	if req.CognitiveDomain != "" {
+		tp.CognitiveDomain = req.CognitiveDomain
+	}
+	if req.EstimatedHours != 0 {
+		tp.EstimatedHours = req.EstimatedHours
+	}
+
+	if err := s.tpRepo.Update(ctx, tp); err != nil {
 		return nil, err
 	}
 	return tp, nil

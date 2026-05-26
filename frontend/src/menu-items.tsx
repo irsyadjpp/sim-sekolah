@@ -26,8 +26,18 @@ export const leftMenuItems: MenuItem[] = [
       { id: "school-profile", label: "menu-school", icon: "NiBuilding", href: "/profile/school" },
       { id: "staff-data", label: "menu-character-building", icon: "NiBadge", href: "/academic/subjects/staff" },
       { id: "student-data", label: "menu-data-students", icon: "NiUsers", href: "/students" },
+      { id: "evidence-data", label: "menu-evidence", icon: "NiFolder", href: "/students/evidence" },
+      { id: "growth-data", label: "menu-growth", icon: "NiChartBar", href: "/students/growth" },
+      {
+        id: "character-growth-data",
+        label: "menu-character-growth",
+        icon: "NiStar",
+        href: "/students/character-growth",
+      },
       { id: "spmb-data", label: "menu-spmb-online", icon: "NiBadge", href: "/spmb/admin" },
       { id: "class-data", label: "menu-data-classes", icon: "NiLayout", href: "/academic/subjects/classroom" },
+      { id: "teacher-workload", label: "menu-teacher-workload", icon: "NiUser", href: "/teachers/workload" },
+      { id: "teacher-reflection", label: "menu-teacher-reflection", icon: "NiBook", href: "/teachers/reflection" },
     ],
   },
   {
@@ -82,6 +92,8 @@ export const leftMenuItems: MenuItem[] = [
         ],
       },
       { id: "p5-projects", label: "menu-projects", icon: "NiBriefcase", href: "/learning/projects/plans" },
+      { id: "lesson-planning", label: "menu-lesson-planning", icon: "NiBook", href: "/learning/lesson-plans" },
+      { id: "intervention", label: "menu-intervention", icon: "NiHeart", href: "/learning/intervention" },
     ],
   },
   {
@@ -127,6 +139,12 @@ export const leftMenuItems: MenuItem[] = [
           },
         ],
       },
+      {
+        id: "numeracy",
+        label: "menu-numeracy",
+        icon: "NiChartBar",
+        href: "/academic/numeracy",
+      },
     ],
   },
   {
@@ -136,7 +154,7 @@ export const leftMenuItems: MenuItem[] = [
     href: "/academic/evaluation",
     color: "text-primary",
     children: [
-      { id: "question-bank", label: "menu-question-bank", icon: "NiArchive", href: "/academic/evaluation/bank" },
+      { id: "question-bank", label: "menu-question-bank", icon: "NiArchive", href: "/academic/question-bank" },
       { id: "formative", label: "menu-formative-value", icon: "NiChartBar", href: "/academic/evaluation/formative" },
       { id: "summative", label: "menu-summative-value", icon: "NiStar", href: "/academic/evaluation/summative" },
       {
@@ -144,6 +162,24 @@ export const leftMenuItems: MenuItem[] = [
         label: "menu-sd-assessment-criteria",
         icon: "NiCheckFull",
         href: "/academic/evaluation/criteria",
+      },
+      {
+        id: "portfolio",
+        label: "menu-portfolio",
+        icon: "NiFolder",
+        href: "/academic/evaluation/portfolio",
+      },
+      {
+        id: "rubric",
+        label: "menu-rubric",
+        icon: "NiCheckFull",
+        href: "/academic/evaluation/rubric",
+      },
+      {
+        id: "supervision",
+        label: "menu-supervision",
+        icon: "NiSearch",
+        href: "/academic/supervision",
       },
     ],
   },
@@ -157,6 +193,27 @@ export const leftMenuItems: MenuItem[] = [
       { id: "p5-achievement", label: "menu-project-scores", icon: "NiHeart", href: "/learning/projects/results" },
       { id: "gradebook-recap", label: "menu-gradebook", icon: "NiBook", href: "/reports/gradebook/scores" },
       { id: "print-rapport", label: "menu-print", icon: "NiPrinter", href: "/reports/gradebook/print" },
+    ],
+  },
+  {
+    id: "analytics",
+    icon: "NiChartBar",
+    label: "menu-analytics-section",
+    href: "/analytics/learning",
+    color: "text-primary",
+    children: [
+      { id: "learning-analytics", label: "menu-learning-analytics", icon: "NiChartBar", href: "/analytics/learning" },
+    ],
+  },
+  {
+    id: "komunikasi",
+    icon: "NiAnnouncement",
+    label: "menu-communication",
+    href: "/communication",
+    color: "text-primary",
+    children: [
+      { id: "announcements", label: "menu-announcements", icon: "NiAnnouncement", href: "/communication" },
+      { id: "messages", label: "menu-messages", icon: "NiEmail", href: "/communication" },
     ],
   },
 ];
@@ -173,6 +230,19 @@ export const leftMenuBottomItems: MenuItem[] = [
       { id: "academic-year", label: "menu-academic-year-cycle", icon: "NiCalendar", href: "/system/academic-years" },
       { id: "grade-level", label: "menu-grade-master", icon: "NiLayout", href: "/system/grades" },
       { id: "system-status", label: "menu-data-index", icon: "NiChartBar", href: "/system/engine" },
+      {
+        id: "database-monitoring",
+        label: "menu-database-monitoring",
+        icon: "NiStore",
+        href: "/system/database-monitoring",
+      },
+      {
+        id: "document-repository",
+        label: "menu-document-repository",
+        icon: "NiFolder",
+        href: "/system/document-repository",
+      },
+      { id: "offline-sync", label: "menu-offline-sync", icon: "NiRefresh", href: "/system/offline" },
     ],
   },
   { id: "guide", label: "menu-guide", href: "/docs", icon: "NiBook", color: "text-primary" },

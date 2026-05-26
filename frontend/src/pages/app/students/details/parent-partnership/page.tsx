@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import {
@@ -66,6 +66,7 @@ interface ParentMeeting {
   duration_minutes: number;
   status: string;
   attendance_status: string;
+  location?: string;
 }
 
 interface TabPanelProps {
@@ -131,7 +132,7 @@ export default function ParentPartnershipPage() {
     agenda: "",
   });
 
-  const fetchPartnerships = async () => {
+  const fetchPartnerships = useCallback(async () => {
     setLoading(true);
     const token = localStorage.getItem("accessToken");
     try {
@@ -152,9 +153,9 @@ export default function ParentPartnershipPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [studentId]);
 
-  const fetchCommunications = async () => {
+  const fetchCommunications = useCallback(async () => {
     const token = localStorage.getItem("accessToken");
     try {
       const res = await fetch(`${DEFAULTS.API_URL}/api/v1/parent-partnership/communications`, {
@@ -167,9 +168,9 @@ export default function ParentPartnershipPage() {
     } catch (err: any) {
       setError(err.message);
     }
-  };
+  }, []);
 
-  const fetchMeetings = async () => {
+  const fetchMeetings = useCallback(async () => {
     const token = localStorage.getItem("accessToken");
     try {
       const res = await fetch(`${DEFAULTS.API_URL}/api/v1/parent-partnership/meetings`, {
@@ -182,13 +183,13 @@ export default function ParentPartnershipPage() {
     } catch (err: any) {
       setError(err.message);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchPartnerships();
     fetchCommunications();
     fetchMeetings();
-  }, [studentId]);
+  }, [studentId, fetchPartnerships, fetchCommunications, fetchMeetings]);
 
   const handleCreatePartnership = async () => {
     const token = localStorage.getItem("accessToken");
