@@ -112,7 +112,7 @@ class ChunkCompetencyMessage(BaseMessage):
     """Message for competency-based chunking"""
     content_id: str
     content: str
-    competency_type: str  # KI-1, KI-2, KI-3, KI-4
+    competency_type: str  # CP code (e.g., CP-IPA-B-01)
     metadata: Dict[str, Any]
     
     def __post_init__(self):
