@@ -1,0 +1,251 @@
+syntax = "proto3";
+
+package ai_platform.semantic_chunk_service;
+
+option go_package = "sim-sekolah/internal/ai/grpc/pb/semanticchunkservice";
+
+// Semantic Chunk Service - Fase 2.3
+service SemanticChunkService {
+    rpc ChunkCompetency(ChunkCompetencyRequest) returns (ChunkCompetencyResponse);
+    rpc ChunkActivity(ChunkActivityRequest) returns (ChunkActivityResponse);
+    rpc ChunkAssessment(ChunkAssessmentRequest) returns (ChunkAssessmentResponse);
+    rpc ChunkInquiry(ChunkInquiryRequest) returns (ChunkInquiryResponse);
+    rpc ChunkLessonPlan(ChunkLessonPlanRequest) returns (ChunkLessonPlanResponse);
+    rpc DetectHierarchy(DetectHierarchyRequest) returns (DetectHierarchyResponse);
+    rpc ClassifyPedagogy(ClassifyPedagogyRequest) returns (ClassifyPedagogyResponse);
+    rpc ValidateQuality(ValidateQualityRequest) returns (ValidateQualityResponse);
+    rpc EnrichMetadata(EnrichMetadataRequest) returns (EnrichMetadataResponse);
+    rpc BuildChunks(BuildChunksRequest) returns (BuildChunksResponse);
+}
+
+// Semantic Chunk Service Messages
+message ChunkCompetencyRequest {
+    string content_id = 1;
+    string content = 2;
+    string competency = 3;
+    string phase = 4;
+    string grade = 5;
+    string subject = 6;
+    map<string, string> options = 7;
+}
+
+message ChunkCompetencyResponse {
+    bool success = 1;
+    string message = 2;
+    ChunkResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message ChunkResult {
+    repeated Chunk chunks = 1;
+    ChunkingSummary summary = 2;
+}
+
+message Chunk {
+    string chunk_id = 1;
+    string content = 2;
+    string chunk_type = 3;
+    map<string, string> metadata = 4;
+    float quality_score = 5;
+    repeated string competencies = 6;
+}
+
+message ChunkingSummary {
+    int32 total_chunks = 1;
+    float average_quality = 2;
+    repeated string chunk_types = 3;
+    map<string, int32> type_counts = 4;
+}
+
+message ChunkActivityRequest {
+    string content_id = 1;
+    string content = 2;
+    string activity_type = 3;
+    string phase = 4;
+    string grade = 5;
+    string subject = 6;
+    map<string, string> options = 7;
+}
+
+message ChunkActivityResponse {
+    bool success = 1;
+    string message = 2;
+    ChunkResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message ChunkAssessmentRequest {
+    string content_id = 1;
+    string content = 2;
+    string assessment_type = 3;
+    string phase = 4;
+    string grade = 5;
+    string subject = 6;
+    map<string, string> options = 7;
+}
+
+message ChunkAssessmentResponse {
+    bool success = 1;
+    string message = 2;
+    ChunkResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message ChunkInquiryRequest {
+    string content_id = 1;
+    string content = 2;
+    string inquiry_type = 3;
+    string phase = 4;
+    string grade = 5;
+    string subject = 6;
+    map<string, string> options = 7;
+}
+
+message ChunkInquiryResponse {
+    bool success = 1;
+    string message = 2;
+    ChunkResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message ChunkLessonPlanRequest {
+    string content_id = 1;
+    string content = 2;
+    string lesson_plan_type = 3;
+    string phase = 4;
+    string grade = 5;
+    string subject = 6;
+    map<string, string> options = 7;
+}
+
+message ChunkLessonPlanResponse {
+    bool success = 1;
+    string message = 2;
+    ChunkResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message DetectHierarchyRequest {
+    string content_id = 1;
+    string content = 2;
+    map<string, string> options = 3;
+}
+
+message DetectHierarchyResponse {
+    bool success = 1;
+    string message = 2;
+    HierarchyResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message HierarchyResult {
+    repeated HierarchyNode nodes = 1;
+    repeated HierarchyEdge edges = 2;
+}
+
+message HierarchyNode {
+    string node_id = 1;
+    string node_type = 2;
+    string content = 3;
+    int32 level = 4;
+    repeated string children = 5;
+}
+
+message HierarchyEdge {
+    string parent_id = 1;
+    string child_id = 2;
+    string relationship_type = 3;
+}
+
+message ClassifyPedagogyRequest {
+    string content_id = 1;
+    string content = 2;
+    map<string, string> options = 3;
+}
+
+message ClassifyPedagogyResponse {
+    bool success = 1;
+    string message = 2;
+    PedagogyClassification result = 3;
+    map<string, string> metadata = 4;
+}
+
+message PedagogyClassification {
+    repeated PedagogyLabel labels = 1;
+    string primary_pedagogy = 2;
+    float confidence = 3;
+}
+
+message PedagogyLabel {
+    string pedagogy_type = 1;
+    float confidence = 2;
+}
+
+message ValidateQualityRequest {
+    repeated Chunk chunks = 1;
+    map<string, string> validation_criteria = 2;
+}
+
+message ValidateQualityResponse {
+    bool success = 1;
+    string message = 2;
+    QualityValidation result = 3;
+    map<string, string> metadata = 4;
+}
+
+message QualityValidation {
+    float overall_quality = 1;
+    repeated QualityIssue issues = 2;
+    repeated QualityMetric metrics = 3;
+}
+
+message QualityIssue {
+    string chunk_id = 1;
+    string issue_type = 2;
+    string description = 3;
+    float severity = 4;
+}
+
+message QualityMetric {
+    string metric_name = 1;
+    float value = 2;
+    string status = 3;
+}
+
+message EnrichMetadataRequest {
+    repeated Chunk chunks = 1;
+    repeated string enrichment_types = 2;
+    map<string, string> options = 3;
+}
+
+message EnrichMetadataResponse {
+    bool success = 1;
+    string message = 2;
+    MetadataEnrichment result = 3;
+    map<string, string> metadata = 4;
+}
+
+message MetadataEnrichment {
+    repeated Chunk enriched_chunks = 1;
+    repeated EnrichmentSummary summaries = 2;
+}
+
+message EnrichmentSummary {
+    string enrichment_type = 1;
+    int32 chunks_enriched = 2;
+    float success_rate = 3;
+}
+
+message BuildChunksRequest {
+    string content_id = 1;
+    string content = 2;
+    string chunking_strategy = 3;
+    map<string, string> parameters = 4;
+}
+
+message BuildChunksResponse {
+    bool success = 1;
+    string message = 2;
+    ChunkResult result = 3;
+    map<string, string> metadata = 4;
+}

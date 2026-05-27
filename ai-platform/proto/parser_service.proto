@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+package ai_platform.parser_service;
+
+option go_package = "sim-sekolah/backend/internal/ai/grpc";
+
+// Parser Service - Fase 2.1
+service ParserService {
+    rpc ParseDocument(ParseDocumentRequest) returns (ParseDocumentResponse);
+    rpc ParseText(ParseTextRequest) returns (ParseTextResponse);
+    rpc ExtractTables(ExtractTablesRequest) returns (ExtractTablesResponse);
+    rpc ExtractImages(ExtractImagesRequest) returns (ExtractImagesResponse);
+    rpc ExtractOCR(ExtractOCRRequest) returns (ExtractOCRResponse);
+    rpc DetectLayout(DetectLayoutRequest) returns (DetectLayoutResponse);
+}
+
+// Parser Service Messages
+message ParseDocumentRequest {
+    string document_id = 1;
+    bytes document_data = 2;
+    string document_type = 3;
+    map<string, string> metadata = 4;
+}
+
+message ParseDocumentResponse {
+    bool success = 1;
+    string message = 2;
+    ParseResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message ParseResult {
+    repeated TextChunk text_chunks = 1;
+    repeated TableChunk table_chunks = 2;
+    repeated ImageChunk image_chunks = 3;
+    map<string, string> metadata = 4;
+}
+
+message TextChunk {
+    string chunk_id = 1;
+    string content = 2;
+    int32 page_number = 3;
+    map<string, string> metadata = 4;
+}
+
+message TableChunk {
+    string chunk_id = 1;
+    repeated string headers = 2;
+    repeated TableRow rows = 3;
+    int32 page_number = 4;
+    map<string, string> metadata = 5;
+}
+
+message TableRow {
+    repeated string cells = 1;
+}
+
+message ImageChunk {
+    string chunk_id = 1;
+    bytes image_data = 2;
+    string image_type = 3;
+    int32 page_number = 4;
+    map<string, string> metadata = 5;
+}
+
+message ParseTextRequest {
+    string text_id = 1;
+    string text_content = 2;
+    map<string, string> metadata = 3;
+}
+
+message ParseTextResponse {
+    bool success = 1;
+    string message = 2;
+    TextParseResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message TextParseResult {
+    string chunk_id = 1;
+    string content = 2;
+    map<string, string> metadata = 3;
+}
+
+message ExtractTablesRequest {
+    string document_id = 1;
+    bytes document_data = 2;
+    map<string, string> options = 3;
+}
+
+message ExtractTablesResponse {
+    bool success = 1;
+    string message = 2;
+    repeated TableChunk tables = 3;
+    map<string, string> metadata = 4;
+}
+
+message ExtractImagesRequest {
+    string document_id = 1;
+    bytes document_data = 2;
+    map<string, string> options = 3;
+}
+
+message ExtractImagesResponse {
+    bool success = 1;
+    string message = 2;
+    repeated ImageChunk images = 3;
+    map<string, string> metadata = 4;
+}
+
+message ExtractOCRRequest {
+    string document_id = 1;
+    bytes image_data = 2;
+    string language = 3;
+    map<string, string> options = 4;
+}
+
+message ExtractOCRResponse {
+    bool success = 1;
+    string message = 2;
+    OCRResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message OCRResult {
+    string text = 1;
+    float confidence = 2;
+    repeated BoundingBox boxes = 3;
+}
+
+message BoundingBox {
+    int32 x = 1;
+    int32 y = 2;
+    int32 width = 3;
+    int32 height = 4;
+    string text = 5;
+}
+
+message DetectLayoutRequest {
+    string document_id = 1;
+    bytes document_data = 2;
+    map<string, string> options = 3;
+}
+
+message DetectLayoutResponse {
+    bool success = 1;
+    string message = 2;
+    LayoutResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message LayoutResult {
+    repeated LayoutElement elements = 1;
+    string document_type = 2;
+}
+
+message LayoutElement {
+    string element_type = 1;
+    repeated BoundingBox bbox = 2;
+    map<string, string> properties = 3;
+}

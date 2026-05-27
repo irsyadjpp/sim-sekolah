@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adaptive-learning-engine
+  namespace: ai-platform
+  labels:
+    app: adaptive-learning-engine
+    tier: educational
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: adaptive-learning-engine
+  template:
+    metadata:
+      labels:
+        app: adaptive-learning-engine
+        tier: educational
+    spec:
+      containers:
+      - name: adaptive-learning-engine
+        image: adaptive-learning-engine:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8018
+          name: http
+        - containerPort: 50067
+          name: grpc
+        env:
+        - name: RABBITMQ_URL
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: url
+        - name: ENABLE_GRPC_SERVER
+          value: "true"
+        - name: ENABLE_RABBITMQ_CONSUMER
+          value: "true"
+        - name: GRPC_PORT
+          value: "50067"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8018
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8018
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adaptive-learning-engine
+  namespace: ai-platform
+  labels:
+    app: adaptive-learning-engine
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8018
+    targetPort: 8018
+    name: http
+  - port: 50067
+    targetPort: 50067
+    name: grpc
+  selector:
+    app: adaptive-learning-engine
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: adaptive-learning-engine-hpa
+  namespace: ai-platform
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: adaptive-learning-engine
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80

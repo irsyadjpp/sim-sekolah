@@ -1,0 +1,16 @@
+[project]
+name = "ai-platform-shared-events"
+version = "0.1.0"
+description = "AI Platform Shared Events - Async event envelopes for RabbitMQ"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.8.0",
+    "aio-pika>=9.4.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]

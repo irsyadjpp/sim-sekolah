@@ -1,0 +1,38 @@
+{
+  "test_documents": [
+    {
+      "id": "doc_001",
+      "title": "Pythagorean Theorem",
+      "content": "The Pythagorean theorem states that in a right-angled triangle, the square of the hypotenuse equals the sum of squares of the other two sides.",
+      "subject": "mathematics",
+      "grade": "8",
+      "difficulty": "medium"
+    },
+    {
+      "id": "doc_002",
+      "title": "Photosynthesis",
+      "content": "Photosynthesis is the process by which plants convert light energy into chemical energy stored in glucose.",
+      "subject": "science",
+      "grade": "7",
+      "difficulty": "easy"
+    },
+    {
+      "id": "doc_003",
+      "title": "Indonesian Independence",
+      "content": "Indonesia proclaimed its independence on August 17, 1945.",
+      "subject": "social",
+      "grade": "6",
+      "difficulty": "easy"
+    }
+  ],
+  "expected_outputs": {
+    "retrieval": {
+      "query": "What is the Pythagorean theorem?",
+      "expected_results": ["doc_001"]
+    },
+    "generation": {
+      "query": "Explain photosynthesis",
+      "expected_answer_length": 50
+    }
+  }
+}

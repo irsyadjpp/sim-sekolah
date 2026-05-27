@@ -1,0 +1,24 @@
+version: v1
+managed:
+  enabled: true
+  override:
+    - plugin: buf.build/protocolbuffers/python
+      out: ../shared/grpc/python
+    - plugin: buf.build/protocolbuffers/pyi
+      out: ../shared/grpc/python
+plugins:
+  # Python gRPC
+  - plugin: buf.build/grpc/python:v1.62.0
+    out: ../shared/grpc/python
+    opt:
+      - pyi
+  # Go gRPC
+  - plugin: buf.build/grpc/go:v1.3.0
+    out: ../sdk/go
+    opt:
+      - paths=source_relative
+  # Go protobuf
+  - plugin: buf.build/protocolbuffers/go:v1.34.0
+    out: ../sdk/go
+    opt:
+      - paths=source_relative

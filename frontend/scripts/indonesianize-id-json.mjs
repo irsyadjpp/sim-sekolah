@@ -65,7 +65,73 @@ const PHRASE_MAP = [
 function isLikelyIndonesian(str) {
   if (typeof str !== "string" || !str.trim()) return false;
   const lower = str.toLowerCase();
-  const idHints = ["tidak", "gagal", "berhasil", "wajib", "murid", "guru", "sekolah", "kelas", "anda", "untuk", "dengan", "pada", "silakan", "sistem", "akses", "peran", "siswa", "tahun", "kurikulum", "pembelajaran", "penilaian", "rapor", "bimbingan", "pendaftaran", "verifikasi", "diterima", "ditolak", "menunggu", "berkas", "nomor", "alamat", "nama", "tanggal", "simpan", "hapus", "tambah", "ubah", "lihat", "cari", "selamat", "manajemen", "pengguna", "keamanan", "audit", "modul", "capaian", "tujuan", "fase", "mapel", "rombel", "wali", "operator", "admin", "staf", "identitas", "domisili", "jalur", "kata sandi", "surel", "beranda", "dasbor", "pengaturan", "komponen", "antarmuka", "deskripsi"];
+  const idHints = [
+    "tidak",
+    "gagal",
+    "berhasil",
+    "wajib",
+    "murid",
+    "guru",
+    "sekolah",
+    "kelas",
+    "anda",
+    "untuk",
+    "dengan",
+    "pada",
+    "silakan",
+    "sistem",
+    "akses",
+    "peran",
+    "siswa",
+    "tahun",
+    "kurikulum",
+    "pembelajaran",
+    "penilaian",
+    "rapor",
+    "bimbingan",
+    "pendaftaran",
+    "verifikasi",
+    "diterima",
+    "ditolak",
+    "menunggu",
+    "berkas",
+    "nomor",
+    "alamat",
+    "nama",
+    "tanggal",
+    "simpan",
+    "hapus",
+    "tambah",
+    "ubah",
+    "lihat",
+    "cari",
+    "selamat",
+    "manajemen",
+    "pengguna",
+    "keamanan",
+    "audit",
+    "modul",
+    "capaian",
+    "tujuan",
+    "fase",
+    "mapel",
+    "rombel",
+    "wali",
+    "operator",
+    "admin",
+    "staf",
+    "identitas",
+    "domisili",
+    "jalur",
+    "kata sandi",
+    "surel",
+    "beranda",
+    "dasbor",
+    "pengaturan",
+    "komponen",
+    "antarmuka",
+    "deskripsi",
+  ];
   return idHints.some((h) => lower.includes(h));
 }
 
@@ -113,7 +179,11 @@ for (const key of Object.keys(id)) {
     const v = id[key];
     if (en[key] !== undefined && v === en[key]) {
       id[key] = translateString(v);
-    } else if (key.endsWith("-description") && !isLikelyIndonesian(v) && / the | allows | component | users | used to /i.test(v)) {
+    } else if (
+      key.endsWith("-description") &&
+      !isLikelyIndonesian(v) &&
+      / the | allows | component | users | used to /i.test(v)
+    ) {
       id[key] = GENERIC_DESCRIPTION;
     }
   }

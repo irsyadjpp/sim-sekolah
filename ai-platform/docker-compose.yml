@@ -1,0 +1,614 @@
+version: '3.8'
+
+# AI Platform - Full Local Stack
+# This is the single source of truth for local development.
+# For environment-specific overrides, see infra/compose/{env}/docker-compose.yml
+
+services:
+  # ============================================================================
+  # Infrastructure Services
+  # ============================================================================
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: ai-platform-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ai_platform}
+      POSTGRES_USER: ${POSTGRES_USER:-ai_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ai_password}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ai_user} -d ${POSTGRES_DB:-ai_platform}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:v1.7.0
+    container_name: ai-platform-qdrant
+    ports:
+      - "${QDRANT_HTTP_PORT:-6333}:6333"
+      - "${QDRANT_GRPC_PORT:-6334}:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:6333/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # MinIO Object Storage
+  minio:
+    image: minio/minio:latest
+    container_name: ai-platform-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    ports:
+      - "${MINIO_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # RabbitMQ Message Queue
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: ai-platform-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-admin}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-admin}
+    ports:
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MGMT_PORT:-15672}:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # Redis for Caching
+  redis:
+    image: redis:7-alpine
+    container_name: ai-platform-redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # ============================================================================
+  # Observability Stack
+  # ============================================================================
+
+  # Prometheus for Metrics
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ai-platform-prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9090/-/healthy" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+    profiles:
+      - observability
+
+  # Grafana for Visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ai-platform-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/api/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+    profiles:
+      - observability
+
+  # Loki for Log Aggregation
+  loki:
+    image: grafana/loki:latest
+    container_name: ai-platform-loki
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "${LOKI_PORT:-3100}:3100"
+    volumes:
+      - ./infra/loki/loki-config.yml:/etc/loki/local-config.yaml:ro
+      - loki_data:/loki
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3100/ready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+    profiles:
+      - observability
+
+  # Tempo for Distributed Tracing
+  tempo:
+    image: grafana/tempo:latest
+    container_name: ai-platform-tempo
+    command: -config.file /etc/tempo.yaml
+    ports:
+      - "${TEMPO_PORT:-3200}:3200"
+      - "${TEMPO_OTLP_GRPC_PORT:-4317}:4317"
+      - "${TEMPO_OTLP_HTTP_PORT:-4318}:4318"
+    volumes:
+      - ./infra/tempo/tempo.yaml:/etc/tempo.yaml:ro
+      - tempo_data:/tmp/tempo
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3200/ready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+    profiles:
+      - observability
+
+  # ============================================================================
+  # AI Platform Services
+  # ============================================================================
+
+  # Gateway Service
+  gateway-service:
+    build:
+      context: ./services/gateway-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-gateway
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - QDRANT_URL=http://qdrant:6333
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-minioadmin}
+      - JWT_SECRET=${JWT_SECRET:-your-secret-key-change-in-production}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    ports:
+      - "${GATEWAY_PORT:-8002}:8002"
+    volumes:
+      - ./services/gateway-service:/app
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8002/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Parser Service
+  parser-service:
+    build:
+      context: ./services/parser-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-parser
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - QDRANT_URL=http://qdrant:6333
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENABLE_RABBITMQ_CONSUMER=true
+    volumes:
+      - ./services/parser-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8001/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Semantic Chunk Service
+  semantic-chunk-service:
+    build:
+      context: ./services/semantic-chunk-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-semantic-chunk
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENABLE_RABBITMQ_CONSUMER=true
+    volumes:
+      - ./services/semantic-chunk-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8003/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Metadata Service
+  metadata-service:
+    build:
+      context: ./services/metadata-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-metadata
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENABLE_RABBITMQ_CONSUMER=true
+    volumes:
+      - ./services/metadata-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8004/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Embedding Service
+  embedding-service:
+    build:
+      context: ./services/embedding-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-embedding
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - QDRANT_URL=http://qdrant:6333
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENABLE_RABBITMQ_CONSUMER=true
+    volumes:
+      - ./services/embedding-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8005/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Retrieval Service
+  retrieval-service:
+    build:
+      context: ./services/retrieval-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-retrieval
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - QDRANT_URL=http://qdrant:6333
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./services/retrieval-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8006/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Generation Service
+  generation-service:
+    build:
+      context: ./services/generation-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-generation
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./services/generation-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8007/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Audit Service
+  audit-service:
+    build:
+      context: ./services/audit-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-audit
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENABLE_RABBITMQ_CONSUMER=true
+    volumes:
+      - ./services/audit-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8008/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Moderation Service
+  moderation-service:
+    build:
+      context: ./services/moderation-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-moderation
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENABLE_RABBITMQ_CONSUMER=true
+    volumes:
+      - ./services/moderation-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8009/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Reranking Service
+  reranking-service:
+    build:
+      context: ./services/reranking-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-reranking
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./services/reranking-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8010/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Vision Service
+  vision-service:
+    build:
+      context: ./services/vision-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-vision
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER:-admin}:${RABBITMQ_PASSWORD:-admin}@rabbitmq:5672
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-minioadmin}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENABLE_RABBITMQ_CONSUMER=true
+    volumes:
+      - ./services/vision-service:/app
+      - ./shared:/app/shared
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8011/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Monitoring Service
+  monitoring-service:
+    build:
+      context: ./services/monitoring-service
+      dockerfile: Dockerfile
+    container_name: ai-platform-monitoring
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ai_user}:${POSTGRES_PASSWORD:-ai_password}@postgres:5432/${POSTGRES_DB:-ai_platform}
+      - REDIS_URL=redis://redis:6379
+      - PROMETHEUS_URL=http://prometheus:9090
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./services/monitoring-service:/app
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8012/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    profiles:
+      - observability
+
+networks:
+  ai-platform-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  minio_data:
+  rabbitmq_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+  loki_data:
+  tempo_data:

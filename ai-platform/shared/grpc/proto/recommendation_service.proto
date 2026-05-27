@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package recommendation;
+
+// Recommendation Engine gRPC definitions
+service RecommendationService {
+  // Generate content recommendations
+  rpc GenerateRecommendations(RecommendationRequest) returns (RecommendationResult);
+  
+  // Get recommendation strategies
+  rpc GetRecommendationStrategies(Empty) returns (RecommendationStrategiesResponse);
+}
+
+// Recommendation request
+message RecommendationRequest {
+  string request_id = 1;
+  string user_id = 2;
+  map<string, string> context = 3;
+  map<string, string> preferences = 4;
+  string strategy = 5;
+}
+
+// Recommendation result
+message RecommendationResult {
+  string request_id = 1;
+  string user_id = 2;
+  repeated Recommendation recommendations = 3;
+  string strategy_used = 4;
+  repeated float confidence_scores = 5;
+  int64 timestamp = 6;
+}
+
+// Recommendation
+message Recommendation {
+  string content_id = 1;
+  string reason = 2;
+  float confidence = 3;
+}
+
+// Recommendation strategies response
+message RecommendationStrategiesResponse {
+  repeated string strategies = 1;
+  map<string, string> descriptions = 2;
+}
+
+// Empty message
+message Empty {}

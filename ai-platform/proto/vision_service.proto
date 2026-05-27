@@ -1,0 +1,163 @@
+syntax = "proto3";
+
+package ai_platform.vision_service;
+
+option go_package = "sim-sekolah/backend/internal/ai/grpc";
+
+// Vision Service - Fase 2.2
+service VisionService {
+    rpc ProcessOCR(ProcessOCRRequest) returns (ProcessOCRResponse);
+    rpc AnalyzeDiagram(AnalyzeDiagramRequest) returns (AnalyzeDiagramResponse);
+    rpc ExtractFormula(ExtractFormulaRequest) returns (ExtractFormulaResponse);
+    rpc ClassifyImage(ClassifyImageRequest) returns (ClassifyImageResponse);
+    rpc PreprocessImage(PreprocessImageRequest) returns (PreprocessImageResponse);
+}
+
+// Vision Service Messages
+message ProcessOCRRequest {
+    string image_id = 1;
+    bytes image_data = 2;
+    string language = 3;
+    map<string, string> options = 4;
+}
+
+message ProcessOCRResponse {
+    bool success = 1;
+    string message = 2;
+    OCRResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message OCRResult {
+    string text = 1;
+    float confidence = 2;
+    repeated OcrWord words = 3;
+    repeated OcrLine lines = 4;
+}
+
+message OcrWord {
+    string text = 1;
+    float confidence = 2;
+    BoundingBox bbox = 3;
+}
+
+message OcrLine {
+    string text = 1;
+    repeated OcrWord words = 2;
+    BoundingBox bbox = 3;
+}
+
+message BoundingBox {
+    int32 x = 1;
+    int32 y = 2;
+    int32 width = 3;
+    int32 height = 4;
+}
+
+message AnalyzeDiagramRequest {
+    string diagram_id = 1;
+    bytes image_data = 2;
+    string diagram_type = 3;
+    map<string, string> options = 4;
+}
+
+message AnalyzeDiagramResponse {
+    bool success = 1;
+    string message = 2;
+    DiagramAnalysis result = 3;
+    map<string, string> metadata = 4;
+}
+
+message DiagramAnalysis {
+    string diagram_type = 1;
+    repeated DiagramElement elements = 2;
+    repeated DiagramRelationship relationships = 3;
+}
+
+message DiagramElement {
+    string element_id = 1;
+    string element_type = 2;
+    BoundingBox bbox = 3;
+    map<string, string> properties = 4;
+}
+
+message DiagramRelationship {
+    string source_id = 1;
+    string target_id = 2;
+    string relationship_type = 3;
+}
+
+message ExtractFormulaRequest {
+    string image_id = 1;
+    bytes image_data = 2;
+    string formula_type = 3;
+    map<string, string> options = 4;
+}
+
+message ExtractFormulaResponse {
+    bool success = 1;
+    string message = 2;
+    FormulaExtraction result = 3;
+    map<string, string> metadata = 4;
+}
+
+message FormulaExtraction {
+    repeated Formula formulas = 1;
+}
+
+message Formula {
+    string formula_id = 1;
+    string latex = 2;
+    string formula_type = 3;
+    float confidence = 4;
+    BoundingBox bbox = 5;
+}
+
+message ClassifyImageRequest {
+    string image_id = 1;
+    bytes image_data = 2;
+    repeated string categories = 3;
+    map<string, string> options = 4;
+}
+
+message ClassifyImageResponse {
+    bool success = 1;
+    string message = 2;
+    ImageClassification result = 3;
+    map<string, string> metadata = 4;
+}
+
+message ImageClassification {
+    string primary_category = 1;
+    float confidence = 2;
+    repeated CategoryScore scores = 3;
+}
+
+message CategoryScore {
+    string category = 1;
+    float score = 2;
+}
+
+message PreprocessImageRequest {
+    string image_id = 1;
+    bytes image_data = 2;
+    repeated string operations = 3;
+    map<string, string> options = 4;
+}
+
+message PreprocessImageResponse {
+    bool success = 1;
+    string message = 2;
+    ImagePreprocessing result = 3;
+    map<string, string> metadata = 4;
+}
+
+message ImagePreprocessing {
+    bytes processed_image = 1;
+    repeated PreprocessingStep steps = 2;
+}
+
+message PreprocessingStep {
+    string operation = 1;
+    map<string, string> parameters = 2;
+}

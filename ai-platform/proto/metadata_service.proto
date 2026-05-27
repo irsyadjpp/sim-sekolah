@@ -1,0 +1,221 @@
+syntax = "proto3";
+
+package ai_platform.metadata_service;
+
+option go_package = "sim-sekolah/backend/internal/ai/grpc";
+
+// Metadata Service - Fase 2.4
+service MetadataService {
+    rpc EnrichDifficulty(EnrichDifficultyRequest) returns (EnrichDifficultyResponse);
+    rpc ClassifyTaxonomy(ClassifyTaxonomyRequest) returns (ClassifyTaxonomyResponse);
+    rpc DetectLearningStyle(DetectLearningStyleRequest) returns (DetectLearningStyleResponse);
+    rpc TagCompetency(TagCompetencyRequest) returns (TagCompetencyResponse);
+    rpc TagPedagogy(TagPedagogyRequest) returns (TagPedagogyResponse);
+    rpc TagAssessment(TagAssessmentRequest) returns (TagAssessmentResponse);
+    rpc BatchEnrich(BatchEnrichRequest) returns (BatchEnrichResponse);
+}
+
+// Metadata Service Messages
+message EnrichDifficultyRequest {
+    string content_id = 1;
+    string content = 2;
+    string content_type = 3;
+    string phase = 4;
+    string grade = 5;
+    string subject = 6;
+    map<string, string> options = 7;
+}
+
+message EnrichDifficultyResponse {
+    bool success = 1;
+    string message = 2;
+    DifficultyResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message DifficultyResult {
+    string difficulty_level = 1;
+    float confidence = 2;
+    repeated DifficultyFactor factors = 3;
+}
+
+message DifficultyFactor {
+    string factor_name = 1;
+    float contribution = 2;
+    string description = 3;
+}
+
+message ClassifyTaxonomyRequest {
+    string content_id = 1;
+    string content = 2;
+    string taxonomy_framework = 3;
+    map<string, string> options = 4;
+}
+
+message ClassifyTaxonomyResponse {
+    bool success = 1;
+    string message = 2;
+    TaxonomyClassification result = 3;
+    map<string, string> metadata = 4;
+}
+
+message TaxonomyClassification {
+    repeated TaxonomyLabel labels = 1;
+    string primary_level = 2;
+    float confidence = 3;
+}
+
+message TaxonomyLabel {
+    string level = 1;
+    string domain = 2;
+    float confidence = 3;
+}
+
+message DetectLearningStyleRequest {
+    string student_id = 1;
+    repeated string content_ids = 2;
+    repeated string interaction_data = 3;
+    map<string, string> options = 4;
+}
+
+message DetectLearningStyleResponse {
+    bool success = 1;
+    string message = 2;
+    LearningStyleResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message LearningStyleResult {
+    string primary_style = 1;
+    repeated string secondary_styles = 2;
+    float confidence = 3;
+    repeated StylePreference preferences = 4;
+}
+
+message StylePreference {
+    string style_type = 1;
+    float strength = 2;
+}
+
+message TagCompetencyRequest {
+    string content_id = 1;
+    string content = 2;
+    string phase = 3;
+    string grade = 4;
+    string subject = 5;
+    map<string, string> options = 6;
+}
+
+message TagCompetencyResponse {
+    bool success = 1;
+    string message = 2;
+    CompetencyTagging result = 3;
+    map<string, string> metadata = 4;
+}
+
+message CompetencyTagging {
+    repeated CompetencyTag tags = 1;
+    repeated CompetencySuggestion suggestions = 2;
+}
+
+message CompetencyTag {
+    string competency_code = 1;
+    string competency_name = 2;
+    float confidence = 3;
+    string evidence = 4;
+}
+
+message CompetencySuggestion {
+    string competency_code = 1;
+    string competency_name = 2;
+    float relevance = 3;
+    string reason = 4;
+}
+
+message TagPedagogyRequest {
+    string content_id = 1;
+    string content = 2;
+    map<string, string> options = 3;
+}
+
+message TagPedagogyResponse {
+    bool success = 1;
+    string message = 2;
+    PedagogyTagging result = 3;
+    map<string, string> metadata = 4;
+}
+
+message PedagogyTagging {
+    repeated PedagogyTag tags = 1;
+}
+
+message PedagogyTag {
+    string pedagogy_type = 1;
+    string pedagogy_method = 2;
+    float confidence = 3;
+    repeated string characteristics = 4;
+}
+
+message TagAssessmentRequest {
+    string content_id = 1;
+    string content = 2;
+    string assessment_type = 3;
+    map<string, string> options = 4;
+}
+
+message TagAssessmentResponse {
+    bool success = 1;
+    string message = 2;
+    AssessmentTagging result = 3;
+    map<string, string> metadata = 4;
+}
+
+message AssessmentTagging {
+    repeated AssessmentTag tags = 1;
+}
+
+message AssessmentTag {
+    string assessment_type = 1;
+    string cognitive_level = 2;
+    string competency_focus = 3;
+    float confidence = 4;
+}
+
+message BatchEnrichRequest {
+    repeated EnrichItem items = 1;
+    repeated string enrichment_types = 2;
+    map<string, string> options = 3;
+}
+
+message EnrichItem {
+    string content_id = 1;
+    string content = 2;
+    string content_type = 3;
+    map<string, string> context = 4;
+}
+
+message BatchEnrichResponse {
+    bool success = 1;
+    string message = 2;
+    BatchEnrichmentResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message BatchEnrichmentResult {
+    repeated EnrichedItem enriched_items = 1;
+    BatchSummary summary = 2;
+}
+
+message EnrichedItem {
+    string content_id = 1;
+    map<string, string> enriched_metadata = 2;
+    repeated string enrichment_types_applied = 3;
+}
+
+message BatchSummary {
+    int32 total_items = 1;
+    int32 successful_items = 2;
+    int32 failed_items = 3;
+    map<string, int32> enrichment_counts = 4;
+    float success_rate = 5;
+}

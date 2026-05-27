@@ -1,0 +1,117 @@
+{
+  "dashboard": {
+    "title": "AI Platform Overview",
+    "uid": "ai-platform-overview",
+    "tags": ["ai-platform", "overview"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Service Health",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "up{job=~\"ai-platform.*\"}",
+            "legendFormat": "{{job}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "green",
+                  "value": 1
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{job=~\"ai-platform.*\"}[5m])",
+            "legendFormat": "{{job}}"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Error Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{job=~\"ai-platform.*\",status=~\"5..\"}[5m])",
+            "legendFormat": "{{job}}"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Latency",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job=~\"ai-platform.*\"}[5m]))",
+            "legendFormat": "{{job}}"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Pipeline Success Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(pipeline_success_total[5m]) / rate(pipeline_total[5m])",
+            "legendFormat": "Success Rate"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Vector Store Operations",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(vector_store_operations_total[5m])",
+            "legendFormat": "{{operation}}"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Knowledge Graph Edges",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "knowledge_graph_edges_total",
+            "legendFormat": "Total Edges"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "LLM Token Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(llm_tokens_total[5m])",
+            "legendFormat": "{{model}}"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+# Model Registry Configuration
+
+# MinIO Configuration
+minio:
+  endpoint: "${MINIO_ENDPOINT:-localhost:9000}"
+  access_key: "${MINIO_ACCESS_KEY:-minioadmin}"
+  secret_key: "${MINIO_SECRET_KEY:-minioadmin}"
+  secure: false
+  
+  # Model Storage Buckets
+  buckets:
+    models: "ai-platform-models"
+    production: "ai-platform-models-production"
+    staging: "ai-platform-models-staging"
+    development: "ai-platform-models-dev"
+
+# Model Categories
+categories:
+  embeddings:
+    bucket: "ai-platform-models"
+    path: "embeddings/"
+    default_version: "latest"
+    
+  rerankers:
+    bucket: "ai-platform-models"
+    path: "rerankers/"
+    default_version: "latest"
+    
+  classifiers:
+    bucket: "ai-platform-models"
+    path: "classifiers/"
+    default_version: "latest"
+    
+  vision:
+    bucket: "ai-platform-models"
+    path: "vision/"
+    default_version: "latest"
+    
+  ocr:
+    bucket: "ai-platform-models"
+    path: "ocr/"
+    default_version: "latest"
+    
+  moderation:
+    bucket: "ai-platform-models"
+    path: "moderation/"
+    default_version: "latest"
+    
+  local-llm:
+    bucket: "ai-platform-models"
+    path: "local-llm/"
+    default_version: "latest"
+
+# Local Cache Configuration
+cache:
+  enabled: true
+  directory: "/models/cache"
+  max_size_gb: 100
+  cleanup_policy: "lru"
+
+# Download Configuration
+download:
+  timeout_seconds: 3600
+  chunk_size: 8192
+  verify_checksum: true
+  parallel_downloads: 3
+
+# Model Loading Configuration
+loading:
+  device: "auto"  # auto, cuda, cpu
+  precision: "auto"  # auto, float16, float32
+  offload_to_cpu: false
+  low_cpu_mem_usage: true
+
+# Monitoring Configuration
+monitoring:
+  enabled: true
+  track_downloads: true
+  track_load_times: true
+  track_memory_usage: true
+  prometheus_port: 9090

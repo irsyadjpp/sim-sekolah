@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package moderation;
+
+// Moderation Service gRPC definitions
+service ModerationService {
+  // Moderate content
+  rpc ModerateContent(ModerationRequest) returns (ModerationResult);
+  
+  // Moderate multiple contents
+  rpc ModerateBatch(ModerationBatchRequest) returns (ModerationBatchResponse);
+  
+  // Get moderation statistics
+  rpc GetModerationStats(Empty) returns (ModerationStatsResponse);
+}
+
+// Moderation request
+message ModerationRequest {
+  string request_id = 1;
+  string content = 2;
+  string content_type = 3;
+  string user_id = 4;
+  map<string, string> context = 5;
+}
+
+// Moderation result
+message ModerationResult {
+  string request_id = 1;
+  bool is_safe = 2;
+  float toxicity_score = 3;
+  float bias_score = 4;
+  repeated string categories = 5;
+  repeated string flags = 6;
+  float confidence = 7;
+  int64 timestamp = 8;
+}
+
+// Batch moderation request
+message ModerationBatchRequest {
+  repeated ModerationRequest requests = 1;
+}
+
+// Batch moderation response
+message ModerationBatchResponse {
+  repeated ModerationResult results = 1;
+}
+
+// Empty message
+message Empty {}
+
+// Moderation stats response
+message ModerationStatsResponse {
+  int64 total_moderated = 1;
+  int64 safe_count = 2;
+  int64 flagged_count = 3;
+  float average_toxicity = 4;
+  float average_bias = 5;
+}

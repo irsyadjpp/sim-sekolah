@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "description": "Sample graph edges for knowledge graph testing",
+    "domain": "educational_ontology",
+    "count": 10,
+    "created_at": "2024-05-27T00:00:00Z"
+  },
+  "edges": [
+    {
+      "from": "node-001",
+      "to": "node-002",
+      "type": "CONTAINS",
+      "properties": {
+        "strength": 0.9,
+        "description": "Photosynthesis occurs in chloroplasts"
+      }
+    },
+    {
+      "from": "node-001",
+      "to": "node-007",
+      "type": "BELONGS_TO",
+      "properties": {
+        "strength": 1.0,
+        "description": "Photosynthesis is a biology concept"
+      }
+    },
+    {
+      "from": "node-002",
+      "to": "node-007",
+      "type": "BELONGS_TO",
+      "properties": {
+        "strength": 1.0,
+        "description": "Chloroplast is a biology concept"
+      }
+    },
+    {
+      "from": "node-003",
+      "to": "node-004",
+      "type": "PART_OF",
+      "properties": {
+        "strength": 0.95,
+        "description": "Linear equations are part of algebra"
+      }
+    },
+    {
+      "from": "node-004",
+      "to": "node-008",
+      "type": "BELONGS_TO",
+      "properties": {
+        "strength": 1.0,
+        "description": "Algebra is a mathematics subject"
+      }
+    },
+    {
+      "from": "node-003",
+      "to": "node-008",
+      "type": "BELONGS_TO",
+      "properties": {
+        "strength": 1.0,
+        "description": "Linear equations are mathematics concepts"
+      }
+    },
+    {
+      "from": "node-005",
+      "to": "node-006",
+      "type": "REQUIRES_UNDERSTANDING",
+      "properties": {
+        "strength": 0.85,
+        "description": "Understanding force is needed for Newton first law"
+      }
+    },
+    {
+      "from": "node-006",
+      "to": "node-001",
+      "type": "RELATED_TO",
+      "properties": {
+        "strength": 0.3,
+        "description": "Force and photosynthesis are weakly related through energy concepts"
+      }
+    },
+    {
+      "from": "node-004",
+      "to": "node-006",
+      "type": "RELATED_TO",
+      "properties": {
+        "strength": 0.7,
+        "description": "Algebra and force are related through mathematical modeling"
+      }
+    },
+    {
+      "from": "node-007",
+      "to": "node-008",
+      "type": "RELATED_TO",
+      "properties": {
+        "strength": 0.4,
+        "description": "Biology and mathematics are related through biostatistics"
+      }
+    }
+  ]
+}

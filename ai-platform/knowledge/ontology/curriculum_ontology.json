@@ -1,0 +1,62 @@
+{
+  "ontology": {
+    "name": "Indonesian Curriculum Ontology",
+    "version": "1.0",
+    "description": "Ontology for Indonesian K-13 curriculum structure",
+    "concepts": {
+      "phases": {
+        "Phase A": {
+          "grades": ["1", "2"],
+          "description": "Foundation phase for grades 1-2"
+        },
+        "Phase B": {
+          "grades": ["3", "4"],
+          "description": "Development phase for grades 3-4"
+        },
+        "Phase C": {
+          "grades": ["5", "6"],
+          "description": "Application phase for grades 5-6"
+        },
+        "Phase D": {
+          "grades": ["7", "8", "9"],
+          "description": "Advanced phase for grades 7-9"
+        }
+      },
+      "competencies": {
+        "CP": "Capaian Pembelajaran",
+        "ATP": "Alur Tujuan Pembelajaran",
+        "TP": "Tujuan Pembelajaran",
+        "CPK": "Capaian Pembelajaran Kompetensi"
+      },
+      "subjects": {
+        "mathematics": {
+          "code": "MAT",
+          "name": "Matematika"
+        },
+        "science": {
+          "code": "IPA",
+          "name": "Ilmu Pengetahuan Alam"
+        },
+        "social": {
+          "code": "IPS",
+          "name": "Ilmu Pengetahuan Sosial"
+        },
+        "language": {
+          "code": "BIN",
+          "name": "Bahasa Indonesia"
+        },
+        "english": {
+          "code": "ING",
+          "name": "Bahasa Inggris"
+        }
+      },
+      "relationships": {
+        "phase_contains_grades": "Phase contains grades",
+        "grade_has_subjects": "Grade has subjects",
+        "subject_has_competencies": "Subject has competencies",
+        "competency_belongs_to_atp": "Competency belongs to ATP",
+        "atp_derives_from_cp": "ATP derives from CP"
+      }
+    }
+  }
+}

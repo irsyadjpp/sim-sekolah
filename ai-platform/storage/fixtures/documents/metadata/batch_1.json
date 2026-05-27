@@ -1,0 +1,65 @@
+{
+  "batch": "test_batch_001",
+  "description": "Sample educational documents for testing",
+  "documents": [
+    {
+      "id": "doc-001",
+      "title": "Introduction to Photosynthesis",
+      "file_name": "photosynthesis_intro.pdf",
+      "file_type": "pdf",
+      "file_size": 1024000,
+      "mime_type": "application/pdf",
+      "source": "test_fixture",
+      "category": "biology",
+      "difficulty": "easy",
+      "metadata": {
+        "author": "Dr. Jane Smith",
+        "subject": "Biology",
+        "grade_level": "10",
+        "language": "en",
+        "page_count": 15,
+        "publication_date": "2024-01-15"
+      }
+    },
+    {
+      "id": "doc-002",
+      "title": "Algebra Fundamentals",
+      "file_name": "algebra_basics.pdf",
+      "file_type": "pdf",
+      "file_size": 1536000,
+      "mime_type": "application/pdf",
+      "source": "test_fixture",
+      "category": "mathematics",
+      "difficulty": "medium",
+      "metadata": {
+        "author": "Prof. John Doe",
+        "subject": "Mathematics",
+        "grade_level": "9",
+        "language": "en",
+        "page_count": 20,
+        "publication_date": "2024-02-20"
+      }
+    },
+    {
+      "id": "doc-003",
+      "title": "Newton Laws of Motion",
+      "file_name": "newton_laws.pdf",
+      "file_type": "pdf",
+      "file_size": 2048000,
+      "mime_type": "application/pdf",
+      "source": "test_fixture",
+      "category": "physics",
+      "difficulty": "hard",
+      "metadata": {
+        "author": "Dr. Emily Brown",
+        "subject": "Physics",
+        "grade_level": "11",
+        "language": "en",
+        "page_count": 25,
+        "publication_date": "2024-03-10"
+      }
+    }
+  ],
+  "created_at": "2024-05-27T00:00:00Z",
+  "version": "1.0"
+}

@@ -1,0 +1,47 @@
+version: '3.8'
+
+# Base Images Build Configuration
+# Usage: docker-compose -f docker-compose.yml build
+
+services:
+  # Base Python image
+  base:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    image: ai-platform-base:latest
+    profiles:
+      - base
+
+  # OCR/Vision base image
+  ocr:
+    build:
+      context: .
+      dockerfile: Dockerfile.ocr
+    image: ai-platform-ocr:latest
+    depends_on:
+      - base
+    profiles:
+      - ocr
+
+  # ML/PyTorch base image
+  ml:
+    build:
+      context: .
+      dockerfile: Dockerfile.ml
+    image: ai-platform-ml:latest
+    depends_on:
+      - base
+    profiles:
+      - ml
+
+  # Document processing base image
+  document:
+    build:
+      context: .
+      dockerfile: Dockerfile.document
+    image: ai-platform-document:latest
+    depends_on:
+      - base
+    profiles:
+      - document

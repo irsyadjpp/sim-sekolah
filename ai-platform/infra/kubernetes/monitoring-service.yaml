@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-service
+  namespace: ai-platform
+  labels:
+    app: monitoring-service
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitoring-service
+  template:
+    metadata:
+      labels:
+        app: monitoring-service
+        version: v1
+    spec:
+      containers:
+      - name: monitoring-service
+        image: ai-platform/monitoring-service:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8006
+          name: http
+          protocol: TCP
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: DATABASE_URL
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ai-platform-secrets
+              key: DATABASE_PASSWORD
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: REDIS_URL
+        - name: PROMETHEUS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: PROMETHEUS_URL
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: LOG_LEVEL
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8006
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8006
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitoring-service
+  namespace: ai-platform
+  labels:
+    app: monitoring-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8006
+    targetPort: 8006
+    protocol: TCP
+    name: http
+  selector:
+    app: monitoring-service

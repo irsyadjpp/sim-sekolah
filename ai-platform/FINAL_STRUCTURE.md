@@ -1,6 +1,6 @@
-Berikut struktur final yang saya sarankan untuk **production-ready enterprise educational AI platform** Anda.
+Berikut struktur final yang disarankan untuk **production-ready enterprise educational AI platform** untuk Kurikulum Merdeka.
 
-Ini bukan sekadar “folder rapi”, tetapi sudah mempertimbangkan:
+Ini bukan sekadar "folder rapi", tetapi sudah mempertimbangkan:
 
 * scalability,
 * observability,
@@ -8,17 +8,17 @@ Ini bukan sekadar “folder rapi”, tetapi sudah mempertimbangkan:
 * async processing,
 * multimodal document intelligence,
 * retrieval engineering,
+* educational intelligence,
 * enterprise maintainability.
 
 ---
 
 # FINAL STRUCTURE — AI PLATFORM
 
-```text id="s2ux1f"
+```text
 ai-platform/
 │
-├── services/
-│   │
+├── services/                          # 13 Microservices
 │   ├── gateway-service/
 │   ├── orchestration-service/
 │   ├── parser-service/
@@ -29,10 +29,67 @@ ai-platform/
 │   ├── generation-service/
 │   ├── audit-service/
 │   ├── monitoring-service/
+│   ├── moderation-service/
+│   ├── reranking-service/
+│   ├── vision-service/
 │   └── notification-service/
 │
-├── shared/
-│   │
+├── educational-intelligence/          # 7 Educational AI Engines
+│   ├── curriculum-engine/
+│   ├── pedagogy-engine/
+│   ├── assessment-engine/
+│   ├── learning-progression-engine/
+│   ├── learning-graph-engine/
+│   ├── adaptive-learning-engine/
+│   └── recommendation-engine/
+│
+├── ai-agents/                         # 4 Specialized AI Agents
+│   ├── teacher-agent/
+│   ├── student-learning-agent/
+│   ├── curriculum-agent/
+│   └── assessment-agent/
+│
+├── hallucination-guard/               # 6 AI Validators
+│   ├── curriculum-validator/
+│   ├── pedagogy-validator/
+│   ├── competency-validator/
+│   ├── assessment-validator/
+│   ├── phase-validator/
+│   └── retrieval-grounding-validator/
+│
+├── educational-observability/         # 6 Monitoring Systems
+│   ├── learning-analytics/
+│   ├── competency-analytics/
+│   ├── assessment-quality-monitoring/
+│   ├── retrieval-quality-monitoring/
+│   ├── pedagogy-effectiveness-monitoring/
+│   └── hallucination-monitoring/
+│
+├── educational-ontology/               # 6 Knowledge Structures
+│   ├── curriculum-ontology/
+│   ├── pedagogy-ontology/
+│   ├── competency-ontology/
+│   ├── assessment-ontology/
+│   ├── learning-objective-ontology/
+│   └── concept-hierarchy/
+│
+├── retrieval-enhancement/             # 6 Specialized Retrieval Systems
+│   ├── curriculum-aware-reranker/
+│   ├── pedagogy-aware-retrieval/
+│   ├── competency-aware-retrieval/
+│   ├── assessment-aware-retrieval/
+│   ├── contextual-retrieval/
+│   └── learning-style-retrieval/
+│
+├── semantic-enrichment/               # 6 Tagging Systems
+│   ├── competency-tagging/
+│   ├── pedagogy-tagging/
+│   ├── assessment-tagging/
+│   ├── cognitive-level-tagging/
+│   ├── learning-objective-tagging/
+│   └── deep-learning-tagging/
+│
+├── shared/                            # Shared Components
 │   ├── schemas/
 │   ├── contracts/
 │   ├── events/
@@ -41,24 +98,92 @@ ai-platform/
 │   ├── logging/
 │   ├── telemetry/
 │   ├── security/
+│   ├── middleware/
 │   ├── utils/
 │   ├── configs/
-│   └── constants/
+│   ├── constants/
+│   ├── grpc/
+│   ├── models/
+│   ├── observability/
+│   ├── prompts/
+│   └── telemetry/
 │
-├── knowledge/
-│   │
-│   ├── cp/
-│   ├── atp/
-│   ├── buku_guru/
-│   ├── buku_siswa/
-│   ├── modul_ajar/
-│   ├── asesmen/
-│   ├── p5/
-│   ├── media/
-│   └── temporary/
+├── knowledge/                         # 9 Domain Knowledge Repositories
+│   ├── cp/                           # Capaian Pembelajaran
+│   ├── atp/                          # Alur Tujuan Pembelajaran
+│   ├── buku_guru/                    # Buku Panduan Guru
+│   ├── buku_siswa/                   # Buku Siswa
+│   ├── modul_ajar/                   # Modul Ajar
+│   ├── asesmen/                      # Bank Asesmen
+│   ├── p5/                           # Projek P5
+│   ├── media/                        # Educational Media
+│   ├── ontology/                     # Knowledge Graphs
+│   └── temporary/                    # Temporary Storage
 │
-├── infra/
-│   │
+├── models/                            # 7 Model Categories
+│   ├── embeddings/
+│   ├── classifiers/
+│   ├── rerankers/
+│   ├── local-llm/
+│   ├── OCR/
+│   ├── vision/
+│   └── moderation/
+│
+├── storage/                           # 11 Storage Layers
+│   ├── raw/                          # Original Documents
+│   ├── parsed/                       # Parsed Content
+│   ├── OCR/                          # OCR Results
+│   ├── chunks/                       # Semantic Chunks
+│   ├── embeddings/                   # Vector Embeddings
+│   ├── enriched/                     # Enriched Metadata
+│   ├── tables/                       # Extracted Tables
+│   ├── images/                       # Extracted Images
+│   ├── formulas/                     # Mathematical Formulas
+│   ├── normalized/                   # Normalized Content
+│   └── snapshots/                    # System Snapshots
+│
+├── workers/                           # 7 Async Worker Types
+│   ├── document-workers/
+│   ├── OCR-workers/
+│   ├── embedding-workers/
+│   ├── enrichment-workers/
+│   ├── indexing-workers/
+│   ├── reranking-workers/
+│   └── cleanup-workers/
+│
+├── pipelines/                         # 9 Processing Pipelines
+│   ├── ingestion/
+│   ├── parsing/
+│   ├── chunking/
+│   ├── embeddings/
+│   ├── enrichment/
+│   ├── retrieval/
+│   ├── reranking/
+│   ├── generation/
+│   └── indexing/
+│
+├── scripts/                           # 20+ Automation Scripts
+│   ├── backup/
+│   ├── benchmark/
+│   ├── bootstrap/
+│   ├── cleanup/
+│   ├── deployment/
+│   ├── embedding/
+│   ├── ingestion/
+│   ├── maintenance/
+│   ├── migration/
+│   ├── migrations/
+│   ├── monitoring/
+│   ├── qdrant/
+│   ├── recovery/
+│   ├── reindex/
+│   ├── repair/
+│   ├── security/
+│   ├── setup/
+│   ├── testing/
+│   └── utils/
+│
+├── infra/                             # 12 Infrastructure Components
 │   ├── docker/
 │   ├── kubernetes/
 │   ├── kafka/
@@ -72,549 +197,523 @@ ai-platform/
 │   ├── loki/
 │   └── nginx/
 │
-├── deployment/
-│   │
+├── deployment/                        # Multi-Environment Deployment
 │   ├── dev/
 │   ├── staging/
 │   ├── production/
 │   └── scripts/
 │
-├── docs/
-│   │
+├── docs/                              # 15 Documentation Categories
+│   ├── API/
 │   ├── architecture/
-│   ├── api/
+│   ├── chunking/
+│   ├── deployment/
+│   ├── engineering/
+│   ├── governance/
+│   ├── ingestion/
+│   ├── knowledge/
+│   ├── models/
+│   ├── observability/
 │   ├── prompts/
 │   ├── retrieval/
-│   ├── governance/
+│   ├── runbooks/
+│   └── security/
+│
+├── tests/                             # 9 Testing Categories
 │   ├── chunking/
-│   └── runbooks/
-│
-├── notebooks/
-│   │
-│   ├── experiments/
-│   ├── embedding-tests/
-│   ├── retrieval-evals/
-│   ├── reranking/
-│   └── model-benchmarks/
-│
-├── scripts/
-│   │
-│   ├── migration/
-│   ├── reindex/
-│   ├── repair/
-│   ├── ingestion/
-│   └── benchmark/
-│
-├── tests/
-│   │
-│   ├── integration/
 │   ├── e2e/
-│   ├── retrieval/
+│   ├── embeddings/
+│   ├── generation/
+│   ├── integration/
+│   ├── load/
 │   ├── parsing/
-│   ├── chunking/
-│   └── load/
+│   ├── reranking/
+│   └── retrieval/
+│
+├── notebooks/                         # 9 R&D Notebook Categories
+│   ├── benchmarks/
+│   ├── embedding-tests/
+│   ├── experiments/
+│   ├── model-benchmarks/
+│   ├── OCR/
+│   ├── parsing/
+│   ├── reranking/
+│   └── retrieval-evals/
 │
 ├── .github/
 │
 ├── Makefile
 ├── pyproject.toml
+├── requirements.txt
 ├── README.md
 └── .env
 ```
 
 ---
 
-# PENJELASAN TIAP SERVICE
+# PENJELASAN STRUKTUR UTAMA
 
 ---
 
-# 1. gateway-service
+## 1. SERVICES - 13 Microservices
 
-API entrypoint untuk:
+### Core AI Services
 
-* frontend,
-* ERP Spring Boot,
-* mobile apps.
+**gateway-service** (Port 8002)
+- API entrypoint untuk frontend, ERP Spring Boot, mobile apps
+- Auth validation, JWT validation, rate limiting, request routing, API aggregation
 
----
+**orchestration-service** (Port 8007)
+- OTAK AI SYSTEM
+- Workflow orchestration, routing, policy, fallback, AI strategy
 
-# Tugas
+**parser-service** (Port 8008)
+- Document intelligence foundation
+- PDF processing, OCR, table extraction, layout detection
+- Tooling: PyMuPDF, Unstructured, Camelot, Nougat, Tesseract
 
-* auth validation,
-* JWT validation,
-* rate limiting,
-* request routing,
-* API aggregation.
+**semantic-chunk-service** (Port 8011)
+- MOST IMPORTANT SERVICE
+- Curriculum-aware semantic chunking
+- Mengubah parsed document menjadi educational semantic chunks
 
----
+**metadata-service** (Port 8004)
+- AI enrichment untuk tagging dan classification
+- Difficulty assessment, taxonomy classification, learning style detection
 
-# Stack
+**embedding-service** (Port 8001)
+- Multimodal embeddings (text, image, table, formula)
+- Tooling: BAAI/bge-m3, intfloat/multilingual-e5-large
 
-* FastAPI
-* NGINX/API Gateway.
+**retrieval-service** (Port 8010)
+- Core retrieval intelligence
+- Hybrid retrieval dengan metadata filtering
+- Tooling: Qdrant
 
----
+**generation-service** (Port 8003)
+- LLM generation layer dengan multiple providers
+- Cloud: GPT, Claude | Local: Qwen, Mistral, Llama
 
-# 2. orchestration-service
+### Governance Services
 
-INI OTAK AI SYSTEM.
+**audit-service** (Port 8000)
+- WAJIB enterprise AI
+- Logging, compliance, traceability
+- Menyimpan prompt, retrieval result, answer, latency, token usage, model version
 
----
+**monitoring-service** (Port 8006)
+- Observability dengan Prometheus/Grafana/OpenTelemetry
+- Metrics: retrieval latency, chunk quality, OCR errors, token usage, hallucination rate
 
-# Tugas
+**moderation-service** (Port 8005)
+- Content moderation dan safety
+- Toxicity detection, bias checking, content filtering
 
-* workflow orchestration,
-* routing,
-* policy,
-* fallback,
-* AI strategy.
+**reranking-service** (Port 8009)
+- Advanced reranking untuk retrieval quality
+- Multiple reranking strategies and models
 
----
+### Specialized Services
 
-# Contoh
+**vision-service** (Port 8012)
+- Image processing, OCR, diagram analysis
+- Tooling: Tesseract, computer vision models
 
-```text id="rvbyb9"
-Question
- ↓
-Intent Detection
- ↓
-Retrieval Strategy
- ↓
-Generation Strategy
- ↓
-Validation
-```
-
----
-
-# Struktur
-
-```text id="2vf0h2"
-orchestration-service/
-├── workflows/
-├── routers/
-├── coordinators/
-├── planners/
-├── evaluators/
-└── policies/
-```
+**notification-service**
+- Event-driven notifications
+- Email, push, in-app notifications
 
 ---
 
-# 3. parser-service
+## 2. EDUCATIONAL INTELLIGENCE - 7 AI Engines
 
-Document intelligence foundation.
+**curriculum-engine**
+- Validasi CP, ATP, phase alignment, grade alignment
+- Curriculum structure validation
 
----
+**pedagogy-engine**
+- Analisis inquiry learning, differentiated learning, deep learning
+- Pedagogical context analysis
 
-# Struktur
+**assessment-engine**
+- Formative assessment, HOTS questions, rubric generation
+- Competency evaluation
 
-```text id="4jml8j"
-parser-service/
-├── extractors/
-│   ├── text/
-│   ├── table/
-│   ├── image/
-│   ├── ocr/
-│   └── layout/
-│
-├── pipelines/
-├── workers/
-├── schemas/
-└── normalizers/
-```
+**learning-progression-engine**
+- Mastery progression detection
+- Prerequisite gaps detection, remediation needs
 
----
+**learning-graph-engine**
+- Knowledge graph construction
+- Competency graph, prerequisite graph, concept relationship
 
-# Tooling
+**adaptive-learning-engine**
+- Personalized learning paths
+- Adaptive content recommendation
 
-* PyMuPDF
-* Unstructured
-* Camelot
-* Nougat
+**recommendation-engine**
+- Content recommendation
+- Learning resource suggestion
 
 ---
 
-# 4. semantic-chunk-service
+## 3. AI AGENTS - 4 Specialized Agents
 
-MOST IMPORTANT SERVICE.
+**teacher-agent**
+- Assistant untuk guru
+- Lesson planning, assessment creation, student progress analysis
 
----
+**student-learning-agent**
+- Personalized learning companion
+- Learning guidance, progress tracking, personalized support
 
-# Tugas
+**curriculum-agent**
+- Curriculum expertise
+- CP/ATP guidance, curriculum alignment checking
 
-Mengubah:
-
-* parsed document
-  menjadi:
-* educational semantic chunks.
-
----
-
-# Struktur
-
-```text id="l9k1m4"
-semantic-chunk-service/
-├── chunkers/
-├── hierarchy/
-├── classifiers/
-├── pedagogy/
-├── taxonomy/
-└── builders/
-```
+**assessment-agent**
+- Assessment generation dan evaluation
+- Question generation, rubric creation, assessment analytics
 
 ---
 
-# Jenis chunk
+## 4. HALLUCINATION GUARD - 6 Validators
 
-```text id="ed1x7h"
-- competency
-- activity
-- assessment
-- inquiry
-- reflection
-- experiment
-- lesson_plan
-```
+**curriculum-validator**
+- Validasi kurikulum alignment
+- CP/ATP compliance checking
 
----
+**pedagogy-validator**
+- Validasi pedagogical approach
+- Teaching method appropriateness
 
-# 5. metadata-service
+**competency-validator**
+- Validasi competency progression
+- Mastery level verification
 
-AI enrichment.
+**assessment-validator**
+- Validasi assessment quality
+- HOTS verification, difficulty calibration
 
----
+**phase-validator**
+- Validasi phase appropriateness
+- Phase alignment checking
 
-# Struktur
-
-```text id="jlwm2e"
-metadata-service/
-├── enrichers/
-├── classifiers/
-├── taxonomy/
-├── difficulty/
-└── standards/
-```
+**retrieval-grounding-validator**
+- Validasi retrieval grounding
+- Source verification, citation checking
 
 ---
 
-# Output
+## 5. EDUCATIONAL OBSERVABILITY - 6 Monitoring Systems
 
-```json id="jlwm3f"
-{
-  "difficulty": "easy",
-  "taxonomy": "analyze",
-  "learning_style": ["visual"]
-}
-```
+**learning-analytics**
+- Student learning progress tracking
+- Performance metrics, engagement analytics
 
----
+**competency-analytics**
+- Competency mastery analytics
+- Progress tracking, gap analysis
 
-# 6. embedding-service
+**assessment-quality-monitoring**
+- Assessment effectiveness monitoring
+- Question quality analysis, difficulty calibration
 
----
+**retrieval-quality-monitoring**
+- Retrieval system performance
+- Relevance scores, precision/recall tracking
 
-# Struktur
+**pedagogy-effectiveness-monitoring**
+- Teaching method effectiveness
+- Pedagogical approach analytics
 
-```text id="jlwm4g"
-embedding-service/
-├── embedders/
-│   ├── text/
-│   ├── image/
-│   ├── table/
-│   └── formula/
-│
-├── vectorizers/
-├── indexers/
-└── workers/
-```
+**hallucination-monitoring**
+- AI hallucination rate tracking
+- Grounding verification, quality metrics
 
 ---
 
-# Tooling
+## 6. EDUCATIONAL ONTOLOGY - 6 Knowledge Structures
 
-* BAAI/bge-m3
-* intfloat/multilingual-e5-large
+**curriculum-ontology**
+- Struktur kurikulum
+- CP/ATP hierarchy, subject organization
 
----
+**pedagogy-ontology**
+- Konsep pedagogis
+- Teaching methods, learning strategies
 
-# 7. retrieval-service
+**competency-ontology**
+- Kompetensi hierarchy
+- Skill progression, prerequisite relationships
 
-Core retrieval intelligence.
+**assessment-ontology**
+- Tipe dan struktur asesmen
+- Assessment categories, HOTS taxonomy
 
----
+**learning-objective-ontology**
+- Tujuan pembelajaran
+- Objective hierarchy, cognitive levels
 
-# Struktur
-
-```text id="jlwm5h"
-retrieval-service/
-├── retrievers/
-├── hybrid/
-├── rerankers/
-├── filters/
-├── query-builders/
-└── context-builders/
-```
-
----
-
-# Tooling
-
-* Qdrant
+**concept-hierarchy**
+- Hubungan konsep
+- Knowledge graph, concept relationships
 
 ---
 
-# Retrieval Strategy
+## 7. RETRIEVAL ENHANCEMENT - 6 Specialized Retrieval Systems
 
-```text id="jlwm6i"
-semantic
-+
-metadata filter
-+
-hybrid search
-+
-reranking
-```
+**curriculum-aware-reranker**
+- Curriculum-based reranking
+- CP/ATP alignment scoring
 
----
+**pedagogy-aware-retrieval**
+- Pedagogy-filtered retrieval
+- Teaching method context
 
-# 8. generation-service
+**competency-aware-retrieval**
+- Competency-grounded retrieval
+- Skill-based filtering
 
-LLM generation layer.
+**assessment-aware-retrieval**
+- Assessment-targeted retrieval
+- Assessment type optimization
 
----
+**contextual-retrieval**
+- Context-aware search
+- Learning context integration
 
-# Struktur
-
-```text id="jlwm7j"
-generation-service/
-├── prompts/
-├── templates/
-├── citations/
-├── validators/
-├── hallucination/
-└── providers/
-```
+**learning-style-retrieval**
+- Learning style adaptive retrieval
+- Personalized search results
 
 ---
 
-# Model Strategy
+## 8. SEMANTIC ENRICHMENT - 6 Tagging Systems
 
-## Cloud
+**competency-tagging**
+- Auto-tag kompetensi
+- Skill identification, competency mapping
 
-* GPT,
-* Claude.
+**pedagogy-tagging**
+- Tag pedagogical approach
+- Teaching method classification
 
-## Local
+**assessment-tagging**
+- Tag assessment type
+- Assessment categorization
 
-* Qwen,
-* Mistral,
-* Llama.
+**cognitive-level-tagging**
+- Tag taksonomi Bloom
+- Cognitive level identification
 
----
+**learning-objective-tagging**
+- Tag tujuan pembelajaran
+- Objective alignment
 
-# 9. audit-service
-
-WAJIB enterprise AI.
-
----
-
-# Menyimpan
-
-* prompt,
-* retrieval result,
-* answer,
-* latency,
-* token usage,
-* model version.
+**deep-learning-tagging**
+- Tag deep learning elements
+- Higher-order thinking identification
 
 ---
 
-# Struktur
+## 9. MODELS - 7 Model Categories
 
-```text id="jlwm8k"
-audit-service/
-├── prompt-logs/
-├── retrieval-logs/
-├── answer-logs/
-└── compliance/
-```
+**embeddings**
+- Text, image, table, formula embedding models
+- BAAI/bge-m3, multilingual-e5-large
 
----
+**classifiers**
+- Content classification models
+- Educational content categorization
 
-# 10. monitoring-service
+**rerankers**
+- Reranking models
+- Cross-encoders, mono-encoders
 
----
+**local-llm**
+- Local LLM models
+- Qwen, Mistral, Llama
 
-# Stack
+**OCR**
+- OCR models
+- Tesseract, specialized OCR
 
-* Prometheus
-* Grafana
-* OpenTelemetry
+**vision**
+- Computer vision models
+- Image classification, diagram analysis
 
----
-
-# Metrics
-
-```text id="jlwm9l"
-- retrieval latency
-- chunk quality
-- OCR errors
-- token usage
-- hallucination rate
-```
+**moderation**
+- Content moderation models
+- Toxicity detection, bias checking
 
 ---
 
-# KNOWLEDGE STRUCTURE
+## 10. STORAGE - 11 Storage Layers
 
-Ini bukan sekadar folder storage.
-
-Ini domain knowledge namespace.
+**raw/** - Original documents
+**parsed/** - Parsed content
+**OCR/** - OCR results
+**chunks/** - Semantic chunks
+**embeddings/** - Vector embeddings
+**enriched/** - Enriched metadata
+**tables/** - Extracted tables
+**images/** - Extracted images
+**formulas/** - Mathematical formulas
+**normalized/** - Normalized content
+**snapshots/** - System snapshots
 
 ---
 
-# FINAL KNOWLEDGE STRUCTURE
+## 11. WORKERS - 7 Async Worker Types
 
-```text id="jlwm0m"
-knowledge/
-├── cp/
-│   ├── ipa/
-│   ├── ips/
-│   └── matematika/
-│
-├── atp/
-├── buku_guru/
-├── buku_siswa/
-├── modul_ajar/
-├── asesmen/
-├── p5/
-│
-├── media/
-│   ├── images/
-│   ├── tables/
-│   └── formulas/
-│
-└── temporary/
-```
+**document-workers** - Document processing
+**OCR-workers** - OCR processing
+**embedding-workers** - Embedding generation
+**enrichment-workers** - Metadata enrichment
+**indexing-workers** - Vector indexing
+**reranking-workers** - Reranking jobs
+**cleanup-workers** - Data maintenance
+
+---
+
+## 12. PIPELINES - 9 Processing Pipelines
+
+**ingestion/** - Document ingestion pipeline
+**parsing/** - Document parsing pipeline
+**chunking/** - Semantic chunking pipeline
+**embeddings/** - Embedding generation pipeline
+**enrichment/** - Metadata enrichment pipeline
+**retrieval/** - Retrieval pipeline
+**reranking/** - Reranking pipeline
+**generation/** - Content generation pipeline
+**indexing/** - Vector indexing pipeline
+
+---
+
+## 13. INFRASTRUCTURE - 12 Components
+
+**docker/** - Container configuration
+**kubernetes/** - K8s manifests
+**kafka/** - Event streaming
+**rabbitmq/** - Message queuing
+**qdrant/** - Vector database
+**postgres/** - Relational database
+**minio/** - Object storage
+**prometheus/** - Metrics collection
+**grafana/** - Visualization
+**tempo/** - Distributed tracing
+**loki/** - Log aggregation
+**nginx/** - Reverse proxy/load balancer
+
+---
+
+## 14. KNOWLEDGE STRUCTURE - 9 Domain Repositories
+
+**cp/** - Capaian Pembelajaran per mata pelajaran
+**atp/** - Alur Tujuan Pembelajaran
+**buku_guru/** - Buku panduan guru
+**buku_siswa/** - Buku siswa
+**modul_ajar/** - Modul ajar
+**asesmen/** - Bank soal dan asesmen
+**p5/** - Projek Penguatan Profil Pelajar Pancasila
+**media/** - Educational media (images, videos, audio)
+**ontology/** - Knowledge graphs dan semantic structures
+
+---
+
+## 15. SHARED COMPONENTS - 17 Categories
+
+**schemas/** - Pydantic schemas
+**contracts/** - Service contracts/interfaces
+**events/** - Event definitions
+**enums/** - Enumeration types
+**exceptions/** - Custom exceptions
+**logging/** - Logging configuration
+**telemetry/** - OpenTelemetry setup
+**security/** - Security utilities
+**middleware/** - FastAPI middleware
+**utils/** - Utility functions
+**configs/** - Configuration management
+**constants/** - Application constants
+**grpc/** - gRPC definitions
+**models/** - Shared data models
+**observability/** - Observability utilities
+**prompts/** - Prompt templates
+**prompts/** - AI prompt management
 
 ---
 
 # EVENT ARCHITECTURE
 
-KRITIKAL.
+KRITIKAL untuk async processing.
 
----
-
-# Semua service berbasis event
-
-```text id="jlwm1n"
+```text
 DOCUMENT_UPLOADED
 DOCUMENT_PARSED
 CHUNKS_CREATED
 METADATA_ENRICHED
 EMBEDDINGS_CREATED
 INDEXING_COMPLETED
+RETRIEVAL_EXECUTED
+GENERATION_COMPLETED
+VALIDATION_PASSED
 ```
 
 ---
 
-# Queue
+# DEPLOYMENT STRATEGY
 
-Gunakan:
+## Container
+- Docker untuk containerization
 
-* RabbitMQ
-  atau
-* Apache Kafka
+## Orchestration
+- Kubernetes untuk production orchestration
 
----
+## CI/CD
+- GitHub Actions
+- ArgoCD untuk GitOps
 
-# OBJECT STORAGE
-
-Gunakan:
-
-MinIO
-
----
-
-# Simpan
-
-```text id="jlwm2o"
-- original PDF
-- extracted images
-- OCR output
-- chunk snapshot
-- embeddings snapshot
-```
+## Environments
+- dev, staging, production
 
 ---
 
-# DATABASE STRATEGY
+# PRIORITAS PENGEMBANGAN
 
----
+Kalau lead engineer, prioritas:
 
-# PostgreSQL
-
-Untuk:
-
-* business data,
-* metadata relational,
-* audit,
-* jobs.
-
----
-
-# Qdrant
-
-Untuk:
-
-* vector retrieval.
-
----
-
-# RECOMMENDED DEPLOYMENT
-
----
-
-# Container
-
-* Docker
-
----
-
-# Orchestration
-
-* Kubernetes
-
----
-
-# CI/CD
-
-* GitHub Actions
-* ArgoCD.
-
----
-
-# PALING PENTING
-
-Kalau saya lead engineer:
-
-Saya akan memprioritaskan:
-
-```text id="jlwm3p"
-1. document intelligence
-2. semantic chunking
-3. metadata engineering
-4. retrieval engineering
-5. observability
+```text
+1. document intelligence (parser-service, vision-service)
+2. semantic chunking (semantic-chunk-service)
+3. metadata engineering (metadata-service)
+4. retrieval engineering (retrieval-service, reranking-service)
+5. observability (monitoring-service, audit-service)
+6. educational intelligence (curriculum-engine, pedagogy-engine)
+7. AI governance (hallucination-guard, educational-observability)
 ```
 
 Bukan:
-
-* agent,
-* chatbot UI,
-* AI gimmick.
+- agent bells & whistles,
+- chatbot UI,
+- AI gimmick.
 
 Karena untuk enterprise educational AI:
 
-> retrieval architecture adalah core product sebenarnya.
+> retrieval architecture + educational intelligence adalah core product sebenarnya.
+
+---
+
+# KEY INSIGHTS
+
+Platform ini dirancang sebagai **Educational Cognitive Infrastructure** yang:
+
+1. **Memahami Kurikulum Merdeka** - bukan generic AI
+2. **Curriculum-Aware** - CP, ATP, phase, grade alignment
+3. **Pedagogy-Aware** - inquiry, differentiated, deep learning
+4. **Competency-Aware** - mastery progression, prerequisite
+5. **Multimodal** - text, tables, formulas, diagrams, images
+6. **Governance-First** - auditability, traceability, observability
+7. **Production-Ready** - scalable, observable, maintainable
+
+Bukan sekadar chatbot PDF atau generic RAG system.

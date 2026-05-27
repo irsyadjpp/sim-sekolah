@@ -1,0 +1,49 @@
+[prefect]
+# Prefect configuration for AI Platform pipelines
+
+# API settings
+api_url = "http://localhost:4200/api"
+api_key = ""
+
+# UI settings
+ui_url = "http://localhost:4200"
+
+# Client settings
+client = "prefect"
+
+# Logging
+logging = {
+    level = "INFO"
+    format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+}
+
+# Task settings
+task = {
+    default_retry_delay_seconds = 5,
+    default_retries = 3
+}
+
+# Flow settings
+flow = {
+    default_retry_delay_seconds = 5,
+    default_retries = 3
+}
+
+[profiles]
+# Development profile
+[profiles.dev]
+api_url = "http://localhost:4200/api"
+
+# Production profile
+[profiles.prod]
+api_url = "https://prefect.simsekolah.id/api"
+
+[context.secrets]
+# Secret references
+POSTGRES_URL = "${POSTGRES_URL}"
+REDIS_URL = "${REDIS_URL}"
+QDRANT_URL = "${QDRANT_URL}"
+RABBITMQ_URL = "${RABBITMQ_URL}"
+MINIO_ENDPOINT = "${MINIO_ENDPOINT}"
+MINIO_ACCESS_KEY = "${MINIO_ACCESS_KEY}"
+MINIO_SECRET_KEY = "${MINIO_SECRET_KEY}"

@@ -1,0 +1,46 @@
+server:
+  http_listen_port: 3100
+
+distributor:
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:4318
+
+storage:
+  trace:
+    backend: local
+    wal:
+      path: /tmp/tempo/wal
+    local:
+      path: /tmp/tempo/traces
+
+metrics_generator:
+  processor:
+    local:
+      mode: processing
+  metrics:
+    # Exemplars are stored in the traces backend
+    storage:
+      path: /tmp/tempo/generator_metrics
+    # Metrics are stored in the metrics backend
+    remote_write:
+      - url: http://prometheus:9090/api/v1/write
+  traces_storage:
+    path: /tmp/tempo/generator_traces
+
+overrides:
+  defaults:
+    metrics:
+      # Generate spans metrics
+      spans:
+        enabled: true
+      # Generate service metrics
+      services:
+        enabled: true
+      # Generate red metrics
+      red:
+        enabled: true

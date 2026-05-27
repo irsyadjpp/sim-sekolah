@@ -1,0 +1,47 @@
+# Base Document Processing Image for AI Platform Services
+# This image extends the base image with document processing dependencies
+
+FROM ai-platform-base:latest
+
+LABEL maintainer="AI Platform Team"
+LABEL description="Base Document Processing image for AI Platform services"
+
+# Install document processing system dependencies
+RUN apt-get update && apt-get install -y \
+    libxml2-dev \
+    libxslt1-dev \
+    zlib1g-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libtiff-dev \
+    libfreetype6-dev \
+    liblcms2-dev \
+    libwebp-dev \
+    harfbuzz-icu \
+    pkg-config \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install document processing libraries
+RUN pip install --no-cache-dir \
+    pymupdf==1.24.9 \
+    pdfplumber==0.11.4 \
+    unstructured==0.15.7 \
+    python-docx==1.1.0 \
+    openpyxl==3.1.5 \
+    pandas==2.2.2
+
+# Install table extraction dependencies
+RUN pip install --no-cache-dir \
+    camelot-py[cv]==0.11.0 \
+    tabulate==0.9.0 \
+    opencv-python-headless==4.10.0.84 \
+    ghostscript
+
+# Install ghostscript for PDF processing
+RUN apt-get update && apt-get install -y \
+    ghostscript \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set default command
+CMD ["/bin/bash"]

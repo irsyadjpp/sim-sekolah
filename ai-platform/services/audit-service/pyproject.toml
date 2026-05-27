@@ -1,0 +1,39 @@
+[project]
+name = "audit-service"
+version = "0.1.0"
+description = "AI Platform Audit Service - Audit logging and compliance tracking"
+requires-python = ">=3.11"
+dependencies = [
+    # Core API
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    
+    # Validation
+    "pydantic>=2.8.0",
+    "pydantic-settings>=2.4.0",
+    
+    # Database
+    "sqlalchemy>=2.0.32",
+    "asyncpg>=0.29.0",
+    
+    # Cache
+    "redis>=5.0.0",
+    
+    # Queue
+    "aio-pika>=9.4.0",
+    
+    # Shared packages
+    "ai-platform-shared",
+    "ai-platform-shared-grpc",
+    "ai-platform-shared-schemas",
+    "ai-platform-shared-events",
+    "ai-platform-shared-security",
+    "ai-platform-shared-observability",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]

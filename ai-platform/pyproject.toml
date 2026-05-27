@@ -1,112 +1,41 @@
-[tool.poetry]
-name = "educational-ai-platform"
+[project]
+name = "ai-platform"
 version = "0.1.0"
-description = "Enterprise Educational Intelligence Platform"
-authors = ["Irsyad"]
+description = "Enterprise Educational Intelligence Platform - Monorepo Workspace"
+requires-python = ">=3.11"
 readme = "README.md"
-package-mode = false
 
-[tool.poetry.dependencies]
-python = "^3.11"
+[tool.uv.workspace]
+members = [
+    "shared/*",
+    "services/gateway-service",
+    "services/parser-service",
+    "services/semantic-chunk-service",
+    "services/metadata-service",
+    "services/embedding-service",
+    "services/retrieval-service",
+    "services/generation-service",
+    "services/audit-service",
+    "services/monitoring-service",
+    "services/moderation-service",
+    "services/reranking-service",
+    "services/vision-service",
+]
 
-# Core API
-fastapi = "^0.115.0"
-uvicorn = { extras = ["standard"], version = "^0.30.0" }
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.3.2",
+    "pytest-asyncio>=0.23.8",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.6.2",
+    "black>=24.8.0",
+    "isort>=5.13.2",
+    "mypy>=1.11.1",
+    "bandit>=1.7.9",
+    "pre-commit>=3.8.0",
+]
 
-# Validation
-pydantic = "^2.8.0"
-pydantic-settings = "^2.4.0"
-
-# Async
-httpx = "^0.27.0"
-aiofiles = "^24.1.0"
-
-# Database
-sqlalchemy = "^2.0.32"
-asyncpg = "^0.29.0"
-psycopg2-binary = "^2.9.9"
-
-# Vector DB
-qdrant-client = "^1.11.0"
-
-# Queue
-aio-pika = "^9.4.0"
-
-# Object Storage
-minio = "^7.2.7"
-
-# PDF Processing
-pymupdf = "^1.24.9"
-pdfplumber = "^0.11.4"
-
-# OCR
-pytesseract = "^0.3.13"
-pillow = "^10.4.0"
-
-# Document Parsing
-unstructured = "^0.15.7"
-
-# Table Extraction
-camelot-py = "^0.11.0"
-tabulate = "^0.9.0"
-
-# NLP
-spacy = "^3.7.5"
-nltk = "^3.9.1"
-
-# Embedding / ML
-sentence-transformers = "^3.0.1"
-transformers = "^4.44.0"
-torch = "^2.4.0"
-
-# Data Processing
-numpy = "^2.0.1"
-pandas = "^2.2.2"
-
-# AI Providers
-openai = "^1.40.0"
-anthropic = "^0.34.0"
-
-# Observability
-prometheus-client = "^0.20.0"
-opentelemetry-api = "^1.26.0"
-opentelemetry-sdk = "^1.26.0"
-
-# Retry
-tenacity = "^9.0.0"
-
-# Logging
-structlog = "^24.4.0"
-
-# Config
-python-dotenv = "^1.0.1"
-
-[tool.poetry.group.dev.dependencies]
-
-# Testing
-pytest = "^8.3.2"
-pytest-asyncio = "^0.23.8"
-pytest-cov = "^5.0.0"
-
-# Lint
-ruff = "^0.6.2"
-
-# Formatting
-black = "^24.8.0"
-isort = "^5.13.2"
-
-# Typing
-mypy = "^1.11.1"
-
-# Security
-bandit = "^1.7.9"
-
-# Pre-commit
-pre-commit = "^3.8.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv.sources]
 
 # =========================
 # BLACK
@@ -130,7 +59,7 @@ line_length = 88
 
 [tool.ruff]
 line-length = 88
-target-version = "py311"
+target-version = ["py311"]
 
 [tool.ruff.lint]
 select = [
@@ -164,7 +93,7 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["src"]
+source = ["shared", "services"]
 
 [tool.coverage.report]
 show_missing = true

@@ -1,0 +1,134 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: retrieval-service
+  namespace: ai-platform
+  labels:
+    app: retrieval-service
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: retrieval-service
+  template:
+    metadata:
+      labels:
+        app: retrieval-service
+        version: v1
+    spec:
+      containers:
+      - name: retrieval-service
+        image: ai-platform/retrieval-service:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8007
+          name: http
+          protocol: TCP
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: DATABASE_URL
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ai-platform-secrets
+              key: DATABASE_PASSWORD
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: REDIS_URL
+        - name: RABBITMQ_URL
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: RABBITMQ_URL
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ai-platform-secrets
+              key: RABBITMQ_PASSWORD
+        - name: QDRANT_URL
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: QDRANT_URL
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: LOG_LEVEL
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: ai-platform-config
+              key: ENVIRONMENT
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8007
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8007
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: retrieval-service
+  namespace: ai-platform
+  labels:
+    app: retrieval-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8007
+    targetPort: 8007
+    protocol: TCP
+    name: http
+  selector:
+    app: retrieval-service
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: retrieval-service-hpa
+  namespace: ai-platform
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: retrieval-service
+  minReplicas: 2
+  maxReplicas: 8
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80

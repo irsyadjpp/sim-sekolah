@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package ai.platform.common.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Common message definitions shared across services
+
+// Standard response wrapper
+message Response {
+  bool success = 1;
+  string message = 2;
+  map<string, string> metadata = 3;
+}
+
+// Pagination request
+message PaginationRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string sort_by = 3;
+  string sort_order = 4; // asc or desc
+}
+
+// Pagination response
+message PaginationResponse {
+  int32 total_items = 1;
+  int32 total_pages = 2;
+  int32 current_page = 3;
+  int32 page_size = 4;
+  bool has_next = 5;
+  bool has_previous = 6;
+}
+
+// Document reference
+message DocumentReference {
+  string document_id = 1;
+  string title = 2;
+  string source = 3;
+  google.protobuf.Timestamp created_at = 4;
+  map<string, string> metadata = 5;
+}
+
+// Chunk reference
+message ChunkReference {
+  string chunk_id = 1;
+  string document_id = 2;
+  int32 chunk_index = 3;
+  string content_preview = 4; // First 100 chars
+  map<string, string> metadata = 5;
+}
+
+// Health check response
+message HealthCheckResponse {
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+    SERVICE_UNKNOWN = 3; // Used only by the Watch method
+  }
+  ServingStatus status = 1;
+  string version = 2;
+  map<string, string> details = 3;
+}
+
+// Metric data point
+message Metric {
+  string name = 1;
+  double value = 2;
+  map<string, string> labels = 3;
+  google.protobuf.Timestamp timestamp = 4;
+}
+
+// Error detail with context
+message ErrorDetail {
+  string code = 1;
+  string message = 2;
+  string details = 3;
+  map<string, string> context = 4;
+}

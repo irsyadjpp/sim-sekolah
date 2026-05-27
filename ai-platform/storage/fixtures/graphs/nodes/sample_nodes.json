@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "description": "Sample graph nodes for knowledge graph testing",
+    "domain": "educational_ontology",
+    "count": 8,
+    "created_at": "2024-05-27T00:00:00Z"
+  },
+  "nodes": [
+    {
+      "id": "node-001",
+      "label": "Concept",
+      "properties": {
+        "name": "photosynthesis",
+        "domain": "biology",
+        "difficulty": "easy",
+        "grade_level": "10",
+        "description": "Process by which plants convert light energy into chemical energy",
+        "language": "en"
+      }
+    },
+    {
+      "id": "node-002",
+      "label": "Concept",
+      "properties": {
+        "name": "chloroplast",
+        "domain": "biology",
+        "difficulty": "medium",
+        "grade_level": "10",
+        "description": "Organelle in plant cells where photosynthesis occurs",
+        "language": "en"
+      }
+    },
+    {
+      "id": "node-003",
+      "label": "Concept",
+      "properties": {
+        "name": "linear_equation",
+        "domain": "mathematics",
+        "difficulty": "medium",
+        "grade_level": "9",
+        "description": "Equation where variables appear only in the first degree",
+        "language": "en"
+      }
+    },
+    {
+      "id": "node-004",
+      "label": "Concept",
+      "properties": {
+        "name": "algebra",
+        "domain": "mathematics",
+        "difficulty": "medium",
+        "grade_level": "8",
+        "description": "Branch of mathematics dealing with symbols and their manipulation",
+        "language": "en"
+      }
+    },
+    {
+      "id": "node-005",
+      "label": "Concept",
+      "properties": {
+        "name": "newton_first_law",
+        "domain": "physics",
+        "difficulty": "hard",
+        "grade_level": "11",
+        "description": "Object remains at rest or in uniform motion unless acted upon by force",
+        "language": "en"
+      }
+    },
+    {
+      "id": "node-006",
+      "label": "Concept",
+      "properties": {
+        "name": "force",
+        "domain": "physics",
+        "difficulty": "medium",
+        "grade_level": "10",
+        "description": "Interaction that causes an object to change motion",
+        "language": "en"
+      }
+    },
+    {
+      "id": "node-007",
+      "label": "Subject",
+      "properties": {
+        "name": "biology",
+        "domain": "science",
+        "difficulty": "varies",
+        "grade_level": "K-12",
+        "description": "Study of living organisms",
+        "language": "en"
+      }
+    },
+    {
+      "id": "node-008",
+      "label": "Subject",
+      "properties": {
+        "name": "mathematics",
+        "domain": "science",
+        "difficulty": "varies",
+        "grade_level": "K-12",
+        "description": "Study of numbers, quantities, and shapes",
+        "language": "en"
+      }
+    }
+  ]
+}
