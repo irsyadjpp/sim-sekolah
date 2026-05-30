@@ -101,7 +101,7 @@ func (h *StudentHandler) Create(c *fiber.Ctx) error {
 	// Trigger Audit Log
 	userID, _ := c.Locals("user_id").(string)
 	if system.GlobalAuditService != nil && data != nil {
-		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "CREATE", "student", data.ID.String(), c.IP())
+		system.GlobalAuditService.LogEvent(c.UserContext(), userID, "CREATE", "student", data.MasterStudent.ID.String(), c.IP())
 	}
 
 	return common.Created(c, "Data siswa berhasil dibuat", data)

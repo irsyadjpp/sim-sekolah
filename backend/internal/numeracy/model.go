@@ -60,8 +60,8 @@ type NumeracyAssessment struct {
 
 	common.Auditable
 
-	Student   *student.Student   `gorm:"foreignKey:StudentID" json:"student,omitempty"`
-	Indicator *NumeracyIndicator `gorm:"foreignKey:IndicatorID" json:"indicator,omitempty"`
+	Student   *student.MasterStudent `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Indicator *NumeracyIndicator     `gorm:"foreignKey:IndicatorID" json:"indicator,omitempty"`
 }
 
 func (NumeracyAssessment) TableName() string {
@@ -88,7 +88,7 @@ type NumeracyGrowth struct {
 
 	common.Auditable
 
-	Student *student.Student `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Student *student.MasterStudent `gorm:"foreignKey:StudentID" json:"student,omitempty"`
 }
 
 func (NumeracyGrowth) TableName() string {
@@ -111,8 +111,8 @@ type NumeracyIntervention struct {
 
 	common.Auditable
 
-	Student   *student.Student   `gorm:"foreignKey:StudentID" json:"student,omitempty"`
-	Indicator *NumeracyIndicator `gorm:"foreignKey:IndicatorID" json:"indicator,omitempty"`
+	Student   *student.MasterStudent `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Indicator *NumeracyIndicator     `gorm:"foreignKey:IndicatorID" json:"indicator,omitempty"`
 }
 
 func (NumeracyIntervention) TableName() string {

@@ -1,0 +1,178 @@
+version: '3.8'
+
+# AI Platform Monolith Architecture
+# Single unified application combining all microservices
+
+services:
+  # AI Platform Monolith Application
+  ai-platform-monolith:
+    build:
+      context: ../../ai-platform/monolith
+      dockerfile: Dockerfile
+    container_name: ai-platform-monolith
+    ports:
+      - "8000:8000"
+    environment:
+      # Database
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USER=ai_user
+      - DATABASE_PASSWORD=ai_password
+      - DATABASE_NAME=ai_platform
+
+      # Vector Database
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - QDRANT_URL=http://qdrant:6333
+
+      # Cache
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_URL=redis://redis:6379
+
+      # Message Queue
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=admin
+      - RABBITMQ_PASSWORD=admin
+      - RABBITMQ_URL=amqp://admin:admin@rabbitmq:5672
+
+      # Object Storage
+      - MINIO_ENDPOINT=minio
+      - MINIO_PORT=9000
+      - MINIO_ACCESS_KEY=admin
+      - MINIO_SECRET_KEY=admin123
+
+      # AI Providers
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+
+      # Monolith Configuration
+      - MONOLITH_PORT=8000
+      - MONOLITH_HOST=0.0.0.0
+      - ENVIRONMENT=development
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      minio:
+        condition: service_started
+    volumes:
+      - ../../ai-platform/monolith/app:/app/app
+      - ../../ai-platform/shared:/app/shared
+      - ../../ai-platform/knowledge:/app/knowledge
+      - ../../ai-platform/storage:/app/storage
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: ai-platform-postgres
+    environment:
+      POSTGRES_DB: ai_platform
+      POSTGRES_USER: ai_user
+      POSTGRES_PASSWORD: ai_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ai_user -d ai_platform" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:v1.7.0
+    container_name: ai-platform-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:6333/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # Redis for Caching
+  redis:
+    image: redis:7-alpine
+    container_name: ai-platform-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # RabbitMQ Message Queue
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: ai-platform-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+  # MinIO Object Storage
+  minio:
+    image: minio/minio:latest
+    container_name: ai-platform-minio
+    command: server /data --console-address ":9000"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - ai-platform-network
+    restart: unless-stopped
+
+networks:
+  ai-platform-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  redis_data:
+  rabbitmq_data:
+  minio_data:

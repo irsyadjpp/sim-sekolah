@@ -1,0 +1,127 @@
+{
+  "pdf_basic_info": {
+    "file_name": "siklus-air.pdf",
+    "page_count": 13,
+    "metadata": {
+      "format": "PDF 1.7",
+      "title": "",
+      "author": "",
+      "subject": "",
+      "keywords": "",
+      "creator": "Adobe InDesign CS6 (Windows)",
+      "producer": "Adobe PDF Library 10.0.1",
+      "creationDate": "D:20211130155901+07'00'",
+      "modDate": "D:20211130155904+07'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "file_size": 1162445
+  },
+  "text_extraction": {
+    "total_pages_tested": 3,
+    "text_extraction_results": [
+      {
+        "page_number": 1,
+        "character_count": 206,
+        "sample_text": "BAHAN AJAR   6\nPokok Bahasan: \nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hi..."
+      },
+      {
+        "page_number": 2,
+        "character_count": 905,
+        "sample_text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n2\nAyo Mengamati\nHai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. \nHmm, kira-kira itu apa ya? Sebelum kita mu..."
+      },
+      {
+        "page_number": 3,
+        "character_count": 1599,
+        "sample_text": "BAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air\nSumber: Dokumentasi penerbit\nGambar 2. Air sebagai salah satu sumber kehidupan manusia\nSemua makhluk hidup, baik manusia, hewan, dan tumbuhan di..."
+      }
+    ]
+  },
+  "table_extractor": {
+    "tables_found": 0,
+    "table_details": []
+  },
+  "image_extractor": {
+    "error": "Error in ImageExtractor: object of type 'ImageExtractionResult' has no len()"
+  },
+  "layout_detector": {
+    "layouts_detected": 53,
+    "layout_details": [
+      {
+        "region_type": "header",
+        "page_number": 1,
+        "bbox": [
+          0,
+          0,
+          595.2760009765625,
+          84.18900146484376
+        ],
+        "content": "6",
+        "confidence": 0.8
+      },
+      {
+        "region_type": "footer",
+        "page_number": 1,
+        "bbox": [
+          0,
+          757.7010131835938,
+          595.2760009765625,
+          841.8900146484375
+        ],
+        "content": "Penyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hidayat",
+        "confidence": 0.8
+      },
+      {
+        "region_type": "image",
+        "page_number": 1,
+        "image_number": 1,
+        "xref": 169,
+        "bbox": [
+          0,
+          0,
+          100,
+          100
+        ],
+        "confidence": 0.7
+      }
+    ]
+  },
+  "enhanced_layout_detector": {
+    "error": "Error in EnhancedLayoutDetector: EnhancedLayoutDetector.detect() missing 1 required positional argument: 'context'"
+  },
+  "competency_chunker": {
+    "error": "Error in CompetencyChunker: CompetencyChunker.chunk() got an unexpected keyword argument 'content'"
+  },
+  "activity_chunker": {
+    "error": "Error in ActivityChunker: ActivityChunker.chunk() got an unexpected keyword argument 'content'"
+  },
+  "assessment_chunker": {
+    "error": "Error in AssessmentChunker: AssessmentChunker.chunk() got an unexpected keyword argument 'content'"
+  },
+  "chunk_builder": {
+    "error": "Error in ChunkBuilder: ChunkBuilder.__init__() missing 9 required positional arguments: 'competency_chunker', 'activity_chunker', 'assessment_chunker', 'inquiry_chunker', 'lesson_plan_chunker', 'hierarchy_detector', 'pedagogy_classifier', 'taxonomy_tagger', and 'chunk_enricher'"
+  },
+  "chunk_enricher": {
+    "error": "Error in ChunkEnricher: 'ChunkEnricher' object has no attribute 'enrich'"
+  },
+  "hierarchy_detector": {
+    "error": "Error in HierarchyDetector: 'HierarchyDetector' object has no attribute 'detect_hierarchy'"
+  },
+  "pedagogy_classifier": {
+    "classification_result": {
+      "pedagogy_type": "inquiry_learning",
+      "confidence": 0.0,
+      "indicators": [],
+      "all_scores": {
+        "inquiry_learning": 0,
+        "differentiated_learning": 0,
+        "deep_learning": 0,
+        "project_based_learning": 0,
+        "problem_based_learning": 0
+      }
+    }
+  },
+  "taxonomy_tagger": {
+    "error": "Error in TaxonomyTagger: TaxonomyTagger.tag() takes 2 positional arguments but 4 were given"
+  }
+}

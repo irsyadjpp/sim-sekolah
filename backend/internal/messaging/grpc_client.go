@@ -30,6 +30,7 @@ type GRPCClient struct {
 	retrievalClient  *grpc_clients.RetrievalServiceClient
 	generationClient *grpc_clients.GenerationServiceClient
 	rerankingClient  *grpc_clients.RerankingServiceClient
+	strategicAnalysisClient *grpc_clients.StrategicAnalysisClient
 }
 
 // NewGRPCClient creates a new gRPC client manager
@@ -47,6 +48,7 @@ func NewGRPCClient() (*GRPCClient, error) {
 			"metadata":   "metadata-service:50057",
 			"reranking":  "reranking-service:50058",
 			// AI Platform services (Phase 7 & 8)
+			"strategic-analysis":        "strategic-analysis-service:50063",
 			"ai-agents":                 "ai-agents-service:50072",
 			"hallucination-guard":       "hallucination-guard-service:50073",
 			"educational-observability": "educational-observability-service:50074",
@@ -105,6 +107,11 @@ func NewGRPCClient() (*GRPCClient, error) {
 	client.rerankingClient, err = grpc_clients.NewRerankingServiceClient(client.services["reranking"])
 	if err != nil {
 		return nil, fmt.Errorf("failed to initialize reranking client: %w", err)
+	}
+
+	client.strategicAnalysisClient, err = grpc_clients.NewStrategicAnalysisClient(client.services["strategic-analysis"])
+	if err != nil {
+		return nil, fmt.Errorf("failed to initialize strategic analysis client: %w", err)
 	}
 
 	return client, nil
@@ -166,6 +173,9 @@ func (c *GRPCClient) Close() error {
 	if c.rerankingClient != nil {
 		c.rerankingClient.Close()
 	}
+	if c.strategicAnalysisClient != nil {
+		c.strategicAnalysisClient.Close()
+	}
 
 	return lastErr
 }
@@ -222,6 +232,11 @@ func (c *GRPCClient) GetGenerationClient() *grpc_clients.GenerationServiceClient
 // GetRerankingClient returns the Reranking Service client
 func (c *GRPCClient) GetRerankingClient() *grpc_clients.RerankingServiceClient {
 	return c.rerankingClient
+}
+
+// GetStrategicAnalysisClient returns the Strategic Analysis Service client
+func (c *GRPCClient) GetStrategicAnalysisClient() *grpc_clients.StrategicAnalysisClient {
+	return c.strategicAnalysisClient
 }
 
 // Legacy compatibility methods - these maintain backward compatibility with existing code

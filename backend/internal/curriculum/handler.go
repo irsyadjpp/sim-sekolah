@@ -404,3 +404,85 @@ func (h *CurriculumHandler) DeleteEkstrakurikulerActivity(c *fiber.Ctx) error {
 	}
 	return common.Success(c, "Aktivitas ekstrakurikuler berhasil dihapus", nil)
 }
+
+// Analysis Data Integration Handlers (FR 4.2.1-4.2.5)
+
+func (h *CurriculumHandler) IntegrateSWOTData(c *fiber.Ctx) error {
+	var req AnalysisDataIntegrationRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+	if err := common.Validate.Struct(req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
+	}
+
+	response, err := h.svc.IntegrateSWOTData(c.Context(), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengintegrasikan SWOT data", err)
+	}
+	return common.Success(c, "SWOT data berhasil diintegrasikan", response)
+}
+
+func (h *CurriculumHandler) IntegrateRootCauseData(c *fiber.Ctx) error {
+	var req AnalysisDataIntegrationRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+	if err := common.Validate.Struct(req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
+	}
+
+	response, err := h.svc.IntegrateRootCauseData(c.Context(), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengintegrasikan Root Cause data", err)
+	}
+	return common.Success(c, "Root Cause data berhasil diintegrasikan", response)
+}
+
+func (h *CurriculumHandler) IntegrateFishboneData(c *fiber.Ctx) error {
+	var req AnalysisDataIntegrationRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+	if err := common.Validate.Struct(req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
+	}
+
+	response, err := h.svc.IntegrateFishboneData(c.Context(), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengintegrasikan Fishbone data", err)
+	}
+	return common.Success(c, "Fishbone data berhasil diintegrasikan", response)
+}
+
+func (h *CurriculumHandler) IntegrateStudentNeedsData(c *fiber.Ctx) error {
+	var req AnalysisDataIntegrationRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+	if err := common.Validate.Struct(req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
+	}
+
+	response, err := h.svc.IntegrateStudentNeedsData(c.Context(), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal mengintegrasikan Student Needs data", err)
+	}
+	return common.Success(c, "Student Needs data berhasil diintegrasikan", response)
+}
+
+func (h *CurriculumHandler) GenerateKSPWithAnalysis(c *fiber.Ctx) error {
+	var req KSPExportWithAnalysisRequest
+	if err := c.BodyParser(&req); err != nil {
+		return common.ErrorFromService(c, fiber.StatusBadRequest, "Format permintaan tidak valid", err)
+	}
+	if err := common.Validate.Struct(req); err != nil {
+		return common.Error(c, fiber.StatusBadRequest, "Validasi gagal", common.MapValidatorError(err))
+	}
+
+	response, err := h.svc.GenerateKSPWithAnalysis(c.Context(), req)
+	if err != nil {
+		return common.ErrorFromService(c, fiber.StatusInternalServerError, "Gagal generate KSP dengan analysis data", err)
+	}
+	return common.Success(c, "KSP dengan analysis data berhasil di-generate", response)
+}

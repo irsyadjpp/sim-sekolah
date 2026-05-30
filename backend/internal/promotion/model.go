@@ -1,6 +1,7 @@
 package promotion
 
 import (
+	"sim-sekolah/internal/common"
 	"time"
 
 	"github.com/google/uuid"
@@ -23,6 +24,8 @@ type AcademicPromotionLog struct {
 	TargetClassroomID uuid.UUID `gorm:"type:uuid;not null" json:"target_classroom_id"`
 	PromotedBy        uuid.UUID `gorm:"type:uuid;not null" json:"promoted_by"`
 	PromotedAt        time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"promoted_at"`
+
+	common.Auditable
 }
 
 func (AcademicPromotionLog) TableName() string {

@@ -1,9 +1,8 @@
 package classroom
 
 import (
-	"time"
-
 	"sim-sekolah/internal/academic_year"
+	"sim-sekolah/internal/common"
 	"sim-sekolah/internal/grade"
 	"sim-sekolah/internal/school"
 	"sim-sekolah/internal/student"
@@ -22,14 +21,15 @@ type Classroom struct {
 	HomeroomTeacherID    *uuid.UUID `gorm:"type:uuid;uniqueIndex:idx_active_homeroom" json:"homeroom_teacher_id"`
 	MaxQuota             int        `gorm:"type:smallint;default:28" json:"max_quota"`
 	ClassCharacteristics string     `gorm:"type:text" json:"class_characteristics"` // Narasi kebutuhan belajar
-	CreatedAt            time.Time  `gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"created_at"`
+
+	common.Auditable
 
 	// Relasi
-	School       *school.School              `gorm:"foreignKey:SchoolID" json:"school,omitempty"`
+	School       *school.MasterSchool        `gorm:"foreignKey:SchoolID" json:"school,omitempty"`
 	AcademicYear *academic_year.AcademicYear `gorm:"foreignKey:AcademicYearID" json:"academic_year,omitempty"`
 	Grade        *grade.Grade                `gorm:"foreignKey:GradeID" json:"grade,omitempty"`
-	Homeroom     *teacher.Teacher            `gorm:"foreignKey:HomeroomTeacherID" json:"homeroom_teacher,omitempty"`
-	Students     []student.Student           `gorm:"many2many:trx_enrollment;" json:"students,omitempty"`
+	Homeroom     *teacher.MasterTeacher      `gorm:"foreignKey:HomeroomTeacherID" json:"homeroom_teacher,omitempty"`
+	Students     []student.MasterStudent     `gorm:"many2many:trx_enrollment;" json:"students,omitempty"`
 }
 
 func (Classroom) TableName() string { return "master_classroom" }

@@ -1,8 +1,6 @@
 package curriculum
 
 import (
-	"time"
-
 	"github.com/google/uuid"
 
 	"sim-sekolah/internal/academic_year"
@@ -60,12 +58,12 @@ type CurriculumDocument struct {
 	CurriculumType           string    `gorm:"type:varchar(20);not null;default:'INTRAKURIKULER'" json:"curriculum_type"` // INTRAKURIKULER, KOKURIKULER, EKSTRAKURIKULER
 	CurriculumClassification string    `gorm:"type:varchar(30);default:'KUMER'" json:"curriculum_classification"`         // KUMER, K13, MUATAN_LOKAL
 	Status                   string    `gorm:"type:varchar(20);default:'DRAFT';not null" json:"status"`                   // DRAFT, REVIEW, FINAL
-	CreatedAt                time.Time `gorm:"type:timestamptz;default:CURRENT_TIMESTAMP" json:"created_at"`
-	UpdatedAt                time.Time `gorm:"type:timestamptz;default:CURRENT_TIMESTAMP" json:"updated_at"`
+
+	common.Auditable
 
 	// Relasi
 	AcademicYear *academic_year.AcademicYear `gorm:"foreignKey:AcademicYearID" json:"academic_year,omitempty"`
-	School       *school.School              `gorm:"foreignKey:SchoolID" json:"school,omitempty"`
+	School       *school.MasterSchool        `gorm:"foreignKey:SchoolID" json:"school,omitempty"`
 	Chapters     []CurriculumChapter         `gorm:"foreignKey:CurriculumDocumentID;constraint:OnDelete:CASCADE" json:"chapters,omitempty"`
 }
 
@@ -79,7 +77,8 @@ type CurriculumChapter struct {
 	ChapterNumber        int       `gorm:"type:int2;not null;uniqueIndex:uni_curriculum_doc_chapter" json:"chapter_number"`
 	Title                string    `gorm:"type:varchar(150);not null" json:"title"`
 	Content              string    `gorm:"type:text" json:"content"`
-	UpdatedAt            time.Time `gorm:"type:timestamptz;default:CURRENT_TIMESTAMP" json:"updated_at"`
+
+	common.Auditable
 }
 
 func (CurriculumChapter) TableName() string {

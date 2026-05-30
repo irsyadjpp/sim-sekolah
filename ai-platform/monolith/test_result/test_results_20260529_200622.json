@@ -1,0 +1,35 @@
+{
+  "parser_service": {
+    "error": "Error in Parser Service: object NoneType can't be used in 'await' expression"
+  },
+  "vision_service": {
+    "error": "Error in Vision Service: object NoneType can't be used in 'await' expression"
+  },
+  "retrieval_service": {
+    "error": "Error in Retrieval Service: object NoneType can't be used in 'await' expression"
+  },
+  "generation_service": {
+    "error": "Error in Generation Service: object NoneType can't be used in 'await' expression"
+  },
+  "ontology_validation_service": {
+    "error": "Error in Ontology Validation Service: object NoneType can't be used in 'await' expression"
+  },
+  "metadata_service": {
+    "error": "Error in Metadata Service: object NoneType can't be used in 'await' expression"
+  },
+  "pedagogy_service": {
+    "error": "Error in Pedagogy Service: object NoneType can't be used in 'await' expression"
+  },
+  "assessment_service": {
+    "error": "Error in Assessment Service: object NoneType can't be used in 'await' expression"
+  },
+  "curriculum_service": {
+    "error": "Error in Curriculum Service: object NoneType can't be used in 'await' expression"
+  },
+  "strategic_analysis_service": {
+    "error": "Error in Strategic Analysis Service: object NoneType can't be used in 'await' expression"
+  },
+  "adaptive_learning_service": {
+    "error": "Error in Adaptive Learning Service: object NoneType can't be used in 'await' expression"
+  }
+}

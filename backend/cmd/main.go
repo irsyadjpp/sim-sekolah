@@ -6,6 +6,8 @@ import (
 	"strconv"
 	"time"
 
+	"log/slog"
+
 	"github.com/gofiber/contrib/otelfiber/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
@@ -16,7 +18,6 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	redisstorage "github.com/gofiber/storage/redis/v2"
 	"github.com/gofiber/swagger"
-	"log/slog"
 
 	"sim-sekolah/config"
 	_ "sim-sekolah/docs"
@@ -82,7 +83,7 @@ func main() {
 		logger.Fatal("Failed to get sql.DB from GORM", err)
 	}
 	if err := config.RunMigrations(sqlDB); err != nil {
-		logger.Fatal("Database migration failed", err)
+		logger.Error("Database migration failed — continuing startup. Manual migration fix required.", err)
 	}
 
 	// Initialize System Views

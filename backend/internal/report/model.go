@@ -1,9 +1,8 @@
 package report
 
 import (
-	"time"
-
 	"sim-sekolah/internal/classroom"
+	"sim-sekolah/internal/common"
 	"sim-sekolah/internal/student"
 	"sim-sekolah/internal/subject"
 
@@ -25,11 +24,12 @@ type Report struct {
 	CharacterNarrativeAI string    `gorm:"type:text" json:"character_narrative_ai"`
 	Status               string    `gorm:"type:varchar(20);default:'DRAFT'" json:"status"` // DRAFT, FINAL
 	IsFinalized          bool      `gorm:"type:boolean;default:false" json:"is_finalized"`
-	CreatedAt            time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"created_at"`
+
+	common.Auditable
 
 	// Relasi
 	Classroom       *classroom.Classroom    `gorm:"foreignKey:ClassroomID" json:"classroom,omitempty"`
-	Student         *student.Student        `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Student         *student.MasterStudent  `gorm:"foreignKey:StudentID" json:"student,omitempty"`
 	Scores          []ReportScore           `gorm:"foreignKey:ReportID" json:"scores,omitempty"`
 	P5              []ReportP5              `gorm:"foreignKey:ReportID" json:"p5,omitempty"`
 	DeepLearning    []ReportDeepLearning    `gorm:"foreignKey:ReportID" json:"deep_learning,omitempty"`
@@ -49,6 +49,8 @@ type ReportScore struct {
 	CompetencyAchieved         string    `gorm:"type:text" json:"competency_achieved"`
 	CompetencyNeedsImprovement string    `gorm:"type:text" json:"competency_needs_improvement"`
 
+	common.Auditable
+
 	Subject *subject.Subject `gorm:"foreignKey:SubjectID" json:"subject,omitempty"`
 }
 
@@ -62,6 +64,8 @@ type ReportP5 struct {
 	Theme       string    `gorm:"type:varchar(255);not null;uniqueIndex:idx_report_p5_theme" json:"theme"`
 	Description string    `gorm:"type:text" json:"description"`
 	Predicate   string    `gorm:"type:varchar(50)" json:"predicate"`
+
+	common.Auditable
 }
 
 func (ReportP5) TableName() string { return "trx_report_p5" }
@@ -71,6 +75,8 @@ type ReportDeepLearning struct {
 	ReportID         uuid.UUID `gorm:"type:uuid;not null;uniqueIndex:idx_report_dl_aspect" json:"report_id"`
 	Aspect           string    `gorm:"type:varchar(100);not null;uniqueIndex:idx_report_dl_aspect" json:"aspect"`
 	ObservationNotes string    `gorm:"type:text" json:"observation_notes"`
+
+	common.Auditable
 }
 
 func (ReportDeepLearning) TableName() string {
@@ -83,6 +89,8 @@ type ReportExtracurricular struct {
 	ActivityName string    `gorm:"type:varchar(255);not null;uniqueIndex:idx_report_extra_activity" json:"activity_name"`
 	Predicate    string    `gorm:"type:varchar(50)" json:"predicate"`
 	Description  string    `gorm:"type:text" json:"description"`
+
+	common.Auditable
 }
 
 func (ReportExtracurricular) TableName() string {
@@ -95,6 +103,8 @@ type ReportAttendance struct {
 	Sick       int       `gorm:"type:int;default:0" json:"sick"`
 	Permission int       `gorm:"type:int;default:0" json:"permission"`
 	Unexcused  int       `gorm:"type:int;default:0" json:"unexcused"`
+
+	common.Auditable
 }
 
 func (ReportAttendance) TableName() string {

@@ -11,8 +11,12 @@ func SetupRoutes(app fiber.Router, db *gorm.DB) {
 	service := NewService(repo)
 	handler := NewHandler(service)
 
-	documents := app.Group("/api/documents")
+	documents := app.Group("/documents")
 	{
+		// File upload operations
+		documents.Post("/upload", handler.UploadDocument)
+		documents.Post("/check-duplicate", handler.CheckDuplicate)
+
 		// Document CRUD operations
 		documents.Post("/", handler.CreateDocument)
 		documents.Get("/", handler.GetDocuments)
@@ -42,13 +46,13 @@ func SetupRoutes(app fiber.Router, db *gorm.DB) {
 	}
 
 	// Categories and tags
-	categories := app.Group("/api/documents/categories")
+	categories := app.Group("/documents/categories")
 	{
 		categories.Post("/", handler.CreateCategory)
 		categories.Get("/", handler.GetCategories)
 	}
 
-	tags := app.Group("/api/documents/tags")
+	tags := app.Group("/documents/tags")
 	{
 		tags.Post("/", handler.CreateTag)
 		tags.Get("/", handler.GetTags)

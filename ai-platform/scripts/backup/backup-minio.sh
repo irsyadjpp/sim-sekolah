@@ -1,19 +1,18 @@
 #!/bin/bash
-# MinIO Backup Script for AI Platform
-# This script backs up MinIO object storage
+# SeaweedFS Backup Script for AI Platform
+# This script backs up SeaweedFS object storage using S3-compatible API
 
 set -e
 
 # Configuration
-BACKUP_DIR="/backups/minio"
+BACKUP_DIR="/backups/seaweedfs"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 RETENTION_DAYS=7
 
-# MinIO configuration
-MINIO_ENDPOINT="${MINIO_ENDPOINT:-localhost:9000}"
-MINIO_ACCESS_KEY="${MINIO_ACCESS_KEY:-}"
-MINIO_SECRET_KEY="${MINIO_SECRET_KEY:-}"
-MINIO_ALIAS="aiplatform"
+# SeaweedFS S3 configuration
+SEAWEEDFS_S3_ENDPOINT="${SEAWEEDFS_S3_ENDPOINT:-http://localhost:8333}"
+SEAWEEDFS_ACCESS_KEY="${SEAWEEDFS_ACCESS_KEY:-}"
+SEAWEEDFS_SECRET_KEY="${SEAWEEDFS_SECRET_KEY:-}"
 BUCKETS_TO_BACKUP="documents embeddings models knowledge-graph"
 
 # Create backup directory
@@ -24,13 +23,17 @@ log() {
     echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1"
 }
 
-log "Starting MinIO backup..."
+log "Starting SeaweedFS backup..."
 
-# Configure MinIO client
-if [ -n "${MINIO_ACCESS_KEY}" ] && [ -n "${MINIO_SECRET_KEY}" ]; then
-    mc alias set ${MINIO_ALIAS} ${MINIO_ENDPOINT} ${MINIO_ACCESS_KEY} ${MINIO_SECRET_KEY}
+# Configure AWS CLI for SeaweedFS
+if [ -n "${SEAWEEDFS_ACCESS_KEY}" ] && [ -n "${SEAWEEDFS_SECRET_KEY}" ]; then
+    export AWS_ACCESS_KEY_ID="${SEAWEEDFS_ACCESS_KEY}"
+    export AWS_SECRET_ACCESS_KEY="${SEAWEEDFS_SECRET_KEY}"
+    export AWS_ENDPOINT_URL="${SEAWEEDFS_S3_ENDPOINT}"
+    # Disable SSL verification for local development
+    export AWS_CA_BUNDLE=""
 else
-    log "ERROR: MinIO credentials not provided"
+    log "ERROR: SeaweedFS credentials not provided"
     exit 1
 fi
 
@@ -39,16 +42,16 @@ for bucket in ${BUCKETS_TO_BACKUP}; do
     log "Backing up bucket: ${bucket}"
     
     # Check if bucket exists
-    if mc ls ${MINIO_ALIAS}/${bucket} > /dev/null 2>&1; then
+    if aws --endpoint-url="${AWS_ENDPOINT_URL}" s3 ls "s3://${bucket}" > /dev/null 2>&1; then
         # Create backup directory for this bucket
         BUCKET_BACKUP_DIR="${BACKUP_DIR}/${bucket}_${TIMESTAMP}"
         mkdir -p "${BUCKET_BACKUP_DIR}"
         
-        # Mirror bucket to backup directory
-        mc mirror ${MINIO_ALIAS}/${bucket} ${BUCKET_BACKUP_DIR}/
+        # Sync bucket to backup directory
+        aws --endpoint-url="${AWS_ENDPOINT_URL}" s3 sync "s3://${bucket}" "${BUCKET_BACKUP_DIR}/"
         
         # Create archive
-        ARCHIVE_FILE="${BACKUP_DIR}/minio_${bucket}_backup_${TIMESTAMP}.tar.gz"
+        ARCHIVE_FILE="${BACKUP_DIR}/seaweedfs_${bucket}_backup_${TIMESTAMP}.tar.gz"
         tar -czf "${ARCHIVE_FILE}" -C "${BACKUP_DIR}" "$(basename ${BUCKET_BACKUP_DIR})"
         
         # Remove temporary directory
@@ -68,6 +71,6 @@ done
 
 # Clean up old backups
 log "Cleaning up backups older than ${RETENTION_DAYS} days..."
-find "${BACKUP_DIR}" -name "minio_*_backup_*.tar.gz" -type f -mtime +${RETENTION_DAYS} -delete
+find "${BACKUP_DIR}" -name "seaweedfs_*_backup_*.tar.gz" -type f -mtime +${RETENTION_DAYS} -delete
 
-log "MinIO backup completed"
+log "SeaweedFS backup completed"

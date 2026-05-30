@@ -19,7 +19,7 @@ type SPMBRepository interface {
 
 	CreateApplication(ctx context.Context, app *Applicant, parents *ApplicantParent) error
 	UpdateApplicationStatus(ctx context.Context, log *VerificationLog) error
-	AcceptApplicant(ctx context.Context, app *Applicant, log *VerificationLog, student *student.Student, parents []student.StudentParent) error
+	AcceptApplicant(ctx context.Context, app *Applicant, log *VerificationLog, student *student.StudentComplete, parents []student.StudentParent) error
 	GetYearlyStudentCount(ctx context.Context, year int) (int64, error)
 	GetDefaultSchoolID(ctx context.Context) (string, error)
 
@@ -137,7 +137,7 @@ func (r *spmbRepository) UpdateApplicationStatus(ctx context.Context, log *Verif
 	})
 }
 
-func (r *spmbRepository) AcceptApplicant(ctx context.Context, app *Applicant, log *VerificationLog, studentObj *student.Student, parents []student.StudentParent) error {
+func (r *spmbRepository) AcceptApplicant(ctx context.Context, app *Applicant, log *VerificationLog, studentObj *student.StudentComplete, parents []student.StudentParent) error {
 	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		// Update Status Pendaftar
 		if err := tx.Model(app).Update("status", "Accepted").Error; err != nil {
@@ -149,14 +149,30 @@ func (r *spmbRepository) AcceptApplicant(ctx context.Context, app *Applicant, lo
 			return err
 		}
 
-		// Simpan Data Siswa
-		if err := tx.Create(studentObj).Error; err != nil {
+		// Simpan Data Siswa - use transaction to insert into multiple tables
+		if err := tx.Create(&studentObj.MasterStudent).Error; err != nil {
+			return err
+		}
+		studentObj.StudentContact.StudentID = studentObj.MasterStudent.ID
+		if err := tx.Create(&studentObj.StudentContact).Error; err != nil {
+			return err
+		}
+		studentObj.StudentFamily.StudentID = studentObj.MasterStudent.ID
+		if err := tx.Create(&studentObj.StudentFamily).Error; err != nil {
+			return err
+		}
+		studentObj.StudentEnrollment.StudentID = studentObj.MasterStudent.ID
+		if err := tx.Create(&studentObj.StudentEnrollment).Error; err != nil {
+			return err
+		}
+		studentObj.StudentHealth.StudentID = studentObj.MasterStudent.ID
+		if err := tx.Create(&studentObj.StudentHealth).Error; err != nil {
 			return err
 		}
 
 		// Simpan Data Orang Tua Siswa
 		for i := range parents {
-			parents[i].StudentID = studentObj.ID
+			parents[i].StudentID = studentObj.MasterStudent.ID
 			if err := tx.Create(&parents[i]).Error; err != nil {
 				return err
 			}

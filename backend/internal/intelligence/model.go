@@ -1,6 +1,7 @@
 package intelligence
 
 import (
+	"sim-sekolah/internal/common"
 	"time"
 
 	"github.com/google/uuid"
@@ -14,7 +15,8 @@ type StudentProfileExt struct {
 	SpecialNeedsNotes string         `gorm:"type:text" json:"special_needs_notes"`
 	BaselineLiteracy  string         `gorm:"type:varchar(50);default:'NEEDS_IMPROVEMENT'" json:"baseline_literacy"`
 	BaselineNumeracy  string         `gorm:"type:varchar(50);default:'NEEDS_IMPROVEMENT'" json:"baseline_numeracy"`
-	UpdatedAt         time.Time      `gorm:"type:timestamptz;default:CURRENT_TIMESTAMP" json:"updated_at"`
+
+	common.Auditable
 }
 
 func (StudentProfileExt) TableName() string {
@@ -39,8 +41,9 @@ type AnecdotalObservation struct {
 	ObservationDate time.Time        `gorm:"type:date;not null" json:"observation_date"`
 	ContextActivity string           `gorm:"type:varchar(100)" json:"context_activity"`
 	Notes           string           `gorm:"type:text;not null" json:"notes"`
-	CreatedAt       time.Time        `gorm:"type:timestamptz;default:CURRENT_TIMESTAMP" json:"created_at"`
 	Tags            []ObservationTag `gorm:"many2many:trx_observation_tag_mapping;joinForeignKey:observation_id;joinReferences:tag_id" json:"tags"`
+
+	common.Auditable
 }
 
 func (AnecdotalObservation) TableName() string {
@@ -63,7 +66,8 @@ type AssessmentInstrument struct {
 	Title               string     `gorm:"type:varchar(150);not null" json:"title"`
 	AssessmentType      string     `gorm:"type:varchar(20);not null" json:"assessment_type"` // FORMATIF, SUMATIF
 	ScoringMethod       string     `gorm:"type:varchar(20);not null" json:"scoring_method"`  // NUMERIC, RUBRIC, OBSERVATION
-	CreatedAt           time.Time  `gorm:"type:timestamptz;default:CURRENT_TIMESTAMP" json:"created_at"`
+
+	common.Auditable
 }
 
 func (AssessmentInstrument) TableName() string {
@@ -77,7 +81,8 @@ type StudentAssessmentResult struct {
 	NumericScore      *float64  `gorm:"type:numeric(5,2)" json:"numeric_score,omitempty"`
 	RubricAchievement string    `gorm:"type:varchar(50)" json:"rubric_achievement,omitempty"`
 	NarrativeFeedback string    `gorm:"type:text" json:"narrative_feedback,omitempty"`
-	AssessedAt        time.Time `gorm:"type:timestamptz;default:CURRENT_TIMESTAMP" json:"assessed_at"`
+
+	common.Auditable
 }
 
 func (StudentAssessmentResult) TableName() string {
@@ -85,16 +90,16 @@ func (StudentAssessmentResult) TableName() string {
 }
 
 type EarlyWarningAlert struct {
-	ID                uuid.UUID  `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
-	StudentID         uuid.UUID  `gorm:"type:uuid;not null" json:"student_id"`
-	ClassroomID       uuid.UUID  `gorm:"type:uuid;not null" json:"classroom_id"`
-	AlertType         string     `gorm:"type:varchar(50);not null" json:"alert_type"`     // LITERACY_DELAY, ATTENDANCE_DROP, BEHAVIORAL_CONCERN
-	SeverityLevel     string     `gorm:"type:varchar(20);not null" json:"severity_level"` // LOW, MEDIUM, HIGH
-	TriggerReason     string     `gorm:"type:text;not null" json:"trigger_reason"`
-	Status            string     `gorm:"type:varchar(20);default:'OPEN'" json:"status"` // OPEN, INTERVENED, RESOLVED
-	InterventionNotes string     `gorm:"type:text" json:"intervention_notes,omitempty"`
-	DetectedAt        time.Time  `gorm:"type:timestamptz;default:CURRENT_TIMESTAMP" json:"detected_at"`
-	ResolvedAt        *time.Time `gorm:"type:timestamptz" json:"resolved_at,omitempty"`
+	ID                uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	StudentID         uuid.UUID `gorm:"type:uuid;not null" json:"student_id"`
+	ClassroomID       uuid.UUID `gorm:"type:uuid;not null" json:"classroom_id"`
+	AlertType         string    `gorm:"type:varchar(50);not null" json:"alert_type"`     // LITERACY_DELAY, ATTENDANCE_DROP, BEHAVIORAL_CONCERN
+	SeverityLevel     string    `gorm:"type:varchar(20);not null" json:"severity_level"` // LOW, MEDIUM, HIGH
+	TriggerReason     string    `gorm:"type:text;not null" json:"trigger_reason"`
+	Status            string    `gorm:"type:varchar(20);default:'OPEN'" json:"status"` // OPEN, INTERVENED, RESOLVED
+	InterventionNotes string    `gorm:"type:text" json:"intervention_notes,omitempty"`
+
+	common.Auditable
 }
 
 func (EarlyWarningAlert) TableName() string {

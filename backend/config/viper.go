@@ -44,7 +44,12 @@ type Config struct {
 	} `mapstructure:"database"`
 
 	Storage struct {
-		RustFSURL string `mapstructure:"rustfs_url"`
+		SeaweedFSS3Endpoint string `mapstructure:"seaweedfs_s3_endpoint"`
+		SeaweedFSAccessKey  string `mapstructure:"seaweedfs_access_key"`
+		SeaweedFSSecretKey  string `mapstructure:"seaweedfs_secret_key"`
+		SeaweedFSBucket     string `mapstructure:"seaweedfs_bucket"`
+		SeaweedFSRegion     string `mapstructure:"seaweedfs_region"`
+		SeaweedFSSecure     bool   `mapstructure:"seaweedfs_secure"`
 	} `mapstructure:"storage"`
 
 	AI struct {
@@ -81,6 +86,14 @@ func InitConfig() {
 	_ = viper.BindEnv("database.redis.port", "REDIS_PORT")
 	_ = viper.BindEnv("database.redis.password", "REDIS_PASSWORD")
 	_ = viper.BindEnv("database.redis.db", "REDIS_DB")
+
+	// Bind SeaweedFS S3 environment variables
+	_ = viper.BindEnv("storage.seaweedfs_s3_endpoint", "SEAWEEDFS_S3_ENDPOINT")
+	_ = viper.BindEnv("storage.seaweedfs_access_key", "SEAWEEDFS_ACCESS_KEY")
+	_ = viper.BindEnv("storage.seaweedfs_secret_key", "SEAWEEDFS_SECRET_KEY")
+	_ = viper.BindEnv("storage.seaweedfs_bucket", "SEAWEEDFS_BUCKET")
+	_ = viper.BindEnv("storage.seaweedfs_region", "SEAWEEDFS_REGION")
+	_ = viper.BindEnv("storage.seaweedfs_secure", "SEAWEEDFS_SECURE")
 
 	// Default values
 	viper.SetDefault("app.name", "SIM Sekolah")

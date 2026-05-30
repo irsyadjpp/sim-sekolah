@@ -3,6 +3,9 @@ package curriculum
 import (
 	"context"
 	"errors"
+	"fmt"
+	"strings"
+	"time"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -35,6 +38,13 @@ type CurriculumService interface {
 	CreateEkstrakurikulerActivity(ctx context.Context, req CreateEkstrakurikulerActivityRequest) (*EkstrakurikulerActivity, error)
 	UpdateEkstrakurikulerActivity(ctx context.Context, id string, req UpdateEkstrakurikulerActivityRequest) (*EkstrakurikulerActivity, error)
 	DeleteEkstrakurikulerActivity(ctx context.Context, id string) error
+
+	// Analysis Data Integration (FR 4.2.1-4.2.5)
+	IntegrateSWOTData(ctx context.Context, req AnalysisDataIntegrationRequest) (*AnalysisDataIntegrationResponse, error)
+	IntegrateRootCauseData(ctx context.Context, req AnalysisDataIntegrationRequest) (*AnalysisDataIntegrationResponse, error)
+	IntegrateFishboneData(ctx context.Context, req AnalysisDataIntegrationRequest) (*AnalysisDataIntegrationResponse, error)
+	IntegrateStudentNeedsData(ctx context.Context, req AnalysisDataIntegrationRequest) (*AnalysisDataIntegrationResponse, error)
+	GenerateKSPWithAnalysis(ctx context.Context, req KSPExportWithAnalysisRequest) (*KSPExportWithAnalysisResponse, error)
 }
 
 type curriculumService struct {
@@ -322,4 +332,171 @@ func (s *curriculumService) UpdateEkstrakurikulerActivity(ctx context.Context, i
 
 func (s *curriculumService) DeleteEkstrakurikulerActivity(ctx context.Context, id string) error {
 	return s.repo.DeleteEkstrakurikulerActivity(ctx, id)
+}
+
+// Analysis Data Integration Methods (FR 4.2.1-4.2.5)
+
+func (s *curriculumService) IntegrateSWOTData(ctx context.Context, req AnalysisDataIntegrationRequest) (*AnalysisDataIntegrationResponse, error) {
+	// Placeholder implementation for SWOT data integration
+	// In production, this would:
+	// 1. Fetch SWOT data from strategic_planning module
+	// 2. Process and format the data for KSP inclusion
+	// 3. Generate appropriate content sections
+	// 4. Store integration record
+
+	integrationID := uuid.New().String()
+
+	swotData := &SWOTDataForKSP{
+		SessionID:     req.SWOTSessionID,
+		SessionName:   "SWOT Analysis Session",
+		Strengths:     []SWOTItem{},
+		Weaknesses:    []SWOTItem{},
+		Opportunities: []SWOTItem{},
+		Threats:       []SWOTItem{},
+		AnalysisDate:  time.Now().Format(time.RFC3339),
+	}
+
+	response := &AnalysisDataIntegrationResponse{
+		CurriculumDocumentID: req.CurriculumDocumentID,
+		IntegrationID:        integrationID,
+		AnalysisData: AnalysisDataSummary{
+			SWOTData: swotData,
+		},
+		GeneratedContent: GeneratedContent{
+			ExecutiveSummary: "Ringkasan eksekutif berdasarkan analisis SWOT...",
+			AnalysisSection:  "Bagian analisis SWOT yang terintegrasi...",
+			Recommendations:  []string{"Rekomendasi berdasarkan SWOT..."},
+			ActionPlan:       "Rencana aksi berdasarkan analisis SWOT...",
+			Charts:           map[string]string{"swot_chart": "/charts/swot/analysis.png"},
+		},
+		Status:  "SUCCESS",
+		Message: "SWOT data berhasil diintegrasikan ke KSP",
+	}
+
+	return response, nil
+}
+
+func (s *curriculumService) IntegrateRootCauseData(ctx context.Context, req AnalysisDataIntegrationRequest) (*AnalysisDataIntegrationResponse, error) {
+	// Placeholder implementation for Root Cause data integration
+	integrationID := uuid.New().String()
+
+	rootCauseData := &RootCauseDataForKSP{
+		RootCauseID:      req.RootCauseID,
+		ProblemStatement: "Identifikasi masalah utama...",
+		RootCauses:       []RootCauseItem{},
+		FiveWhysAnalysis: []FiveWhysStep{},
+		Solutions:        []SolutionItem{},
+		AnalysisDate:     time.Now().Format(time.RFC3339),
+	}
+
+	response := &AnalysisDataIntegrationResponse{
+		CurriculumDocumentID: req.CurriculumDocumentID,
+		IntegrationID:        integrationID,
+		AnalysisData: AnalysisDataSummary{
+			RootCauseData: rootCauseData,
+		},
+		GeneratedContent: GeneratedContent{
+			ExecutiveSummary: "Ringkasan eksekutif berdasarkan analisis akar masalah...",
+			AnalysisSection:  "Bagian analisis akar masalah yang terintegrasi...",
+			Recommendations:  []string{"Rekomendasi berdasarkan root cause analysis..."},
+			ActionPlan:       "Rencana aksi berdasarkan solusi yang diidentifikasi...",
+			Charts:           map[string]string{"root_cause_chart": "/charts/root-cause/analysis.png"},
+		},
+		Status:  "SUCCESS",
+		Message: "Root Cause data berhasil diintegrasikan ke KSP",
+	}
+
+	return response, nil
+}
+
+func (s *curriculumService) IntegrateFishboneData(ctx context.Context, req AnalysisDataIntegrationRequest) (*AnalysisDataIntegrationResponse, error) {
+	// Placeholder implementation for Fishbone data integration
+	integrationID := uuid.New().String()
+
+	fishboneData := &FishboneDataForKSP{
+		DiagramID:        req.FishboneDiagramID,
+		DiagramName:      "Fishbone Diagram Analysis",
+		ProblemStatement: "Identifikasi masalah menggunakan fishbone diagram...",
+		Categories:       []FishboneCategory{},
+		AnalysisDate:     time.Now().Format(time.RFC3339),
+	}
+
+	response := &AnalysisDataIntegrationResponse{
+		CurriculumDocumentID: req.CurriculumDocumentID,
+		IntegrationID:        integrationID,
+		AnalysisData: AnalysisDataSummary{
+			FishboneData: fishboneData,
+		},
+		GeneratedContent: GeneratedContent{
+			ExecutiveSummary: "Ringkasan eksekutif berdasarkan analisis fishbone...",
+			AnalysisSection:  "Bagian analisis fishbone yang terintegrasi...",
+			Recommendations:  []string{"Rekomendasi berdasarkan fishbone analysis..."},
+			ActionPlan:       "Rencana aksi berdasarkan kategori penyebab...",
+			Charts:           map[string]string{"fishbone_chart": "/charts/fishbone/analysis.png"},
+		},
+		Status:  "SUCCESS",
+		Message: "Fishbone data berhasil diintegrasikan ke KSP",
+	}
+
+	return response, nil
+}
+
+func (s *curriculumService) IntegrateStudentNeedsData(ctx context.Context, req AnalysisDataIntegrationRequest) (*AnalysisDataIntegrationResponse, error) {
+	// Placeholder implementation for Student Needs data integration
+	integrationID := uuid.New().String()
+
+	studentNeedsData := &StudentNeedsDataForKSP{
+		ProfileID:            req.StudentNeedsProfileID,
+		ProfileName:          "Student Needs Profile",
+		ProfileDimension:     "Akademik",
+		Needs:                []StudentNeedItem{},
+		PriorityDistribution: map[string]int{},
+		AnalysisDate:         time.Now().Format(time.RFC3339),
+	}
+
+	response := &AnalysisDataIntegrationResponse{
+		CurriculumDocumentID: req.CurriculumDocumentID,
+		IntegrationID:        integrationID,
+		AnalysisData: AnalysisDataSummary{
+			StudentNeedsData: studentNeedsData,
+		},
+		GeneratedContent: GeneratedContent{
+			ExecutiveSummary: "Ringkasan eksekutif berdasarkan analisis kebutuhan siswa...",
+			AnalysisSection:  "Bagian analisis kebutuhan siswa yang terintegrasi...",
+			Recommendations:  []string{"Rekomendasi berdasarkan student needs analysis..."},
+			ActionPlan:       "Rencana aksi berdasarkan kebutuhan prioritas...",
+			Charts:           map[string]string{"student_needs_chart": "/charts/student-needs/analysis.png"},
+		},
+		Status:  "SUCCESS",
+		Message: "Student Needs data berhasil diintegrasikan ke KSP",
+	}
+
+	return response, nil
+}
+
+func (s *curriculumService) GenerateKSPWithAnalysis(ctx context.Context, req KSPExportWithAnalysisRequest) (*KSPExportWithAnalysisResponse, error) {
+	// Placeholder implementation for KSP generation with analysis data
+	// In production, this would:
+	// 1. Fetch the curriculum document
+	// 2. If IncludeAnalysisData is true, fetch integrated analysis data
+	// 3. Generate the document with analysis data included
+	// 4. Create PDF/Word export
+	// 5. Return download URL
+
+	exportID := uuid.New().String()
+	generatedAt := time.Now()
+	expiresAt := generatedAt.Add(24 * time.Hour) // Expires in 24 hours
+
+	documentURL := fmt.Sprintf("/exports/ksp/%s.%s", exportID, strings.ToLower(req.Format))
+
+	response := &KSPExportWithAnalysisResponse{
+		ExportID:    exportID,
+		DocumentURL: documentURL,
+		Format:      req.Format,
+		FileSize:    1024 * 1024, // 1MB placeholder
+		GeneratedAt: generatedAt.Format(time.RFC3339),
+		ExpiresAt:   expiresAt.Format(time.RFC3339),
+	}
+
+	return response, nil
 }

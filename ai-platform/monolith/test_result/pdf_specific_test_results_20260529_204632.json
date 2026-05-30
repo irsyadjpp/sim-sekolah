@@ -1,0 +1,1039 @@
+{
+  "parser_service_bkb10.pdf": {
+    "success": true,
+    "page_count": 50,
+    "text_content": [
+      {
+        "page_number": 1,
+        "text": "184\nMEP Pupil Text 10\n10 Equations\n10.1\nNegative Numbers\nA number line like this is very helpful when dealing with negative numbers.\nWorked Example 1\nAn ice cube taken from a deep freeze is at a temperature of \u2212\u00b0\n6 C.  Its temperature rises\nby 4 degrees.  What is its new temperature?\nSolution\nThe number line can be used as shown.\n     \u2212\n+\n= \u2212\n6\n4\n2\nWorked Example 2\nWrite down numbers which are:\n(a)\nless than \u22124\n(b)\ngreater than \u22125 but less than \u22122\n(c)\nless than \u22123 but greater than \u22128.\nSolution\n(a)\nAny number less than \u22124 must be to the left of \u22124 on the number line,\nfor example  \u22125,  \u22126,  \u22127,  etc.\n(b)\nA number greater than \u22125 must be to the right of \u22125, and to be less than \u22122\nmust also be to the left of \u22122,  for example  \u22124 and \u22123.\n(c)\nTo be less than \u22123 the number must be to the left of \u22123 but to be greater than \u22128\nthe number must be to the right of \u22128,  for example  \u22127,  \u22126, \u22125,  \u22124.\n-4\n\u20133\n\u20132\n\u20131\n0\n2\n3\n4\n5\n1\n\u2013 6\n\u2013 5\n\u2013 4\n\u2013 3\n\u2013 2\n0\n\u2013 1\n+ 4\n\u2013 4\n\u2013 3\n\u2013 2\n\u20131\n0\n1\n\u2013 5\n\u2013 6\n\u2013 7\n\u2013 8\nInvestigation\nWithin 4 consecutive years, Mrs. White gave birth to four lovely children.  Today, x years\nlater, Mr and Mrs. White find out that the product of their four children's ages is 3 024.\nHow old is each child now, assuming that all the children are of different ages?\n",
+        "character_count": 1266
+      },
+      {
+        "page_number": 2,
+        "text": "185\nMEP Pupil Text 10\nExercises\n1.\nCopy and complete the following table of temperature changes.\nOriginal Temperature          Temperature Change          Final Temperature\n6\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n+\n\u00b0\n2 C\n\u2212\n\u00b05 C\n\u2212\n\u00b03 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n2\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n6 C\n+ \u00b01 C\n\u2212\n\u00b05 C\n\u2212\n\u00b0\n2 C\n2.\nPlace each set of numbers in increasing order.\n(a)\n\u221210,  \u22124,  \u22126,   2,  \u22125,   3\n(b)\n3,   \u22121,   0,   \u22124,   7\n(c)\n7,   \u22122,  \u22124,  \u22126,   3,   0\n(d)\n\u22124,   0,  \u22127,   7,   5,   \u22122\n(e)\n\u22121,  \u22124,   0,   \u22125,   6,   \u22123\n3.\nWrite down all the integers which lie between:\n(a)\n\u22126  and  \u221210\n(b)\n\u22124  and  2\n(c)\n\u22123  and  0\n(d)\n\u22121  and  \u22123\n(e)\n\u22129  and  0.\n4.\nWrite down a whole number which is:\n(a)\ngreater than \u221210 but less than \u22126\n(b)\nless than \u22126\n(c)\ngreater than \u22125 but less than 0\n(d)\ngreater than \u221210\n(e)\nless than \u22126 but greater than \u22129\n(f)\nless than \u22124.\n5.\nInsert a  <  sign or a  >  sign between each pair of numbers.\n(a)\n3      2\n(b)\n\u22125     \u22126\n(c)\n0     \u22121\n(d)\n\u22127     \u221210\n(e)\n\u2013 2     \u2013 4\n(f)\n\u22121     \u22126\n(g)\n\u22125     0\n(h)\n\u22129     \u22126\n(i)\n\u22128   \u22122\nJust For Fun\nIf   ABCDE  \u00d7 4   =   EDCBA,  find A, B, C, D and E if none of them is zero.\n",
+        "character_count": 1102
+      },
+      {
+        "page_number": 3,
+        "text": "186\nMEP Pupil Text 10\n10.2\nArithmetic with Negative Numbers\nThe following rules for working with negative numbers are important to remember.\n          Multiplication\n     Division\n+ \u00d7\n+\n\u21d2+\n+ \u00f7\n+\n\u21d2\n+\n+ \u00d7\n\u2212\n\u21d2\u2212\n+ \u00f7\n\u2212\n\u21d2\u2212\n\u2212\u00d7\n+\n\u21d2\u2212\n\u2212\u00f7\n+\n\u21d2\u2212\n\u2212\u00d7\n\u2212\n\u21d2\n+\n\u2212\u00f7\n\u2212\n\u21d2+\nWorked Example 1\n(a)\n6\n4\n\u00d7 \u2212\n(\n) = ?\n(b)\n\u2212\n\u00d7 \u2212\n(\n) =\n6\n7\n?\n(c)\n42\n2\n\u00f7 \u2212\n(\n) = ?\n(d)\n\u2212\n\u00f7 \u2212\n(\n) =\n33\n11\n?\nSolution\n(a)\n6\n4\n24\n\u00d7 \u2212\n(\n) = \u2212\n(b)\n\u2212\n\u00d7 \u2212\n(\n) =\n6\n7\n42\n(c)\n42\n2\n21\n\u00f7 \u2212\n(\n) = \u2212\n(d)\n\u2212\n\u00f7 \u2212\n(\n) =\n33\n11\n3\nWorked Example 2\n(a)\n\u2212\n+\n=\n6\n7\n?\n(b)\n\u2212\n\u2212\n=\n6\n8\n?\n(c)\n\u2212\n\u2212\u2212\n(\n) =\n6\n4\n?\n(d)\n\u2212\n+ \u2212\n(\n) =\n7\n3\n?\nSolution\n(a)\n\u2212\n+\n=\n6\n7\n1\n(b)\n\u2212\n\u2212\n= \u2212\n6\n8\n14\n(c)\n\u2212\n\u2212\u2212\n(\n) = \u2212\n+\n6\n4\n6\n4\n(d)\n\u2212\n+ \u2212\n(\n) = \u2212\n\u2212\n7\n3\n7\n3\n= \u22122\n= \u221210\nExercises\n1.\n(a)\n\u2212\n\u00d7 \u2212\n=\n6\n2\n?\n(b)\n\u2212\n\u00d7\n=\n7\n2\n?\n(c)\n\u2212\n+ \u2212\n=\n8\n4\n?\n(d)\n\u2212\n\u2212\n=\n8\n12\n?\n(e)\n\u2212\n+\n=\n9\n2\n?\n(f)\n\u2212\n+ \u2212\n(\n) =\n4\n2\n?\n(g)\n\u2212\n\u2212\u2212\n(\n) =\n6\n5\n?\n(h)\n\u2212\n\u00d7 \u2212\n(\n) =\n7\n4\n?\n(i)\n\u2212\n\u2212\u2212\n(\n) =\n3\n4\n?\n(j)\n\u2212\n\u00f7 \u2212\n(\n) =\n64\n2\n?\n(k)\n\u2212\n\u00f7\n=\n18\n9\n?\n(l)\n\u2212\n\u00f7 \u2212\n(\n) =\n21\n3\n?\n(m)\n\u2212\n+ \u2212\n(\n) =\n4\n6\n?\n(n)\n\u2212\n\u2212\u2212\n(\n) =\n2\n4\n?\n(o)\n\u2212\n\u2212\n=\n6\n7\n?\n(p)\n\u2212\n\u00f7\n=\n24\n2\n?\n(q)\n\u2212\n\u00d7 \u2212\n(\n) =\n7\n8\n?\n(r)\n\u2212\n\u2212\u2212\n(\n) =\n7\n8\n?\n(s)\n\u2212\n+\n=\n14\n8\n?\n(t)\n\u2212\n\u2212\n=\n12\n3\n?\n(u)\n\u2212\n\u2212\u2212\n(\n) =\n16\n8\n?\n(v)\n4\n12\n\u2212\n= ?\n(w)\n3\n2\n\u2212\u2212\n(\n) = ?\n(x)\n8\n4\n\u00f7 \u2212\n(\n) = ?\n",
+        "character_count": 1135
+      },
+      {
+        "page_number": 4,
+        "text": "187\nMEP Pupil Text 10\n10.3\nSimplifying Expressions\nWhen simplifying expressions you should bring together terms which contain the same letter.\nNote\nx   and  x2  must be treated as if they were different letters.  You cannot add an x term to\nan x2 term.  The  +  and  \u2013  signs go with the term which follows.\nWorked Example 1\nSimplify each expression below.\n(a)\n4\n3\n6\n2\na\na\n+\n+\n+\n(b)\n4\n8\n2\n3\na\nb\na\nb\n+\n\u2212\n+\n(c)\nx\nx\nx\nx\n2\n2\n5\n8\n4\n+\n\u2212\n+\n\u2212\n(d)\n8\n4\n6\nx\ny\nx\ny\n+\n\u2212\n\u2212\nSolution\n(a)\nThe terms which involve a can be brought together.  Also the 6 and 2 can be added.\n  4\n3\n6\n2\n7\n8\na\na\na\n+\n+\n+\n=\n+\n(b)\nThe terms involving a are considered together, and then the terms involving b.\n       4\n8\n2\n3\n4\n2\n8\n3\na\nb\na\nb\na\na\nb\nb\n+\n\u2212\n+\n=\n\u2212\n+\n+\n       \n=\n+\n2\n11\na\nb\n(c)\nHere the x and x2 must be treated as if they are different letters.\n  x\nx\nx\nx\nx\nx\nx\nx\n2\n2\n2\n2\n5\n8\n4\n5\n8\n4\n+\n\u2212\n+\n\u2212\n=\n+\n+\n\u2212\n\u2212\n  \n=\n\u2212\n\u2212\n2\n3\n4\n2\nx\nx\n(d)\nThe different letters, x and y, must be considered in turn.\n        8\n4\n6\n8\n4\n6\nx\ny\nx\ny\nx\nx\ny\ny\n+\n\u2212\n\u2212\n=\n\u2212\n+\n\u2212\n        \n=\n\u2212\n4\n5\nx\ny\nWhen a bracket is to be multiplied by a number or a letter, every term inside the bracket\nmust be multiplied.\nWorked Example 2\nRemove the brackets from each expression below.\n(a)\n6\n5\nx +\n(\n)            (b)     3 2\n7\nx +\n(\n)            (c)     4\n3\nx \u2212\n(\n)            (d)     x x \u2212\n(\n)\n4\nSolution\n(a)\n6\n5\n6\n6\n5\nx\nx\n+\n(\n) =\n\u00d7\n+\n\u00d7\n(b)\n3 2\n7\n3\n2\n3\n7\nx\nx\n+\n(\n) =\n\u00d7\n+\n\u00d7\n=\n+\n6\n30\nx\n=\n+\n6\n21\nx\n(c)\n4\n3\n4\n4\n3\nx\nx\n\u2212\n(\n) =\n\u00d7\n\u2212\n\u00d7\n(d)\nx x\nx\nx\nx\n\u2212\n(\n) =\n\u00d7\n\u2212\n\u00d7\n4\n4\n=\n\u2212\n4\n12\nx\n=\n\u2212\nx\nx\n2\n4\n",
+        "character_count": 1498
+      },
+      {
+        "page_number": 5,
+        "text": "188\nMEP Pupil Text 10\nExercises\n1.\nSimplify each of these expressions.\n(a)\na\na\na\n+\n+\n2\n3\n(b)\n3\n2\n4\n6\na +\n+\n+\n(c)\n3\n2\n8\n4\na\nb\na\nb\n+\n+\n+\n(d)\n4\n2\n8\nx\ny\ny\ny\n+\n+\n+\n(e)\n5\n2\n8\n3\nx\ny\nx\ny\n+\n+\n\u2212\n(f)\n6\n7\n3\n4\na\nb\nb\na\n+\n+\n\u2212\n(g)\n4\n6\n3\n2\n+\n\u2212\n+\n+\na\na\nb\n(h)\np\nq\np\nq\np\n+\n+\n\u2212\n+\n2\n8\n3\n(i)\nx\ny\nx\ny\n+\n\u2212\n+\n8\n2\n(j)\n4\n3\n2\n2\nx\np\np\nx\n\u2212\n+\n\u2212\n(k)\n7\n4\n8\n5\nx\nz\nx\nz\n\u2212\n+\n\u2212\n(l)\n3\n4\n2\n10\nz\nx\nz\nx\n\u2212\n+\n\u2212\n(m)\n3\n4\n8\n2\nq\nx\na\nx\nq\n\u2212\n+\n\u2212\n+\n(n)\nx\ny\nz\np\nq\ny\n+\n+\n\u2212\n\u2212\n\u2212\n(o)\nx\ny\nx\ny\n+\n+\n+\n+\n\u2212\n6\n4\n2\n3\n(p)\n4\n8\n17\n24\nx\nq\nx\nq\n\u2212\n+\n\u2212\n(q)\n\u2212\n+\n+\n+\nx\ny\nx\ny\n(r)\n4\n7\n3\n8\nx\ny\nx\ny\nx\ny\n+\n\u2212\n\u2212\n+\n+\n(s)\n\u2212\n+\n\u2212\n+\n8\n7\n11\n4\nx\ny\nx\ny\n(t)\n6\n18\n17\n4\nx\ny\nx\n\u2212\n+\n\u2212\n(u)\nx\ny\nx\ny\n+\n\u2212\n\u2212\n8\n11\n(v)\n4\n8\n8\n4\np\nq\np\nq\n+\n\u2212\n\u2212\n2.\nSimplify each of the following expressions.\n(a)\n2\n3\n4\n5\n2\n2\nx\nx\nx\nx\n+\n+\n+\n(b)\nx\nx\nx\n2\n8\n5\n10\n+\n+\n+\n(c)\nx\nx\nx\nx\n2\n2\n6\n4\n+\n+\n+\n(d)\nx\nx\nx\nx\n2\n2\n10\n4\n+\n+\n+\n+\n(e)\n5\n6\n8\n2\n2\nx\nx\nx\nx\n\u2212\n\u2212\n+\n(f)\n4\n3\n2\n2\n2\n2\nx\ny\nx\ny\n\u2212\n\u2212\n+\n(g)\nx\ny\nx\ny\nx\n2\n2\n2\n+\n\u2212\n\u2212\n+\n(h)\n4\n7\n1\n4\n11\n2\n2\nx\nx\nx\nx\n\u2212\n+\n+\n+\n\u2212\n(i)\nx\ny\nx\ny\nx\ny\n2\n2\n2\n2\n2\n2\n\u2212\n\u2212\n\u2212\n+\n\u2212\n(j)\ny\ny\ny\ny\n2\n2\n4\n4\n+\n\u2212\n+\n+\n(k)\nab\ncd\nab\n+\n+ 4\n(l)\nxy\nxz\nxy\nxz\n+\n+\n+ 4\n(m)\n4\n7\n3\nab\nab\nad\n+\n\u2212\n(n)\n4\n3\n5\npq\nqr\npq\n\u2212\n+\n3.\nRemove the brackets from each expression below.\n(a)\n3\n5\nx +\n(\n)\n(b)\n4 6 +\n(\n)\nx\n(c)\n7\n2\nx +\n(\n)\n(d)\n2\n6\nx +\n(\n)\n(e)\n5\n2\nx +\n(\n)\n(f)\n4 2\n3\nx +\n(\n)\n(g)\n5 3\n2\nx +\n(\n)\n(h)\n8 5\n3\nx +\n(\n)\n(i)\n7\n6\nx \u2212\n(\n)\n(j)\n8 5 \u2212\n(\n)\nx\n(k)\n4 2\n7\nx \u2212\n(\n)\n(l)\n7 5\n3\nx \u2212\n(\n)\n(m)\n6 3\n5\nx \u2212\n(\n)\n(n)\n4\n2\nx\ny\n\u2212\n(\n)\n(o)\n5\n2\n3\nx\ny\nz\n+\n+\n(\n)\n(p)\nx\nx\n5 +\n(\n)\n(q)\na\na\n2 \u2212\n(\n)\n(r)\n4\n3\nb \u2212\n(\n)\n(s)\n2\n6\nx x \u2212\n(\n)\n(t)\n4\n2\n3\nx\nx +\n(\n)\n(u)\n3\n7\n2\nx\nx\n\u2212\n(\n)\n(v)\n8\n5\nx x \u2212\n(\n)\n10.3\n",
+        "character_count": 1515
+      },
+      {
+        "page_number": 6,
+        "text": "189\nMEP Pupil Text 10\n4.\nSimplify each of the following expressions, by first removing all the brackets.\n(a)\n3\n2\n4\n5\na\na\n+\n(\n) +\n+\n(\n)\n(b)\n2 2\n4\n3\n5\nx\nx\n+\n(\n) +\n+\n(\n)\n(c)\n5\n2\n3\n4\nx\nx\n+\n(\n) +\n+\n(\n)\n(d)\nx x\nx x\n+\n(\n) +\n+\n(\n)\n1\n6\n(e)\n4\n1\n5\nx\nx x\n+\n(\n) +\n+\n(\n)\n(f)\n2\n5 2\n3\na\nb\na\nb\n+\n(\n) +\n+\n(\n)\n10.4\nSimple Equations\nTo solve simple equations you must carry out the same operation (addition, subtraction,\nmultiplication or division) on both sides of the equation so that the new equation is still\nbalanced.\nWorked Example 1\nSolve each of the following equations.\n(a)\nx +\n=\n3\n8          (b)    x \u2212\n=\n8\n11          (c)    4\n32\nx =\n          (d)    x\n6\n7\n=\nSolution\n(a)\nTo solve this equation, subtract 3 from both sides.\n        x +\n=\n3\n8\n x +\n\u2212\n=\n\u2212\n3\n3\n8\n3\n    x = 5.\n(b)\nTo solve this equation, add 8 to both sides.\n \nx \u2212\n=\n8\n11\n x \u2212\n+\n=\n8\n8\n11+ 8\n   x\n= 19.\n(c)\nTo solve this equation divide both sides by 4.\n  4\n32\nx =\n  4\n4\n32\n4\nx =\n    x = 8.\n(d)\nTo solve this equation multiply both sides by 6.\n   x\n6\n7\n=\n      x\n6\n6\n7\n6\n\u00d7\n=\n\u00d7\n    x = 42.\n1\n8\n1\n1\n1\n1\n",
+        "character_count": 1053
+      },
+      {
+        "page_number": 7,
+        "text": "190\nMEP Pupil Text 10\nWorked Example 2\nA packet of sweets is divided equally among 5 children and each child is given 4 sweets.\nWrite down an equation to describe this situation and solve it to find the number of\nsweets in the packet.\nSolution\nLet x be the number of sweets in the packet.\nThen\n    x\n5\n4\n=\n,\nsince the 5 children have 4 sweets each.  Now the equation can be solved by multiplying\nboth sides by 5.\n        x\n5\n5\n4\n5\n\u00d7\n=\n\u00d7\n    x = 20.\nExercises\n1.\nSolve each of these equations.\n(a)\nx +\n=\n6\n10\n(b)\nx \u2212\n=\n7\n3\n(c)\nx +\n=\n4\n7\n(d)\nx \u2212\n=\n1\n11\n(e)\nx \u2212\n=\n6\n8\n(f)\nx +\n=\n5\n3\n(g)\n5\n45\nx =\n(h)\n6\n24\nx =\n(i)\n6\n108\nx =\n(j)\n7\n56\nx =\n(k)\n3\n102\nx =\n(l)\n6\n42\nx =\n(m)\nx\n2\n5\n=\n(n)\nx\n2\n12\n=\n(o)\nx\n5\n10\n=\n(p)\nx\n3\n4\n=\n(q)\nx\n7\n3\n=\n(r)\nx\n6\n11\n=\n(s)\nx \u2212\n=\n5\n3\n(t)\nx +\n=\n8\n14\n(u)\n4\n104\nx =\n(v)\nx\n2\n18\n=\n(w)\nx \u2212\n=\n3\n12\n(x)\nx +\n=\n7\n11\n2.\nSolve each of these equations.\n(a)\nx +\n=\n6\n2\n(b)\nx +\n=\n8\n3\n(c)\nx \u2212\n= \u2212\n5\n2\n(d)\nx +\n= \u2212\n2\n4\n(e)\nx \u2212\n= \u2212\n2\n6\n(f)\nx +\n= \u2212\n4\n10\n(g)\n2\n12\nx = \u2212\n(h)\n3\n24\nx = \u2212\n(i)\n5\n60\nx = \u2212\n(j)\nx\n2\n8\n= \u2212\n(k)\nx \u2212\n= \u2212\n2\n5\n(l)\nx +\n= \u2212\n6\n14\n(m)\nx \u2212\n= \u2212\n10\n2\n(n)\nx \u2212\n= \u2212\n12\n4\n(o)\nx \u2212\n= \u2212\n7\n1\n(p)\nx +\n= \u2212\n4\n1\n(q)\nx +\n=\n12\n2\n(r)\nx +\n= \u2212\n10\n16\n10.4\n1\n1\n",
+        "character_count": 1147
+      },
+      {
+        "page_number": 8,
+        "text": "191\nMEP Pupil Text 10\n3.\nThe angles on a straight line add up to 180\u00b0.  Write down and solve an equation for\neach diagram shown below.\n(a)\n(b)\n(c)\n(d)\n4.\nSanjit is two years older than his brother.  His brother is 16.  Write down an\nequation which uses x to represent Sanjit's age.  Solve the equation for x..\n5.\nTo pay for a school trip, 12 children take the same amount of money to school.  If\nthe total money collected is \u00a354 and the amount each child takes is x, write down\nan equation to describe this situation.  Solve your equation for x.\n6.\nThe train fare for a long journey increases by \u00a33 to \u00a341.  If x is the old fare, write\ndown an equation to describe this situation.  Solve your equation for x.\n7.\nMajid knows that when a certain number is doubled, the answer is 52.  Explain in\nwords, starting with 52, how he can work out the number.\n(SEG)\n8.\nTim thought of a number.  He doubled his number.  His answer was 24.\nWhat number did Tim think of?\n(LON)\n9.\nAli is twice as old as Sue.  Sue is 2 years younger than Philip.  Philip is 11 years\nold.\n(a)\nHow old is Sue?\n(b)\nHow old is Ali?\n(NEAB)\n10.5\nSolving Equations\nMost equations require a number of steps to solve them.  These steps must be logical so\nthat the new equation still balances.  Whatever you do to one side of an equation you\nmust do the same to the other side.  The following examples illustrate these steps.\nWorked Example 1\nSolve the following equations.\n(a)\n3\n7\n13\nx +\n=\n(b)\n5\n8\n13\nx \u2212\n=\n(c)\nx\n5\n2\n3\n\u2212\n=\n(d)\n4\n3\n8\nx \u2212\n(\n) =\nx\n110\u02da\nx\n31\u02da\nx\n42\u02da\n40\u02da\nx\n92\u02da\n",
+        "character_count": 1532
+      },
+      {
+        "page_number": 9,
+        "text": "192\nMEP Pupil Text 10\nSolution\n(a)\nFirst subtract 7 from both sides of the equation.\n      3\n7\n13\nx +\n=\n         3\n7\n7\n13\n7\nx +\n\u2212\n=\n\u2212\n  3\n6\nx =\nNext divide both sides of the equation by 3.\n  3\n3\n6\n3\nx =\n    x = 2.\n(b)\nFirst add 8 to both sides of the equation.\n      5\n8\n13\nx \u2212\n=\n          5\n8\n8\n13\n8\nx \u2212\n+\n=\n+\n  5\n21\nx =\n.\nThen divide both sides of the equation by 5.\n  5\n5\n21\n5\nx =\n   x\n= 21\n5\n   \n= 4 1\n5 .\n(c)\nFirst add 2 to both sides of the equation.\n      x\n5\n2\n3\n\u2212\n=\n x\n5\n2\n2\n3\n2\n\u2212\n+\n=\n+\n    x\n5\n5\n=\nThen multiply both sides of the equation by 5.\n        x\n5\n5\n5\n5\n\u00d7\n=\n\u00d7\n   x\n= 25.\n(d)\nFirst remove the brackets, multiplying each term inside the bracket by 4.\n   4\n3\n8\nx \u2212\n(\n) =\n   4\n12\n8\nx \u2212\n=\n.\nThen add 12 to both sides of the equation.\n2\n1\n1\n1\n1\n1\n1\n1\n10.5\n",
+        "character_count": 769
+      },
+      {
+        "page_number": 10,
+        "text": "193\nMEP Pupil Text 10\n      4\n12\n12\n8\n12\nx \u2212\n+\n=\n+\n  4\n20\nx =\n.\nFinally divide both sides by 4.\n  4\n4\n20\n4\nx =\n   x\n= 5\nSometimes equations may contain the letter x on both sides of the equation or a \u2212x  term.\nThe next examples show how to deal with these cases.\nWorked Example 2\nSolve these equations.\n(a)\n4\n6\n3\n10\nx\nx\n+\n=\n+\n(b)\n6\n2\n8\n\u2212\n=\nx\n(c)\n4\n2\n8\n6\nx\nx\n\u2212\n=\n\u2212\nSolution\n(a)\nAs x appears on both sides of the equation, first subtract 3x from both sides.\n        \n4\n6\n3\n10\nx\nx\n+\n=\n+\n        4\n6\n3\n3\n10\n3\nx\nx\nx\nx\n+\n\u2212\n=\n+\n\u2212\n        \nx +\n=\n6\n10.\nThen subtract 6 from both sides.\n x +\n\u2212\n=\n\u2212\n6\n6\n10\n6\n    x = 4.\n(b)\nAs the left-hand side contains \u22122x, add 2x to both sides.\n      6\n2\n8\n\u2212\n=\nx\n        6\n2\n2\n8\n2\n\u2212\n+\n=\n+\nx\nx\nx\n    6\n8\n2\n=\n+\nx\nThen subtract 8 from both sides.\n         6\n8\n8\n2\n8\n\u2212\n=\n+\n\u2212\nx\n  \u2212\n=\n2\n2x .\nFinally divide both sides by 2.\n  \u2212\n=\n2\n2\n2\n2\nx\n  \u2212\n=\n1\nx    or   x\n= \u22121.\n(c)\nAs one side contains \u22126x, add 6x to both sides.\n      4\n2\n8\n6\nx\nx\n\u2212\n=\n\u2212\n        4\n2\n6\n8\n6\n6\nx\nx\nx\nx\n\u2212\n+\n=\n\u2212\n+\n    10\n2\n8\nx \u2212\n=\n1\n1\n1\n5\n1\n1\n1\n\u22121\n",
+        "character_count": 1033
+      },
+      {
+        "page_number": 11,
+        "text": "194\nMEP Pupil Text 10\nThen add 2 to both sides of the equation.\n        10\n2\n2\n8\n2\nx \u2212\n+\n=\n+\n 10\n10\nx =\nFinally divide both sides by 10.\n10\n10\n10\n10\nx =\n    x = 1.\nWorked Example 3\nUse the information in the diagram to write down\nan equation and then find the value of x.\nSolution\nThe three angles shown must add up to 360\u00b0,  so\n         170\n2\n50\n10\n360\n+\n+\n+\n\u2212\n=\nx\nx\n  210\n3\n360\n+\n=\nx\n.\nSubtracting 210 from both sides gives\n 210\n3\n210\n360\n210\n+\n\u2212\n=\n\u2212\nx\n  3\n150\nx =\n.\nThen dividing both sides by 3 gives\n  3\n3\n150\n3\nx =\n    x = 50.\nExercises\n1.\nSolve each of these equations.\n(a)\n3\n6\n48\nx +\n=\n(b)\n5\n6\n39\nx \u2212\n=\n(c)\n2\n6\n22\nx \u2212\n=\n(d)\n6\n7\n41\nx \u2212\n=\n(e)\n8\n3\n29\nx \u2212\n=\n(f)\n6\n12\n20\nx +\n=\n(g)\n4\n18\n2\nx +\n=\n(h)\n5\n10\n5\nx +\n=\n(i)\n3\n6\n1\nx +\n=\n(j)\n5\n2\n45\nx +\n(\n) =\n(k)\n3\n2\n12\nx \u2212\n(\n) =\n(l)\n2\n7\n10\nx +\n(\n) =\n(m)\n3 2\n1\n57\nx \u2212\n(\n) =\n(n)\n3 2\n7\n27\nx +\n(\n) =\n(o)\n5 5\n1\n20\nx +\n(\n) =\n(p)\n4 2\n3\n8\nx +\n(\n) = \u2212\n(q)\n5 3\n1\n2\nx \u2212\n(\n) = \u2212\n(r)\n2 8\n5\n2\nx +\n(\n) = \u2212\n(s)\n6\n8\n26\nx \u2212\n= \u2212\n(t)\n4\n15\n60\nx +\n(\n) =\n(u)\n5\n8\n10\nx \u2212\n= \u2212\n(v)\nx\n4\n1\n8\n\u2212\n=\n(w)\nx\n3\n2\n7\n+\n=\n(x)\n2\n5\n1\n3\nx +\n=\n1\n1\n1\n1\n1\n50\n1\n1\n10.5\n170\u02da\nx + 50\u02da\n2\nx \u2013 10\u02da\n",
+        "character_count": 1089
+      },
+      {
+        "page_number": 12,
+        "text": "195\nMEP Pupil Text 10\n2.\nSolve these equations.\n(a)\n2\n6\n3\nx\nx\n+\n=\n+\n(b)\n4\n8\n5\n2\nx\nx\n\u2212\n=\n\u2212\n(c)\n6\n7\n2\n20\nx\nx\n+\n=\n+\n(d)\nx\nx\n+\n=\n\u2212\n6\n2\n8\n(e)\n3\n7\n2\n11\nx\nx\n+\n=\n+\n(f)\n10\n2\n8\n22\nx\nx\n+\n=\n+\n(g)\n6\n5\n\u2212\n=\nx\n(h)\n2\n5\n\u2212\n=\nx\n(i)\n3\n10\n\u2212\n= \u2212\nx\n(j)\n14\n3\n5\n\u2212\n=\nx\n(k)\n10\n2\n2\n\u2212\n=\nx\n(l)\n4\n3\n2\n\u2212\n=\nx\n(m)\nx\nx\n+\n=\n\u2212\n2\n8\n(n)\nx\nx\n+\n=\n\u2212\n4\n10\n2\n(o)\nx\nx\n+\n=\n\u2212\n4\n9\n2\n(p)\n8\n12\n2\n\u2212\n=\n\u2212\nx\nx\n(q)\n22\n4\n18\n2\n\u2212\n=\n\u2212\nx\nx\n(r)\n3\n6\n2\n4\n\u2212\n=\n\u2212\nx\nx\n(s)\n3\n2\n5\n2\nx\nx\n+\n(\n) =\n\u2212\n(\n)\n(t)\n4\n8\n3\n=\n\u2212x\n(u)\n3\n4\n5\n\u2212\n= \u2212\nx\n(v)\n4\n2\n3\n2\nx\nx\n\u2212\n(\n) =\n+\n(\n)\n(w)\n5\n18\n3\n=\n\u2212x\n(x)\n2\n4\n1\n6\n\u2212\n=\n\u2212\nx\nx\n3.\nFor each diagram below, write down an equation involving x and solve it.\n(a)\n(b)\n(c)\n(d)\n4.\nA rope of length 10 m is used to mark out a rectangle, so that the two long sides are\n1 m longer than the short sides.  If x is the length of the short sides, write down an\nequation to describe this situation and hence find x.\n5.\nYou ask a friend to think of a number, double it and add 10.  His answer is 42.\nIf x is the number your friend thought of, write down the relevant equation and\nfind x.\nx\n120\u02da\u2013\nx\n180\u02da\u2013\nx\n140\u02da \u2013\nx\nx + 10\u02da\nx + 30\u02da\n2\nx + 30\u02da\nx + 10\u02da\nx \u2013 10\u02da\nx + 30\u02da\n80\u02da\nx\nx + 40\u02da\n3\n",
+        "character_count": 1118
+      },
+      {
+        "page_number": 13,
+        "text": "196\nMEP Pupil Text 10\n6.\nSix teams enter a competition.  There are x members in each team.  If 8 people drop\nout and 34 complete the competition, write down an equation and solve it to find\nthe number in each team at the start of the competition.\n7.\nThree people drive a car on a long journey.  John drives for 2 hours more than\nMary.  Philip drives for twice as long as Mary.  The whole journey takes 6 hours.\nUse an equation to find out for how long each person drives.\n8.\nA driver travels 80 miles to a motorway and then travels at a steady 60 mph for\nx hours.  Write down and solve equations involving x if the driver travels a total of\n(a)\n290 miles\n(b)\n220 miles.\nGive your answers in hours and minutes.\n9.\nA child was asked to think of a number and follow these instructions.  In each case,\nlet x be the number the child thinks of, write down an equation, and find the value\nof x.\n(a)\nThink of a number, add 6 and double it.\nAnswer 18\n(b)\nThink of a number, divide by 2 and add 10.\nAnswer 16\n(c)\nThink of a number, divide by 2, add 2 and multiply by 2.\nAnswer 9\n(d)\nThink of a number, subtract 7, divide by 2 and multiply by 10.\nAnswer 115\n10.\nFour consecutive numbers, when added together, give a total of 114.  If x is the\nlowest number, write down an equation and solve it.\n11.\nAdrian thinks of a number.  He doubles it and then adds 5.  The answer is 17.\nWhat was his number?\n(SEG)\n12.\n(a)\nWrite, in symbols, the rule,\nTo find y, double x and add 1.\n(b)\nUse your rule from part (a) to calculate the value of x when  y = 9.\n(LON)\n13.\nJacob uses this rule,\nStart with a number, divide it by 2 and then add 3.  Write down the result.\n(a)\nWhat is the result when Jacob starts with 8?\n(b)\nWhat number did Jacob start with when the result is 5?\n(SEG)\n14.\nSolve the equation\n11\n5\n25\nx\nx\n+\n=\n+\n.\n(LON)\n15.\nSolve the equations\n(a)\n4\n1\n17\nx \u2212\n=\n(b)\n11\n3\n5\n27\ny\ny\n+\n=\n+\n(MEG)\n10.5\n",
+        "character_count": 1881
+      },
+      {
+        "page_number": 14,
+        "text": "197\nMEP Pupil Text 10\n16.\nThe lengths of the sides of a triangle are\nx cm, x +\n(\n)\n3  cm and  x \u2212\n(\n)\n2  cm.\n(a)\nWhat is the perimeter of the triangle in terms of x?\n(b)\nThe triangle has a perimeter of 22 cm.\n(i)\nWrite down an equation in x.\n(ii)\nUse your equation to find the length of each side of the triangle\n(SEG)\n17.\nA pint of milk costs x pence.\n(a)\nWrite, in terms of x, the cost of two pints of milk.\nThe cost of a carton of fruit juice is 10 p more than the cost of a pint of milk.\n(b)\nWrite in terms of x, the cost of a carton of fruit juice.\nSam pays \u00a31.70 for three pints of milk and two cartons of fruit juice.  He writes\ndown the correct equation\n3\n2\n10\n170\nx\nx\n+\n+\n(\n) =\n(c)\nSolve this equation to find the cost of a pint of milk.\n(SEG)\n10.6 Trial and Improvement Method\nThe equations which have been solved so far are called linear equations, as they contain\nonly x or number terms. However, some equations are not linear, that is they contain, for\nexample, x2 or x3 terms.\nEquations such as these can be solved by a trial and improvement method.\nWorked Example 1\nSolve the equation\nx\nx\n3\n5\n+\n=\nby using a trial and improvement method.\nSolution\nFirst give a value of x to start the process, for example 1.\nStart with  1 and substitute 1 into x\nx\n3 +\n,  giving\n         1\n1\n1\n1\n3 +\n=\n+\n         \n= 2.\nx cm\nx +\n(\n)\n3 cm\nx \u2212\n(\n)\n2 cm\nNot to scale\n",
+        "character_count": 1361
+      },
+      {
+        "page_number": 15,
+        "text": "198\nMEP Pupil Text 10\nAs this is less than 5, x must be greater than 1.  So choose a larger value, say 2.\nThen substitute 2 into  x\nx\n3 +\n to get\n        2\n2\n8\n2\n3 +\n=\n+\n        \n= 10.\nAs this is greater than 5, x must be less than 2.  But x is also greater than 1, so you know\nthat x must lie in the interval\n1\n2\n<\n<\nx\n.\nThe next stage is to choose a value between 1 and 2, say 1.5.  This is substituted into\nx\nx\n3 +\n and the process is repeated.\nThe results of each trial can be shown in a table, as below.\nTrial Value\nx\nx\n3 +\n   Comment\nConclusion\nof x\n(to 4 d.p.)\n1\n2\nless than 5\nx > 1\n2\n10\ngreater than 5\n1\n2\n<\n<\nx\n1.5\n5.0625\ngreater than 5\n1\n1 5\n<\n<\nx\n.\n1.49\n4.9288\nless than 5\n1 49\n1 50\n.\n.\n<\n<\nx\n  \u2190  so x = 1 5.  to 1 d.p.\n1.495\n4.9953\nless than 5\n1 495\n1 500\n.\n.\n<\n<\nx\n     \u2190 so x = 1 50\n.\n to 2 d.p.\n1.497\n5.0221\ngreater than 5\n1 495\n1 497\n.\n.\n<\n<\nx\n1.496\n5.0087\ngreater than 5\n1 495\n1 496\n.\n.\n<\n<\nx\n1.4955\n5.0020\ngreater than 5\n1 4950\n1 4955\n.\n.\n<\n<\nx\n \u2190 so x = 1 495\n.\n to 3 d.p.\nNote\nThis process could be continued to give the answer correct to any number of decimal\nplaces.  Usually questions will specify the accuracy required and you must always state\nthe accuracy of your solution.  You should ensure that all working is correct to at least\ntwo decimal places (or significant figures) more than is required in the final answer; it is a\nvery common mistake to approximate answers too soon in the calculation.\nSo in this worked example, the answer is 1.495 correct to 3 d.p.\nWorked Example 2\nSolve the equation\nx\nx\n+\n\u2212\n=\n1\n0\nusing the trial and improvement method, giving your answer to 2 decimal places.\nSolution\nThe working is displayed in a table, as in the previous example.\n10.6\n",
+        "character_count": 1701
+      },
+      {
+        "page_number": 16,
+        "text": "199\nMEP Pupil Text 10\nTrial Value\nx\nx\n+\n\u2212\n1\nComment\n    Conclusion\nof x\n(to 4 d.p.)\n1\n1\ngreater than 0\nx > 1\n2\n0.4142\ngreater than 0\nx > 2\n3\n\u22120 2679\n.\nless than 0\n2\n3\n<\n<\nx\n2.5\n0.0811\ngreater than 0\n2 5\n3\n.\n<\n<\nx\n2.6\n0.0125\ngreater than 0\n2 6\n3\n.\n<\n<\nx\n2.7\n\u22120 0568\n.\nless than 0\n2 6\n2 7\n.\n.\n<\n<\nx\n2.65\n\u22120 0221\n.\nless than 0\n2 60\n2 65\n.\n.\n<\n<\nx\n2.62\n\u22120 0014\n.\nless than 0\n2 60\n2 62\n.\n.\n<\n<\nx\n2.61\n0.0055\ngreater than 0\n2 61\n2 62\n.\n.\n<\n<\nx\n2.615\n0.0021\ngreater than 0\n2 615\n2 62\n.\n.\n<\n<\nx\nSo  x = 2 62\n.\n to 2 decimal places.\nExercises\n1.\nEach of the following equations have solutions which are whole numbers.\nFind the solution of each equation by using a trial and improvement method.\n(a)\nx\nx\n2\n30\n+\n=\n(b)\nx\nx\n2\n702\n\u2212\n=\n(c)\nx\nx\n3\n2\n135\n+\n=\n(d)\nx\nx\n3\n2\n1752\n+\n=\n(e)\nx\nx\n5\n240\n\u2212\n=\n(f)\nx\nx\n+\n= 72\n(g)\nx\nx\n\u2212\n= 90\n(h)\nx\nx\n\u2212\n= \u2212\n3\n1320.\n2.\nSolve each of the following equations, giving your answers to 1 decimal place.\n(a)\nx3\n1\n10\n\u2212\n=\n(b)\nx\nx\n+\n= 7\n(c)\nx\nx\n3\n4\n\u2212\n=\n(d)\nx\nx\n+\n= 8\n(e)\nx\nx\n2\n5\n\u2212\n=\n(f)\nx\nx\n3\n16\n+\n=\n3.\nTrial and improvement can be used to find cube roots of numbers.  To find the cube\nroot of 6, you need to solve  x3\n6\n=\n.\n(a)\nSolve  x3\n6\n=\n  to 2 decimal places, starting with a first trial value of 2.\n(b)\nWhat would be a good first trial value when solving x3\n1020\n=\n?  Find x.\n(c)\nIn the same way find the cube root of 350.\nJust For Fun\nFind a number, the double of which is 99 greater than its half.\n",
+        "character_count": 1413
+      },
+      {
+        "page_number": 17,
+        "text": "200\nMEP Pupil Text 10\n4.\nSome equations have more than one solution.  The equations below all have two\nsolutions, some of which are negative.  Find the solutions by using the trial and\nimprovement method.\n(a)\nx\nx\n2\n56\n+\n=\n(b)\nx\nx\n2\n72\n\u2212\n=\n(c)\nx4\n1\n0\n\u2212\n=\n(d)\nx\nx\n2\n2\n80\n\u2212\n=\n(e)\nx\nx\n2\n6\n7\n\u2212\n=\n(f)\nx\nx\n2\n5\n24\n0\n+\n\u2212\n=\n5.\nFind both solutions to the following equations, giving your answers to 2 decimal\nplaces.\n(a)\nx\nx\n2\n5\n7\n0\n+\n\u2212\n=\n(b)\nx\nx\n2\n6\n4\n0\n\u2212\n+\n=\n(c)\nx\nx\n2\n10\n0\n+\n\u2212\n=\n(d)\nx\nx\n2\n6\n8\n+\n=\n6.\n(a)\nExplain why the equation  \nx\nx\n+\n= 8  cannot have a solution which is\nnegative.\n(b)\nFind the solution correct to 3 decimal places.\n7.\nSolve the following equations, giving your answers to 2 decimal places.\n(a)\n1\n8\nx\nx\n+\n=\n(b)\nx\nx\n\u2212\n=\n1\n5\n(c)\n2\n4\nx\nx\n+\n=\n(d)\n4\n5\nx\nx\n+\n=\n(e)\n5\n2\n8\nx\nx\n\u2212\n=\n(f)\n5\n7\nx\nx\n+\n=\n8.\nJimmy tries to solve this problem using trial and improvement.\nnumber  \u00d7\n=\n3 1\n5 6\n.\n.\nTry 2.0\n   2 0\n3 1\n6 2\n.\n.\n.\n\u00d7\n=\nToo large\nTry 1.5\n   1 5\n3 1\n4 65\n.\n.\n.\n\u00d7\n=\nToo small\n  . . .\n. . .\n  . . .\nContinue Jimmy's working until you know the number correct to one decimal\nplace.  Write down this number.\n(SEG)\n9.\nJudy is using 'trial and improvement' to solve the equation\nx\nx\n2\n11\n+\n=\n.\nCopy and complete her working and find a solution correct to one decimal place.\nTry  x = 3 5.\n3 5\n3 5\n15 75\n2\n.\n.\n.\n+\n=\nToo large\nTry  x = 2 5.\n2 5\n2 5\n8 75\n2\n.\n.\n.\n+\n=\nToo small\nTry  x = 3 0.\n  . . .\n    . . .\n        . . .\n  . . .\n    . . .\n(SEG)\n10.6\n",
+        "character_count": 1443
+      },
+      {
+        "page_number": 18,
+        "text": "201\nMEP Pupil Text 10\n10.\n(a)\nSolve the equation  3\n2\n17\nx +\n=\n.\n(b)\n(i)\nWork out    43 = ?,   53 = ?\n(ii)\nUse a trial and improvement method to solve, correct to 1 decimal\nplace, the equation\nx3\n100\n=\n.\nShow all your trials.\n(MEG)\n11.\nThe length, AB, of a side of a square with area 300\n2\nm\nis \n300  m.\nSabeeha wants to find this length but her calculator does not have a   \n   key,\nso she has to use a trial and improvement method.\nHer first 2 trials are as follows:\n18\n18\n324\n\u00d7\n=\n(too big)\n17\n17\n289\n\u00d7\n=\n(too small)\n(a)\nShowing your working clearly, continue for at least 2 more trials until you\nhave found the length of AB correct to 1 decimal place.\n(b)\nChange your answer to part (a) into centimetres.\n(MEG)\n12.\nThe number x satisfies the equation\nx3\n20\n=\n.\n(a)\nBetween which two consecutive whole numbers does x lie?\n(b)\nUse a trial and improvement method to find this value of x correct to one\ndecimal place.  Show all your working clearly.\n(NEAB)\n10.7\nExpanding Brackets\nEquations or formulae may contain brackets, for example\nP\nx\n=\n\u2212\n(\n)\n8\n7      or     y\nx\nx\n=\n\u2212\n(\n)\n\u2212\n(\n)\n2\n3\n8\nRemoving brackets from these types of expressions is known as expanding.\nWhen evaluating or manipulating expressions it is sometimes important to be able to use\nthe original equation, whereas at other times the expanded version might be helpful.\nThe reverse of expanding, the process of factorisation, is even more important and\nbecomes easier once you have gained confidence in expanding brackets.\nC\nD\nB\nA\n300\n2\nm\n",
+        "character_count": 1505
+      },
+      {
+        "page_number": 19,
+        "text": "202\nMEP Pupil Text 10\nWorked Example 1\nExpand   2\n5\n8\nx\nx \u2212\n(\n).\nSolution\n         2\n5\n8\n2\n5\n2\n8\nx\nx\nx\nx\nx\n\u2212\n(\n) =\n\u00d7\n\u2212\n\u00d7\n         \n=\n\u2212\n10\n16\n2\nx\nx .\nWorked Example 2\nExpand   \u2212\n\u2212\n(\n)\n4\n6\nx\n.\nSolution\n\u2212\n\u2212\n(\n) = \u2212\n\u00d7\n+ \u2212\n(\n) \u00d7 \u2212\n(\n)\n4\n6\n4\n4\n6\nx\nx\n= \u2212\n+\n4\n24\nx\n.\nSometimes situations will arise where a bracket has to be multiplied by another bracket,\nas in the next example.\nWorked Example 3\nExpand   x\nx\n+\n(\n)\n+\n(\n)\n2\n5 .\nSolution\nThe first bracket x +\n(\n)\n2  is split so that each if its terms, x( ) and +\n(\n)\n2 , can multiply the\nother bracket.\n    x\nx\nx x\nx\n+\n(\n)\n+\n(\n) =\n+\n(\n) +\n+\n(\n)\n2\n5\n5\n2\n5\n    \n=\n+\n+\n+\nx\nx\nx\n2\n5\n2\n10\n    \n=\n+\n+\nx\nx\n2\n7\n10.\n     (collecting like terms)\nWorked Example 4\nExpand   4\n3 2\n7\nx\nx\n\u2212\n(\n)\n\u2212\n(\n)\nSolution\nSplitting the first bracket and multiplying the other bracket by each of its terms gives,\n4\n3 2\n7\n4\n2\n7\n3 2\n7\nx\nx\nx\nx\nx\n\u2212\n(\n)\n\u2212\n(\n) =\n\u2212\n(\n) \u2212\n\u2212\n(\n)\n=\n\u2212\n\u2212\n+\n8\n28\n6\n21\n2\nx\nx\nx\n=\n\u2212\n+\n8\n34\n21\n2\nx\nx\n.\n10.7\nJust For Fun\nWhich area is larger and by how much \u2013 a half km square or a half square km?\n",
+        "character_count": 1027
+      },
+      {
+        "page_number": 20,
+        "text": "203\nMEP Pupil Text 10\nWorked Example 5\nExpand   x +\n(\n)\n6\n2 .\nSolution\nFirst note that\n    x\nx\nx\n+\n(\n) =\n+\n(\n)\n+\n(\n)\n6\n6\n6\n2\n.\nThen the brackets can be expanded.\n   x\nx\nx x\nx\n+\n(\n)\n+\n(\n) =\n+\n(\n) +\n+\n(\n)\n6\n6\n6\n6\n6\n   \n=\n+\n+\n+\nx\nx\nx\n2\n6\n6\n36\n   \n=\n+\n+\nx\nx\n2\n12\n36.\nWorked Example 6\nExpand   3\n2\n4\n5\nx\nn\nx\nn\n\u2212\n(\n)\n+\n(\n).\nSolution\n     3\n2\n4\n5\n3\n4\n5\n2\n4\n5\nx\nn\nx\nn\nx\nx\nn\nn\nx\nn\n\u2212\n(\n)\n+\n(\n) =\n+\n(\n) \u2212\n+\n(\n)\n     \n=\n+\n\u2212\n\u2212\n12\n15\n8\n10\n2\n2\nx\nxn\nnx\nn\n     \n=\n+\n\u2212\n12\n7\n10\n2\n2\nx\nxn\nn .\nNote that xn is the same as nx.\nExercises\n1.\nSimplify each expression below, expanding the brackets as necessary.\n(a)\nx x +\n(\n)1\n(b)\n\u2212\n\u2212\n(\n)\nx\nx\n3\n2\n(c)\n3\n2\n5\nn\na \u2212\n(\n)\n(d)\nx\nx\n2 1 \u2212\n(\n)\n(e)\n4\n7\nx x \u2212\n(\n)\n(f)\n5\n3\n2\n+\n+\n(\n)\nx\n(g)\n4\n6\nx\nx x\n+\n\u2212\n(\n)\n(h)\nx\nx\n1\n2\n+\n(\n)\n(i)\n5\n4\n2\n2\n\u2212\n+\n(\n)\nx\n(j)\nx\nx x\n2\n5\n\u2212\n+\n(\n)\n(k)\nx\nx\nx\n2\n4\n5\n\u2212\n\u2212\n(\n)\n(l)\nx\nx\n2\n2\n4\n2\n+\n\u2212\n(\n)\n(m)\nx\nx\nx\n3\n2 5\n2\n+\n\u2212\n(\n)\n(n)\n4\n4\nx\nx\n+\n(\n) \u2212\n(o)\n5\n3\n2\nx\nx\nx\n\u2212\n\u2212\n(\n)\n2.\nExpand and simplify each of the following.\n(a)\nx\nx\n+\n(\n)\n+\n(\n)\n1\n6\n(b)\nx\nx\n+\n(\n)\n+\n(\n)\n4\n7\n(c)\nx\nx\n\u2212\n(\n)\n+\n(\n)\n2\n8\n(d)\nx\nx\n\u2212\n(\n)\n+\n(\n)\n1\n4\n(e)\nx\nx\n\u2212\n(\n)\n\u2212\n(\n)\n7\n1\n(f)\n2\n1 3\n1\nx\nx\n+\n(\n)\n\u2212\n(\n)\n(g)\n4\n3 2\n7\nx\nx\n+\n(\n)\n+\n(\n)\n(h)\n5\n2 2\n3\nx\nx\n\u2212\n(\n)\n+\n(\n)\n(i)\n6\n1 4\n3\nx\nx\n\u2212\n(\n)\n+\n(\n)\n(j)\n3\n1 4\n3\nx\nx\n\u2212\n(\n)\n\u2212\n(\n)\n(k)\n5\n6 3\n8\nx\nx\n\u2212\n(\n)\n\u2212\n(\n)\n(l)\n3\n7 5\n2\na\na\n\u2212\n(\n)\n+\n(\n)\n(m)\n4\n5 3\n5\na\na\n\u2212\n(\n)\n\u2212\n(\n)\n(n)\n6\n1 4\n2\nn\nn\n+\n(\n)\n\u2212\n(\n)\n(o)\n4\n3 5\n8\nx\nx\n+\n(\n)\n\u2212\n(\n)\n",
+        "character_count": 1345
+      },
+      {
+        "page_number": 21,
+        "text": "204\nMEP Pupil Text 10\n3.\nExpand and simplify each of the following.\n(a)\nx +\n(\n)1\n2\n(b)\nx \u2212\n(\n)1\n2\n(c)\nx +\n(\n)\n8\n2\n(d)\n2\n1\n2\nx +\n(\n)\n(e)\n3\n4\n2\nx +\n(\n)\n(f)\n6\n1\n2\nx \u2212\n(\n)\n(g)\n2\n5\n2\nx \u2212\n(\n)\n(h)\n6\n7\n2\nx \u2212\n(\n)\n(i)\n5\n9\n2\nx +\n(\n)\n4.\nExpand and simplify, whenever possible, the following.\n(a)\na\nb c\nd\n+\n(\n)\n+\n(\n)\n(b)\na\nc\na\nc\n+\n(\n)\n+\n(\n)\n2\n(c)\n3\n5\na\nd\na\nd\n+\n(\n)\n\u2212\n(\n)\n(d)\n4\n3\nx\ny\nx\ny\n\u2212\n(\n)\n+\n(\n)\n(e)\n4\n3\na\nd\na\nd\n+\n(\n)\n+\n(\n)\n(f)\n2\n4\na\nb a\nc\n+\n(\n)\n+\n(\n)\n(g)\n6\n3\nx\ny\ny\nx\n\u2212\n(\n)\n\u2212\n(\n)\n(h)\np\nq q\np\n+\n(\n)\n\u2212\n(\n)\n2\n(i)\n5\n9\n2\nx\ny\nx\ny\n+\n(\n)\n\u2212\n(\n)\n(j)\n4\n2\nx\nx\ny\n\u2212\n(\n)\n+\n(\n)\n(k)\n2\n2\na\nb\na\nc\n+\n(\n)\n\u2212\n(\n)\n(l)\n4\n5\n6\nx\ny\nx\ny\n\u2212\n(\n)\n\u2212\n(\n)\n(m)\np\nq\np\nq\n\u2212\n(\n)\n+\n(\n)\n2\n2\n(n)\n5\n2\n3\na\nb a\nb\n+\n(\n)\n\u2212\n(\n)\n(o)\n5\n6\n2\n3\nx\ny\nx\ny\n\u2212\n(\n)\n\u2212\n(\n)\n5.\n(a)\nExpand and simplify\n(i)\nx\nx\n+\n(\n)\n\u2212\n(\n)\n1\n1\n(ii)\nx\nx\n+\n(\n)\n\u2212\n(\n)\n4\n4\n(iii)\nx\nx\n+\n(\n)\n\u2212\n(\n)\n6\n6\n(b)\nWithout expanding the brackets, write down what you would expect to get if\nyou expanded\nx\nx\n+\n(\n)\n\u2212\n(\n)\n5\n5\n(c)\nExpand and simplify\na\nb a\nb\n+\n(\n)\n\u2212\n(\n)\n(d)\nWhat would you expect to obtain if you expanded\n5\n2 5\n2\nx\nx\n+\n(\n)\n\u2212\n(\n)?\n6.\nFind the area of each rectangle.\n(a)\n     (b)\n(c)\n     \n7.\nExpand and simplify each expression.\n(a)\nx x\nx\n+\n(\n)\n\u2212\n(\n)\n2\n5\n(b)\nx\nx\nx\n+\n(\n)\n+\n\u2212\n(\n)\n2\n2\n8\n2\n(c)\nx\nx\nx\n+\n(\n)\n\u2212\n(\n)\n+\n(\n)\n1\n2\n3\n(d)\n2\n1 3\n4\n7\nx\nx\nx\n+\n(\n)\n\u2212\n(\n)\n+\n(\n)\n(e)\nx +\n(\n)1\n3\n(f)\nx \u2212\n(\n)\n4\n3\n10.7\nx + 2\nx \u22121\n2\n4\nx \u2212\nx \u22121\nx +1\n2\n2\nx +\n",
+        "character_count": 1337
+      },
+      {
+        "page_number": 22,
+        "text": "205\nMEP Pupil Text 10\n10.8\nSimultaneous Linear Equations\nA pair of equations which use both terms at the same time, such as\nx\ny\n+\n=\n2\n8\n2\n7\nx\ny\n+\n=\n,\nare known as a pair of simultaneous equations.\nWorked Example 1\nSolve the pair of simultaneous equations\nx\ny\n+\n=\n2\n8\n2\n7\nx\ny\n+\n=\n.\nSolution\nFirst it is helpful to label the equations (1) and (2).\nx\ny\n+\n=\n2\n8\n(1)\n2\n7\nx\ny\n+\n=\n(2)\nEquation (1) is multiplied by 2, so that it contains the same number of x's as equation (2).\nLet the new equation be labelled (3).\n  2\n4\n16\nx\ny\n+\n=\n(3)\n2\n1\n\u00d7\n[\n]\n( )\n  2\n7\nx\ny\n+\n=\n(2)\nEquation (2) is now subtracted from equation (3).\n  2\n4\n16\nx\ny\n+\n=\n(3)\n  2\n7\nx\ny\n+\n=\n(2)\n  \n3\n9\ny\n=\n(3)  \u2013 (2)\nSolving  3\n9\ny =\n  gives  y = 3.\nThis value of y can now be substituted into equation (1) to give:\nx +\n\u00d7\n=\n2\n3\n8\n  \nx +\n=\n6\n8\nSolving this gives  x = 2.  So the solution to the equation is  x = 2,  y = 3.\nWorked Example 2\nSolve the simultaneous equations\n3\n5\n2\nx\ny\n+\n=\n\u2212\n+\n= \u2212\n4\n7\n30\nx\ny\n.\n",
+        "character_count": 963
+      },
+      {
+        "page_number": 23,
+        "text": "206\nMEP Pupil Text 10\nSolution\nFirst label the equations (1) and (2) as shown below.\n3\n5\n2\nx\ny\n+\n=\n(1)\n\u2212\n+\n= \u2212\n4\n7\n30\nx\ny\n(2)\nThen multiply equation (1) by 4 and equation (2) by 3 to make the number of x's in both\nequations the same.\n       12\n20\n8\nx\ny\n+\n=\n(3)\n4\n1\n\u00d7 ( )\n[\n]\n       \u2212\n+\n= \u2212\n12\n21\n90\nx\ny\n(4)\n3\n2\n\u00d7 ( )\n[\n]\nNow add together equations (3) and (4) to give\n       12\n20\n8\nx\ny\n+\n=\n(3)\n       \u2212\n+\n= \u2212\n12\n21\n90\nx\ny\n(4)\n          41\n82\ny = \u2212\n(3)  +  (4)\nSolving the equation  41\n82\ny = \u2212\n  gives  y = \u22122.\nThis value for y can be substituted into equation (1) to give\n    3\n5\n2\n2\nx +\n\u00d7 \u2212\n(\n) =\nor\n3\n10\n2\nx \u2212\n=\n.\nSolving this equation gives:\n    3\n10\n2\nx \u2212\n=\n    \n3\n12\nx =\n     \nx = 12\n3\n     \n= 4.\nSo the solution is  x = 4  and  y = \u22122.\nNote\nIt is a good idea to check that solutions are correct by substituting these values back into\nthe original equations.  Here,\n          3\n4\n5\n2\n2\n\u00d7\n+\n\u00d7 \u2212\n(\n) =\nand\n      \u2212\n\u00d7\n+\n\u00d7 \u2212\n(\n) = \u2212\n4\n4\n7\n2\n30\nYou must check both equations to make sure that you have the correct answer.\n10.8\n",
+        "character_count": 1028
+      },
+      {
+        "page_number": 24,
+        "text": "207\nMEP Pupil Text 10\nWorked Example 3\nDenise sells 300 tickets for a concert.  Some tickets are sold to adults at \u00a35 each and some\nare sold to children at \u00a34 each.  If she collects in \u00a31444 in ticket sales, how many tickets\nhave been sold to adults and how many to children?\nSolution\nLet\nx = number of adults' tickets\nand\ny = number of children's tickets.\nShe has sold 300 tickets, so\nx\ny\n+\n= 300.\nThe value of the adult tickets sold is \u00a35x, and the value of the children's tickets is \u00a34y.\nAs the value of all the tickets sold is \u00a31444, then\n5\n4\n1444\nx\ny\n+\n=\n.\nThe two simultaneous equations\n    x\ny\n+\n= 300\n(1)\n    5\n4\n1444\nx\ny\n+\n=\n(2)\ncan now be solved.  First multiply equation (1) by 5 and subtract equation (2) to give\n    5\n5\n1500\nx\ny\n+\n=\n(3)\n5\n1\n\u00d7\n[\n]\n( )\n    5\n4\n1444\nx\ny\n+\n=\n(2)\n    \ny = 56\n(3)  \u2013  (2)\nThis value can then be substituted into equation (1) to give\n     x +\n=\n56\n300\nor\n     \nx\n= 244.\nSo the solution is  x = 244 and  y = 56.  That is, 244 adults' tickets and 56 children's\ntickets have been sold.\nInvestigation\nConsider the following simultaneous equations.\n    2x\ny\n6\n+\n=\n(1)\n    x\n1\ny\n1\n2\n=\n\u2212\n(2)\nIf (2) is substituted for x into (1), then\n  2 1\ny\ny\n6\n1\n2\n\u2212\n(\n) +\n=\n2\ny\ny\n6\n\u2212\n+\n=\n              2\n6\n=\n!\nFind out where the problem lies.\n",
+        "character_count": 1263
+      },
+      {
+        "page_number": 25,
+        "text": "208\nMEP Pupil Text 10\nExercises\n1.\nSolve each pair of simultaneous equations.\n(a)\nx\ny\n+\n=\n2\n5\n(b)\n3\n2\n19\nx\ny\n+\n=\n(c)\nx\ny\n\u2212\n=\n2\n4\n3\n5\nx\ny\n+\n=\nx\ny\n+\n=\n5\n15\n4\n3\n49\nx\ny\n+\n=\n(d)\n2\n3\n14\nx\ny\n+\n=\n(e)\n3\n4\n2\nx\ny\n+\n=\n(f)\n   4\n2\n16\nx\ny\n+\n=\n5\n2\n24\nx\ny\n+\n=\n7\n5\n9\nx\ny\n\u2212\n=\n          \u2212\n+\n= \u2212\n3\n2\n19\nx\ny\n(g)\n5\n2\nx\ny\n+\n=\n(h)\n6\n4\n12\nx\ny\n\u2212\n=\n(i)\n7\n2\n23\nx\ny\n\u2212\n=\n\u2212\n+\n=\n4\n3\n44\nx\ny\n\u2212\n+\n= \u2212\n9\n2\n66\nx\ny\n3\n4\n39\nx\ny\n+\n=\n(j)\n 8\n4\n7\nx\ny\n+\n=\n(k)\n4\n2\n0 1\nx\ny\n\u2212\n= \u2212.\n(l)\n6\n5\n41\nx\ny\n\u2212\n=\n\u2212\n+\n= \u2212\n12\n8\n6\nx\ny\n5\n2\n1 5\nx\ny\n+\n=\n.\n4\n15\n31\nx\ny\n+\n=\n(m)\n\u2212\n+\n=\n2\n5\n14\nx\ny\n(n)\n8\n5\n29\nx\ny\n+\n= \u2212\n(o)\n6\n5\n14\nx\ny\n\u2212\n= \u2212\n10\n7\n26\nx\ny\n+\n=\n3\n7\n2\nx\ny\n\u2212\n= \u2212\n18\n4\n6\nx\ny\n\u2212\n=\n(p)\n6\n8\n2\nx\ny\n\u2212\n= \u2212\n(q)\n1\n2\n1\n4\n0\nx\ny\n\u2212\n=\n(r)\n1\n5\n1\n10\n1\nx\ny\n\u2212\n= \u2212\n1\n3\n2\n3\n10\nx\ny\n+\n=\n1\n4\n1\n2\n10\nx\ny\n+\n=\n2.\nFind the coordinates of the point of intersection of the lines:\n(a)\nx\ny\n+\n= 8\nand\ny\nx\n=\n\u2212\n2\n1\n(b)\nx\ny\n+\n= 10\nand\ny\nx\n=\n+\n2\n1\n(c)\nx\ny\n+\n= 4\nand\ny\nx\n=\n\u2212\n2\n10\n3.\nDescribe the problems you encounter when you try to solve the simultaneous\nequations:\n    3\n2\n8\nx\ny\n\u2212\n=\n    9\n6\n2\nx\ny\n\u2212\n=\n.\n4.\n(a)\nCheck that  x = 2  and  y = 5  is a solution of both the equations below.\n   \nx\ny\n+\n=\n2\n12\n    3\n6\n36\nx\ny\n+\n=\n(b)\nTry to solve the equations.  What happens?\n(c)\nWrite both equations in the form  y = . . . and comment on the equations you\nobtain.\n5\n2\n1 8\nx\ny\n+\n=\n.\n10.8\n",
+        "character_count": 1282
+      },
+      {
+        "page_number": 26,
+        "text": "209\nMEP Pupil Text 10\n5.\nIan rows a boat in a river where there is a steady current.  He travels at 1.3 mph\nupstream and 3.7 mph downstream.\nUse a pair of simultaneous equations to find v, the speed of the boat in still water,\nand c, the speed of the current.\n6.\nA machine sells tickets for travel on a tram system.  A single ticket costs \u00a31 and a\nreturn ticket costs \u00a32.  In one day, the machine sells 100 tickets and takes \u00a3172.\nHow many of each type of ticket were sold?\n7.\nA shopkeeper takes 200 notes to a bank.  They are a mixture of \u00a35 and \u00a310 notes.\nThe shopkeeper claims that there is \u00a31395.\n(a)\nFind out how many of each type of note there should be.\n(b)\nIn fact the value of the notes turns out to be \u00a31390.  How many of each type\nof note does this mean there should be?  What error do you think the\nshopkeeper made?\n8.\nA bus stops at two places.  The fare to the first stop is \u00a33 and the fare to the second\nstop is \u00a35.  When the bus sets out, there are 38 people on the bus and the driver has\ncollected \u00a3158 in fares.  How many people get off the bus at the first stop?\n9.\nWhen Isa travels to the USA for a holiday he leaves the UK at 1.00 pm local time\nand lands at 5.00 pm local time.  On the return journey he leaves at 8.00 pm local\ntime and lands at 10.00 am local time the next day.\nFind the length of the flight in hours and the time difference between the UK and\nthe part of the USA that Isa visited.\n10.\nSolve the simultaneous equations,\n    2\n3\n23\nx\ny\n+\n=\n    x\ny\n+\n= 4\n(LON)\n11.\nSolve the simultaneous equations,\n    2\n4\n13\na\nc\n+\n=\n    a\nc\n+\n=\n3\n8\n(NEAB)\n12.\nThe height, h metres, of a sky rocket t seconds after being launched is given by the\nformula\nh\nat\nbt\n=\n+\n+\n2\n2\nwhere a and b are constants.  The heights of the rocket above the ground at two\ndifferent times are given in the table below.\nt  (seconds)          1          2\nh  (metres)\n    37        62\n",
+        "character_count": 1883
+      },
+      {
+        "page_number": 27,
+        "text": "210\nMEP Pupil Text 10\n(a)\nAt what height above the ground is the rocket launched?\n(b)\n(i)\nUse the table of values to show that\n        a\nb\n+\n= 35\nand\n    4\n2\n60\na\nb\n+\n=\n.\n(ii)\nSolve these simultaneous equations to find the value of a and the\nvalue of b.\n(c)\nWhat was the height of the sky rocket 7 1\n2  seconds after it was launched?\n(MEG)\n10.9\nFactorisation 1\nThe process of removing brackets is known as expanding.  The reverse process is known\nas factorisation, where an expression is re-written as a product of terms.\nTo factorise an expression it is necessary to identify numbers or variables which are\nfactors common to all the terms.\nWorked Example 1\nFactorise  6\n8\nx +\n.\nSolution\nBoth terms (6x) and (8) can be divided by 2, so the expression is factorised as\n      6\n8\n2\n3\n2\n4\nx\nx\n+\n=\n\u00d7\n(\n) +\n\u00d7\n(\n)\n      \n=\n+\n(\n)\n2 3\n4\nx\n.\nWorked Example 2\nFactorise  12\n16\na \u2212\n.\nSolution\nHere the largest number by which both terms,  (12a) and (16), can be divided is 4.\n  12\n16\n4\n3\n4\n4\na\na\n\u2212\n=\n\u00d7\n(\n) \u2212\n\u00d7\n(\n)\n  \n=\n\u2212\n(\n)\n4 3\n4\na\n.\nWorked Example 3\nFactorise  4\n8\n2\nx\nx\n\u2212\n.\nSolution\nHere 4 is the largest number that will divide both terms, but each term can also be divided\nby x, so 4x is the factor common to both terms.\n10.8\n",
+        "character_count": 1220
+      },
+      {
+        "page_number": 28,
+        "text": "211\nMEP Pupil Text 10\n 4\n8\n4\n4\n2\n2\nx\nx\nx\nx\nx\n\u2212\n=\n\u00d7\n(\n) \u2212\n\u00d7\n(\n)\n \n=\n\u2212\n(\n)\n4\n2\nx x\n.\nExercises\n1.\nCopy and complete each of the following.\n(a)\n5\n10\n2\nx\nx\n+\n=\n+\n(\n)\n?\n(b)\n6\n8\n3\n4\nx\nx\n\u2212\n=\n\u2212\n(\n)\n?\n(c)\n15\n25\n3\n5\nx\nx\n+\n=\n+\n(\n)\n?\n(d)\n12\n8\n4\nx +\n=\n+\n(\n)\n?\n?\n(e)\n18\n6\n6\n\u2212\n=\n\u2212\n(\n)\nn\n?\n?\n(f)\n6\n21\n3\nx \u2212\n=\n\u2212\n(\n)\n?\n?\n(g)\n16\n24\n8\na +\n=\n+\n(\n)\n?\n?\n(h)\n33\n9\n3\nx \u2212\n=\n\u2212\n(\n)\n?\n?\n2.\nFactorise each of the following expressions.\n(a)\n6\n24\nx +\n(b)\n5\n20\nx \u2212\n(c)\n16\n8\n\u2212\nx\n(d)\n8\n12\nn +\n(e)\n12\n14\nx \u2212\n(f)\n3\n24\na \u2212\n(g)\n11\n66\nx \u2212\n(h)\n10\n25\n+\nx\n(i)\n100\n40\nx \u2212\n(j)\n50\n40\n\u2212\nx\n(k)\n6\n30\nx \u2212\n(l)\n5\n45\ny \u2212\n(m)\n12\n36\n+\nx\n(n)\n16\n32\nx +\n(o)\n27\n33\nx \u2212\n3.\nComplete a copy of each of the following.\n(a)\nx\nx\nx\n2\n1\n+\n=\n+\n(\n)\n?\n(b)\nx\nx\nx\n2\n2\n2\n+\n=\n+\n(\n)\n?\n(c)\n2\n5\n2\n5\n2\na\na\na\n\u2212\n=\n\u2212\n(\n)\n?\n(d)\n4\n2\nx\nx\nx\n+\n=\n+\n(\n)\n?\n?\n(e)\nx\nx\nx\n2\n4\n+\n=\n+\n(\n)\n?\n?\n(f)\nxa\nxb\nx\n+\n=\n+\n(\n)\n?\n?\n(g)\n6\n3\n3\n2\nx\nx\nx\n+\n=\n+\n(\n)\n?\n?\n(h)\n4\n2\n2\n2\nx\nax\nx\n\u2212\n=\n\u2212\n(\n)\n?\n?\n4.\nFactorise each of the following expressions.\n(a)\n5\n2\nx\nx\n+\n(b)\na\na\n2\n3\n+\n(c)\n5\n2\n2\nn\nn\n+\n(d)\n6\n3\n2\nn\nn\n+\n(e)\n5\n10\n2\nn\nn\n\u2212\n(f)\n3\n6\n2\nx\nx\n+\n(g)\n15\n30\n2\nx\nx\n+\n(h)\n14\n21\n2\nx\nx\n+\n(i)\n16\n24\n2\nx\nx\n+\n(j)\n30\n18\n2\nx\nx\n\u2212\n(k)\n5\n5\n2\n+\nn\n(l)\n10\n15\n2\nn \u2212\n(m)\n3\n9\n3\nn\nn\n+\n(n)\n9\n27\n2\nx\nx\n\u2212\n(o)\n10\n5\n3\n2\nx\nx\n\u2212\n5.\nFactorise each of the following expressions.\n(a)\nax\nax\n+\n2\n(b)\nbx\nc x\n+\n2\n(c)\n2\n4\npq\nrq\n\u2212\n",
+        "character_count": 1276
+      },
+      {
+        "page_number": 29,
+        "text": "212\nMEP Pupil Text 10\n(d)\n15\n5\n2\nxy\ny\n\u2212\n(e)\n16\n24\n2\npq\np\n+\n(f)\n6\n18\n2\nx\nxy\n+\n(g)\n3\n9\n2\np\npx\n\u2212\n(h)\n24\n56\n2\npx\nx\n+\n(i)\n16\n18\n2\n2\nx y\nxy\n\u2212\n6.\nFor each factorisation shown below, state whether it can be factorised further.\nIf the answer is yes, give the complete factorisation.\n(a)\n6\n4\n2 3\n2\n2\n2\nx\nx\nx\nx\n+\n=\n+\n(\n)\n(b)\n16\n8\n8\n2\n3\n2\n2\nx\nx\nx\nx\nx\n+\n=\n+\n(\n)\n(c)\n5\n60\n5\n12\n2\nx\nx\nx x\n\u2212\n=\n\u2212\n(\n)\n(d)\n3\n18\n3\n6\n2\n2\n2\nx y\nxy\nx xy\ny\n\u2212\n=\n\u2212\n(\n)\nFactorisation 2\nIt is also possible to factorise expressions such as\nx\nx\n2\n5\n6\n+\n+\nto obtain\nx\nx\n+\n(\n)\n+\n(\n)\n2\n3 .\nFirst consider what happens when two brackets are multiplied together.  For example,\nx\nx\nx\nx\n+\n(\n)\n+\n(\n) =\n+\n+\n2\n3\n5\n6\n2\n.\nNote that the 5 is given by  2 + 3 and the 6 is given by  2\n3\n\u00d7\n.\nWhen factorising a quadratic like this we need to find two numbers which, when added\ntogether, give one number and when multiplied together give the other number.\nFor example, when factorising\nx\nx\n2\n8\n12\n+\n+\nwe need two numbers which give 12 when multiplied and 8 when added.  These are, of\ncourse, 2 and 6.  Hence  x\nx\nx\nx\n2\n8\n12\n2\n6\n+\n+\n=\n+\n(\n)\n+\n(\n).\nWorked Example 1\nFactorise  x\nx\n2\n9\n20\n+\n+\n.\nSolution\nThe solution will be of the form\nx\na\nx\nb\n+\n(\n)\n+\n(\n)\nwhere  a\nb\n\u00d7\n= 20  and  a\nb\n+\n= 9.\nYou may immediately see that the two numbers are 4 and 5.  However, it will not always\nbe obvious.  A helpful approach is to write the possible pairs of numbers which multiply\nto give 20.\n10.9\n10.10\n",
+        "character_count": 1425
+      },
+      {
+        "page_number": 30,
+        "text": "213\nMEP Pupil Text 10\n      x\nx\nx\nx\n2\n9\n20\n+\n+\n=\n+\n(\n)\n+\n(\n)\n  1\n  20\n  2\n  10\n  4\n    5\nIt is then easy to see that only the third pair of numbers add up to  9.  So\n    x\nx\nx\nx\n2\n9\n20\n4\n5\n+\n+\n=\n+\n(\n)\n+\n(\n).\nWorked Example 2\nFactorise  x\nx\n2\n3\n10\n\u2212\n\u2212\n.\nSolution\nThe solution will be of the form  x\nx\n(\n)(\n).  Considering the ways of obtaining\n\u221210 by multiplication gives\n      x\nx\nx\nx\n2\n3\n10\n\u2212\n\u2212\n= (\n)(\n)\n\u22121\n+10\n\u22122\n +5\n+1\n\u221210\n+2\n \u22125\nOnly the fourth possibility gives a total of \u22123 when the two terms are added, so\n      x\nx\nx\nx\n2\n3\n10\n2\n5\n\u2212\n\u2212\n=\n+\n(\n)\n\u2212\n(\n).\nWorked Example 3\nFactorise  x\nx\n2\n5\n6\n\u2212\n+\n.\nSolution\nThe solution will be of the form  x\nx\n(\n)(\n).  Considering ways of obtaining +6\n(including negative factors since the x component has a negative coefficient) gives:\n        x\nx\nx\nx\n2\n5\n6\n\u2212\n+\n= (\n)(\n)\n+6\n  +1\n+3\n +2\n\u22126\n \u22121\n\u22123\n \u22122\nThe last of these gives a total of \u22125 when the two terms are added, so\n      x\nx\nx\nx\n2\n5\n6\n3\n2\n\u2212\n+\n=\n\u2212\n(\n)\n\u2212\n(\n).\n",
+        "character_count": 954
+      },
+      {
+        "page_number": 31,
+        "text": "214\nMEP Pupil Text 10\nNote that these will\nbe multiplied by the\n2 in the 2x term\nWorked Example 4\nFactorise  2\n3\n2\nx\nx\n\u2212\n\u2212\n.\nSolution\nThe solution will be of the form  2x\nx\n(\n)(\n) to give the 2\n2\nx  term.  Considering the\nways of obtaining \u22123 gives:\n        2\n3\n2\n2\nx\nx\nx\nx\n\u2212\n\u2212\n= (\n)(\n)\n \u20131\n  +3\n +1\n  \u22123\n+3\n   \u22121\n\u22123\n   +1\nFrom the last of these we can obtain the middle middle term,\n     \u2212\n\u00d7\n(\n) +\n\u00d7\n(\n) = \u2212\n+\n3\n1\n2\n3\n2\nx\nx\nx\nx\n   \n=\n\u2212x\nso\n        2\n3\n2\n3\n1\n2\nx\nx\nx\nx\n\u2212\n\u2212\n=\n\u2212\n(\n)\n+\n(\n).\nYou can check that these brackets multiply out to give the original expression.\nNote\nIt is often a good idea to check the answers you obtain by expanding the brackets.\nYou may remember that\na\nb a\nb\na\nb\n\u2212\n(\n)\n+\n(\n) =\n\u2212\n2\n2\nThis result is known as the difference between two squares and can be used to factorise\nsome expressions.\nWorked Example 5\nFactorise the following using the difference between two squares result.\n(a)\nx2\n9\n\u2212\n(b)\n4\n25\n2\nx \u2212\n.\nSolution\n(a)\nx\nx\n2\n2\n2\n9\n3\n\u2212\n=\n\u2212\n(b)\n4\n25\n2\n5\n2\n2\n2\nx\nx\n\u2212\n= (\n) \u2212\n=\n+\n(\n)\n\u2212\n(\n)\nx\nx\n3\n3\n=\n\u2212\n(\n)\n+\n(\n)\n2\n5 2\n5\nx\nx\n10.10\n",
+        "character_count": 1054
+      },
+      {
+        "page_number": 32,
+        "text": "215\nMEP Pupil Text 10\nExercises\n1.\nFactorise each of the following expressions.\n(a)\nx\nx\n2\n4\n4\n+\n+\n(b)\nx\nx\n2\n7\n12\n+\n+\n(c)\nx\nx\n2\n6\n8\n+\n+\n(d)\nx\nx\n2\n7\n6\n+\n+\n(e)\nx\nx\n2\n10\n16\n+\n+\n(f)\nx\nx\n2\n4\n3\n+\n+\n(g)\nx\nx\n2\n8\n15\n+\n+\n(h)\nx\nx\n2\n3\n2\n+\n+\n(i)\nx\nx\n2\n5\n4\n+\n+\n(j)\nx\nx\n2\n11\n24\n+\n+\n(k)\nx\nx\n2\n12\n11\n+\n+\n(l)\nx\nx\n2\n15\n56\n+\n+\n(m)\nx\nx\n2\n6\n9\n+\n+\n(n)\nx\nx\n2\n7\n10\n+\n+\n(o)\nx\nx\n2\n9\n14\n+\n+\n(p)\nx\nx\n2\n11\n30\n+\n+\n(q)\nx\nx\n2\n9\n8\n+\n+\n(r)\nx\nx\n2\n12\n32\n+\n+\n2.\nFactorise the following expressions.\n(a)\nx\nx\n2\n2\n+\n\u2212\n(b)\nx\nx\n2\n12\n\u2212\n\u2212\n(c)\nx\nx\n2\n3\n10\n\u2212\n\u2212\n(d)\nx\nx\n2\n4\n5\n+\n\u2212\n(e)\nx\nx\n2\n5\n14\n\u2212\n\u2212\n(f)\nx\nx\n2\n2\n8\n\u2212\n\u2212\n(g)\nx\nx\n2\n2\n15\n+\n\u2212\n(h)\nx\nx\n2\n3\n2\n\u2212\n+\n(i)\nx\nx\n2\n9\n20\n\u2212\n+\n(j)\nx\nx\n2\n10\n21\n\u2212\n+\n(k)\nx\nx\n2\n9\n14\n\u2212\n+\n(l)\nx\nx\n2\n7\n10\n\u2212\n+\n(m)\nx\nx\n2\n6\n16\n\u2212\n\u2212\n(n)\nx\nx\n2\n17\n72\n\u2212\n+\n(o)\nx\nx\n2\n5\n24\n\u2212\n\u2212\n3.\nFactorise each of the following using the difference of two squares result.\n(a)\nx2\n1\n\u2212\n(b)\nx2\n16\n\u2212\n(c)\nx2\n81\n\u2212\n(d)\n9\n4\n2\nx \u2212\n(e)\n16\n36\n2\nx \u2212\n(f)\n4\n100\n2\nx \u2212\n(g)\nx4\n100\n\u2212\n(h)\nx4\n4\n\u2212\n(i)\n4\n9\n4\nx \u2212\n4.\nComplete each of the following factorisations.\n(a)\n2\n3\n1\n2\n1\n2\nx\nx\nx\nx\n+\n+\n=\n+\n(\n)\n+\n(\n)?\n(b)\n3\n7\n2\n3\n1\n2\nx\nx\nx\nx\n+\n+\n=\n+\n(\n)\n+\n(\n)?\n(c)\n2\n5\n3\n2\n1\n2\nx\nx\nx\nx\n+\n+\n=\n+\n(\n)\n+\n(\n)\n?\n(d)\n3\n14\n8\n3\n4\n2\nx\nx\nx\nx\n+\n+\n=\n+\n(\n)\n+\n(\n)\n?\n(e)\n2\n9\n5\n2\n1\n2\nx\nx\nx\nx\n+\n\u2212\n=\n\u2212\n(\n)\n+\n(\n)?\n(f)\n4\n5\n6\n4\n2\nx\nx\nx\nx\n\u2212\n\u2212\n=\n+\n(\n)\n\u2212\n(\n)\n?\n?\n(g)\n3\n10\n3\n2\nx\nx\nx\nx\n+\n\u2212\n=\n\u2212\n(\n)\n+\n(\n)\n?\n?\n(h)\n3\n23\n14\n3\n2\nx\nx\nx\nx\n\u2212\n+\n=\n\u2212\n(\n)\n\u2212\n(\n)\n?\n?\n(i)\n6\n17\n5\n3\n2\n2\nx\nx\nx\nx\n+\n+\n=\n+\n(\n)\n+\n(\n)\n?\n?\n(j)\n8\n6\n1\n4\n2\n2\nx\nx\nx\nx\n\u2212\n+\n=\n\u2212\n(\n)\n\u2212\n(\n)\n?\n?\n",
+        "character_count": 1431
+      },
+      {
+        "page_number": 33,
+        "text": "216\nMEP Pupil Text 10\n5.\nFactorise each of the following expressions.\n(a)\n3\n2\n1\n2\nx\nx\n\u2212\n\u2212\n(b)\n3\n4\n1\n2\nx\nx\n+\n+\n(c)\n2\n5\n2\n2\nx\nx\n+\n+\n(d)\n3\n8\n4\n2\nx\nx\n+\n+\n(e)\n3\n8\n3\n2\nx\nx\n+\n\u2212\n(f)\n4\n11\n3\n2\nx\nx\n\u2212\n\u2212\n(g)\n5\n3\n2\n2\nx\nx\n+\n\u2212\n(h)\n3\n8\n4\n2\nx\nx\n\u2212\n+\n(i)\n5\n13\n6\n2\nx\nx\n+\n\u2212\n(j)\n6\n5\n1\n2\nx\nx\n+\n+\n(k)\n6\n7\n2\n2\nx\nx\n\u2212\n+\n(l)\n10\n3\n1\n2\nx\nx\n\u2212\n\u2212\n(m)\n8\n10\n3\n2\nx\nx\n+\n\u2212\n(n)\n6\n19\n7\n2\nx\nx\n+\n\u2212\n(o)\n6\n17\n12\n2\nx\nx\n\u2212\n+\n6.\n(a)\nExpand  2\n1\n4\nx\nx\n+\n(\n)\n+\n(\n).\n(b)\nFactorise completely  4\n6\n2\nx\nx\n\u2212\n.\n(LON)\n7.\n(a)\nFactorise completely  12\n15\n2\n2\np q\npq\n\u2212\n.\n(b)\nExpand and simplify  2\n3\n5\nx\nx\n\u2212\n(\n)\n+\n(\n).\n(c)\nThe cost, C pence, of printing n party invitations is given by\nC\nn\n=\n+\n120\n40 .\nFind a formula for n in terms of C.\n(MEG)\nSolving Quadratic Equations\nby Factorisation\nEquations of the form\nax\nbx\nc\n2\n0\n+\n+\n=\nare called quadratic equations.  Many can be solved using factorisation.  If a quadratic\nequation can be written as\nx\na\nx\nb\n\u2212\n(\n)\n\u2212\n(\n) = 0,\nthen the equation will be satisfied if either bracket is equal to zero.  That is,\nx\na\n\u2212\n(\n) = 0    or   x\nb\n\u2212\n(\n) = 0.\nSo there would be two possible solutions,  x\na\n=\n and  x\nb\n=\n.\nWorked Example 1\nSolve  x\nx\n2\n6\n5\n0\n+\n+\n=\n.\nSolution\nFactorising gives\nx\nx\n+\n(\n)\n+\n(\n) =\n5\n1\n0.\n10.10\n10.11\n",
+        "character_count": 1201
+      },
+      {
+        "page_number": 34,
+        "text": "217\nMEP Pupil Text 10\nSo\nx +\n=\n5\n0     or     x +\n=\n1\n0,\ntherefore\nx = \u22125     or     x = \u22121.\nWorked Example 2\nSolve  x\nx\n2\n5\n14\n0\n+\n\u2212\n=\n.\nSolution\nFactorising gives\nx\nx\n\u2212\n(\n)\n+\n(\n) =\n2\n7\n0.\nSo\n x \u2212\n=\n2\n0     or     x +\n=\n7\n0,\ntherefore\n   x = 2     or     x = \u22127.\nWorked Example 3\nSolve  x\nx\n2\n12\n0\n\u2212\n=\n.\nSolution\nFactorising gives\nx x \u2212\n(\n) =\n12\n0.\nSo\n  x = 0      or     x \u2212\n=\n12\n0,\ntherefore\n  x = 0      or     x = 12.\nWorked Example 4\nSolve\n4\n81\n0\n2\nx \u2212\n=\n.\nSolution\nFactorising gives\n2\n9 2\n9\n0\nx\nx\n\u2212\n(\n)\n+\n(\n) =\n.\nSo\n   2\n9\n0\nx \u2212\n=\n      or     2\n9\n0\nx +\n=\n,\ntherefore\nx\n= 9\n2      or     x\n= \u22129\n2\n= 4 1\n2\n       \n= \u22124 1\n2 .\n",
+        "character_count": 631
+      },
+      {
+        "page_number": 35,
+        "text": "218\nMEP Pupil Text 10\nWorked Example 5\nSolve  x\nx\n2\n4\n4\n0\n\u2212\n+\n=\n.\nSolution\nFactorising gives\nx\nx\n\u2212\n(\n)\n\u2212\n(\n) =\n2\n2\n0 .\nSo\n     x \u2212\n=\n2\n0      or     x \u2212\n=\n2\n0,\ntherefore\n  x = 2      or     x = 2.\nThis type of solution is often called a repeated solution.\nMost of these examples have had two solutions, but the last example had only one\nsolution.\nThe graphs below show\n       y\nx\nx\n=\n+\n+\n2\n6\n5\n       and\n  y\nx\nx\n=\n\u2212\n+\n2\n4\n4.\nThe curve crosses the x-axis at\nThe curve touches the x-axis at\n     x = \u22125  and  x = \u22121.\nx = 2.\nThese are the solutions of\nThis is the solution of\n      x\nx\n2\n6\n5\n0\n+\n+\n=\n.\nx\nx\n2\n4\n4\n0\n\u2212\n+\n=\n.\nExercises\n1.\nSolve the following quadratic equations.\n(a)\nx\nx\n2\n12\n0\n+\n\u2212\n=\n(b)\nx\nx\n2\n2\n15\n0\n\u2212\n\u2212\n=\n(c)\nx\nx\n2\n4\n12\n0\n+\n\u2212\n=\n(d)\nx\nx\n2\n6\n0\n+\n=\n(e)\n3\n4\n0\n2\nx\nx\n\u2212\n=\n(f)\n4\n9\n0\n2\nx\nx\n\u2212\n=\n(g)\nx2\n9\n0\n\u2212\n=\n(h)\nx2\n49\n0\n\u2212\n=\n(i)\n9\n64\n0\n2\nx \u2212\n=\n(j)\nx\nx\n2\n8\n16\n0\n\u2212\n+\n=\n(k)\nx\nx\n2\n10\n25\n0\n+\n+\n=\n(l)\nx\nx\n2\n3\n18\n0\n\u2212\n\u2212\n=\n(m)\nx\nx\n2\n11\n28\n0\n\u2212\n+\n=\n(n)\nx\nx\n2\n30\n0\n+\n\u2212\n=\n(o)\nx\nx\n2\n14\n40\n0\n\u2212\n+\n=\n(p)\n2\n7\n3\n0\n2\nx\nx\n+\n+\n=\n(q)\n2\n5\n12\n0\n2\nx\nx\n+\n\u2212\n=\n(r)\n3\n7\n4\n0\n2\nx\nx\n\u2212\n+\n=\n(s)\n4\n3\n0\n2\nx\nx\n+\n\u2212\n=\n(t)\n2\n5\n3\n0\n2\nx\nx\n+\n\u2212\n=\n(u)\n2\n19\n35\n0\n2\nx\nx\n\u2212\n+\n=\n10.11\ny\nx\n\u22121\n\u22125\n2\nx\ny\n",
+        "character_count": 1155
+      },
+      {
+        "page_number": 36,
+        "text": "219\nMEP Pupil Text 10\n2.\nThe equations of a number of curves are given below.  Find where each curve\ncrosses the x-axis and use this to draw a sketch of the curve.\n(a)\ny\nx\nx\n=\n+\n+\n2\n6\n9\n(b)\ny\nx\n=\n\u2212\n2\n4\n(c)\ny\nx\nx\n=\n\u2212\n2\n3\n2\n(d)\ny\nx\nx\n=\n+\n\u2212\n2\n12\n3.\nUse the difference of two squares result to solve the following equations.\n(a)\nx4\n16\n0\n\u2212\n=\n(b)\nx4\n625\n0\n\u2212\n=\n(c)\nx6\n1\n0\n\u2212\n=\n4.\nFind the lengths of each side of the rectangles given below.\n(a)\n(b)\n(c)\n(d)\n5.\nThe height of a ball thrown straight up from the ground into the air at time, t, is\ngiven by\nh\nt\nt\n=\n\u2212\n8\n10 2.\nFind the time it takes for the ball to go up and fall back to ground level.\n6.\nThe diagram represents a greenhouse.\nThe volume of the greenhouse is given by\nthe formula\nV\nLW E\nR\n=\n+\n(\n)\n1\n2\n.\n(a)\nMake L the subject of the formula, giving\nyour answer as simply as possible.\nThe surface area, A, of the greenhouse, is given by the formula\nA\nGL\nEL\nW E\nR\n=\n+\n+\n+\n(\n)\n2\n2\n,\nwhere  V = 500,  A = 300,  E = 6  and  G = 4.\n(b)\nBy substituting these values into the equations for V and A show that L\nsatisfies the equation\nL\nL\n2\n15\n50\n0\n\u2212\n+\n=\n.\nMake the steps in your working clear.\n(c)\nSolve the equation  L\nL\n2\n15\n50\n0\n\u2212\n+\n=\n.\n(LON)\nArea  =  45\n2\n1\nx +\n2\n3\nx \u2212\nx + 6\nArea  = 224\n2x\nx \u22122\nArea  =  21\nx + 2\nArea  = 32\nx\nx + 4\nG\nE\nR\nW\nL\n",
+        "character_count": 1290
+      },
+      {
+        "page_number": 37,
+        "text": "220\nMEP Pupil Text 10\nSolving Quadratic Equations\nUsing the Formula\nQuadratic equations of the form\nax\nbx\nc\n2\n0\n+\n+\n=\ncan be solved using the formula\nx\nb\nb\nac\na\n= \u2212\n\u00b1\n\u2212\n2\n4\n2\nThis formula is particularly useful for quadratics which cannot be factorised.  To prove\nthis important result requires some quite complex analysis, using a technique called\ncompleting the square, which will be discussed again in Section 10.14.\nProof\nThe equation  ax\nbx\nc\n2\n0\n+\n+\n=\n is first divided by the non-zero constant, a, giving\n      x\nb\na x\nc\na\n2\n0\n+\n+\n=\n.\nNote that\n         x\nb\na\nx\nb\na\nx\nb\na\n+\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\n=\n+\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\n+\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\n2\n2\n2\n2\n         \n=\n+\n+\n+ \uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\nx\nbx\na\nbx\na\nb\na\n2\n2\n2\n2\n2\n  (expanding)\n         \n=\n+\n+ \uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\nx\nbx\na\nb\na\n2\n2\n2\n2\n2\n(adding like terms)\n         \n=\n+\n+ \uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\nx\nbx\na\nb\na\n2\n2\n2\n.\n(simplifying)\nThe first two terms are identical to the first two terms in our equation, so you can re-write\nthe equation as\nx\nb\na\nb\na\nc\na\n+\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\n\u2212\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8+\n=\n2\n2\n0\n2\n2\nx\nb\na\nb\na\nc\na\n+\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\n= \uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\u2212\n2\n2\n2\n2\n=\n\u2212\nb\na\nc\na\n2\n2\n4\ni.e.\nx\nb\na\nb\nac\na\n+\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\n=\n\u2212\n2\n4\n4\n2\n2\n2\n.\n10.12\n",
+        "character_count": 1076
+      },
+      {
+        "page_number": 38,
+        "text": "221\nMEP Pupil Text 10\nTaking the square root of both sides of the equation gives\n    x\nb\na\nb\nac\na\n+\n= \u00b1\n\u2212\n2\n4\n4\n2\n2\n \n= \u00b1\n\u2212\nb\nac\na\n2\n4\n2\n.\nHence\n   x\nb\na\nb\nac\na\n= \u2212\n\u00b1\n\u2212\n2\n4\n2\n2\nor\n   x\nb\nb\nac\na\n= \u2212\n\u00b1\n\u2212\n2\n4\n2\n,\nas required.\nWorked Example 1\nSolve\nx\nx\n2\n6\n8\n0\n+\n\u2212\n=\ngiving the solution correct to 2 decimal places.\nSolution\nHere  a = 1,  b = 6  and  c = \u22128.  These values can be substituted into\nx\nb\nb\nac\na\n= \u2212\n\u00b1\n\u2212\n2\n4\n2\nto give\nx =\n\u2212\n\u00b1\n\u2212\n\u00d7\n\u00d7 \u2212\n(\n)\n\u00d7\n6\n6\n4\n1\n8\n2\n1\n2\n= \u2212\n\u00b1\n6\n68\n2\n= \u2212\n+\n6\n68\n2\n   or\n\u2212\n\u2212\n6\n68\n2\n= 1 12\n.\n   or\n\u22127 12\n.\n(to 2 d.p.)\nWorked Example 2\nSolve the quadratic equation\n4\n12\n9\n0\n2\nx\nx\n\u2212\n+\n=\n.\nSolution\nHere  a = 4,  b = \u221212   and  c = 9.  Substituting the values into\n",
+        "character_count": 687
+      },
+      {
+        "page_number": 39,
+        "text": "222\nMEP Pupil Text 10\nx\nb\nb\nac\na\n= \u2212\n\u00b1\n\u2212\n2\n4\n2\ngives\nx =\n\u00b1\n\u2212\n(\n) \u2212\n\u00d7\n\u00d7\n(\n)\n\u00d7\n12\n12\n4\n4\n9\n2\n4\n2\n=\n\u00b1\n\u2212\n12\n144\n144\n8\n=\n\u00b1\n12\n0\n8\n= 12\n8\n= 1 5. .\nWorked Example 3\nSolve the quadratic equation\nx\nx\n2\n5\n0\n+\n+\n=\n.\nSolution\nHere  a = 1,  b = 1  and  c = 5.  Substituting the values into the formula gives\nx =\n\u2212\n\u00b1\n\u2212\n\u00d7\n\u00d7\n(\n)\n\u00d7\n1\n1\n4\n1\n5\n2\n1\n2\n= \u2212\n\u00b1\n\u2212\n1\n1\n20\n2\n= \u2212\n\u00b1\n\u2212\n1\n19\n2\n.\nAs it is not possible to find  \n\u221219 , this equation has no solutions.\nThese three examples illustrate that a quadratic equation can have 2, 1 or 0 solutions.\nThe graphs below illustrate these graphically and show how the number of solutions\ndepends on the sign of  b\nac\n2\n4\n\u2212\n(\n) which is part of the quadratic formula.\nTwo solutions\n One solution\n         No solutions\nb\nac\n2\n4\n0\n\u2212\n>\nb\nac\n2\n4\n0\n\u2212\n=\n      b\nac\n2\n4\n0\n\u2212\n<\n      (Worked Example 1)\n      (Worked Example 2)\n   (Worked Example 3)\n10.12\nxx\ny\nx\ny\nx\nx\nx\ny\n",
+        "character_count": 881
+      },
+      {
+        "page_number": 40,
+        "text": "223\nMEP Pupil Text 10\nExercises\n1.\nUse the quadratic equation formula to find the solutions, where they exist, of each\nof the following equations.  Give answers to 2 decimal places.\n(a)\n4\n7\n3\n0\n2\nx\nx\n\u2212\n+\n=\n(b)\n2\n10\n0\n2\nx\nx\n+\n\u2212\n=\n(c)     9\n6\n11\n0\n2\nx\nx\n\u2212\n\u2212\n=\n(d)\n3\n5\n7\n0\n2\nx\nx\n\u2212\n\u2212\n=\n(e)\nx\nx\n2\n8\n0\n+\n\u2212\n=\n(f)\n4\n6\n9\n0\n2\nx\nx\n\u2212\n\u2212\n=\n(g)\n2\n17\n9\n0\n2\nx\nx\n+\n\u2212\n=\n(h)\nx\nx\n2\n14\n0\n\u2212\n=\n(i)\nx\nx\n2\n2\n10\n0\n+\n\u2212\n=\n(j)\n3\n8\n1\n0\n2\nx\nx\n+\n\u2212\n=\n(k)\nx2\n6\n0\n+\n=\n(l)\n2\n8\n3\n0\n2\nx\nx\n\u2212\n+\n=\n(m)\n4\n5\n3\n0\n2\nx\nx\n\u2212\n\u2212\n=\n(n)\n5\n4\n12\n0\n2\nx\nx\n\u2212\n+\n=\n(o)\nx\nx\n2\n6\n5\n0\n\u2212\n\u2212\n=\n2.\nA ticket printing and cutting machine cuts rectangular cards which are 2 cm longer\nthan they are wide.\n(a)\nIf x is the width of a ticket, find an expression for the area of the ticket.\n(b)\nFind the size of a ticket with an area of  10\n2\ncm .\n3.\nA window manufacturer makes a range of windows for which the height is 0.5 m\ngreater than the width.\nFind the width and height of a window with an area of 2\n2\nm .\n4.\nThe height of a stone launched from a catapult is given by\nh\nt\nt\n=\n\u2212\n20\n9 8 2\n.\nwhere t is the time after the moment of launching.\n(a)\nFind when the stone hits the ground.\n(b)\nFor how long is the stone more than 5 m above the ground?\n(c)\nIs the stone ever more than 12 m above ground level?\n(d)\nIf m is the maximum height of the stone, write down a quadratic equation\nwhich involves m.  Explain why this equation has only one solution and use\nthis fact to find the value of m, to 2 decimal places.\n5.\nThe equation below is used to find the maximum amount, x, which a bungee cord\nstretches during a bungee jump:\nmgx\nmgl\nkx\n+\n\u2212\n=\n1\n2\n2\n0,\nwhere\nm = mass of bungee jumper\nl\n=\nlength of rope when not stretched\n(10 m)\nk\n=\nstiffness constant\n120\n1\nNm\u2212\n(\n)\ng =\nacceleration due to gravity\n10\n2\nms \u2212\n(\n)\n(a)\nFind the maximum amount that the cord stretches for a bungee jumper of\nmass 60 kg.\n",
+        "character_count": 1825
+      },
+      {
+        "page_number": 41,
+        "text": "224\nMEP Pupil Text 10\n(b)\nHow much more would the cord stretch for a person of mass 70 kg?\n6.\nSolve the equation  x\nx\n2\n5\n7\n=\n+\n,  giving your answers correct to 3 significant\nfigures.\n(NEAB)\nAlgebraic Fractions\nSome algebraic fractions can be simplified if the numerator and denominator are\nfactorised.\nWorked Example 1\nSimplify\nx\nx\nx\nx\n2\n2\n2\n15\n12\n+\n\u2212\n+\n\u2212\n.\nSolution\nBoth the top and bottom of the fraction can be factorised to give\n      x\nx\nx\nx\nx\nx\nx\nx\n2\n2\n2\n15\n12\n5\n3\n4\n3\n+\n\u2212\n+\n\u2212\n=\n+\n(\n)\n\u2212\n(\n)\n+\n(\n)\n\u2212\n(\n)\n.\nThe term  x \u2212\n(\n)\n3   appears as a factor on both the top and bottom of the fraction so it can\nbe cancelled to give\n   x\nx\nx\nx\nx\nx\n+\n(\n)\n\u2212\n(\n)\n+\n(\n)\n\u2212\n(\n)\n=\n+\n+\n5\n3\n4\n3\n5\n4\nNo further simplification is possible.\nWorked Example 2\nSimplify\n   \nx\nx\nx\nx\n\u2212\n\u00d7\n\u2212\n1\n1\n2\n3\n.\nSolution\nFirst multiply together the fractions to give\n \nx\nx\nx\nx\nx x\nx\nx\n\u2212\n\u00d7\n\u2212\n=\n\u2212\n(\n)\n\u2212\n(\n)\n1\n1\n1\n1\n2\n3\n2\n3\n.\nThe bracket  x2\n1\n\u2212\n(\n)  can be factorised using the difference of two squares to give\n \nx x\nx\nx\nx x\nx\nx\nx\n2\n3\n3\n1\n1\n1\n1\n1\n\u2212\n(\n)\n\u2212\n(\n)\n=\n+\n(\n)\n\u2212\n(\n)\n\u2212\n(\n)\n.\n10.13\n",
+        "character_count": 1053
+      },
+      {
+        "page_number": 42,
+        "text": "225\nMEP Pupil Text 10\nCancellation can then take place to give\n x x\nx\nx\nx\nx\nx\n+\n(\n)\n\u2212\n(\n)\n\u2212\n(\n)\n=\n+\n1\n1\n1\n1\n3\n2\nNo further simplification is possible.\nWorked Example 3\nSimplify\n   x\nx\nx\nx\n+\n\u00f7\n\u2212\n1\n1\n2\n2\n.\nSolution\nRecall from working with fractions that\n    a\nb\nc\nd\na\nb\nd\nc\n\u00f7\n=\n\u00d7\n.\nSo\nx\nx\nx\nx\nx\nx\nx\nx\n+\n\u00f7\n\u2212\n=\n+\n\u00d7\n\u2212\n1\n1\n1\n1\n2\n2\n2\n2\n    \n=\n+\n\u2212\n(\n)\nx\nx x\n1\n1\n2\n \n=\n+\n+\n(\n)\n\u2212\n(\n)\nx\nx x\nx\n1\n1\n1\n \n=\n\u2212\n(\n)\n1\n1\nx x\n.\nWorked Example 4\nSimplify\n   \nx\nx\nx\nx\n+\n+\n+\n2\n2\n1.\nSolution\nAlgebraic fractions are added in the same way as ordinary fractions, by using the lowest\ncommon denominator.  In this case it will be  x\nx\n+\n(\n)\n+\n(\n)\n2\n1 .\n \nx\nx\nx\nx\nx x\nx\nx\nx x\nx\nx\n+\n+\n+\n=\n+\n(\n)\n+\n(\n)\n+\n(\n)\n+\n+\n(\n)\n+\n(\n)\n+\n(\n)\n2\n2\n1\n1\n2\n1\n2\n2\n2\n1\n \n=\n+\n+\n+\n+\n(\n)\n+\n(\n)\nx\nx\nx\nx\nx\nx\n2\n2\n2\n4\n2\n1\n1\n1\nx2\n1\n1\nx\n1\n1\n",
+        "character_count": 781
+      },
+      {
+        "page_number": 43,
+        "text": "226\nMEP Pupil Text 10\n \n=\n+\n+\n(\n)\n+\n(\n)\n3\n5\n2\n1\n2\nx\nx\nx\nx\n=\n+\n(\n)\n+\n(\n)\n+\n(\n)\nx\nx\nx\nx\n3\n5\n2\n1\nNo further simplification is possible.\nExercises\n1.\nSimplify each of the following expressions.\n(a)\nx\nx\n6\n4\n(b)\nx x\nx\nx\n+\n(\n)\n\u2212\n(\n)\n2\n2\n2\n(c)\nx\nx\nx\nx\n+\n(\n)\n\u2212\n(\n)\n\u2212\n(\n)\n+\n(\n)\n2\n3\n2\n2\n(d)\nx\nx\nx x\nx\n\u2212\n(\n)\n\u2212\n(\n)\n\u2212\n(\n)\n+\n(\n)\n4 2\n1\n4\n1\n(e)\nx\nx\nx x\n3\n6\n6\n\u2212\n(\n)\n+\n(\n)\n(f)\nx x\nx\nx\nx\nx\n\u2212\n(\n)\n+\n(\n)\n\u2212\n(\n)\n+\n(\n)\n2\n3\n2\n3\n2\n(g)\n2\n1 5\n3\n2\n1\nx\nx\nx\nx\n+\n(\n)\n\u2212\n(\n)\n+\n(\n)\n(h)\n2\n1\n2\n7\n7\n2\nx\nx\nx\nx x\nx\n+\n(\n)\n\u2212\n(\n)\n+\n(\n)\n+\n(\n)\n\u2212\n(\n)\n(i)\nx\nx\nx\nx\nx\nx\n+\n(\n)\n\u2212\n(\n)\n+\n(\n)\n+\n(\n)\n+\n(\n)\n+\n(\n)\n1\n3\n4\n4\n2\n1\n2.\nSimplify each of the following expressions.\n(a)\nx\nx\nx\nx\n2\n3\n2\n+\n+\n(b)\nx\nx\nx\n2\n2\n2\n+\n+\n(c)\n4\n6\n2\n3\n2\nx\nx\nx\n+\n+\n(d)\nx\nx\nx x\n4\n2\n5\n5\n+\n+\n(\n)\n(e)\nx\nx\nx\n3\n2\n\u2212\n(f)\nx\nx\nx x\n6\n3\n1\n\u2212\n\u2212\n(\n)\n(g)\nx\nx\nx\n2\n2\n1\n+\n\u2212\n(h)\nx\nx\nx\nx\n3\n2\n4\n3\n4\n\u2212\n\u2212\n\u2212\n(i)\nx\nx\nx\n2\n2\n9\n4\n3\n\u2212\n+\n+\n(j)\nx\nx\nx\nx\n3\n2\n16\n6\n8\n\u2212\n\u2212\n+\n(k)\nx\nx\nx\nx\n2\n2\n7\n10\n6\n+\n+\n\u2212\n\u2212\n(l)\nx\nx\nx\nx\nx\n3\n2\n2\n6\n8\n3\n4\n\u2212\n+\n\u2212\n\u2212\n(m)\nx\nx\nx\nx\nx\nx\n3\n2\n4\n3\n2\n2\n6\n+\n\u2212\n\u2212\n\u2212\n(n)\nx\nx\nx\nx\n3\n2\n9\n8\n\u2212\n+\n+\n(o)\nx\nx\nx\nx\nx\n2\n3\n2\n7\n10\n4\n12\n\u2212\n+\n+\n\u2212\n(p)\n10\n27\n18\n2\n3\n2\n2\nx\nx\nx\nx\n\u2212\n+\n\u2212\n\u2212\n(q)\n5\n23\n10\n2\n35\n2\n2\nx\nx\nx\nx\n+\n\u2212\n\u2212\n\u2212\n(r)\n3\n5\n2\n5\n9\n2\n2\n2\nx\nx\nx\nx\n\u2212\n\u2212\n\u2212\n\u2212\n(s)\n2\n3\n35\n3\n17\n10\n2\n2\nx\nx\nx\nx\n+\n\u2212\n+\n+\n(t)\n12\n5\n3\n15\n2\n1\n2\n2\nx\nx\nx\nx\n\u2212\n\u2212\n+\n\u2212\n(u)\n9\n4\n12\n6\n3\n2\nx\nx\nx\nx\n\u2212\n+\n\u2212\n10.13\n",
+        "character_count": 1247
+      },
+      {
+        "page_number": 44,
+        "text": "227\nMEP Pupil Text 10\n3.\nSimplify each of the following expressions.\n(a)\nx\nx\nx\nx\n+\n+\n\u00d7\n+\n1\n4\n1\n(b)\n1\n1\n1\n2\n2\nx\nx\nx\n+\n(\n)\n\u00d7\n\u2212\n(c)\nx\nx\nx\nx\nx\n2\n5\n6\n2\n3\n+\n+\n\u00d7\n+\n+\n(d)\n3\n4\n2\n2\n3\nx\nx\nx\nx\n\u2212\n\u00d7\n\u2212\n(e)\nx\nx\nx\nx\n+\n\u00f7\n+\n3\n3\n2\n(f)\nx\nx\nx\nx\n+\n(\n)\n\u00f7\n+\n3\n3\n2\n2\n(g)\nx\nx\nx\nx\nx\nx\n3\n2\n2\n6\n5\n6\n+\n\u00f7\n+\n+\n\u2212\n(h)\nx\nx\nx\nx\nx\nx\n3\n2\n2\n4\n3\n4\n\u2212\n+\n\u00f7\n+\n\u2212\n(i)\nx\nx\nx\nx\nx\nx\n2\n2\n5\n6\n4\n2\n8\n3\n+\n+\n\u2212\n\u00f7\n\u2212\n\u2212\n+\n4.\nExpress each of the following as a single fraction, simplifying if possible.\n(a)\n1\n2\n2\n5\nx\nx\n+\n+\n\u2212\n(b)\n4\n2\n5\n1\nx\nx\n+\n\u2212\n\u2212\n(c)\n1\n1\n1\n1\n2\nx\nx\n\u2212\n+\n+\n(d)\n3\n2\n5\n2\nx\nx\n+\n+\n+\n(e)\n1\n9\n1\n3\n2\nx\nx\n\u2212\n+\n\u2212\n(f)\n4\n3\n5\n6\nx\nx\n\u2212\n+\n\u2212\n(g)\nx\nx\nx\nx\n\u2212\n+\n+\n4\n2\n(h)\nx\nx\nx\nx\n2\n1\n1\n+\n+\n+\n(i)\nx\nx\nx\n\u2212\n+\n\u2212\n6\n4\n2\n1\n(j)\n3\n2\n2\n6\nx\nx\nx\nx\n+\n+\n\u2212\n(k)\nx\nx\nx\nx\n2\n2\n1\n1\n\u2212\n+\n+\n(l)\nx\nx\nx\nx\n+\n+\n+\n1\n7\n2\n(m)\n3\n6\n2\n7\nx\nx\nx\nx\n+\n+\n+\n(n)\nx\nx\nx\nx\n\u2212\n+\n+\n+\n+\n1\n2\n7\n3\n(o)\nx\nx\nx\nx\n\u2212\n+\n+\n\u2212\n+\n3\n2\n7\n1\nCompleting the Square\nCompleting the square is a technique which can be used to solve quadratic equations that\ndo not factorise.  It can also be useful when finding the minimum or maximum value of a\nquadratic.\nA general quadratic  ax\nbx\nc\n2 +\n+\n  is written in the form  a x\np\nq\n+\n(\n) +\n2\n  when\ncompleting the square.  You need to find the constants p and q so that the two expressions\nare identical.\nWorked Example 1\nComplete the square for  x\nx\n2\n10\n2\n+\n+\n.\n10.14\n",
+        "character_count": 1278
+      },
+      {
+        "page_number": 45,
+        "text": "228\nMEP Pupil Text 10\nSolution\nFirst consider the  x\nx\n2\n10\n+\n.  These terms can be obtained by expanding  x +\n(\n)\n5\n2.\nBut\n     x\nx\nx\n+\n(\n)\n=\n+\n+\n5\n10\n25\n2\n2\n,\nso\n   x\nx\nx\n2\n2\n10\n5\n25\n+\n=\n+\n(\n) \u2212\n.\nTherefore\n       x\nx\nx\n2\n2\n10\n2\n5\n25\n2\n+\n+\n=\n+\n(\n) \u2212\n+\n       \n=\n+\n(\n) \u2212\nx\n5\n23\n2\n.\nWorked Example 2\nComplete the square for  x\nx\n2\n6\n8\n+\n\u2212\n.\nSolution\nTo obtain  x\nx\n2\n6\n+\n requires expanding  x +\n(\n)\n3\n2.\nBut\n     x\nx\nx\n+\n(\n)\n=\n+\n+\n3\n6\n9\n2\n2\n,\nso\n    x\nx\nx\n2\n2\n6\n3\n9\n+\n=\n+\n(\n) \u2212\n.\nTherefore\n         x\nx\nx\n2\n2\n6\n8\n3\n9\n8\n+\n\u2212\n=\n+\n(\n) \u2212\n\u2212\n         \n=\n+\n(\n) \u2212\nx\n3\n17\n2\n.\nNote\nWhen completing the square for  x\nbx\nc\n2 +\n+\n,  the result is\n         x\nbx\nc\nx\nb\nb\nc\n2\n2\n2\n2\n4\n+\n+\n=\n+\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\u2212\n+\nWorked Example 3\nComplete the square for  3\n6\n7\n2\nx\nx\n+\n+\n.\nSolution\nAs a first step, the quadratic can be rearranged as shown below.\n      3\n6\n7\n3\n2\n7\n2\n2\nx\nx\nx\nx\n+\n+\n=\n+\n(\n) +\n.\nThen note that\n    x\nx\nx\n2\n2\n2\n1\n1\n+\n=\n+\n(\n) \u2212,\nso\n   3\n2\n7\n3\n1\n1\n7\n2\n2\nx\nx\nx\n+\n(\n) +\n=\n+\n(\n) \u2212\n[\n] +\n   \n=\n+\n(\n) \u2212\n+\n3\n1\n3\n7\n2\nx\n   \n=\n+\n(\n) +\n3\n1\n4\n2\nx\n.\n10.14\n",
+        "character_count": 1029
+      },
+      {
+        "page_number": 46,
+        "text": "229\nMEP Pupil Text 10\nWorked Example 4\n(a)\nComplete the square for  y\nx\nx\n=\n\u2212\n+\n2\n8\n2\n2\n.\n(b)\nFind the minimum value of y.\n(c)\nSketch the graph of  y\nx\nx\n=\n\u2212\n+\n2\n8\n2\n2\n.\nSolution\n(a)\nFirst rearrange the quadratic as shown.\n      2\n8\n2\n2\n4\n2\n2\n2\nx\nx\nx\nx\n\u2212\n+\n=\n\u2212\n(\n) +\n.\nThen  x\nx\n2\n4\n\u2212\n  can be written as  x \u2212\n(\n) \u2212\n2\n4\n2\n  to give\n   2\n4\n2\n2\n2\n4\n2\n2\n2\nx\nx\nx\n\u2212\n(\n) +\n=\n\u2212\n(\n) \u2212\n[\n] +\n   \n=\n\u2212\n(\n) \u2212\n+\n2\n2\n8\n2\n2\nx\n   \n=\n\u2212\n(\n) \u2212\n2\n2\n6\n2\nx\n.\n(b)\nAs  y\nx\n=\n\u2212\n(\n) \u2212\n2\n2\n6\n2\n,  the minimum possible value of y is \u22126, which is obtained\nwhen  x \u2212\n=\n2\n0  or  x = 2.\n(c)\nBefore sketching the graph, it is also useful to find where the curve crosses the\nx-axis, that is when  y = 0.  To do this, solve\n    0\n2\n2\n6\n2\n=\n\u2212\n(\n) \u2212\nx\n 2\n2\n6\n2\nx \u2212\n(\n)\n=\n    x \u2212\n(\n)\n=\n2\n3\n2\n        x \u2212\n= \u00b1\n2\n3\n    x =\n\u00b1\n2\n3\nSo the curve crosses the x-axis at  2\n3\n+\nand  2\n3\n\u2212\n,  and has a minimum at\n2\n6\n, \u2212\n(\n).\nThis is shown in the graph opposite.\n6\n4\n2\n0\n\u2013 2\n\u2013 4\n\u2013 6\n1\n2\n3\n4\nx\ny\n\u2190\n\u2190\n2\n3\n\u2212\n2\n6\n, \u2212\n(\n)\n2\n3\n+\n",
+        "character_count": 975
+      },
+      {
+        "page_number": 47,
+        "text": "230\nMEP Pupil Text 10\nExercises\n1.\nComplete the square for each of the expressions below.\n(a)\nx\nx\n2\n4\n5\n+\n\u2212\n(b)\nx\nx\n2\n6\n1\n+\n\u2212\n(c)\nx\nx\n2\n10\n2\n+\n\u2212\n(d)\nx\nx\n2\n8\n2\n\u2212\n+\n(e)\nx\nx\n2\n12\n3\n+\n+\n(f)\nx\nx\n2\n20\n10\n\u2212\n+\n(g)\nx\nx\n2\n3\n1\n+\n\u2212\n(h)\nx\nx\n2\n5\n2\n\u2212\n+\n(i)\nx\nx\n2\n4\n\u2212\n+\n2.\nUse the completing the square method to solve each of the following equations.\n(a)\nx\nx\n2\n4\n3\n0\n\u2212\n+\n=\n(b)\nx\nx\n2\n6\n4\n0\n\u2212\n\u2212\n=\n(c)\nx\nx\n2\n10\n8\n0\n+\n\u2212\n=\n(d)\nx\nx\n2\n5\n1\n0\n+\n+\n=\n(e)\nx\nx\n2\n1\n0\n+\n\u2212\n=\n(f)\nx\nx\n2\n2\n4\n0\n+\n\u2212\n=\n(g)\nx\nx\n2\n4\n8\n0\n+\n\u2212\n=\n(h)\nx\nx\n2\n5\n2\n0\n+\n\u2212\n=\n(i)\nx\nx\n2\n7\n1\n0\n+\n+\n=\n3.\nComplete the square for each of the following expressions.\n(a)\n2\n8\n1\n2\nx\nx\n+\n\u2212\n(b)\n2\n10\n3\n2\nx\nx\n+\n\u2212\n(c)\n2\n2\n1\n2\nx\nx\n+\n+\n(d)\n3\n6\n2\n2\nx\nx\n+\n\u2212\n(e)\n5\n15\n4\n2\nx\nx\n+\n\u2212\n(f)\n7\n14\n2\n2\nx\nx\n\u2212\n+\n(g)\n3\n12\n4\n2\nx\nx\n+\n\u2212\n(h)\n4\n20\n3\n2\nx\nx\n+\n\u2212\n(i)\n2\n12\n3\n2\nx\nx\n\u2212\n+\n4.\nSolve each of the following equations by completing the square.\n(a)\n2\n4\n5\n0\n2\nx\nx\n+\n\u2212\n=\n(b)\n2\n16\n3\n0\n2\nx\nx\n+\n\u2212\n=\n(c)\n3\n12\n8\n0\n2\nx\nx\n+\n\u2212\n=\n(d)\n4\n2\n1\n0\n2\nx\nx\n+\n\u2212\n=\n(e)\n2\n6\n0\n2\nx\nx\n+\n\u2212\n=\n(f)\n5\n20\n1\n0\n2\nx\nx\n\u2212\n+\n=\n5.\nSketch the graph of each equation below, showing its minimum or maximum point\nand where it crosses the x-axis.\n(a)\ny\nx\nx\n=\n\u2212\n\u2212\n2\n2\n1\n(b)\ny\nx\nx\n=\n+\n+\n2\n6\n8\n(c)\ny\nx\nx\n=\n\u2212\n+\n2\n10\n24\n(d)\ny\nx\nx\n=\n+\n\u2212\n2\n5\n14\n(e)\ny\nx\nx\n=\n+\n\u2212\n4\n3\n2\n(f)\ny\nx\nx\n=\n\u2212\n\u2212\n3\n2\n2\n6.\nThe height of a ball thrown into the air is given by\nh\nt\nt\n=\n+\n\u2212\n1\n20\n10 2.\nFind the maximum height reached by the ball.\n10.14\nInformation\nThe word 'quadratic' comes from the Latin word 'quadratum', which means 'a squared\nfigure'.\n",
+        "character_count": 1476
+      },
+      {
+        "page_number": 48,
+        "text": "231\nMEP Pupil Text 10\n7.\n(a)\nBy writing the quadratic expression\nx\nx\n2\n4\n2\n\u2212\n+\nin the form  x\na\nb\n+\n(\n) +\n2\n,  find a and b and hence find the minimum value\nof the expression.\n(b)\nSolve the equation\nx\nx\n2\n4\n2\n0\n\u2212\n+\n=\ngiving your answers correct to 2 decimal places.\n(SEG)\n8.\n(a)\nFactorise the expression  x\nx\n2\n2\n3\n+\n\u2212\n.\n(b)\nExpress  x\nx\n2\n2\n3\n+\n\u2212\n  in the form  x\na\nb\n+\n(\n) \u2212\n2\n,  where a and b are whole\nnumbers.\n(c)\nSketch the curve with equation  y\nx\nx\n=\n+\n\u2212\n2\n2\n3.\n(MEG)\nAlgebraic Fractions and\nQuadratic Equations\nThis final section deals with finding the solutions of equations such as\n   \nx\nx\nx\nx\n\u2212\n+\n+\n=\n6\n2\n2\n15\nand uses techniques from the earlier  sections.\nWorked Example 1\nFind the solution of\n   \nx\nx\nx\nx\n\u2212\n+\n+\n=\n6\n2\n2\n15 .\nSolution\nThe first stage is to combine the two fractions so that they have a common denominator.\n   x x\nx x\nx\nx\n+\n(\n) +\n\u2212\n(\n)\n\u2212\n(\n)\n+\n(\n)\n=\n2\n6\n6\n2\n2\n15\n   \nx\nx\nx\nx\nx\nx\n2\n2\n2\n6\n6\n2\n2\n15\n+\n+\n\u2212\n\u2212\n(\n)\n+\n(\n)\n=\n   \n2\n4\n6\n2\n2\n15\n2\nx\nx\nx\nx\n\u2212\n\u2212\n(\n)\n+\n(\n)\n=\n10.15\n",
+        "character_count": 994
+      },
+      {
+        "page_number": 49,
+        "text": "232\nMEP Pupil Text 10\nThen dividing both sides by 2 gives\n   \nx\nx\nx\nx\n2\n2\n6\n2\n1\n15\n\u2212\n\u2212\n(\n)\n+\n(\n)\n=\nThen multiplying both sides by 15  and  x\nx\n\u2212\n(\n)\n+\n(\n)\n6\n2   gives\n        15\n2\n6\n2\n2\nx\nx\nx\nx\n\u2212\n(\n) =\n\u2212\n(\n)\n+\n(\n).\nTherefore\n        15\n30\n4\n12\n2\n2\nx\nx\nx\nx\n\u2212\n=\n\u2212\n\u2212\nand\n 14\n26\n12\n0\n2\nx\nx\n\u2212\n+\n=\n.\nThis factorises as\nx\nx\n\u2212\n(\n)\n\u2212\n(\n) =\n1 14\n12\n0\nso\nx \u2212\n=\n1\n0     or     14\n12\n0\nx \u2212\n=\nand\n          x = 1     or      x =\n=\n12\n14\n6\n7 .\nWorked Example 2\nSolve the equation\n1\n2\n5\n3\nx\nx\nx\n+\n+\n=\n.\nSolution\nThe first step is to combine the two fractions.\n          x\nx\nx x\n2\n2\n2\n5\n3\n+\n+\n+\n(\n)\n=\nThen multiplying by  3 and  x x +\n(\n)\n2   gives\n      3\n2\n5\n2\n2\nx\nx\nx x\n+\n+\n(\n) =\n+\n(\n).\n       3\n3\n6\n5\n10\n2\n2\nx\nx\nx\nx\n+\n+\n=\n+\n    0\n2\n7\n6\n2\n=\n+\n\u2212\nx\nx\n.\nThis quadratic can be solved by completing the square (or using the formula) to give\n      x\nx\n2\n7\n2\n3\n0\n+\n\u2212\n=\n    (dividing both sides by 2)\n      x +\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\u2212\n\u2212\n=\n7\n4\n49\n16\n3\n0\n2\n   \nx\nx\nx\nx\n+\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\n+\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8=\n+\n+\n\uf8ee\n\uf8f0\uf8ef\n\uf8f9\n\uf8fb\uf8fa\n7\n4\n7\n4\n7\n2\n49\n16\n2\n10.15\n",
+        "character_count": 991
+      },
+      {
+        "page_number": 50,
+        "text": "233\nMEP Pupil Text 10\n           x +\n\uf8eb\n\uf8ed\n\uf8f6\n\uf8f8\n=\n+\n7\n4\n49\n16\n48\n16\n2\n   \n= 97\n16\n     x +\n= \u00b1\n7\n4\n97\n4\n    x = \u2212\n\u00b1\n7\n4\n97\n4\n    x   =\n\u2212\n+\n7\n97\n4\n  or   \u2212\n\u2212\n7\n97\n4\n.\nExercises\nSolve each of the following equations.\n1.\nx\nx\nx\n+\n+\n=\n4\n1\n3\n4\n2.\nx\nx\nx\nx\n\u2212\n\u2212\n+\n=\n2\n2\n4\n3\n3.\n2\n1\n3\n25\n24\nx\nx\nx\nx\n+\n\u2212\n+\n=\n4.\nx\nx\nx\nx\n2\n1\n1\n12\n5\n+\n+\n\u2212\n=\n5.\nx\nx\nx\nx\n+\n\u2212\n\u2212\n=\n3\n5\n2\n6.\nx\nx\nx\nx\n2\n1\n2\n7\n2\n15\n+\n\u2212\n+\n=\n7.\n1\n2\n1\n3\n9\n20\nx\nx\n+\n+\n+\n=\n8.\nx\nx\nx\nx\n\u2212\n\u2212\n+\n=\n5\n5\n4\n3\n9.\n8\n3\n2\n1\nx\nx\nx\nx\n+\n\u2212\n\u2212\n=\n10.\n2\n1\n6\n7\n8\nx\nx\n\u2212\n+\n=\n11.\n4\n3\n10\n2\nx\nx\n+\n\u2212\n=\n12.\n1\n2\n3\n1\n6\n2\n5\nx\nx\n+\n+\n\u2212\n=\n13.\nx\nx\nx\nx\n+\n\u2212\n\u2212\n=\n2\n1\n4\n14.\n1\n10\n4\n4\n7\n\u2212\n+\n+\n=\nx\nx\nx\n15.\n3\n1\n7\n6\n5\nx\nx\n+\n+\n\u2212\n=\nInformation\nBoth linear and quadratic equations have been used for over four thousand years.\nThe early Chinese and Babylonians made use of equations to solve daily problems such\nas the sharing of an inheritance.\n",
+        "character_count": 832
+      }
+    ],
+    "tables_found": 5,
+    "images_found": 125,
+    "metadata": {
+      "subject": "IPA",
+      "grade": "6"
+    },
+    "pipeline_version": "1.0.0",
+    "extraction_method": "basic_extraction",
+    "processing_time": 1.7292661666870117
+  },
+  "semantic_chunk_service_bkb10.pdf": {
+    "success": true,
+    "document_id": "test_bkb10",
+    "chunks": [
+      {
+        "chunk_id": "75b15135-10b0-476e-b4d2-93427333b869",
+        "text": "184 MEP Pupil Text 10 10 Equations 10 1 Negative Numbers A number line like this is very helpful when dealing with negative numbers Worked Example 1 An ice cube taken from a deep freeze is at a temperature of \u2212\u00b0 6 C Its temperature rises by 4 degrees What is its new temperature Solution The number line can be used as shown \u2212 + = \u2212 6 4 2 Worked Example 2 Write down numbers which are: (a) less than \u22124 (b) greater than \u22125 but less than \u22122 (c) less than \u22123 but greater than \u22128",
+        "metadata": {
+          "chunk_id": "75b15135-10b0-476e-b4d2-93427333b869",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 0,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 476,
+        "word_count": 98,
+        "position": 0,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "c3233dfb-c0eb-4163-ab76-d893633c06fd",
+        "text": "Solution (a) Any number less than \u22124 must be to the left of \u22124 on the number line, for example \u22125, \u22126, \u22127, etc (b) A number greater than \u22125 must be to the right of \u22125, and to be less than \u22122 must also be to the left of \u22122, for example \u22124 and \u22123 (c) To be less than \u22123 the number must be to the left of \u22123 but to be greater than \u22128 the number must be to the right of \u22128, for example \u22127, \u22126, \u22125, \u22124",
+        "metadata": {
+          "chunk_id": "c3233dfb-c0eb-4163-ab76-d893633c06fd",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 1,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 396,
+        "word_count": 92,
+        "position": 1,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "55e1c30d-dceb-4e63-8536-79e04d8bb40a",
+        "text": "-4 \u20133 \u20132 \u20131 0 2 3 4 5 1 \u2013 6 \u2013 5 \u2013 4 \u2013 3 \u2013 2 0 \u2013 1 + 4 \u2013 4 \u2013 3 \u2013 2 \u20131 0 1 \u2013 5 \u2013 6 \u2013 7 \u2013 8 Investigation Within 4 consecutive years, Mrs White gave birth to four lovely children Today, x years later, Mr and Mrs White find out that the product of their four children's ages is 3 024 How old is each child now, assuming that all the children are of different ages 185 MEP Pupil Text 10 Exercises 1",
+        "metadata": {
+          "chunk_id": "55e1c30d-dceb-4e63-8536-79e04d8bb40a",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 2,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 393,
+        "word_count": 98,
+        "position": 2,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "eacd92c1-41c4-4655-90b7-d6ef06e9c69a",
+        "text": "Copy and complete the following table of temperature changes Original Temperature Temperature Change Final Temperature 6\u00b0 C \u2212 \u00b0 10 C \u2212 \u00b0 4 C + \u00b0 2 C \u2212 \u00b05 C \u2212 \u00b03 C \u2212 \u00b0 10 C \u2212 \u00b0 4 C 2\u00b0 C \u2212 \u00b0 10 C \u2212 \u00b0 6 C + \u00b01 C \u2212 \u00b05 C \u2212 \u00b0 2 C 2 Place each set of numbers in increasing order",
+        "metadata": {
+          "chunk_id": "eacd92c1-41c4-4655-90b7-d6ef06e9c69a",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 3,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 271,
+        "word_count": 72,
+        "position": 3,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "157a0ac0-7022-4362-9596-0a9a65690568",
+        "text": "(a) \u221210, \u22124, \u22126, 2, \u22125, 3 (b) 3, \u22121, 0, \u22124, 7 (c) 7, \u22122, \u22124, \u22126, 3, 0 (d) \u22124, 0, \u22127, 7, 5, \u22122 (e) \u22121, \u22124, 0, \u22125, 6, \u22123 3 Write down all the integers which lie between: (a) \u22126 and \u221210 (b) \u22124 and 2 (c) \u22123 and 0 (d) \u22121 and \u22123 (e) \u22129 and 0 4 Write down a whole number which is: (a) greater than \u221210 but less than \u22126 (b) less than \u22126 (c) greater than \u22125 but",
+        "metadata": {
+          "chunk_id": "157a0ac0-7022-4362-9596-0a9a65690568",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 4,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 352,
+        "word_count": 88,
+        "position": 4,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "b0c53bba-c032-4190-be01-3d5651c2da22",
+        "text": "184 MEP Pupil Text 10 10 Equations 10.1 Negative Numbers A number line like this is very helpful when dealing with negative numbers. Worked Example 1 An ice cube taken from a deep freeze is at a temperature of \u2212\u00b0 6 C. Its temperature rises by 4 degrees. What is its new temperature? Solution The number line can be used as shown. \u2212 + = \u2212 6 4 2 Worked Example 2 Write down numbers which are: (a) less than \u22124 (b) greater than \u22125 but less than \u22122 (c) less than \u22123 but greater than \u22128. Solution (a) Any number less than \u22124 must be to the left of \u22124 on the number line, for example \u22125, \u22126, \u22127, etc. (b) A number greater than \u22125 must be to the right of \u22125, and to be less than \u22122 must also be to the left of \u22122, for example \u22124 and \u22123. (c) To be less than \u22123 the number must be to the left of \u22123 but to be greater than \u22128 the number must be to the right of \u22128, for example \u22127, \u22126, \u22125, \u22124. -4 \u20133 \u20132 \u20131 0 2 3 4 5 1 \u2013 6 \u2013 5 \u2013 4 \u2013 3 \u2013 2 0 \u2013 1 + 4 \u2013 4 \u2013 3 \u2013 2 \u20131 0 1 \u2013 5 \u2013 6 \u2013 7 \u2013 8 Investigation Within 4 consecutive years, Mrs. White gave birth to four lovely children. Today, x years later, Mr and Mrs. White find out that the product of their four children's ages is 3 024. How old is each child now, assuming that all the children are of different ages? 185 MEP Pupil Text 10 Exercises 1. Copy and complete the following table of temperature changes. Original Temperature Temperature Change Final Temperature 6\u00b0 C \u2212 \u00b0 10 C \u2212 \u00b0 4 C + \u00b0 2 C \u2212 \u00b05 C \u2212 \u00b03 C \u2212 \u00b0 10 C \u2212 \u00b0 4 C 2\u00b0 C \u2212 \u00b0 10 C \u2212 \u00b0 6 C + \u00b01 C \u2212 \u00b05 C \u2212 \u00b0 2 C 2. Place each set of numbers in increasing order. (a) \u221210, \u22124, \u22126, 2, \u22125, 3 (b) 3, \u22121, 0, \u22124, 7 (c) 7, \u22122, \u22124, \u22126, 3, 0 (d) \u22124, 0, \u22127, 7, 5, \u22122 (e) \u22121, \u22124, 0, \u22125, 6, \u22123 3. Write down all the integers which lie between: (a) \u22126 and \u221210 (b) \u22124 and 2 (c) \u22123 and 0 (d) \u22121 and \u22123 (e) \u22129 and 0. 4. Write down a whole number which is: (a) greater than \u221210 but less than \u22126 (b) less than \u22126 (c) greater than \u22125 but",
+        "metadata": {
+          "chunk_id": "b0c53bba-c032-4190-be01-3d5651c2da22",
+          "chunk_type": "generic",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 1913,
+        "word_count": 447,
+        "position": 0,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "c6517915-2da6-44bd-b7e8-4434a9dd6405",
+        "text": "184\nMEP Pupil Text 10\n10 Equations\n10.1\nNegative Numbers\nA number line like this is very helpful when dealing with negative numbers.\nWorked Example 1\nAn ice cube taken from a deep freeze is at a temperature of \u2212\u00b0\n6 C.  Its temperature rises\nby 4 degrees.  What is its new temperature?\nSolution\nThe number line can be used as shown.\n     \u2212\n+\n= \u2212\n6\n4\n2\nWorked Example 2\nWrite down numbers which are:\n(a)\nless than \u22124\n(b)\ngreater than \u22125 but less than \u22122\n(c)\nless than \u22123 but greater than \u22128.\nSolution\n(a)\nAny number less than \u22124 must be to the left of \u22124 on the number line,\nfor example  \u22125,  \u22126,  \u22127,  etc.\n(b)\nA number greater than \u22125 must be to the right of \u22125, and to be less than \u22122\nmust also be to the left of \u22122,  for example  \u22124 and \u22123.\n(c)\nTo be less than \u22123 the number must be to the left of \u22123 but to be greater than \u22128\nthe number must be to the right of \u22128,  for example  \u22127,  \u22126, \u22125,  \u22124.\n-4\n\u20133\n\u20132\n\u20131\n0\n2\n3\n4\n5\n1\n\u2013 6\n\u2013 5\n\u2013 4\n\u2013 3\n\u2013 2\n0\n\u2013 1\n+ 4\n\u2013 4\n\u2013 3\n\u2013 2\n\u20131\n0\n1\n\u2013 5\n\u2013 6\n\u2013 7\n\u2013 8\nInvestigation\nWithin 4 consecutive years, Mrs. White gave birth to four lovely children.  Today, x years\nlater, Mr and Mrs. White find out that the product of their four children's ages is 3 024.\nHow old is each child now, assuming that all the children are of different ages?\n185\nMEP Pupil Text 10\nExercises",
+        "metadata": {
+          "chunk_id": "c6517915-2da6-44bd-b7e8-4434a9dd6405",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 1,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 1297,
+        "word_count": 286,
+        "position": 0,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "85527a35-517a-4a89-b2a4-8340f2139816",
+        "text": "1.\nCopy and complete the following table of temperature changes.\nOriginal Temperature          Temperature Change          Final Temperature\n6\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n+\n\u00b0\n2 C\n\u2212\n\u00b05 C\n\u2212\n\u00b03 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n2\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n6 C\n+ \u00b01 C\n\u2212\n\u00b05 C\n\u2212\n\u00b0\n2 C",
+        "metadata": {
+          "chunk_id": "85527a35-517a-4a89-b2a4-8340f2139816",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 2,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 245,
+        "word_count": 64,
+        "position": 1,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "bf1c1a22-782d-437d-841c-6ca9131e4027",
+        "text": "2.\nPlace each set of numbers in increasing order.\n(a)\n\u221210,  \u22124,  \u22126,   2,  \u22125,   3\n(b)\n3,   \u22121,   0,   \u22124,   7\n(c)\n7,   \u22122,  \u22124,  \u22126,   3,   0\n(d)\n\u22124,   0,  \u22127,   7,   5,   \u22122\n(e)\n\u22121,  \u22124,   0,   \u22125,   6,   \u22123",
+        "metadata": {
+          "chunk_id": "bf1c1a22-782d-437d-841c-6ca9131e4027",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 3,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 209,
+        "word_count": 43,
+        "position": 2,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "6c72cae3-5e93-4a4d-855b-e4b4b9484328",
+        "text": "3.\nWrite down all the integers which lie between:\n(a)\n\u22126  and  \u221210\n(b)\n\u22124  and  2\n(c)\n\u22123  and  0\n(d)\n\u22121  and  \u22123\n(e)\n\u22129  and  0.",
+        "metadata": {
+          "chunk_id": "6c72cae3-5e93-4a4d-855b-e4b4b9484328",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 4,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 128,
+        "word_count": 29,
+        "position": 3,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "1d41a3be-1e2a-420f-b8c2-160ea1d86cfd",
+        "text": "4.\nWrite down a whole number which is:\n(a)\ngreater than \u221210 but less than \u22126\n(b)\nless than \u22126\n(c)\ngreater than \u22125 but",
+        "metadata": {
+          "chunk_id": "1d41a3be-1e2a-420f-b8c2-160ea1d86cfd",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 5,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 117,
+        "word_count": 25,
+        "position": 4,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "e55244ba-e192-4fdf-b704-cd9ec19998dc",
+        "text": "184\nMEP Pupil Text 10\n10 Equations\n10.1\nNegative Numbers\nA number line like this is very helpful when dealing with negative numbers.\nWorked Example 1\nAn ice cube taken from a deep freeze is at a temperature of \u2212\u00b0\n6 C.  Its temperature rises\nby 4 degrees.  What is its new temperature?\nSolution\nThe number line can be used as shown.\n     \u2212\n+\n= \u2212\n6\n4\n2\nWorked Example 2\nWrite down numbers which are:\n(a)\nless than \u22124\n(b)\ngreater than \u22125 but less than \u22122\n(c)\nless than \u22123 but greater than \u22128.\nSolution\n(a)\nAny number less than \u22124 must be to the left of \u22124 on the number line,\nfor example  \u22125,  \u22126,  \u22127,  etc.\n(b)\nA number greater than \u22125 must be to the right of \u22125, and to be less than \u22122\nmust also be to the left of \u22122,  for example  \u22124 and \u22123.\n(c)\nTo be less than \u22123 the number must be to the left of \u22123 but to be greater than \u22128\nthe number must be to the right of \u22128,  for example  \u22127,  \u22126, \u22125,  \u22124.\n-4\n\u20133\n\u20132\n\u20131\n0\n2\n3\n4\n5\n1\n\u2013 6\n\u2013 5\n\u2013 4\n\u2013 3\n\u2013 2\n0\n\u2013 1\n+ 4\n\u2013 4\n\u2013 3\n\u2013 2\n\u20131\n0\n1\n\u2013 5\n\u2013 6\n\u2013 7\n\u2013 8\nInvestigation\nWithin 4 consecutive years, Mrs. White gave birth to four lovely children.  Today, x years\nlater, Mr and Mrs. White find out that the product of their four children's ages is 3 024.\nHow old is each child now, assuming that all the children are of different ages?\n185\nMEP Pupil Text 10\nExercises\n1.\nCopy and complete the following table of temperature changes.\nOriginal Temperature          Temperature Change          Final Temperature\n6\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n+\n\u00b0\n2 C\n\u2212\n\u00b05 C\n\u2212\n\u00b03 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n2\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n6 C\n+ \u00b01 C\n\u2212\n\u00b05 C\n\u2212\n\u00b0\n2 C\n2.\nPlace each set of numbers in increasing order.\n(a)\n\u221210,  \u22124,  \u22126,   2,  \u22125,   3\n(b)\n3,   \u22121,   0,   \u22124,   7\n(c)\n7,   \u22122,  \u22124,  \u22126,   3,   0\n(d)\n\u22124,   0,  \u22127,   7,   5,   \u22122\n(e)\n\u22121,  \u22124,   0,   \u22125,   6,   \u22123\n3.\nWrite down all the integers which lie between:\n(a)\n\u22126  and  \u221210\n(b)\n\u22124  and  2\n(c)\n\u22123  and  0\n(d)\n\u22121  and  \u22123\n(e)\n\u22129  and  0.\n4.\nWrite down a whole number which is:\n(a)\ngreater than \u221210 but less than \u22126\n(b)\nless than \u22126\n(c)\ngreater than \u22125 but",
+        "metadata": {
+          "chunk_id": "e55244ba-e192-4fdf-b704-cd9ec19998dc",
+          "chunk_type": "inquiry",
+          "inquiry_stage": "question",
+          "pedagogy_type": "inquiry_learning",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.75,
+          "educational_value_score": 0.85
+        },
+        "character_count": 2000,
+        "word_count": 447,
+        "position": 0,
+        "confidence": 0.75
+      }
+    ],
+    "chunk_count": 12,
+    "chunking_strategy": "semantic_curriculum_aware",
+    "chunk_types": {
+      "generic": 6,
+      "assessment": 5,
+      "inquiry": 1
+    },
+    "processing_time_ms": 150
+  },
+  "semantic_enrichment_service_bkb10.pdf": {
+    "success": true,
+    "enriched_chunks": [
+      {
+        "chunk_id": "chunk_bkb10_1",
+        "text": "184\nMEP Pupil Text 10\n10 Equations\n10.1\nNegative Numbers\nA number line like this is very helpful when dealing with negative numbers.\nWorked Example 1\nAn ice cube taken from a deep freeze is at a temperature of \u2212\u00b0\n6 C.  Its temperature rises\nby 4 degrees.  What is its new temperature?\nSolution\nThe number line can be used as shown.\n     \u2212\n+\n= \u2212\n6\n4\n2\nWorked Example 2\nWrite down numbers which are:\n(a)\nless than \u22124\n(b)\ngreater than \u22125 but less than \u22122\n(c)\nless than \u22123 but greater than \u22128.\nSolution\n(",
+        "metadata": {
+          "subject": "IPA",
+          "grade": "6"
+        },
+        "enrichment": {
+          "pedagogy_classification": {
+            "pedagogy_type": "deep_learning",
+            "confidence": 0.010101010101010102,
+            "indicators": [
+              "deep"
+            ],
+            "all_scores": {
+              "inquiry_learning": 0,
+              "differentiated_learning": 0,
+              "deep_learning": 1,
+              "project_based_learning": 1,
+              "problem_based_learning": 1
+            }
+          },
+          "taxonomy_tags": [
+            {
+              "type": "subject",
+              "canonical": "IPA",
+              "original": "IPA",
+              "confidence": 0.95,
+              "source": "context"
+            },
+            {
+              "type": "grade_level",
+              "canonical": "Kelas 6",
+              "original": "6",
+              "confidence": 0.95,
+              "source": "context"
+            },
+            {
+              "type": "bloom_taxonomy",
+              "levels": [
+                "applying"
+              ],
+              "dominant_level": "applying",
+              "confidence": 0.010101010101010102,
+              "level_scores": {
+                "remembering": 0,
+                "understanding": 0,
+                "applying": 1,
+                "analyzing": 0,
+                "evaluating": 0,
+                "creating": 0
+              }
+            }
+          ],
+          "competency_tags": {
+            "competencies_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "assessment_tags": {
+            "assessment_types_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "cognitive_tags": {
+            "cognitive_levels": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "learning_objective_tags": {
+            "learning_objectives": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "deep_learning_tags": {
+            "deep_learning_features": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "enrichment_metadata": {
+            "enriched_at": "2026-05-29T13:46:33.934446",
+            "enrichment_version": "2.0.0",
+            "content_length": 500,
+            "word_count": 99,
+            "language": "unknown"
+          }
+        }
+      }
+    ],
+    "chunk_count": 1,
+    "enrichment_types": [
+      "pedagogy_classification",
+      "taxonomy_tags",
+      "competency_tags",
+      "assessment_tags",
+      "cognitive_tags",
+      "learning_objective_tags",
+      "deep_learning_tags",
+      "enrichment_metadata"
+    ],
+    "processing_time_ms": 200
+  },
+  "parser_service_siklus-air.pdf": {
+    "success": true,
+    "page_count": 13,
+    "text_content": [
+      {
+        "page_number": 1,
+        "text": "BAHAN AJAR   6\nPokok Bahasan: \nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hidayat\n",
+        "character_count": 206
+      },
+      {
+        "page_number": 2,
+        "text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n2\nAyo Mengamati\nHai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. \nHmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang \nsiklus air di bawah ini!\nNah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan \nbelajar kali ini! \nSetelah mempelajari pokok bahasan ini, siswa dapat:\n1.\t mendeskripsikan tentang siklus air,\n2.\t menjelaskan tahapan-tahapan siklus air, \n3.\t menjelaskan kegunaan air bagi kehidupan,\n4.\t mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. \nTujuan yang Diharapkan\nMedia Pembelajaran\n1.\t Toples kaca\n2.\t Plastik kaca\n3.\t Air panas\n4.\t Es batu\n5.\t Pewarna biru\n6.\t Karet\nMetode Pembelajaran\nProblem Based Learning (PBL)\nhttps://youtu.be/vZaxn6w0cQk\nSumber: \nQR CODE\nSumber: Dokumentasi penerbit\nGambar 1. Hujan\n",
+        "character_count": 905
+      },
+      {
+        "page_number": 3,
+        "text": "BAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air\nSumber: Dokumentasi penerbit\nGambar 2. Air sebagai salah satu sumber kehidupan manusia\nSemua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat \nmembutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan \nuntuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan \nmembutuhkan air untuk berfotosintesis.  Hal tersebut menunjukkan bahwa air merupakan \nsalah satu sumber kehidupan. \nAir termasuk\u00a0sumber daya alam\u00a0yang dapat diperbaharui. Ini berarti jumlah air di bumi \ntidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu \nada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses \nsiklus air itu? Ayo, kita pelajari bersama-sama!  \nTopik 1: Apa itu Siklus Air?\n \n \nUraian materi\nPernahkah kamu berpikir dari manakah datangnya air? Mengapa air tidak bisa habis \nmeskipun digunakan setiap hari? Nah, sebelumnya kita tahu bahwa air akan selalu ada di \nbumi karena air mengalami daur (siklus). Siklus air di bumi merupakan runtutan perubahan \nwujud air yang terjadi terus-menerus dan berulang-ulang.  \nSiklus air atau disebut juga\u00a0siklus hidrologi\u00a0adalah gerak perputaran air dengan \nperubahan air menjadi berbagai wujud dan kembali ke bentuk semula. \nSecara sederhana, siklus air terjadi melalui tahapan evaporasi atau transpirasi, \nkondensasi, dan presipitasi. Adapun penjelasannya adaalah sebagai berikut. \n1.\t Evaporasi/transpirasi\n\t\nIstilah evaporasi diguna\u00adkan untuk menunjukkan proses penguapan air yang berasal dari \n",
+        "character_count": 1599
+      },
+      {
+        "page_number": 4,
+        "text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n4\nlaut, sungai, danau, dan badan air lainnya. Sedangkan transpirasi meru\u00adpa\u00adkan pelepasan \nmolekul air sebagai hasil metabolisme dari tumbuh-tumbuhan.\n2. \t Kondensasi\n\t\nKondensasi adalah pro\u00adses perubahan air dari gas menjadi cair atau kita kenal dengan \nistilah pengem\u00adbunan yang merupakan kebalikan dari evaporasi atau penguapan. Pada \nsiklus air, kondensasi terjadi di atmosfer akibat perubahan suhu dan tekanan. Akibat \nadanya kondensasi air akan berkumpul membentuk awan hitam yang siap turun sebagai \nhujan ketika mencapai titik jenuh.\n3.\t Presipitasi\n\t\nPresipitasi merupakan produk dari kondensasi. Presipitasi dapat terjadi karena adanya \npendinginan dan penambahan uap air, sehingga air yang membentuk awan mencapai \ntitik jenuh. Semakin banyak uap air yang terbentuk di atmosfer, maka tetesan air yang \nada di awan akan semakin banyak dan semakin berat. Ketika awan tidak mampu \nmenampung banyaknya air yang terbentuk, maka air tersebut akan dikeluarkan dalam \nbentuk hujan.\nSecara umum, berikut siklus air yang terjadi. Air yang ada di permukaan bumi menguap \nkarena terkena panas matahari. Uap air akan naik ke atmosfer dan mengalami pendinginan. \nSelanjutnya, uap air akan berubah menjadi kristal-kristal air yang berkumpul membentuk \nawan (kondensasi). Semakin lama awan semakin tebal dan gelap. Gumpalan awan yang \nmenebal mengandung banyak sekali kristal dan uap air. Karena suhu yang rendah, uap air, \ndan kristal air akan mengembun menjadi titik-titik air. Selanjutnya, titik-titik air akan jatuh ke \nbumi menjadi hujan (presipitasi). Air hujan yang jatuh ke bumi sebagian meresap ke dalam \ntanah dan akan keluar sebagai mata air. Sebagaian lagi akan mengalir ke tempat-tempat \nyang lebih rendah, seperti sungai dan akan terus mengalir sampai ke danau atau laut. Air di \nsungai dan laut kembali mendapat panas dari sinar matahari dan mengalami penguapan. \nProses ini berlanjut sampai terjadinya hujan kembali dan dikenal dengan siklus air. \nSumber: Youtube.com (Fendra Nugroho)\nGambar 3. Siklus air \n",
+        "character_count": 2069
+      },
+      {
+        "page_number": 5,
+        "text": "BAHAN AJAR 6: MENGENAL SIKLUS AIR\n5\nEksplorasi Konsep\nTahap-tahap Siklus Air\nAlat dan Bahan\n1.\t Toples kaca\t\n4.\t Es batu\n2.\t Plastik kaca\t\n5.\t Pewarna biru\n3.\t Air panas\t\n6.\t Karet\nLangkah Kegiatan\n1.\t\n\t\nSiapkan toples kaca, lalu masukkan pewarna biru.\n\t\n2.\t\n\t\nMasukkanlah air panas ke dalam toples kaca.\n3.\t\n\t\nTutuplah toples dengan plastik kaca dan ikat dengan karet, \nlalu amati.\tApakah air menguap?\n4.\t\n\t\nLetakkanlah es batu di atas plastik kaca dan tunggu beberapa \nsaat. Apakah terlihat tetes-tetes air pada dinding kaca?\n5.\t\n\t\nCatat hasil pengamatanmu.\nHasil Pengamatan\n",
+        "character_count": 577
+      },
+      {
+        "page_number": 6,
+        "text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n6\nPertanyaan\n1.\t Pada bagian manakah terjadinya  peristiwa evaporasi pada percobaan tersebut?\n\t\nJawab : ...............................................................................................................................................\n2.\t Pada tahap manakah terjadi kondensasi?\n\t\nJawab : ...............................................................................................................................................\n3.\t Pada tahap manakah terjadi presipitasi?\n\t\nJawab : ...............................................................................................................................................\nTopik 2: Kegunaan Air\nNah, sekarang kalian sudah memahami tentang siklus air, bukan? Seperti kita ketahui \nsebelumnya, air merupakan salah satu sumber kehidupan karena memiliki banyak \nkegunaan. Selain yang sudah disebutkan di atas, apa sajakah kegunaan air bagi manusia? \nUntuk mengetahuinya, coba perhatikan gambar berikut ini!\nSumber: id.pinterest.com \nGambar 4. Berbagai kegunaan air bagi kehidupan manusia \n(a)\n(c)\n(b)\n(d)\n \n  \nApa yang dapat kamu simpulkan tentang gambar di atas? Tuliskan pada tabel di bawah \nini!\nHasil Pengamatan\nKegunaan Air bagi Kehidupan Manusia\nGambar a\nGambar b\n",
+        "character_count": 1287
+      },
+      {
+        "page_number": 7,
+        "text": "BAHAN AJAR 6: MENGENAL SIKLUS AIR\n7\nKegunaan Air bagi Kehidupan Manusia\nGambar c\nGambar d\nAyo Berdiskusi\nBentuklah kelompok dengan teman sebangkumu, kemudian diskusikan \njawaban dari pertanyaan-pertanyaan berikut!\n1.\t Perhatikan gambar berikut! \nSumber: ponorogo.go.id \n\t\n\t\na.\t Apa pendapat kelompokmu tentang gambar tersebut?\nc.\t Apa dampak jika tidak turun hujan dalam waktu yang lama?\nd.\t Dapatkah tumbuhan hidup di daerah tersebut?\ne.\t Menurutmu, pentingkah siklus air di bumi?\n",
+        "character_count": 482
+      },
+      {
+        "page_number": 8,
+        "text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n8\n2.\t Buatlah tiga kalimat pernyataan dari gambar di bawah ini!\nSumber: dailyklik.id \nTingkatkan Pemahamanmu\nKerjakan soal-soal di bawah ini secara mandiri!\nPerhatikan gambar berikut untuk menjawab soal nomor 1-2!\n1.\t Tahapan siklus air yang ditunjukkan oleh angka II adalah . . . . \nA.\t penguapan\t\nC.\t pegembunan\nB.\t peresapan\t\nD.\t pengendapan\n2.\t Pernyataan berikut yang benar berdasarkan gambar di atas adalah . . . . (Pilihan jawaban \ndapat lebih dari satu)\n\tangka I menunjukkan proses penguapan air  \n\tproses kondensasi dan evaporasi berturut-turut ditunjukkan oleh I dan II\nI\nII\nIII\nIV\n",
+        "character_count": 643
+      },
+      {
+        "page_number": 9,
+        "text": "BAHAN AJAR 6: MENGENAL SIKLUS AIR\n9\n\tangka II menunjukkan proses jatuhnya air hujan\n\tII dan IV menunjukkan proses presipitasi\n3.\t Berikut ini yang termasuk kegiatan yang dapat menjaga siklus air adalah . . . . (Pilihan \njawaban dapat lebih dari satu)\n\tmembuat sumur bor dalam jumlah banyak\n\tmendirikan bangunan di lahan kosong\n\tmenanami lahan dengan pohon\n\ttidak membuang sampah ataupun limbah di sungai\n4.\t Menurutmu, mengapa penebangan pohon secara liar dapat mempengaruhi siklus air? \nJelaskan!\nUji Kompetensi\nJawablah pertanyaan-pertanyaan berikut!\n1.\t Pernyataan berikut yang benar mengenai proses siklus air adalah . . . . (Pilihan jawaban \ndapat lebih dari satu)\n\tsiklus air terjadi karena adanya pemanasan air secara terus menerus oleh sinar \nmatahari\n\tpanas matahari menyebabkan air di permukaan bumi mengalami evaporasi\n\tsemakin tinggi suhu udara, maka awan akan mengalami kondensasi\n\ttitik-titik air hasil dari transpirasi akan jatuh ke permukaan bumi berupa hujan\n2.\t Peristiwa kondensasi membentuk \u2026.\nA.\t awan\t\nC.\t tanah\nB.\t air\t\nD.\t pasir\n3.\t Jatuhnya titik air di atas permukaan bumi dinamakan . . . . \n4.\t Pasangkan pertanyaan-pertanyaan berikut ini dengan jawaban yang tepat!\nNo.\nPertanyaan\nJawaban\n1.\nAir hujan bisa menjadi air tanah karena \nadanya proses .... \nmenyimpan air hujan\n2.\nFungsi pohon dalam proses siklus air adalah .... \ntranspirasi\n3.\nAwan yang mengandung uap air akan \nmengalami pengembunan. Hal ini \nmenunjukkan proses .... \nperesapan\n4.\nPenguapan air di permukaan bumi \ndisebabkan oleh ....\npanas matahari\nkondensasi\n5.\t Perhatikan pernyataan-pernyataan berikut!\n\t\n(1) \tUap air mengalami pendinginan sehingga membentuk titik-titik air. \n\t\n(2) Air meresap ke dalam tanah dan mengalir di permukaan tanah. \n",
+        "character_count": 1740
+      },
+      {
+        "page_number": 10,
+        "text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n10\n\t\n(3)  Uap air yang berkumpul membentuk awan tebal. \n\t\n(4) Titik-titik air akan jatuh sebagai hujan.\n\t\n(5) Air mengalami penguapan dan naik ke udara sehingga menjadi gas atau uap air.\nUrutkan pernyataan-pernyataan di atas sehingga menjadi tahapan sikus air yang runtut!\nRefleksi\nBerilah tanda centang (\u221a) pada salah satu kolom jawaban (Ya/Tidak) untuk \nmenggambarkan perasaanmu! Lakukan dengan jujur dan mandiri! \nNo.\nPernyataan\nYa\nTidak\n1.\nApakah kamu dapat mendeskripsikan tentang siklus air?\n2.\nApakah kamu dapat menjelaskan tahapan-tahapan siklus \nair?\n3.\nApakah kamu dapat menjelaskan kegunaan air bagi ke-\nhidupan?\n4.\nApakah kamu dapat mendemonstrasikan tahapan siklus air \nberdasarkan hasil percobaan?\nRangkuman\n1.\t Siklus air adalah gerak perputaran air dengan perubahan air menjadi berbagai wujud \ndan kembali ke bentuk semula. \n2.\t Tahapan siklus air meliputi: evaporasi, kondensasi, dan presipitasi. \n3.\t Evaporasi menunjukkan proses penguapan air yang berasal dari laut, sungai, danau, dan \nbadan air lainnya.\n4.\t Kondensasi merupakan pro\u00adses perubahan air dari gas menjadi cair atau kita kenal dengan \nistilah pengem\u00adbunan yang merupakan kebalikan dari evaporasi atau penguapan.\n5. \t Presipitasi menunjukkan proses turunnya air hujan.\n6.\t Siklus air diawali dengan menguapnya air di permukaan bumi. Air berubah menjadi \nuap air. Uap air berkumpul membentuk awan. Titik-titik air di awan akan jatuh ke bumi \nsebagai hujan\nGlosarium\nAtmosfer\t\n:\t lapisan udara (gas) yang menyelimuti bumi.\nEvaporasi\t\n: \tproses penguapan air menjadi uap air.\n",
+        "character_count": 1606
+      },
+      {
+        "page_number": 11,
+        "text": "BAHAN AJAR 6: MENGENAL SIKLUS AIR\n11\nKondensasi\t\n: \tpengembunan, perubahan wujud dari gas menjadi cair.\nPresipitasi\t\n: \ttitik-titik air hujan.\nTransirasi\t\n:\t proses penguapan pada tanaman\nSiklus air\t\n: \tperedaran air yang terjadi secara terus menerus.\nDaftar Pustaka\nKholil, Munawar, dkk. 2009. Ilmu Pengetahuan Alam 5. Jakarta: Pusat Perbukuan Departemen \nPendidikan Nasional. \nSulaiman. 2018. Jelajah Sains. Jakarta: Yudhistira.\nSusilowati, Eko, dkk. 2010. Ilmu Pengetahuan Alam 5. Jakarta: Pusat Perbukuan Departemen \nPendidikan Nasional. \nProfil Penulis\n\t\nNama Lengkap\t\n:   Dra. Sri Rahayu, M.Pd.\nEmail\t \t\n\t\n:   yayukr001@gmail.com\nInstansi\t\n\t\n:   SDN Makamhaji 05, Kartasura, Sukoharjo\nBidang Keahlian\t\n:   IPAS\nDra. Sri Rahayu, M.Pd. adalah seorang kepala sekolah di SDN \nMakamhaji 05, Kartasura, Sukoharjo, Jawa Tengah. Berbekal tekad \nuntuk terus belajar dan berbagi, membuat Rahayu bersemangat \nmenulis bahan ajar mata pelajaran IPAS. Semoga bahan ajar ini bisa \nbermanfaat bagi para peserta didik, guru, dan orang tua, sehingga \nmemajukan pendidikan di Indonesia.\n",
+        "character_count": 1074
+      },
+      {
+        "page_number": 12,
+        "text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n12\nRubrik Penilaian\nRubrik Penilaian Percobaan\nNo.\nKriteria Penilaian\nSangat \nBaik\nBaik\nCukup\nPerlu \nPerbaikan \n1\nSiswa melakukan percobaan dengan mengikuti \nlangkah-langkah percobaan.\n2\nSiswa dapat menjawab pertanyaan dengan benar \ndan didukung alasan yang logis.\n3\nSiswa terlihat sungguh-sungguh dan selalu menjaga \nkeamanan diri dan orang lain saat melakukan \npercobaan.\n4\nSiswa memanfaatkan bahan yang ada dan \nmelakukan modifikasi dari kesulitan yang \nditemuinya.\nRubrik Penilaian Pengamatan\nKriteria \nPenilaian\nSangat Baik\nBaik\nCukup\nPerlu Perbaikan \nPengumpulan \nBahan\nSiswa memenuhi \nsemua bahan yang \ndiperlukan.\nSiswa memenuhi \n4-5 bahan yang \ndiperlukan.\nSiswa memenuhi \n3-4  bahan yang \ndiperlukan.\nSiswa memenuhi \n1-2 bahan yang \ndiperlukan.\nKegiatan \nPengamatan\nSiswa melakukan \nlangkah-langkah \ndalam kegiatan \ndengan runtut, \nmengikuti petunjuk, \ndan mengisi jurnal \npengamatan secara \nmandiri tanpa \ndiingatkan.\nSiswa melakukan \nlangkah-langkah \ndalam kegiatan \ndengan runtut, \nmengikuti petunjuk, \ndan mengisi jurnal \npengamatan \nnamun masih perlu \ndiingatkan.\nSiswa melakukan \nlangkah-langkah \ndalam kegiatan tidak \nruntut, mengikuti \npetunjuk, dan \nmengisi jurnal \npengamatan \nnamun masih perlu \ndiingatkan.\nSiswa melakukan \nlangkah-langkah \ndalam kegiatan \ntidak runtut, tidak \nmengikuti petunjuk, \ndan perlu ditemani \nsaat pengisian jurnal \npengamatan.\nSimpulan\nSiswa dapat \nmembuat \nkesimpulan \ndari kegiatan \npengamatan yang \ntelah dilakukan \ndalam bentuk \ngambar/bagan/\ndeskripsi secara \nbenar dan lengkap.\nSiswa dapat \nmembuat \nkesimpulan \ndari kegiatan \npengamatan yang \ntelah dilakukan \ndalam bentuk \ngambar/bagan/\ndeskripsi secara \nbenar namun kurang \nlengkap.\nSiswa dapat \nmembuat \nkesimpulan \ndari kegiatan \npengamatan yang \ntelah dilakukan \ndalam bentuk \ngambar/bagan/\ndeskripsi secara \nlengkap namun \nmasih ditemui 1-2 \nkesalahan.\nSiswa dapat \nmembuat \nkesimpulan \ndari kegiatan \npengamatan yang \ntelah dilakukan \ndalam bentuk \ngambar/bagan/\ndeskripsi namun \nmasih ditemui 3-5 \nkesalahan.\n",
+        "character_count": 2073
+      },
+      {
+        "page_number": 13,
+        "text": "BAHAN AJAR 6: MENGENAL SIKLUS AIR\n13\nKriteria \nPenilaian\nSangat Baik\nBaik\nCukup\nPerlu Perbaikan \nPenulisan\nSiswa memenuhi 4 \nkriteria penulisan \nyaitu: menggunakan \nkalimat efektif, \nbahasa yang \nmudah dipahami, \nsesuai dengan \nhasil pengamtan, \nmenggunakan tanda \nbaca yang tepat.\nSiswa memenuhi 3 \ndari 4 kriteria yang \nditentukan\nSiswa memenuhi 2 \ndari 4 kriteria yang \nditentukan\nSiswa memenuhi 1 \ndari 4 kriteria yang \nditentukan\nPenyelesaian \nMasalah dan \nKemandirian.\nAktif mencari ide \natau mencari solusi \njika ada hambatan.\nBisa mencari solusi \nnamun dengan \narahan sesekali.\nMemerlukan \nbantuan setiap \nmenemukan \nkesulitan namun ada \ninisiatif bertanya.\nPasif jika \nmenemukan \nkesulitan.\n",
+        "character_count": 700
+      }
+    ],
+    "tables_found": 10,
+    "images_found": 18,
+    "metadata": {
+      "subject": "IPA",
+      "grade": "6"
+    },
+    "pipeline_version": "1.0.0",
+    "extraction_method": "basic_extraction",
+    "processing_time": 0.864905595779419
+  },
+  "semantic_chunk_service_siklus-air.pdf": {
+    "success": true,
+    "document_id": "test_siklus-air",
+    "chunks": [
+      {
+        "chunk_id": "41792481-fec5-4669-9a34-3b97b9431711",
+        "text": "BAHAN AJAR 6 Pokok Bahasan: Mengenal Siklus Air untuk Kelas IV SD PT Jepe Press Media Utama Penyusun: Editor: Ilustrator: Dra. Sri Rahayu, M.Pd. Riska Luthfiana Febi Rahmat Hidayat Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV 2 Ayo Mengamati Hai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. Hmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang siklus air di bawah ini! Nah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan belajar kali ini! Setelah mempelajari pokok bahasan ini, siswa dapat: 1. mendeskripsikan tentang siklus air, 2. menjelaskan tahapan-tahapan siklus air, 3. menjelaskan kegunaan air bagi kehidupan, 4. mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. Tujuan yang Diharapkan Media Pembelajaran 1. Toples kaca 2. Plastik kaca 3. Air panas 4. Es batu 5. Pewarna biru 6. Karet Metode Pembelajaran Problem Based Learning (PBL) https://youtu.be/vZaxn6w0cQk Sumber: QR CODE Sumber: Dokumentasi penerbit Gambar 1. Hujan BAHAN AJAR 6: MENGENAL SIKLUS AIR 3 Mengenal Siklus Air Sumber: Dokumentasi penerbit Gambar 2. Air sebagai salah satu sumber kehidupan manusia Semua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat membutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan untuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan membutuhkan air untuk berfotosintesis. Hal tersebut menunjukkan bahwa air merupakan salah satu sumber kehidupan. Air termasuk sumber daya alam yang dapat diperbaharui. Ini berarti jumlah air di bumi tidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu ada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses siklus air itu? Ayo, kita pelajari bersama-sama! Topik 1: Apa itu Siklus Air? Uraian materi Pernahkah kamu berpikir dari man",
+        "metadata": {
+          "chunk_id": "41792481-fec5-4669-9a34-3b97b9431711",
+          "chunk_type": "competency",
+          "competency": "tahapan-tahapan siklus air, 3. menjelaskan kegunaan air bagi kehidupan, 4. mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. Tujuan",
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 0,
+          "chunk_quality_score": 0.9999999999999999,
+          "educational_value_score": 0.8
+        },
+        "character_count": 1943,
+        "word_count": 288,
+        "position": 0,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "18f4eddb-af8f-448b-aa0a-dbf242464529",
+        "text": "BAHAN AJAR 6 Pokok Bahasan: Mengenal Siklus Air untuk Kelas IV SD PT Jepe Press Media Utama Penyusun: Editor: Ilustrator: Dra. Sri Rahayu, M.Pd. Riska Luthfiana Febi Rahmat Hidayat Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV 2 Ayo Mengamati Hai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. Hmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang siklus air di bawah ini! Nah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan belajar kali ini! Setelah mempelajari pokok bahasan ini, siswa dapat: 1. mendeskripsikan tentang siklus air, 2. menjelaskan tahapan-tahapan siklus air, 3. menjelaskan kegunaan air bagi kehidupan, 4. mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. Tujuan yang Diharapkan Media Pembelajaran 1. Toples kaca 2. Plastik kaca 3. Air panas 4. Es batu 5. Pewarna biru 6. Karet Metode Pembelajaran Problem Based Learning (PBL) https://youtu.be/vZaxn6w0cQk Sumber: QR CODE Sumber: Dokumentasi penerbit Gambar 1. Hujan BAHAN AJAR 6: MENGENAL SIKLUS AIR 3 Mengenal Siklus Air Sumber: Dokumentasi penerbit Gambar 2. Air sebagai salah satu sumber kehidupan manusia Semua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat membutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan untuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan membutuhkan air untuk berfotosintesis. Hal tersebut menunjukkan bahwa air merupakan salah satu sumber kehidupan. Air termasuk sumber daya alam yang dapat diperbaharui. Ini berarti jumlah air di bumi tidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu ada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses siklus air itu? Ayo, kita pelajari bersama-sama! Topik 1: Apa itu Siklus Air? Uraian materi Pernahkah kamu berpikir dari man",
+        "metadata": {
+          "chunk_id": "18f4eddb-af8f-448b-aa0a-dbf242464529",
+          "chunk_type": "activity",
+          "activity_type": "b",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.7,
+          "educational_value_score": 0.75
+        },
+        "character_count": 1943,
+        "word_count": 288,
+        "position": 0,
+        "confidence": 0.7
+      },
+      {
+        "chunk_id": "e2d4e7a9-09e1-48cb-b2e7-191958882aa8",
+        "text": "BAHAN AJAR   6\nPokok Bahasan: \nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hidayat\nIlmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n2\nAyo Mengamati\nHai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. \nHmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang \nsiklus air di bawah ini!\nNah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan \nbelajar kali ini! \nSetelah mempelajari pokok bahasan ini, siswa dapat:",
+        "metadata": {
+          "chunk_id": "e2d4e7a9-09e1-48cb-b2e7-191958882aa8",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 1,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 641,
+        "word_count": 96,
+        "position": 0,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "9a082248-8d85-4610-bce2-462eca9a0d00",
+        "text": "1.\t mendeskripsikan tentang siklus air,",
+        "metadata": {
+          "chunk_id": "9a082248-8d85-4610-bce2-462eca9a0d00",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 2,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 39,
+        "word_count": 5,
+        "position": 1,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "7240c281-21cb-4d6a-88c6-86ded2f44a7d",
+        "text": "2.\t menjelaskan tahapan-tahapan siklus air,",
+        "metadata": {
+          "chunk_id": "7240c281-21cb-4d6a-88c6-86ded2f44a7d",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 3,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 43,
+        "word_count": 5,
+        "position": 2,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "20b621ef-9d2d-4317-a4c2-c94c5d9f5e59",
+        "text": "3.\t menjelaskan kegunaan air bagi kehidupan,",
+        "metadata": {
+          "chunk_id": "20b621ef-9d2d-4317-a4c2-c94c5d9f5e59",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 4,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 44,
+        "word_count": 6,
+        "position": 3,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "62402b6c-153b-4d5c-920c-fd75fc36b4f5",
+        "text": "4.\t mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. \nTujuan yang Diharapkan\nMedia Pembelajaran",
+        "metadata": {
+          "chunk_id": "62402b6c-153b-4d5c-920c-fd75fc36b4f5",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 5,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 112,
+        "word_count": 13,
+        "position": 4,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "5378a049-1b85-405f-931b-abc62eadfc94",
+        "text": "1.\t Toples kaca",
+        "metadata": {
+          "chunk_id": "5378a049-1b85-405f-931b-abc62eadfc94",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 6,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 15,
+        "word_count": 3,
+        "position": 5,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "c9aa05a4-f6e0-4bce-ae88-aa437da60cd3",
+        "text": "2.\t Plastik kaca",
+        "metadata": {
+          "chunk_id": "c9aa05a4-f6e0-4bce-ae88-aa437da60cd3",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 7,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 16,
+        "word_count": 3,
+        "position": 6,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "2923d751-76a1-45a8-8d11-de382c986048",
+        "text": "3.\t Air panas",
+        "metadata": {
+          "chunk_id": "2923d751-76a1-45a8-8d11-de382c986048",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 8,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 13,
+        "word_count": 3,
+        "position": 7,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "bc07ba91-43da-41fe-83d3-616115ffba45",
+        "text": "4.\t Es batu",
+        "metadata": {
+          "chunk_id": "bc07ba91-43da-41fe-83d3-616115ffba45",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 9,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 11,
+        "word_count": 3,
+        "position": 8,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "7ebdcff1-31f8-4744-ad8f-02c8159a86aa",
+        "text": "5.\t Pewarna biru",
+        "metadata": {
+          "chunk_id": "7ebdcff1-31f8-4744-ad8f-02c8159a86aa",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 10,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 16,
+        "word_count": 3,
+        "position": 9,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "2f38d071-6f1c-4216-be7c-fdb14e983595",
+        "text": "6.\t Karet\nMetode Pembelajaran\nProblem Based Learning (PBL)\nhttps://youtu.be/vZaxn6w0cQk\nSumber: \nQR CODE\nSumber: Dokumentasi penerbit\nGambar 1. Hujan\nBAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air\nSumber: Dokumentasi penerbit\nGambar 2. Air sebagai salah satu sumber kehidupan manusia\nSemua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat \nmembutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan \nuntuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan \nmembutuhkan air untuk berfotosintesis.  Hal tersebut menunjukkan bahwa air merupakan \nsalah satu sumber kehidupan. \nAir termasuk\u00a0sumber daya alam\u00a0yang dapat diperbaharui. Ini berarti jumlah air di bumi \ntidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu \nada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses \nsiklus air itu? Ayo, kita pelajari bersama-sama!  \nTopik 1: Apa itu Siklus Air?\n \n \nUraian materi\nPernahkah kamu berpikir dari man",
+        "metadata": {
+          "chunk_id": "2f38d071-6f1c-4216-be7c-fdb14e983595",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 11,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 1039,
+        "word_count": 148,
+        "position": 10,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "0f554445-51f7-452a-8667-972398a4d4bd",
+        "text": "BAHAN AJAR   6\nPokok Bahasan: \nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hidayat\nIlmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n2\nAyo Mengamati\nHai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. \nHmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang \nsiklus air di bawah ini!\nNah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan \nbelajar kali ini! \nSetelah mempelajari pokok bahasan ini, siswa dapat:\n1.\t mendeskripsikan tentang siklus air,\n2.\t menjelaskan tahapan-tahapan siklus air, \n3.\t menjelaskan kegunaan air bagi kehidupan,\n4.\t mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. \nTujuan yang Diharapkan\nMedia Pembelajaran\n1.\t Toples kaca\n2.\t Plastik kaca\n3.\t Air panas\n4.\t Es batu\n5.\t Pewarna biru\n6.\t Karet\nMetode Pembelajaran\nProblem Based Learning (PBL)\nhttps://youtu.be/vZaxn6w0cQk\nSumber: \nQR CODE\nSumber: Dokumentasi penerbit\nGambar 1. Hujan\nBAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air\nSumber: Dokumentasi penerbit\nGambar 2. Air sebagai salah satu sumber kehidupan manusia\nSemua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat \nmembutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan \nuntuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan \nmembutuhkan air untuk berfotosintesis.  Hal tersebut menunjukkan bahwa air merupakan \nsalah satu sumber kehidupan. \nAir termasuk\u00a0sumber daya alam\u00a0yang dapat diperbaharui. Ini berarti jumlah air di bumi \ntidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu \nada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses \nsiklus air itu? Ayo, kita pelajari bersama-sama!  \nTopik 1: Apa itu Siklus Air?\n \n \nUraian materi\nPernahkah kamu berpikir dari man",
+        "metadata": {
+          "chunk_id": "0f554445-51f7-452a-8667-972398a4d4bd",
+          "chunk_type": "inquiry",
+          "inquiry_stage": "question",
+          "pedagogy_type": "inquiry_learning",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.75,
+          "educational_value_score": 0.85
+        },
+        "character_count": 2000,
+        "word_count": 288,
+        "position": 0,
+        "confidence": 0.75
+      }
+    ],
+    "chunk_count": 14,
+    "chunking_strategy": "semantic_curriculum_aware",
+    "chunk_types": {
+      "competency": 1,
+      "activity": 1,
+      "assessment": 11,
+      "inquiry": 1
+    },
+    "processing_time_ms": 150
+  },
+  "semantic_enrichment_service_siklus-air.pdf": {
+    "success": true,
+    "enriched_chunks": [
+      {
+        "chunk_id": "chunk_siklus-air_1",
+        "text": "BAHAN AJAR   6\nPokok Bahasan: \nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hidayat\n",
+        "metadata": {
+          "subject": "IPA",
+          "grade": "6"
+        },
+        "enrichment": {
+          "pedagogy_classification": {
+            "pedagogy_type": "inquiry_learning",
+            "confidence": 0.0,
+            "indicators": [],
+            "all_scores": {
+              "inquiry_learning": 0,
+              "differentiated_learning": 0,
+              "deep_learning": 0,
+              "project_based_learning": 0,
+              "problem_based_learning": 0
+            }
+          },
+          "taxonomy_tags": [
+            {
+              "type": "subject",
+              "canonical": "IPA",
+              "original": "IPA",
+              "confidence": 0.95,
+              "source": "context"
+            },
+            {
+              "type": "grade_level",
+              "canonical": "Kelas 6",
+              "original": "6",
+              "confidence": 0.95,
+              "source": "context"
+            }
+          ],
+          "competency_tags": {
+            "competencies_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "assessment_tags": {
+            "assessment_types_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "cognitive_tags": {
+            "cognitive_levels": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "learning_objective_tags": {
+            "learning_objectives": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "deep_learning_tags": {
+            "deep_learning_features": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "enrichment_metadata": {
+            "enriched_at": "2026-05-29T13:46:34.812435",
+            "enrichment_version": "2.0.0",
+            "content_length": 206,
+            "word_count": 29,
+            "language": "indonesian"
+          }
+        }
+      }
+    ],
+    "chunk_count": 1,
+    "enrichment_types": [
+      "pedagogy_classification",
+      "taxonomy_tags",
+      "competency_tags",
+      "assessment_tags",
+      "cognitive_tags",
+      "learning_objective_tags",
+      "deep_learning_tags",
+      "enrichment_metadata"
+    ],
+    "processing_time_ms": 200
+  }
+}

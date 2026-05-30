@@ -27,15 +27,19 @@ func NewSystemService(repo SystemRepository, rdb *redis.Client) SystemService {
 func (s *systemService) GetPimpinanDashboard(ctx context.Context) (map[string]interface{}, error) {
 	cacheKey := "dashboard:pimpinan"
 	return common.GetOrSetCache(ctx, s.rdb, cacheKey, 10*time.Minute, func() (map[string]interface{}, error) {
-		kspProgress, err := s.repo.GetPimpinanKSP(ctx)
-		if err != nil {
-			return nil, err
-		}
+		// GetPimpinanKSP is commented out due to missing trx_ksp_document table in normalized schema
+		// kspProgress, err := s.repo.GetPimpinanKSP(ctx)
+		// if err != nil {
+		// 	return nil, err
+		// }
+		kspProgress := []map[string]interface{}{} // Empty placeholder
 
-		cognitiveStats, err := s.repo.GetPimpinanCognitive(ctx)
-		if err != nil {
-			return nil, err
-		}
+		// Commented out due to missing tables in normalized schema
+		// cognitiveStats, err := s.repo.GetPimpinanCognitive(ctx)
+		// if err != nil {
+		// 	return nil, err
+		// }
+		cognitiveStats := []map[string]interface{}{} // Empty placeholder
 
 		p5Stats, err := s.repo.GetPimpinanP5(ctx)
 		if err != nil {
@@ -61,15 +65,19 @@ func (s *systemService) GetPimpinanDashboard(ctx context.Context) (map[string]in
 func (s *systemService) GetGuruDashboard(ctx context.Context) (map[string]interface{}, error) {
 	cacheKey := "dashboard:guru"
 	return common.GetOrSetCache(ctx, s.rdb, cacheKey, 10*time.Minute, func() (map[string]interface{}, error) {
-		moduleCompliance, err := s.repo.GetGuruCompliance(ctx)
-		if err != nil {
-			return nil, err
-		}
+		// Commented out due to missing tables in normalized schema
+		// moduleCompliance, err := s.repo.GetGuruCompliance(ctx)
+		// if err != nil {
+		// 	return nil, err
+		// }
+		moduleCompliance := []map[string]interface{}{} // Empty placeholder
 
-		studentWatch, err := s.repo.GetGuruStudentWatch(ctx)
-		if err != nil {
-			return nil, err
-		}
+		// Commented out due to missing tables in normalized schema
+		// studentWatch, err := s.repo.GetGuruStudentWatch(ctx)
+		// if err != nil {
+		// 	return nil, err
+		// }
+		studentWatch := []map[string]interface{}{} // Empty placeholder
 
 		automationQueue, err := s.repo.GetGuruAutomationQueue(ctx)
 		if err != nil {

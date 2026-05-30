@@ -64,7 +64,7 @@ Untuk menjamin performa tinggi dan keandalan sistem berskala produksi, backend i
 - **Bahasa Utama:** Go (Golang) **1.26**
 - **Framework Web:** [Fiber v2](https://gofiber.io/) - untuk performa API ultra cepat dan konsumsi memori rendah.
 - **Database Utama:** PostgreSQL **16.5** - DBMS Relasional tangguh untuk menyimpan data master dan operasional.
-- **Object Storage:** [RustFS](https://github.com/rustfs/rustfs) - server penyimpanan file berbasis HTTP mandiri untuk menangani file dokumen & media (S3-compatible).
+- **Object Storage:** [SeaweedFS](https://github.com/chrislusf/seaweedfs) - distributed object storage system untuk menangani file dokumen & media (S3-compatible).
 - **Caching & Queue:** Redis **v9** - digunakan untuk global rate limiting (menghindari serangan DDoS/abuse) serta backend *Asynchronous Queue Worker* menggunakan mekanisme List `BRPOP` untuk menangani antrean tugas latar belakang.
 
 - **Message Broker:** RabbitMQ - untuk manajemen event-driven communication dan pub-sub messages.
@@ -82,11 +82,11 @@ Pastikan servis-servis berikut terpasang atau dapat diakses:
 - **PostgreSQL 16+**
 - **Redis v9**
 - **RabbitMQ**
-- **RustFS** (untuk media storage)
+- **SeaweedFS** (untuk media storage)
 - **OpenTelemetry Collector** (jika ingin melacak trace/logs di Grafana Cloud)
 
 > [!TIP]
-> Seluruh database pendukung (PostgreSQL, Qdrant, RustFS, OTel Collector) dapat dijalankan dengan sangat mudah menggunakan Docker Compose yang telah disediakan di root workspace:
+> Seluruh database pendukung (PostgreSQL, Qdrant, SeaweedFS, OTel Collector) dapat dijalankan dengan sangat mudah menggunakan Docker Compose yang telah disediakan di root workspace:
 > ```bash
 > docker-compose up -d
 > ```
@@ -138,8 +138,11 @@ REDIS_DB=0
 # RABBITMQ BROKER
 RABBITMQ_URL=amqp://user:password123@localhost:5672/
 
-# RUSTFS STORAGE
-RUSTFS_URL=http://localhost:9000
+# SEAWEDFS STORAGE
+SEAWEEDFS_S3_ENDPOINT=http://localhost:8333
+SEAWEEDFS_ACCESS_KEY=admin
+SEAWEEDFS_SECRET_KEY=admin
+SEAWEEDFS_BUCKET=sim-sekolah-documents
 
 # LOGGING
 LOG_LEVEL=debug

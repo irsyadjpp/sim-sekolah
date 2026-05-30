@@ -46,8 +46,8 @@ type Portfolio struct {
 
 	common.Auditable
 
-	Student   *student.Student    `gorm:"foreignKey:StudentID" json:"student,omitempty"`
-	Artifacts []PortfolioArtifact `gorm:"foreignKey:PortfolioID" json:"artifacts,omitempty"`
+	Student   *student.MasterStudent `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Artifacts []PortfolioArtifact    `gorm:"foreignKey:PortfolioID" json:"artifacts,omitempty"`
 }
 
 func (Portfolio) TableName() string {
@@ -100,7 +100,7 @@ type LearningEvidence struct {
 
 	common.Auditable
 
-	Student *student.Student `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Student *student.MasterStudent `gorm:"foreignKey:StudentID" json:"student,omitempty"`
 }
 
 func (LearningEvidence) TableName() string {

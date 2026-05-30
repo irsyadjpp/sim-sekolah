@@ -1,722 +1,265 @@
-Berikut cara saya membangun **Dedicated AI Services (Python)** dari nol sampai production-ready untuk sistem Anda.
+# AI Platform Monolith - README
 
-Saya akan buat pendekatan yang realistis untuk tim enterprise kecil–menengah:
+## Overview
 
-* scalable,
-* maintainable,
-* async,
-* observable,
-* mudah di-debug,
-* mudah diintegrasikan ke Spring Boot.
+AI Platform Monolith adalah arsitektur terpadu yang menggabungkan semua 33+ microservices menjadi satu aplikasi Python unified. Arsitektur ini dirancang untuk deployment yang lebih simple, performance yang lebih baik, dan development yang lebih efficient.
 
 ---
 
-# TARGET AKHIR
+## Quick Start
 
-Kita akan membangun:
+### Prerequisites
+- Docker & Docker Compose
+- Python 3.12+
+- 8GB+ RAM
+- 20GB+ disk space
 
-```text id="u3d4o9"
-ai-platform/
-├── api-gateway/
-├── parser-service/
-├── embedding-service/
-├── retrieval-service/
-├── generation-service/
-├── metadata-service/
-├── orchestration-service/
-├── shared/
-├── infra/
-└── deployment/
+### Local Development
+
+```bash
+# Clone repository
+cd ai-platform/monolith
+
+# Start infrastructure services
+docker-compose up -d postgres qdrant redis minio
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run monolith
+python -m uvicorn app.main:app --reload
+```
+
+### Docker Deployment
+
+```bash
+# Start complete stack
+docker-compose up -d
+
+# View logs
+docker-compose logs -f ai-platform-monolith
+
+# Stop stack
+docker-compose down
 ```
 
 ---
 
-# PHASE 0 — Tentukan Filosofi Architecture
+## Architecture
 
-Sebelum coding:
+### Key Components
+- **Parser Service**: Document parsing and text extraction
+- **Semantic Chunk Service**: Curriculum-aware semantic chunking
+- **Semantic Enrichment Service**: Educational tag enrichment
+- **Embedding Service**: Vector embedding generation
+- **Retrieval Service**: Hybrid semantic retrieval
+- **Generation Service**: AI-powered content generation
+- **Pipeline Tracker Service**: Document pipeline state tracking
+- **Ontology Validation Service**: Educational tag validation
 
-## Jangan membuat:
-
-* 1 service besar,
-* 1 Python app monster,
-* semua AI logic di satu tempat.
-
----
-
-# Gunakan prinsip:
-
-## “Single Responsibility AI Service”
-
-Artinya:
-
-| Service               | Tanggung Jawab  |
-| --------------------- | --------------- |
-| parser-service        | parsing PDF     |
-| embedding-service     | embedding       |
-| retrieval-service     | search          |
-| generation-service    | generate answer |
-| metadata-service      | enrichment      |
-| orchestration-service | workflow AI     |
+### Communication Pattern
+- **Before**: HTTP/gRPC calls between microservices
+- **After**: Direct function calls within monolith
+- **Result**: Zero network latency, simplified debugging
 
 ---
 
-# PHASE 1 — Setup Foundation
+## API Endpoints
 
----
-
-# STEP 1 — Pilih Framework Python
-
-Saya sarankan:
-
-## Gunakan:
-
-* FastAPI
-
-Kenapa:
-
-* async native,
-* cepat,
-* cocok microservices,
-* OpenAPI otomatis,
-* production proven.
-
----
-
-# STEP 2 — Setup Monorepo
-
-Buat:
-
-```text id="m0wqcr"
-ai-platform/
+### Health Check
+```
+GET /health
 ```
 
----
-
-# STEP 3 — Struktur Awal
-
-```text id="0u4h9z"
-ai-platform/
-├── services/
-│   ├── parser-service/
-│   ├── embedding-service/
-│   ├── retrieval-service/
-│   ├── generation-service/
-│   └── orchestration-service/
-│
-├── shared/
-│   ├── models/
-│   ├── utils/
-│   ├── logging/
-│   └── configs/
-│
-├── infra/
-│   ├── docker/
-│   ├── kafka/
-│   └── monitoring/
-│
-└── deployment/
+### Parser Service
 ```
-
----
-
-# STEP 4 — Python Package Manager
-
-Saya sarankan:
-
-## Gunakan:
-
-* uv
-
-lebih modern daripada pip.
-
----
-
-# STEP 5 — Standardisasi Semua Service
-
-Semua service WAJIB punya:
-
-```text id="tk0o9q"
-app/
-├── api/
-├── core/
-├── services/
-├── workers/
-├── models/
-├── repositories/
-└── main.py
-```
-
----
-
-# PHASE 2 — Parser Service
-
-Ini service paling penting.
-
----
-
-# STEP 6 — Parser Service Pertama
-
-## Tujuan
-
-Input:
-
-* PDF
-
-Output:
-
-* structured document JSON.
-
----
-
-# Install
-
-Gunakan:
-
-* PyMuPDF
-* Unstructured
-
----
-
-# STEP 7 — Buat Flow Parsing Dasar
-
-```text id="jlwmgm"
-PDF
- ↓
-Extract pages
- ↓
-Extract blocks
- ↓
-Detect layout
- ↓
-Normalize
- ↓
-Store JSON
-```
-
----
-
-# STEP 8 — Raw Extraction Layer
-
-Gunakan:
-
-PyMuPDF
-
-Extract:
-
-* text,
-* bbox,
-* font,
-* image refs.
-
----
-
-# Output
-
-```json id="t9ub8y"
+POST /api/v1/parser/parse
+Content-Type: application/json
 {
-  "page": 1,
-  "blocks": [
-    {
-      "type": "text",
-      "bbox": [0,0,100,100],
-      "text": "Energi"
-    }
-  ]
+  "document_data": "...",
+  "document_type": "pdf",
+  "metadata": {...}
 }
 ```
 
----
-
-# STEP 9 — Layout Intelligence
-
-Gunakan:
-
-Unstructured
-
-Deteksi:
-
-* Title,
-* Header,
-* Paragraph,
-* Table,
-* Figure.
-
----
-
-# STEP 10 — Buat Unified Document Schema
-
-KRITIKAL.
-
-Jangan simpan hasil parsing mentah.
-
----
-
-# Buat schema standar
-
-Contoh:
-
-```json id="px26hl"
+### Semantic Chunk Service
+```
+POST /api/v1/chunk/chunk
+Content-Type: application/json
 {
-  "document_id": "uuid",
-  "page": 1,
-  "element_type": "title",
-  "content": "Energi",
-  "metadata": {
-    "subject": "IPA",
-    "grade": 4
-  }
+  "document": {...},
+  "chunking_strategy": "semantic"
 }
 ```
 
----
-
-# PHASE 3 — Queue System
-
----
-
-# STEP 11 — Tambahkan Queue
-
-Gunakan:
-
-* RabbitMQ
-  atau
-* Apache Kafka
-
-Saya sarankan awal:
-
-* RabbitMQ lebih mudah.
+### Other Services
+- `/api/v1/enrichment/enrich` - Semantic enrichment
+- `/api/v1/embedding/generate` - Embedding generation
+- `/api/v1/retrieval/retrieve` - Document retrieval
+- `/api/v1/generation/generate` - Content generation
+- `/api/v1/ontology/validate` - Ontology validation
 
 ---
 
-# Flow
+## Configuration
 
-```text id="vrvkkx"
-Upload PDF
-   ↓
-Queue
-   ↓
-Parser Worker
+### Environment Variables
+See `.env` file for configuration options:
+- Database connection settings
+- Vector database settings
+- Storage configuration
+- AI model settings
+- Processing parameters
+
+### Database Schema
+Monolith uses single PostgreSQL database:
+- `pipeline_state` - Document pipeline tracking
+- `documents` - Document metadata
+- `chunks` - Semantic chunks
+- `embeddings` - Vector embeddings
+
+---
+
+## Benefits
+
+### Compared to Microservices
+1. **Simpler Deployment**: Single container vs 33+ containers
+2. **Better Performance**: Zero network latency
+3. **Easier Debugging**: Single codebase, direct function calls
+4. **Cost Efficiency**: Reduced infrastructure overhead
+5. **Faster Development**: No inter-service mocking
+
+### Performance Improvements
+- Eliminates network latency between services
+- Shared memory access
+- Direct function calls vs HTTP/gRPC
+- Unified caching strategy
+- Single database connection pool
+
+---
+
+## Development
+
+### Adding New Functionality
+```python
+# 1. Add service class to app/services/
+# 2. Add API routes to app/api/
+# 3. Register routes in app/main.py
+# 4. Initialize service in lifespan
+```
+
+### Testing
+```bash
+# Run all tests
+pytest
+
+# Run specific test
+pytest tests/test_parser_service.py
+
+# Run with coverage
+pytest --cov=app
 ```
 
 ---
 
-# STEP 12 — Worker Architecture
+## Migration Path
 
-Jangan parsing di request HTTP.
+### From Microservices to Monolith
+1. ✅ Created unified application structure
+2. ✅ Consolidated dependencies
+3. ✅ Integrated core services
+4. ✅ Simplified deployment
+5. ✅ Updated documentation
 
-SALAH BESAR.
+### Future Expansion Options
+- Horizontal scaling: Multiple instances
+- Service extraction: Extract specific services if needed
+- Hybrid approach: Core services in monolith, specialized as microservices
 
 ---
 
-# Yang benar:
+## Monitoring
 
-```text id="7hdf25"
-HTTP Upload
-   ↓
-Create Job
-   ↓
-Push Queue
-   ↓
-Background Worker
+### Health Check
+```bash
+curl http://localhost:8000/health
+```
+
+### Logs
+```bash
+# View application logs
+docker-compose logs -f ai-platform-monolith
+
+# View infrastructure logs
+docker-compose logs -f postgres qdrant redis
+```
+
+### Metrics
+- Application metrics via Prometheus
+- Database metrics via pg_stat
+- Vector DB metrics via Qdrant dashboard
+
+---
+
+## Troubleshooting
+
+### Common Issues
+1. **Database Connection**: Check PostgreSQL container health
+2. **Vector Database**: Verify Qdrant container is running
+3. **Memory Issues**: Increase Docker memory allocation
+4. **Model Loading**: Ensure model files are accessible
+
+### Debug Mode
+```bash
+# Enable debug mode
+export DEBUG=true
+
+# Run with detailed logging
+python -m uvicorn app.main:app --log-level debug
 ```
 
 ---
 
-# PHASE 4 — Embedding Service
+## Comparison with Microservices
+
+| Aspect | Microservices | Monolith |
+|--------|---------------|----------|
+| Containers | 33+ | 1 |
+| Network Calls | Inter-service HTTP/gRPC | Direct function calls |
+| Deployment Complexity | High | Low |
+| Debugging | Cross-service tracing | Single codebase |
+| Network Latency | High | Zero |
+| Infrastructure Cost | High | Low |
+| Team Coordination | Complex | Simple |
+| Scaling | Per-service | Application-level |
 
 ---
 
-# STEP 13 — Buat Embedding Service
+## Next Steps
 
-Service khusus embedding.
+### Phase 2 Integration (Future)
+- Integrate remaining specialized services
+- Add comprehensive error handling
+- Implement advanced caching strategies
+- Add performance monitoring
 
----
-
-# Install model
-
-Gunakan:
-
-* BAAI/bge-m3
-
-atau
-
-* intfloat/multilingual-e5-large
+### Phase 3 Integration (Future)
+- Integrate assessment engine
+- Integrate curriculum engine
+- Integrate pedagogy engine
+- Integrate learning graph engine
 
 ---
 
-# STEP 14 — Embedding Pipeline
+## Support
 
-```text id="d8y0nh"
-Chunk
- ↓
-Normalize text
- ↓
-Generate embedding
- ↓
-Store vector
-```
+For issues and questions:
+- Check ARCHITECTURE.md for detailed documentation
+- Review docker-compose.yml for infrastructure setup
+- See .env for configuration options
 
 ---
 
-# STEP 15 — Vector Store
+## License
 
-Gunakan:
-
-Qdrant
-
----
-
-# Collection Strategy
-
-Jangan satu collection besar.
-
-Pisahkan:
-
-```text id="6v4mh7"
-curriculum_chunks
-teacher_books
-student_books
-assessment_items
-lesson_plans
-```
-
----
-
-# STEP 16 — Metadata Schema
-
-WAJIB konsisten.
-
----
-
-# Contoh metadata
-
-```json id="hrp1zq"
-{
-  "subject": "IPA",
-  "grade": 4,
-  "phase": "B",
-  "topic": "Energi",
-  "chunk_type": "activity"
-}
-```
-
----
-
-# PHASE 5 — Retrieval Service
-
----
-
-# STEP 17 — Retrieval Service
-
-Service khusus search.
-
----
-
-# Tanggung jawab
-
-* semantic search,
-* metadata filter,
-* reranking.
-
----
-
-# STEP 18 — Hybrid Retrieval
-
-Jangan hanya vector search.
-
-Gabungkan:
-
-* semantic,
-* BM25,
-* metadata filter.
-
----
-
-# STEP 19 — Reranking
-
-Tambahkan reranker.
-
-Karena embedding saja tidak cukup.
-
----
-
-# Flow
-
-```text id="wb3bx8"
-Top 50 retrieval
-   ↓
-Rerank
-   ↓
-Top 5 context
-```
-
----
-
-# PHASE 6 — Generation Service
-
----
-
-# STEP 20 — Generation Service
-
-Service khusus LLM.
-
----
-
-# Tanggung jawab
-
-* prompt building,
-* answer generation,
-* citation,
-* hallucination guard.
-
----
-
-# STEP 21 — Structured Prompting
-
-Jangan prompt random.
-
-Buat template system prompt.
-
----
-
-# Contoh
-
-```text id="vh6rdu"
-You are curriculum assistant.
-Only answer from retrieved context.
-Always cite source.
-```
-
----
-
-# STEP 22 — Citation System
-
-Setiap chunk WAJIB punya:
-
-* source,
-* page,
-* chunk id.
-
----
-
-# STEP 23 — Hallucination Guard
-
-Jika retrieval confidence rendah:
-
-* jangan jawab pasti.
-
----
-
-# PHASE 7 — Orchestration Service
-
-Ini “otak” AI system.
-
----
-
-# STEP 24 — Buat Orchestrator
-
-Gunakan:
-
-* LangGraph
-  atau custom orchestrator.
-
----
-
-# Flow
-
-```text id="k7uxmx"
-Question
- ↓
-Intent Detection
- ↓
-Retrieval
- ↓
-Reranking
- ↓
-Prompt Build
- ↓
-Generation
- ↓
-Validation
-```
-
----
-
-# PHASE 8 — Observability
-
-WAJIB.
-
----
-
-# STEP 25 — Structured Logging
-
-Gunakan JSON logging.
-
----
-
-# STEP 26 — Monitoring
-
-Gunakan:
-
-* Prometheus
-* Grafana
-
----
-
-# STEP 27 — Tracing
-
-Gunakan:
-
-* OpenTelemetry
-
-Trace:
-
-* retrieval latency,
-* LLM latency,
-* parsing latency.
-
----
-
-# PHASE 9 — Security
-
----
-
-# STEP 28 — API Security
-
-Gunakan:
-
-* JWT,
-* service-to-service auth,
-* API gateway validation.
-
----
-
-# STEP 29 — AI Governance
-
-Simpan:
-
-* prompt,
-* response,
-* retrieved chunks,
-* model,
-* token usage.
-
----
-
-# PHASE 10 — Production Deployment
-
----
-
-# STEP 30 — Dockerize Semua Service
-
-Semua service:
-
-* independent container,
-* independent scaling.
-
----
-
-# STEP 31 — Kubernetes
-
-Gunakan:
-
-* HPA,
-* autoscaling worker,
-* queue-based scaling.
-
----
-
-# STEP 32 — CI/CD
-
-Gunakan:
-
-* GitHub Actions,
-* GitLab CI,
-* ArgoCD.
-
----
-
-# REKOMENDASI PALING PENTING
-
----
-
-# Jangan mulai dari:
-
-```text id="yv3mfd"
-chatbot UI
-```
-
----
-
-# Mulai dari:
-
-```text id="kh9s2k"
-1. parsing pipeline
-2. metadata schema
-3. retrieval quality
-```
-
-Karena:
-
-> retrieval bagus + metadata bagus = AI bagus.
-
----
-
-# Urutan Pengerjaan yang Benar
-
-## Minggu 1–2
-
-* parser-service
-* queue
-* MinIO
-* PostgreSQL
-
----
-
-## Minggu 3–4
-
-* chunking
-* embedding
-* Qdrant
-
----
-
-## Minggu 5–6
-
-* retrieval
-* reranking
-* metadata filter
-
----
-
-## Minggu 7–8
-
-* generation service
-* orchestration
-* observability
-
----
-
-# Saran Senior AI Engineer
-
-Kalau project ini serius production enterprise:
-
-## Jangan buru-buru ke:
-
-* AI agent,
-* multi-agent,
-* autonomous AI.
-
----
-
-# Prioritaskan dulu:
-
-```text id="z7d8oo"
-document intelligence
-+
-retrieval engineering
-+
-governance
-```
-
-Karena itu fondasi sebenarnya dari enterprise education AI.
+Same as parent AI Platform project.

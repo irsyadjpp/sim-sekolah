@@ -37,7 +37,6 @@ type CreateTeacherRequest struct {
 	TeachingSubject    string `json:"teaching_subject" example:"Matematika"`                                           // Mata pelajaran utama yang diampu
 	AdditionalPosition string `json:"additional_position" example:"Kepala Perpustakaan"`                               // Tugas tambahan di luar mengajar (e.g. Kepala Laboratorium)
 	TeachingHours      int    `json:"teaching_hours" example:"24"`                                                     // Total jam mengajar tatap muka per minggu
-	IsActive           *bool  `json:"is_active" example:"true"`                                                        // Status keaktifan guru di sekolah
 
 	// Pendidikan
 	LastEducation     string `json:"last_education" example:"S1"`                           // Tingkatan pendidikan terakhir (e.g. S1, S2)
@@ -86,7 +85,6 @@ type UpdateTeacherRequest struct {
 	TeachingSubject    string `json:"teaching_subject" example:"Matematika"`
 	AdditionalPosition string `json:"additional_position" example:"Kepala Perpustakaan"`
 	TeachingHours      int    `json:"teaching_hours" example:"24"`
-	IsActive           *bool  `json:"is_active" example:"true"`
 
 	// Pendidikan
 	LastEducation     string `json:"last_education" example:"S1"`

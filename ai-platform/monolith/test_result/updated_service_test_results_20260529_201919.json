@@ -1,0 +1,176 @@
+{
+  "parser_service": {
+    "success": false,
+    "error": "document closed",
+    "extraction_method": "basic_extraction",
+    "processing_time": 0.87209153175354
+  },
+  "semantic_chunk_service": {
+    "success": true,
+    "document_id": "test_doc_1",
+    "chunks": [
+      {
+        "chunk_id": "d343525f-a8d2-4f07-a861-8a789469bd86",
+        "text": "Siklus air adalah pergerakan air yang terus menerus dari bumi ke atmosfer dan kembali lagi Air menguap dari permukaan laut dan danau, membentuk awan, kemudian turun kembali sebagai hujan",
+        "metadata": {
+          "chunk_id": "d343525f-a8d2-4f07-a861-8a789469bd86",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 0,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 186,
+        "word_count": 29,
+        "position": 0,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "9f4f49a2-a464-47c7-a0a0-b946d93b3db6",
+        "text": "Siklus air adalah pergerakan air yang terus menerus dari bumi ke atmosfer dan kembali lagi. Air menguap dari permukaan laut dan danau, membentuk awan, kemudian turun kembali sebagai hujan.",
+        "metadata": {
+          "chunk_id": "9f4f49a2-a464-47c7-a0a0-b946d93b3db6",
+          "chunk_type": "generic",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 188,
+        "word_count": 29,
+        "position": 0,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "f7318d54-2b59-42b2-82cd-c9ce03f31d84",
+        "text": "Siklus air adalah pergerakan air yang terus menerus dari bumi ke atmosfer dan kembali lagi. Air menguap dari permukaan laut dan danau, membentuk awan, kemudian turun kembali sebagai hujan.",
+        "metadata": {
+          "chunk_id": "f7318d54-2b59-42b2-82cd-c9ce03f31d84",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 1,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 188,
+        "word_count": 29,
+        "position": 0,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "ecba5b9c-fee3-466b-8763-cc8af7d882fa",
+        "text": "Siklus air adalah pergerakan air yang terus menerus dari bumi ke atmosfer dan kembali lagi. Air menguap dari permukaan laut dan danau, membentuk awan, kemudian turun kembali sebagai hujan.",
+        "metadata": {
+          "chunk_id": "ecba5b9c-fee3-466b-8763-cc8af7d882fa",
+          "chunk_type": "inquiry",
+          "inquiry_stage": "question",
+          "pedagogy_type": "inquiry_learning",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.75,
+          "educational_value_score": 0.85
+        },
+        "character_count": 188,
+        "word_count": 29,
+        "position": 0,
+        "confidence": 0.75
+      }
+    ],
+    "chunk_count": 4,
+    "chunking_strategy": "semantic_curriculum_aware",
+    "chunk_types": {
+      "generic": 2,
+      "assessment": 1,
+      "inquiry": 1
+    },
+    "processing_time_ms": 150
+  },
+  "semantic_enrichment_service": {
+    "success": true,
+    "enriched_chunks": [
+      {
+        "chunk_id": "chunk_1",
+        "text": "Siklus air adalah pergerakan air yang terus menerus dari bumi ke atmosfer dan kembali lagi.",
+        "metadata": {
+          "subject": "IPA",
+          "grade": "6"
+        },
+        "enrichment": {
+          "pedagogy_classification": {
+            "pedagogy_type": "inquiry_learning",
+            "confidence": 0.0,
+            "indicators": [],
+            "all_scores": {
+              "inquiry_learning": 0,
+              "differentiated_learning": 0,
+              "deep_learning": 0,
+              "project_based_learning": 0,
+              "problem_based_learning": 0
+            }
+          },
+          "taxonomy_tags": {
+            "error": "TaxonomyTagger.tag() takes 2 positional arguments but 4 were given"
+          },
+          "competency_tags": {
+            "competencies_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "assessment_tags": {
+            "assessment_types_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "cognitive_tags": {
+            "cognitive_levels": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "learning_objective_tags": {
+            "learning_objectives": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "deep_learning_tags": {
+            "deep_learning_features": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "enrichment_metadata": {
+            "enriched_at": "2026-05-29T13:19:20.790660",
+            "enrichment_version": "2.0.0",
+            "content_length": 91,
+            "word_count": 15,
+            "language": "indonesian"
+          }
+        }
+      }
+    ],
+    "chunk_count": 1,
+    "enrichment_types": [
+      "pedagogy_classification",
+      "taxonomy_tags",
+      "competency_tags",
+      "assessment_tags",
+      "cognitive_tags",
+      "learning_objective_tags",
+      "deep_learning_tags",
+      "enrichment_metadata"
+    ],
+    "processing_time_ms": 200
+  },
+  "retrieval_service": {
+    "error": "Error in Retrieval Service: 'RetrievalService' object has no attribute 'retrieve_content'"
+  },
+  "generation_service": {
+    "error": "Error in Generation Service: 'GenerationService' object has no attribute 'generate_content'"
+  },
+  "vision_service": {
+    "error": "Error in Vision Service: 'VisionService' object has no attribute 'analyze_document'"
+  }
+}

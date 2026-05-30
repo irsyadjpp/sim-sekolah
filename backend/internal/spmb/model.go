@@ -79,7 +79,7 @@ type ApplicantDocument struct {
 	ID           uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
 	ApplicantID  uuid.UUID `gorm:"type:uuid;not null;uniqueIndex:idx_app_doc" json:"applicant_id"`
 	DocumentType string    `gorm:"type:varchar(50);not null;uniqueIndex:idx_app_doc" json:"document_type"` // KK, AKTA, dll
-	FilePath     string    `gorm:"type:text;not null" json:"file_path"`                                    // RustFS path
+	FilePath     string    `gorm:"type:text;not null" json:"file_path"`                                    // SeaweedFS S3 path
 	UploadedAt   time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"uploaded_at"`
 }
 

@@ -1,0 +1,98 @@
+{
+  "test_timestamp": "2026-05-29 21:15:46.875449",
+  "test_version": "enhanced_typed_chunking_v1",
+  "enhanced_chunking_result": {
+    "success": true,
+    "document_id": "siklus_air_enhanced",
+    "chunks": [
+      {
+        "chunk_id": "45597b52-427a-4166-b3c6-d42a7e2e16f5",
+        "text": "BAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air\nSumber: Dokumentasi penerbit\nGambar 2. Air sebagai salah satu sumber kehidupan manusia\nSemua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat \nmembutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan \nuntuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan \nmembutuhkan air untuk berfotosintesis.  Hal tersebut menunjukkan bahwa air merupakan \nsalah satu sumber kehidupan. \nAir termasuk\u00a0sumber daya alam\u00a0yang dapat diperbaharui. Ini berarti jumlah air di bumi \ntidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu \nada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses \nsiklus air itu? Ayo, kita pelajari bersama-sama!",
+        "chunk_type": "concept_explanation",
+        "importance": "supporting",
+        "bloom_level": "C1_remember",
+        "bloom_is_hots": false,
+        "bloom_is_lots": true,
+        "subject": "IPA",
+        "grade": "4",
+        "related_topics": [],
+        "related_experiments": [],
+        "related_competencies": [],
+        "prerequisite_concepts": [],
+        "quality_score": 0.7999999999999999,
+        "educational_value": 0.7,
+        "complexity_level": "intermediate",
+        "document_position": 0,
+        "section_hierarchy": [
+          "BAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air\nSumber: Dokumentasi penerbit\nGambar 2."
+        ],
+        "word_count": 117,
+        "character_count": 807,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "cca4f3db-b77c-451b-9867-cf791abb2c53",
+        "text": "Topik 1: Apa itu Siklus Air?\n \n \nUraian materi\nPernahkah kamu berpikir dari manakah datangnya air? Mengapa air tidak bisa habis \nmeskipun digunakan setiap hari? Nah, sebelumnya kita tahu bahwa air akan selalu ada di \nbumi karena air mengalami daur (siklus). Siklus air di bumi merupakan runtutan perubahan \nwujud air yang terjadi terus-menerus dan berulang-ulang.  \nSiklus air atau disebut juga\u00a0siklus hidrologi\u00a0adalah gerak perputaran air dengan \nperubahan air menjadi berbagai wujud dan kembali ke bentuk semula. \nSecara sederhana, siklus air terjadi melalui tahapan evaporasi atau transpirasi, \nkondensasi, dan presipitasi. Adapun penjelasannya adaalah sebagai berikut.",
+        "chunk_type": "concept_intro",
+        "importance": "core",
+        "bloom_level": "C1_remember",
+        "bloom_is_hots": false,
+        "bloom_is_lots": true,
+        "subject": "IPA",
+        "grade": "4",
+        "related_topics": [],
+        "related_experiments": [],
+        "related_competencies": [],
+        "prerequisite_concepts": [],
+        "quality_score": 1.0,
+        "educational_value": 0.9,
+        "complexity_level": "intermediate",
+        "document_position": 1,
+        "section_hierarchy": [
+          "Topik 1:"
+        ],
+        "word_count": 94,
+        "character_count": 672,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "fbc3469b-ae77-4ed5-a406-336a044a2393",
+        "text": "1.\t Evaporasi/transpirasi\n\t\nIstilah evaporasi diguna\u00adkan untuk menunjukkan proses penguapan air yang berasal dari",
+        "chunk_type": "process_explanation",
+        "importance": "core",
+        "bloom_level": "C1_remember",
+        "bloom_is_hots": false,
+        "bloom_is_lots": true,
+        "subject": "IPA",
+        "grade": "4",
+        "related_topics": [],
+        "related_experiments": [],
+        "related_competencies": [],
+        "prerequisite_concepts": [],
+        "quality_score": 0.95,
+        "educational_value": 0.9,
+        "complexity_level": "basic",
+        "document_position": 2,
+        "section_hierarchy": [],
+        "word_count": 13,
+        "character_count": 113,
+        "confidence": 0.8
+      }
+    ],
+    "chunk_count": 3,
+    "chunking_strategy": "typed_curriculum_aware",
+    "chunk_types": {
+      "types": {
+        "concept_explanation": 1,
+        "concept_intro": 1,
+        "process_explanation": 1
+      },
+      "importance_levels": {
+        "supporting": 1,
+        "core": 2
+      }
+    },
+    "boundary_detection": "enabled",
+    "processing_time_ms": 150
+  }
+}

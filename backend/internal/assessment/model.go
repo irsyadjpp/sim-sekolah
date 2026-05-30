@@ -62,7 +62,8 @@ type Assessment struct {
 	AssessmentType       string    `gorm:"type:varchar(20);not null" json:"assessment_type"` // Formatif, Sumatif, Proyek, UTS, UAS
 	AgeAppropriateType   string    `gorm:"type:varchar(30)" json:"age_appropriate_type"`     // SD-specific assessment types
 	AssessmentDate       time.Time `gorm:"type:date;not null" json:"assessment_date"`
-	CreatedAt            time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"created_at"`
+
+	common.Auditable
 
 	// Relasi
 	TeachingAssignment *teaching_assignment.TeachingAssignment `gorm:"foreignKey:TeachingAssignmentID" json:"teaching_assignment,omitempty"`
@@ -80,8 +81,10 @@ type AssessmentScore struct {
 	Score        float64   `gorm:"type:numeric(5,2);default:0" json:"score"`
 	Notes        string    `gorm:"type:text" json:"notes"` // Narasi umpan balik
 
+	common.Auditable
+
 	// Relasi
-	Student *student.Student `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Student *student.MasterStudent `gorm:"foreignKey:StudentID" json:"student,omitempty"`
 }
 
 func (AssessmentScore) TableName() string {
@@ -113,7 +116,7 @@ type AssessmentP5 struct {
 
 	common.Auditable
 
-	Student *student.Student `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Student *student.MasterStudent `gorm:"foreignKey:StudentID" json:"student,omitempty"`
 }
 
 func (AssessmentP5) TableName() string {
@@ -148,8 +151,8 @@ type DailyAttendance struct {
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 
-	Classroom *classroom.Classroom `gorm:"foreignKey:ClassroomID" json:"classroom,omitempty"`
-	Student   *student.Student     `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Classroom *classroom.Classroom   `gorm:"foreignKey:ClassroomID" json:"classroom,omitempty"`
+	Student   *student.MasterStudent `gorm:"foreignKey:StudentID" json:"student,omitempty"`
 }
 
 func (DailyAttendance) TableName() string {
@@ -166,8 +169,8 @@ type AcademicScore struct {
 
 	common.Auditable
 
-	Student  *student.Student `gorm:"foreignKey:StudentID" json:"student,omitempty"`
-	Question *QuestionBank    `gorm:"foreignKey:QuestionID" json:"question,omitempty"`
+	Student  *student.MasterStudent `gorm:"foreignKey:StudentID" json:"student,omitempty"`
+	Question *QuestionBank          `gorm:"foreignKey:QuestionID" json:"question,omitempty"`
 }
 
 func (AcademicScore) TableName() string {

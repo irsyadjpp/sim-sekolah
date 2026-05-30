@@ -28,12 +28,12 @@ else
     exit 1
 fi
 
-# Backup MinIO
-log "Backing up MinIO..."
-if [ -f "/scripts/backup/backup-minio.sh" ]; then
-    /scripts/backup/backup-minio.sh
+# Backup SeaweedFS
+log "Backing up SeaweedFS..."
+if [ -f "/scripts/backup/backup-seaweedfs.sh" ]; then
+    /scripts/backup/backup-seaweedfs.sh
 else
-    log "ERROR: MinIO backup script not found"
+    log "ERROR: SeaweedFS backup script not found"
     exit 1
 fi
 

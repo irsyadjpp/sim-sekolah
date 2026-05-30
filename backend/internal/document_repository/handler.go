@@ -9,12 +9,21 @@ import (
 
 // Handler handles HTTP requests for document repository
 type Handler struct {
-	service *Service
+	service       *Service
+	uploadService *UploadService
 }
 
 // NewHandler creates a new document repository handler
 func NewHandler(service *Service) *Handler {
-	return &Handler{service: service}
+	uploadService, err := NewUploadService(service.repo)
+	if err != nil {
+		// Log error but continue without upload service
+		uploadService = nil
+	}
+	return &Handler{
+		service:       service,
+		uploadService: uploadService,
+	}
 }
 
 // CreateDocument handles POST /api/documents
@@ -628,5 +637,114 @@ func (h *Handler) GetPendingApprovals(c *fiber.Ctx) error {
 		"status":  "success",
 		"message": "Pending approvals retrieved successfully",
 		"data":    documents,
+	})
+}
+
+// UploadDocument handles POST /api/documents/upload
+func (h *Handler) UploadDocument(c *fiber.Ctx) error {
+	if h.uploadService == nil {
+		return c.Status(500).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Upload service not available",
+		})
+	}
+
+	// Get form data
+	title := c.FormValue("title")
+	description := c.FormValue("description")
+	documentNumber := c.FormValue("document_number")
+	category := c.FormValue("category")
+	documentType := c.FormValue("document_type")
+	accessLevel := c.FormValue("access_level")
+
+	// Get file from form
+	fileHeader, err := c.FormFile("file")
+	if err != nil {
+		return c.Status(400).JSON(fiber.Map{
+			"status":  "error",
+			"message": "File is required",
+			"error":   err.Error(),
+		})
+	}
+
+	// Get user and school ID from context
+	userID := c.Locals("user_id").(uuid.UUID)
+	schoolID := c.Locals("school_id").(uuid.UUID)
+
+	// Upload document with metadata
+	doc, err := h.uploadService.UploadDocumentWithMetadata(
+		c.Context(),
+		fileHeader,
+		title,
+		description,
+		documentNumber,
+		category,
+		documentType,
+		accessLevel,
+		userID,
+		schoolID,
+	)
+	if err != nil {
+		return c.Status(400).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Failed to upload document",
+			"error":   err.Error(),
+		})
+	}
+
+	return c.Status(201).JSON(fiber.Map{
+		"status":  "success",
+		"message": "Document uploaded successfully",
+		"data":    doc,
+	})
+}
+
+// CheckDuplicate handles POST /api/documents/check-duplicate
+func (h *Handler) CheckDuplicate(c *fiber.Ctx) error {
+	if h.uploadService == nil {
+		return c.Status(500).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Upload service not available",
+		})
+	}
+
+	var req struct {
+		Title          string `json:"title"`
+		DocumentNumber string `json:"document_number"`
+		FileHash       string `json:"file_hash"`
+	}
+
+	if err := c.BodyParser(&req); err != nil {
+		return c.Status(400).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Invalid request body",
+			"error":   err.Error(),
+		})
+	}
+
+	schoolID := c.Locals("school_id").(uuid.UUID)
+
+	duplicate, err := h.uploadService.CheckDuplicateDocument(c.Context(), schoolID, req.FileHash, req.Title, req.DocumentNumber)
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Failed to check for duplicates",
+			"error":   err.Error(),
+		})
+	}
+
+	if duplicate != nil {
+		return c.Status(200).JSON(fiber.Map{
+			"status":      "warning",
+			"message":     "Duplicate document found",
+			"data":        duplicate,
+			"isDuplicate": true,
+		})
+	}
+
+	return c.Status(200).JSON(fiber.Map{
+		"status":      "success",
+		"message":     "No duplicate found",
+		"isDuplicate": false,
 	})
 }

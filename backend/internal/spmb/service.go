@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"io"
 	"mime/multipart"
-	"net/http"
 	"path/filepath"
 	"time"
 
@@ -15,6 +14,9 @@ import (
 	"sim-sekolah/internal/common"
 	"sim-sekolah/internal/student"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
+	awsconfig "github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/google/uuid"
 )
 
@@ -163,47 +165,55 @@ func (s *spmbService) UploadDocument(ctx context.Context, applicantID string, do
 	}
 	defer file.Close()
 
-	// 1. Upload ke RustFS
-	rustfsURL := config.Cfg.Storage.RustFSURL
+	// 1. Upload ke SeaweedFS (via S3 API)
+	cfg, err := awsconfig.LoadDefaultConfig(ctx,
+		awsconfig.WithEndpointResolverWithOptions(aws.EndpointResolverWithOptionsFunc(
+			func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+				return aws.Endpoint{
+					URL:               config.Cfg.Storage.SeaweedFSS3Endpoint,
+					SigningRegion:     config.Cfg.Storage.SeaweedFSRegion,
+					HostnameImmutable: true,
+				}, nil
+			},
+		)),
+		awsconfig.WithCredentialsProvider(aws.CredentialsProviderFunc(
+			func(ctx context.Context) (aws.Credentials, error) {
+				return aws.Credentials{
+					AccessKeyID:     config.Cfg.Storage.SeaweedFSAccessKey,
+					SecretAccessKey: config.Cfg.Storage.SeaweedFSSecretKey,
+				}, nil
+			},
+		)),
+	)
+	if err != nil {
+		return errors.New("gagal konfigurasi AWS SDK")
+	}
 
-	// Siapkan multipart form untuk RustFS
-	body := &bytes.Buffer{}
-	writer := multipart.NewWriter(body)
+	s3Client := s3.NewFromConfig(cfg)
+
+	// Baca file ke buffer
+	buf := new(bytes.Buffer)
+	_, err = io.Copy(buf, file)
+	if err != nil {
+		return err
+	}
 
 	// Penamaan file yang unik
 	filename := fmt.Sprintf("%s_%s%s", applicantID, docType, filepath.Ext(fileHeader.Filename))
+	objectKey := fmt.Sprintf("spmb/documents/%s", filename)
 
-	part, err := writer.CreateFormFile("file", filename)
+	// Upload ke S3
+	_, err = s3Client.PutObject(ctx, &s3.PutObjectInput{
+		Bucket: aws.String(config.Cfg.Storage.SeaweedFSBucket),
+		Key:    aws.String(objectKey),
+		Body:   bytes.NewReader(buf.Bytes()),
+	})
 	if err != nil {
-		return err
-	}
-
-	_, err = io.Copy(part, file)
-	if err != nil {
-		return err
-	}
-
-	writer.Close()
-
-	uploadReq, err := http.NewRequestWithContext(ctx, "POST", rustfsURL+"/upload", body)
-	if err != nil {
-		return err
-	}
-	uploadReq.Header.Set("Content-Type", writer.FormDataContentType())
-
-	client := &http.Client{Timeout: 10 * time.Second}
-	resp, err := client.Do(uploadReq)
-	if err != nil {
-		return errors.New("gagal terhubung ke storage server (RustFS)")
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
-		return fmt.Errorf("gagal upload ke storage server, status: %d", resp.StatusCode)
+		return fmt.Errorf("gagal upload ke storage server: %w", err)
 	}
 
 	// 2. Simpan path ke DB
-	filePath := fmt.Sprintf("%s/download/%s", rustfsURL, filename)
+	filePath := fmt.Sprintf("s3://%s/%s", config.Cfg.Storage.SeaweedFSBucket, objectKey)
 
 	appUUID, _ := uuid.Parse(applicantID)
 	doc := &ApplicantDocument{
@@ -251,25 +261,35 @@ func (s *spmbService) VerifyApplication(ctx context.Context, id string, req Veri
 		schoolID, _ := s.repo.GetDefaultSchoolID(ctx)
 		schoolUUID, _ := uuid.Parse(schoolID)
 
-		newStudent := &student.Student{
-			ID:            uuid.New(),
-			SchoolID:      schoolUUID,
-			FullName:      app.FullName,
-			NIK:           app.NIK,
-			NISN:          app.NISN,
-			NIS:           newNIS,
-			Gender:        app.Gender,
-			BirthPlace:    app.BirthPlace,
-			BirthDate:     &app.BirthDate,
-			Religion:      app.Religion,
-			FullAddress:   app.Address,
-			Village:       app.Village,
-			District:      app.District,
-			Regency:       app.Regency,
-			Province:      app.Province,
-			PostalCode:    app.PostalCode,
-			EntryPath:     "SPMB", // Set default entry path
-			StudentStatus: student.StatusActive,
+		newStudent := &student.StudentComplete{
+			MasterStudent: student.MasterStudent{
+				ID:         uuid.New(),
+				NIK:        app.NIK, // NIK di MasterStudent sebagai data identitas
+				SchoolID:   schoolUUID,
+				FullName:   app.FullName,
+				Gender:     app.Gender,
+				BirthPlace: app.BirthPlace,
+				BirthDate:  &app.BirthDate,
+				Religion:   app.Religion,
+			},
+			StudentContact: student.StudentContact{
+				FullAddress: app.Address,
+				Village:     app.Village,
+				District:    app.District,
+				Regency:     app.Regency,
+				Province:    app.Province,
+				PostalCode:  app.PostalCode,
+			},
+			StudentFamily: student.StudentFamily{
+				ChildOrder: 1,
+				Siblings:   0,
+			},
+			StudentEnrollment: student.StudentEnrollment{
+				NIS:           newNIS,
+				NISN:          app.NISN,
+				EntryPath:     "SPMB", // Set default entry path
+				StudentStatus: student.StatusActive,
+			},
 		}
 
 		// PPDB Parent to Student Parents

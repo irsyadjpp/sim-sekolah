@@ -10,7 +10,6 @@ import (
 	"fmt"
 	"io"
 	"mime/multipart"
-	"net/http"
 	"path/filepath"
 	"strings"
 	"time"
@@ -18,8 +17,13 @@ import (
 	"log/slog"
 	"sim-sekolah/config"
 	bcryptpkg "sim-sekolah/pkg/bcrypt"
+
 	jwtpkg "sim-sekolah/pkg/jwt"
 	"sim-sekolah/pkg/logger"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	awsconfig "github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 
 	"github.com/google/uuid"
 	"github.com/pquerna/otp/totp"
@@ -460,45 +464,54 @@ func (s *authService) UploadPhoto(ctx context.Context, userID string, fileHeader
 	}
 	defer file.Close()
 
-	// 3. Upload to RustFS
-	rustfsURL := config.Cfg.Storage.RustFSURL
+	// 3. Upload to SeaweedFS (via S3 API)
+	cfg, err := awsconfig.LoadDefaultConfig(ctx,
+		awsconfig.WithEndpointResolverWithOptions(aws.EndpointResolverWithOptionsFunc(
+			func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+				return aws.Endpoint{
+					URL:               config.Cfg.Storage.SeaweedFSS3Endpoint,
+					SigningRegion:     config.Cfg.Storage.SeaweedFSRegion,
+					HostnameImmutable: true,
+				}, nil
+			},
+		)),
+		awsconfig.WithCredentialsProvider(aws.CredentialsProviderFunc(
+			func(ctx context.Context) (aws.Credentials, error) {
+				return aws.Credentials{
+					AccessKeyID:     config.Cfg.Storage.SeaweedFSAccessKey,
+					SecretAccessKey: config.Cfg.Storage.SeaweedFSSecretKey,
+				}, nil
+			},
+		)),
+	)
+	if err != nil {
+		return "", errors.New("failed to configure AWS SDK")
+	}
 
-	body := &bytes.Buffer{}
-	writer := multipart.NewWriter(body)
+	s3Client := s3.NewFromConfig(cfg)
+
+	// Baca file ke buffer
+	buf := new(bytes.Buffer)
+	_, err = io.Copy(buf, file)
+	if err != nil {
+		return "", err
+	}
 
 	// Filename: profile_userID_timestamp.ext
 	filename := fmt.Sprintf("profile_%s_%d%s", userID, time.Now().Unix(), filepath.Ext(fileHeader.Filename))
+	objectKey := fmt.Sprintf("auth/profiles/%s", filename)
 
-	part, err := writer.CreateFormFile("file", filename)
+	// Upload ke S3
+	_, err = s3Client.PutObject(ctx, &s3.PutObjectInput{
+		Bucket: aws.String(config.Cfg.Storage.SeaweedFSBucket),
+		Key:    aws.String(objectKey),
+		Body:   bytes.NewReader(buf.Bytes()),
+	})
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("failed upload to storage: %w", err)
 	}
 
-	_, err = io.Copy(part, file)
-	if err != nil {
-		return "", err
-	}
-
-	writer.Close()
-
-	uploadReq, err := http.NewRequestWithContext(ctx, "POST", rustfsURL+"/upload", body)
-	if err != nil {
-		return "", err
-	}
-	uploadReq.Header.Set("Content-Type", writer.FormDataContentType())
-
-	client := &http.Client{Timeout: 10 * time.Second}
-	resp, err := client.Do(uploadReq)
-	if err != nil {
-		return "", errors.New("failed to connect to storage server")
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
-		return "", fmt.Errorf("failed upload to storage, status: %d", resp.StatusCode)
-	}
-
-	photoURL := fmt.Sprintf("%s/download/%s", rustfsURL, filename)
+	photoURL := fmt.Sprintf("s3://%s/%s", config.Cfg.Storage.SeaweedFSBucket, objectKey)
 
 	// 4. Update Profile (Teacher or Student)
 	if user.TeacherID != nil {

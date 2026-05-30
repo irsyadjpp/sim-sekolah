@@ -73,6 +73,57 @@ export const leftMenuItems: MenuItem[] = [
     ],
   },
   {
+    id: "strategic-planning",
+    icon: "NiChart",
+    label: "menu-strategic-planning",
+    href: "/strategic-planning",
+    color: "text-primary",
+    children: [
+      {
+        id: "data-collection",
+        label: "menu-data-collection",
+        icon: "NiArchive",
+        href: "/strategic-planning/data-collection",
+        children: [
+          { id: "surveys", label: "menu-surveys", icon: "NiClipboard", href: "/strategic-planning/data-collection/surveys" },
+          { id: "rapor-integration", label: "menu-rapor-integration", icon: "NiBook", href: "/strategic-planning/data-collection/rapor-integration" },
+          { id: "fgd", label: "menu-fgd", icon: "NiUsers", href: "/strategic-planning/data-collection/fgd" },
+        ],
+      },
+      {
+        id: "student-profiling",
+        label: "menu-student-profiling",
+        icon: "NiUser",
+        href: "/strategic-planning/student-profiling",
+      },
+      {
+        id: "local-context",
+        label: "menu-local-context",
+        icon: "NiGlobe",
+        href: "/strategic-planning/local-context",
+      },
+      {
+        id: "school-data",
+        label: "menu-school-data",
+        icon: "NiBuilding",
+        href: "/strategic-planning/school-data",
+      },
+      {
+        id: "analysis",
+        label: "menu-analysis",
+        icon: "NiChart",
+        href: "/strategic-planning/analysis",
+        children: [
+          { id: "swot", label: "menu-swot", icon: "NiGrid", href: "/strategic-planning/analysis/swot" },
+          { id: "root-cause", label: "menu-root-cause", icon: "NiSearch", href: "/strategic-planning/analysis/root-cause" },
+          { id: "fishbone", label: "menu-fishbone", icon: "NiShare", href: "/strategic-planning/analysis/fishbone" },
+        ],
+      },
+      { id: "student-needs", label: "menu-student-needs", icon: "NiHeart", href: "/strategic-planning/student-needs" },
+      { id: "ksp-enhanced", label: "menu-ksp-enhanced", icon: "NiPen", href: "/strategic-planning/ksp-enhanced" },
+    ],
+  },
+  {
     id: "pembelajaran",
     icon: "NiGraduation",
     label: "menu-learning",

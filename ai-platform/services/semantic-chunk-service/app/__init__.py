@@ -1,1 +1,0 @@
-"""Semantic Chunk Service Application"""

@@ -33,3 +33,27 @@ func RunMigrations(db *sql.DB) error {
 	log.Printf("✅ Database migrations applied (version %d)", version)
 	return nil
 }
+
+// ForceMigrationVersion forces the migration to a specific version
+// Use this to reset a failed migration state
+func ForceMigrationVersion(db *sql.DB, version int) error {
+	driver, err := postgres.WithInstance(db, &postgres.Config{})
+	if err != nil {
+		return fmt.Errorf("failed to create migration driver: %w", err)
+	}
+
+	m, err := migrate.NewWithDatabaseInstance(
+		"file://migrations",
+		"postgres", driver,
+	)
+	if err != nil {
+		return fmt.Errorf("failed to init migrator: %w", err)
+	}
+
+	if err := m.Force(version); err != nil {
+		return fmt.Errorf("failed to force migration version: %w", err)
+	}
+
+	log.Printf("✅ Migration version forced to %d", version)
+	return nil
+}

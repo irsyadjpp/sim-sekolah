@@ -1,0 +1,182 @@
+services:
+  # 1. PostgreSQL: Master Data & Context Chunks
+  postgres:
+    image: postgres:18.4-alpine
+    container_name: sim_sekolah_db
+    restart: always
+    shm_size: 5gb
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ../../services/postgres/extensions.sql:/docker-entrypoint-initdb.d/extensions.sql
+    command:
+      - "postgres"
+      - "-c"
+      - "shared_preload_libraries=pg_stat_statements"
+      - "-c"
+      - "shared_buffers=4GB"
+      - "-c"
+      - "effective_cache_size=12GB"
+      - "-c"
+      - "work_mem=64MB"
+      - "-c"
+      - "maintenance_work_mem=1GB"
+      - "-c"
+      - "autovacuum_vacuum_scale_factor=0.1"
+      - "-c"
+      - "autovacuum_analyze_scale_factor=0.05"
+      - "-c"
+      - "max_connections=200"
+      - "-c"
+      - "autovacuum_naptime=30s"
+      - "-c"
+      - "autovacuum_vacuum_threshold=50"
+      - "-c"
+      - "autovacuum_analyze_threshold=50"
+      - "-c"
+      - "pg_stat_statements.track=all"
+      - "-c"
+      - "pg_stat_statements.max=10000"
+      - "-c"
+      - "pg_stat_statements.save=on"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. Redis: Caching & Session Management
+  redis:
+    image: redis:7-alpine
+    container_name: sim_sekolah_redis
+    restart: always
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 3. RabbitMQ: Message Queue
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: sim_sekolah_mq
+    restart: always
+    environment:
+      # Menggunakan variabel default jika tidak diset di .env
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  # 4. Qdrant: Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: sim_sekolah_vector
+    restart: always
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  # 5. MinIO AIStor: High-Performance AI Storage
+  minio:
+    image: minio/minio:latest
+    container_name: sim_sekolah_minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+      - "8333:8333"
+    volumes:
+      - minio_data:/data
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER:-admin}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-admin123}
+      - MINIO_BROWSER=on
+      - MINIO_SERVER_URL=http://localhost:9000
+      - MINIO_KMS_HTTP_ENDPOINT=
+      - MINIO_KMS_AUTO_ENCRYPTION=off
+      - MINIO_DOMAIN=sim-sekolah-minio
+      - MINIO_REGION_NAME=us-east-1
+      - MINIO_COMPRESSION=off
+      - MINIO_COMPRESSION_EXTENSIONS=.txt,.csv,.json,.xml,.log
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # 6. Backend: Go Fiber API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sim_sekolah_backend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "8081:8080"
+    environment:
+      - APP_NAME=SIM Sekolah Terpadu
+      - APP_ENV=production
+      - APP_PORT=8080
+      # Database Configuration
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}?sslmode=${DB_SSLMODE}&timezone=${DB_TIMEZONE}
+      # Redis Configuration
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=${REDIS_DB}
+      # RabbitMQ Configuration
+      - RABBITMQ_URL=${RABBITMQ_URL}
+      # MinIO AIStor Configuration
+      - MINIO_ENDPOINT=http://minio:9000
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-admin}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-admin123}
+      - MINIO_BUCKET=sim-sekolah-documents
+      - MINIO_REGION=us-east-1
+      - MINIO_SECURE=false
+      # Observability
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${GRAFANA_CLOUD_OTLP_ENDPOINT}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+
+networks:
+  default:
+    name: sim_sekolah_network
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  redis_data:
+  rabbitmq_data:
+  minio_data:

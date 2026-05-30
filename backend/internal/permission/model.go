@@ -1,7 +1,7 @@
 package permission
 
 import (
-	"time"
+	"sim-sekolah/internal/common"
 
 	"github.com/google/uuid"
 )
@@ -10,7 +10,8 @@ type Permission struct {
 	ID             uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
 	PermissionName string    `gorm:"unique;not null" json:"permission_name"`
 	Description    string    `json:"description"`
-	CreatedAt      time.Time `json:"created_at"`
+
+	common.Auditable
 }
 
 func (Permission) TableName() string {

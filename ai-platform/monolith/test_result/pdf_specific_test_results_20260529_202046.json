@@ -1,0 +1,664 @@
+{
+  "parser_service_bkb10.pdf": {
+    "success": false,
+    "error": "document closed",
+    "extraction_method": "basic_extraction",
+    "processing_time": 1.7335059642791748
+  },
+  "semantic_chunk_service_bkb10.pdf": {
+    "success": true,
+    "document_id": "test_bkb10",
+    "chunks": [
+      {
+        "chunk_id": "33f5dfdd-d14f-4723-81b3-c75ff347965b",
+        "text": "184 MEP Pupil Text 10 10 Equations 10 1 Negative Numbers A number line like this is very helpful when dealing with negative numbers Worked Example 1 An ice cube taken from a deep freeze is at a temperature of \u2212\u00b0 6 C Its temperature rises by 4 degrees What is its new temperature Solution The number line can be used as shown \u2212 + = \u2212 6 4 2 Worked Example 2 Write down numbers which are: (a) less than \u22124 (b) greater than \u22125 but less than \u22122 (c) less than \u22123 but greater than \u22128",
+        "metadata": {
+          "chunk_id": "33f5dfdd-d14f-4723-81b3-c75ff347965b",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 0,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 476,
+        "word_count": 98,
+        "position": 0,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "31c7dd8f-fc30-45c8-8a5b-c73c8c1266c4",
+        "text": "Solution (a) Any number less than \u22124 must be to the left of \u22124 on the number line, for example \u22125, \u22126, \u22127, etc (b) A number greater than \u22125 must be to the right of \u22125, and to be less than \u22122 must also be to the left of \u22122, for example \u22124 and \u22123 (c) To be less than \u22123 the number must be to the left of \u22123 but to be greater than \u22128 the number must be to the right of \u22128, for example \u22127, \u22126, \u22125, \u22124",
+        "metadata": {
+          "chunk_id": "31c7dd8f-fc30-45c8-8a5b-c73c8c1266c4",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 1,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 396,
+        "word_count": 92,
+        "position": 1,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "8041af0f-b9d7-403f-885b-4fae9c4205dc",
+        "text": "-4 \u20133 \u20132 \u20131 0 2 3 4 5 1 \u2013 6 \u2013 5 \u2013 4 \u2013 3 \u2013 2 0 \u2013 1 + 4 \u2013 4 \u2013 3 \u2013 2 \u20131 0 1 \u2013 5 \u2013 6 \u2013 7 \u2013 8 Investigation Within 4 consecutive years, Mrs White gave birth to four lovely children Today, x years later, Mr and Mrs White find out that the product of their four children's ages is 3 024 How old is each child now, assuming that all the children are of different ages 185 MEP Pupil Text 10 Exercises 1",
+        "metadata": {
+          "chunk_id": "8041af0f-b9d7-403f-885b-4fae9c4205dc",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 2,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 393,
+        "word_count": 98,
+        "position": 2,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "262862d8-e5fe-4a09-9cd2-41d98ec76431",
+        "text": "Copy and complete the following table of temperature changes Original Temperature Temperature Change Final Temperature 6\u00b0 C \u2212 \u00b0 10 C \u2212 \u00b0 4 C + \u00b0 2 C \u2212 \u00b05 C \u2212 \u00b03 C \u2212 \u00b0 10 C \u2212 \u00b0 4 C 2\u00b0 C \u2212 \u00b0 10 C \u2212 \u00b0 6 C + \u00b01 C \u2212 \u00b05 C \u2212 \u00b0 2 C 2 Place each set of numbers in increasing order",
+        "metadata": {
+          "chunk_id": "262862d8-e5fe-4a09-9cd2-41d98ec76431",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 3,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 271,
+        "word_count": 72,
+        "position": 3,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "44d05889-ef31-4dc1-b821-c1d3a4767fc3",
+        "text": "(a) \u221210, \u22124, \u22126, 2, \u22125, 3 (b) 3, \u22121, 0, \u22124, 7 (c) 7, \u22122, \u22124, \u22126, 3, 0 (d) \u22124, 0, \u22127, 7, 5, \u22122 (e) \u22121, \u22124, 0, \u22125, 6, \u22123 3 Write down all the integers which lie between: (a) \u22126 and \u221210 (b) \u22124 and 2 (c) \u22123 and 0 (d) \u22121 and \u22123 (e) \u22129 and 0 4 Write down a whole number which is: (a) greater than \u221210 but less than \u22126 (b) less than \u22126 (c) greater than \u22125 but",
+        "metadata": {
+          "chunk_id": "44d05889-ef31-4dc1-b821-c1d3a4767fc3",
+          "chunk_type": "generic",
+          "competency": null,
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 4,
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 352,
+        "word_count": 88,
+        "position": 4,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "3ca5515e-49b7-43d1-baa4-2c824e392784",
+        "text": "184 MEP Pupil Text 10 10 Equations 10.1 Negative Numbers A number line like this is very helpful when dealing with negative numbers. Worked Example 1 An ice cube taken from a deep freeze is at a temperature of \u2212\u00b0 6 C. Its temperature rises by 4 degrees. What is its new temperature? Solution The number line can be used as shown. \u2212 + = \u2212 6 4 2 Worked Example 2 Write down numbers which are: (a) less than \u22124 (b) greater than \u22125 but less than \u22122 (c) less than \u22123 but greater than \u22128. Solution (a) Any number less than \u22124 must be to the left of \u22124 on the number line, for example \u22125, \u22126, \u22127, etc. (b) A number greater than \u22125 must be to the right of \u22125, and to be less than \u22122 must also be to the left of \u22122, for example \u22124 and \u22123. (c) To be less than \u22123 the number must be to the left of \u22123 but to be greater than \u22128 the number must be to the right of \u22128, for example \u22127, \u22126, \u22125, \u22124. -4 \u20133 \u20132 \u20131 0 2 3 4 5 1 \u2013 6 \u2013 5 \u2013 4 \u2013 3 \u2013 2 0 \u2013 1 + 4 \u2013 4 \u2013 3 \u2013 2 \u20131 0 1 \u2013 5 \u2013 6 \u2013 7 \u2013 8 Investigation Within 4 consecutive years, Mrs. White gave birth to four lovely children. Today, x years later, Mr and Mrs. White find out that the product of their four children's ages is 3 024. How old is each child now, assuming that all the children are of different ages? 185 MEP Pupil Text 10 Exercises 1. Copy and complete the following table of temperature changes. Original Temperature Temperature Change Final Temperature 6\u00b0 C \u2212 \u00b0 10 C \u2212 \u00b0 4 C + \u00b0 2 C \u2212 \u00b05 C \u2212 \u00b03 C \u2212 \u00b0 10 C \u2212 \u00b0 4 C 2\u00b0 C \u2212 \u00b0 10 C \u2212 \u00b0 6 C + \u00b01 C \u2212 \u00b05 C \u2212 \u00b0 2 C 2. Place each set of numbers in increasing order. (a) \u221210, \u22124, \u22126, 2, \u22125, 3 (b) 3, \u22121, 0, \u22124, 7 (c) 7, \u22122, \u22124, \u22126, 3, 0 (d) \u22124, 0, \u22127, 7, 5, \u22122 (e) \u22121, \u22124, 0, \u22125, 6, \u22123 3. Write down all the integers which lie between: (a) \u22126 and \u221210 (b) \u22124 and 2 (c) \u22123 and 0 (d) \u22121 and \u22123 (e) \u22129 and 0. 4. Write down a whole number which is: (a) greater than \u221210 but less than \u22126 (b) less than \u22126 (c) greater than \u22125 but",
+        "metadata": {
+          "chunk_id": "3ca5515e-49b7-43d1-baa4-2c824e392784",
+          "chunk_type": "generic",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.5,
+          "educational_value_score": 0.5
+        },
+        "character_count": 1913,
+        "word_count": 447,
+        "position": 0,
+        "confidence": 0.5
+      },
+      {
+        "chunk_id": "f970e464-4b98-4a6b-b1a0-e96fd1f886b3",
+        "text": "184\nMEP Pupil Text 10\n10 Equations\n10.1\nNegative Numbers\nA number line like this is very helpful when dealing with negative numbers.\nWorked Example 1\nAn ice cube taken from a deep freeze is at a temperature of \u2212\u00b0\n6 C.  Its temperature rises\nby 4 degrees.  What is its new temperature?\nSolution\nThe number line can be used as shown.\n     \u2212\n+\n= \u2212\n6\n4\n2\nWorked Example 2\nWrite down numbers which are:\n(a)\nless than \u22124\n(b)\ngreater than \u22125 but less than \u22122\n(c)\nless than \u22123 but greater than \u22128.\nSolution\n(a)\nAny number less than \u22124 must be to the left of \u22124 on the number line,\nfor example  \u22125,  \u22126,  \u22127,  etc.\n(b)\nA number greater than \u22125 must be to the right of \u22125, and to be less than \u22122\nmust also be to the left of \u22122,  for example  \u22124 and \u22123.\n(c)\nTo be less than \u22123 the number must be to the left of \u22123 but to be greater than \u22128\nthe number must be to the right of \u22128,  for example  \u22127,  \u22126, \u22125,  \u22124.\n-4\n\u20133\n\u20132\n\u20131\n0\n2\n3\n4\n5\n1\n\u2013 6\n\u2013 5\n\u2013 4\n\u2013 3\n\u2013 2\n0\n\u2013 1\n+ 4\n\u2013 4\n\u2013 3\n\u2013 2\n\u20131\n0\n1\n\u2013 5\n\u2013 6\n\u2013 7\n\u2013 8\nInvestigation\nWithin 4 consecutive years, Mrs. White gave birth to four lovely children.  Today, x years\nlater, Mr and Mrs. White find out that the product of their four children's ages is 3 024.\nHow old is each child now, assuming that all the children are of different ages?\n185\nMEP Pupil Text 10\nExercises",
+        "metadata": {
+          "chunk_id": "f970e464-4b98-4a6b-b1a0-e96fd1f886b3",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 1,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 1297,
+        "word_count": 286,
+        "position": 0,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "352a79f0-d870-4a89-9212-4f86d8925b0f",
+        "text": "1.\nCopy and complete the following table of temperature changes.\nOriginal Temperature          Temperature Change          Final Temperature\n6\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n+\n\u00b0\n2 C\n\u2212\n\u00b05 C\n\u2212\n\u00b03 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n2\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n6 C\n+ \u00b01 C\n\u2212\n\u00b05 C\n\u2212\n\u00b0\n2 C",
+        "metadata": {
+          "chunk_id": "352a79f0-d870-4a89-9212-4f86d8925b0f",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 2,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 245,
+        "word_count": 64,
+        "position": 1,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "249c0d7c-feae-47a5-b860-15bcfa1e4899",
+        "text": "2.\nPlace each set of numbers in increasing order.\n(a)\n\u221210,  \u22124,  \u22126,   2,  \u22125,   3\n(b)\n3,   \u22121,   0,   \u22124,   7\n(c)\n7,   \u22122,  \u22124,  \u22126,   3,   0\n(d)\n\u22124,   0,  \u22127,   7,   5,   \u22122\n(e)\n\u22121,  \u22124,   0,   \u22125,   6,   \u22123",
+        "metadata": {
+          "chunk_id": "249c0d7c-feae-47a5-b860-15bcfa1e4899",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 3,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 209,
+        "word_count": 43,
+        "position": 2,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "cd7ecaa0-6e19-4db2-a32a-0950ccefd59c",
+        "text": "3.\nWrite down all the integers which lie between:\n(a)\n\u22126  and  \u221210\n(b)\n\u22124  and  2\n(c)\n\u22123  and  0\n(d)\n\u22121  and  \u22123\n(e)\n\u22129  and  0.",
+        "metadata": {
+          "chunk_id": "cd7ecaa0-6e19-4db2-a32a-0950ccefd59c",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 4,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 128,
+        "word_count": 29,
+        "position": 3,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "d7853fe3-f475-4e6e-a422-dfb497e2a09a",
+        "text": "4.\nWrite down a whole number which is:\n(a)\ngreater than \u221210 but less than \u22126\n(b)\nless than \u22126\n(c)\ngreater than \u22125 but",
+        "metadata": {
+          "chunk_id": "d7853fe3-f475-4e6e-a422-dfb497e2a09a",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 5,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 117,
+        "word_count": 25,
+        "position": 4,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "887a3fcb-48a3-497f-bad5-db9d086ea507",
+        "text": "184\nMEP Pupil Text 10\n10 Equations\n10.1\nNegative Numbers\nA number line like this is very helpful when dealing with negative numbers.\nWorked Example 1\nAn ice cube taken from a deep freeze is at a temperature of \u2212\u00b0\n6 C.  Its temperature rises\nby 4 degrees.  What is its new temperature?\nSolution\nThe number line can be used as shown.\n     \u2212\n+\n= \u2212\n6\n4\n2\nWorked Example 2\nWrite down numbers which are:\n(a)\nless than \u22124\n(b)\ngreater than \u22125 but less than \u22122\n(c)\nless than \u22123 but greater than \u22128.\nSolution\n(a)\nAny number less than \u22124 must be to the left of \u22124 on the number line,\nfor example  \u22125,  \u22126,  \u22127,  etc.\n(b)\nA number greater than \u22125 must be to the right of \u22125, and to be less than \u22122\nmust also be to the left of \u22122,  for example  \u22124 and \u22123.\n(c)\nTo be less than \u22123 the number must be to the left of \u22123 but to be greater than \u22128\nthe number must be to the right of \u22128,  for example  \u22127,  \u22126, \u22125,  \u22124.\n-4\n\u20133\n\u20132\n\u20131\n0\n2\n3\n4\n5\n1\n\u2013 6\n\u2013 5\n\u2013 4\n\u2013 3\n\u2013 2\n0\n\u2013 1\n+ 4\n\u2013 4\n\u2013 3\n\u2013 2\n\u20131\n0\n1\n\u2013 5\n\u2013 6\n\u2013 7\n\u2013 8\nInvestigation\nWithin 4 consecutive years, Mrs. White gave birth to four lovely children.  Today, x years\nlater, Mr and Mrs. White find out that the product of their four children's ages is 3 024.\nHow old is each child now, assuming that all the children are of different ages?\n185\nMEP Pupil Text 10\nExercises\n1.\nCopy and complete the following table of temperature changes.\nOriginal Temperature          Temperature Change          Final Temperature\n6\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n+\n\u00b0\n2 C\n\u2212\n\u00b05 C\n\u2212\n\u00b03 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n4 C\n2\u00b0 C\n\u2212\n\u00b0\n10 C\n\u2212\n\u00b0\n6 C\n+ \u00b01 C\n\u2212\n\u00b05 C\n\u2212\n\u00b0\n2 C\n2.\nPlace each set of numbers in increasing order.\n(a)\n\u221210,  \u22124,  \u22126,   2,  \u22125,   3\n(b)\n3,   \u22121,   0,   \u22124,   7\n(c)\n7,   \u22122,  \u22124,  \u22126,   3,   0\n(d)\n\u22124,   0,  \u22127,   7,   5,   \u22122\n(e)\n\u22121,  \u22124,   0,   \u22125,   6,   \u22123\n3.\nWrite down all the integers which lie between:\n(a)\n\u22126  and  \u221210\n(b)\n\u22124  and  2\n(c)\n\u22123  and  0\n(d)\n\u22121  and  \u22123\n(e)\n\u22129  and  0.\n4.\nWrite down a whole number which is:\n(a)\ngreater than \u221210 but less than \u22126\n(b)\nless than \u22126\n(c)\ngreater than \u22125 but",
+        "metadata": {
+          "chunk_id": "887a3fcb-48a3-497f-bad5-db9d086ea507",
+          "chunk_type": "inquiry",
+          "inquiry_stage": "question",
+          "pedagogy_type": "inquiry_learning",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.75,
+          "educational_value_score": 0.85
+        },
+        "character_count": 2000,
+        "word_count": 447,
+        "position": 0,
+        "confidence": 0.75
+      }
+    ],
+    "chunk_count": 12,
+    "chunking_strategy": "semantic_curriculum_aware",
+    "chunk_types": {
+      "generic": 6,
+      "assessment": 5,
+      "inquiry": 1
+    },
+    "processing_time_ms": 150
+  },
+  "semantic_enrichment_service_bkb10.pdf": {
+    "success": true,
+    "enriched_chunks": [
+      {
+        "chunk_id": "chunk_bkb10_1",
+        "text": "184\nMEP Pupil Text 10\n10 Equations\n10.1\nNegative Numbers\nA number line like this is very helpful when dealing with negative numbers.\nWorked Example 1\nAn ice cube taken from a deep freeze is at a temperature of \u2212\u00b0\n6 C.  Its temperature rises\nby 4 degrees.  What is its new temperature?\nSolution\nThe number line can be used as shown.\n     \u2212\n+\n= \u2212\n6\n4\n2\nWorked Example 2\nWrite down numbers which are:\n(a)\nless than \u22124\n(b)\ngreater than \u22125 but less than \u22122\n(c)\nless than \u22123 but greater than \u22128.\nSolution\n(",
+        "metadata": {
+          "subject": "IPA",
+          "grade": "6"
+        },
+        "enrichment": {
+          "pedagogy_classification": {
+            "pedagogy_type": "deep_learning",
+            "confidence": 0.010101010101010102,
+            "indicators": [
+              "deep"
+            ],
+            "all_scores": {
+              "inquiry_learning": 0,
+              "differentiated_learning": 0,
+              "deep_learning": 1,
+              "project_based_learning": 1,
+              "problem_based_learning": 1
+            }
+          },
+          "taxonomy_tags": {
+            "error": "TaxonomyTagger.tag() takes 2 positional arguments but 4 were given"
+          },
+          "competency_tags": {
+            "competencies_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "assessment_tags": {
+            "assessment_types_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "cognitive_tags": {
+            "cognitive_levels": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "learning_objective_tags": {
+            "learning_objectives": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "deep_learning_tags": {
+            "deep_learning_features": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "enrichment_metadata": {
+            "enriched_at": "2026-05-29T13:20:47.972942",
+            "enrichment_version": "2.0.0",
+            "content_length": 500,
+            "word_count": 99,
+            "language": "unknown"
+          }
+        }
+      }
+    ],
+    "chunk_count": 1,
+    "enrichment_types": [
+      "pedagogy_classification",
+      "taxonomy_tags",
+      "competency_tags",
+      "assessment_tags",
+      "cognitive_tags",
+      "learning_objective_tags",
+      "deep_learning_tags",
+      "enrichment_metadata"
+    ],
+    "processing_time_ms": 200
+  },
+  "parser_service_siklus-air.pdf": {
+    "success": false,
+    "error": "document closed",
+    "extraction_method": "basic_extraction",
+    "processing_time": 0.8443567752838135
+  },
+  "semantic_chunk_service_siklus-air.pdf": {
+    "success": true,
+    "document_id": "test_siklus-air",
+    "chunks": [
+      {
+        "chunk_id": "fccf626c-3246-43dc-a4f9-81418c8f1e1e",
+        "text": "BAHAN AJAR 6 Pokok Bahasan: Mengenal Siklus Air untuk Kelas IV SD PT Jepe Press Media Utama Penyusun: Editor: Ilustrator: Dra. Sri Rahayu, M.Pd. Riska Luthfiana Febi Rahmat Hidayat Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV 2 Ayo Mengamati Hai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. Hmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang siklus air di bawah ini! Nah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan belajar kali ini! Setelah mempelajari pokok bahasan ini, siswa dapat: 1. mendeskripsikan tentang siklus air, 2. menjelaskan tahapan-tahapan siklus air, 3. menjelaskan kegunaan air bagi kehidupan, 4. mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. Tujuan yang Diharapkan Media Pembelajaran 1. Toples kaca 2. Plastik kaca 3. Air panas 4. Es batu 5. Pewarna biru 6. Karet Metode Pembelajaran Problem Based Learning (PBL) https://youtu.be/vZaxn6w0cQk Sumber: QR CODE Sumber: Dokumentasi penerbit Gambar 1. Hujan BAHAN AJAR 6: MENGENAL SIKLUS AIR 3 Mengenal Siklus Air Sumber: Dokumentasi penerbit Gambar 2. Air sebagai salah satu sumber kehidupan manusia Semua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat membutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan untuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan membutuhkan air untuk berfotosintesis. Hal tersebut menunjukkan bahwa air merupakan salah satu sumber kehidupan. Air termasuk sumber daya alam yang dapat diperbaharui. Ini berarti jumlah air di bumi tidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu ada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses siklus air itu? Ayo, kita pelajari bersama-sama! Topik 1: Apa itu Siklus Air? Uraian materi Pernahkah kamu berpikir dari man",
+        "metadata": {
+          "chunk_id": "fccf626c-3246-43dc-a4f9-81418c8f1e1e",
+          "chunk_type": "competency",
+          "competency": "tahapan-tahapan siklus air, 3. menjelaskan kegunaan air bagi kehidupan, 4. mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. Tujuan",
+          "subject": "IPA",
+          "grade": "6",
+          "phase": "B",
+          "document_position": 0,
+          "chunk_quality_score": 0.9999999999999999,
+          "educational_value_score": 0.8
+        },
+        "character_count": 1943,
+        "word_count": 288,
+        "position": 0,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "92f1dbaa-c2ca-4ab7-80e8-94a31a10e722",
+        "text": "BAHAN AJAR 6 Pokok Bahasan: Mengenal Siklus Air untuk Kelas IV SD PT Jepe Press Media Utama Penyusun: Editor: Ilustrator: Dra. Sri Rahayu, M.Pd. Riska Luthfiana Febi Rahmat Hidayat Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV 2 Ayo Mengamati Hai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. Hmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang siklus air di bawah ini! Nah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan belajar kali ini! Setelah mempelajari pokok bahasan ini, siswa dapat: 1. mendeskripsikan tentang siklus air, 2. menjelaskan tahapan-tahapan siklus air, 3. menjelaskan kegunaan air bagi kehidupan, 4. mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. Tujuan yang Diharapkan Media Pembelajaran 1. Toples kaca 2. Plastik kaca 3. Air panas 4. Es batu 5. Pewarna biru 6. Karet Metode Pembelajaran Problem Based Learning (PBL) https://youtu.be/vZaxn6w0cQk Sumber: QR CODE Sumber: Dokumentasi penerbit Gambar 1. Hujan BAHAN AJAR 6: MENGENAL SIKLUS AIR 3 Mengenal Siklus Air Sumber: Dokumentasi penerbit Gambar 2. Air sebagai salah satu sumber kehidupan manusia Semua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat membutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan untuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan membutuhkan air untuk berfotosintesis. Hal tersebut menunjukkan bahwa air merupakan salah satu sumber kehidupan. Air termasuk sumber daya alam yang dapat diperbaharui. Ini berarti jumlah air di bumi tidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu ada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses siklus air itu? Ayo, kita pelajari bersama-sama! Topik 1: Apa itu Siklus Air? Uraian materi Pernahkah kamu berpikir dari man",
+        "metadata": {
+          "chunk_id": "92f1dbaa-c2ca-4ab7-80e8-94a31a10e722",
+          "chunk_type": "activity",
+          "activity_type": "b",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.7,
+          "educational_value_score": 0.75
+        },
+        "character_count": 1943,
+        "word_count": 288,
+        "position": 0,
+        "confidence": 0.7
+      },
+      {
+        "chunk_id": "8f1751c6-1509-4a2b-b34d-b0de50dd8894",
+        "text": "BAHAN AJAR   6\nPokok Bahasan: \nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hidayat\nIlmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n2\nAyo Mengamati\nHai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. \nHmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang \nsiklus air di bawah ini!\nNah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan \nbelajar kali ini! \nSetelah mempelajari pokok bahasan ini, siswa dapat:",
+        "metadata": {
+          "chunk_id": "8f1751c6-1509-4a2b-b34d-b0de50dd8894",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 1,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 641,
+        "word_count": 96,
+        "position": 0,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "01591343-0622-45a1-8751-76905ffc351c",
+        "text": "1.\t mendeskripsikan tentang siklus air,",
+        "metadata": {
+          "chunk_id": "01591343-0622-45a1-8751-76905ffc351c",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 2,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 39,
+        "word_count": 5,
+        "position": 1,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "40778dac-8405-4242-b627-c4b39a4f919a",
+        "text": "2.\t menjelaskan tahapan-tahapan siklus air,",
+        "metadata": {
+          "chunk_id": "40778dac-8405-4242-b627-c4b39a4f919a",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 3,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 43,
+        "word_count": 5,
+        "position": 2,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "01b3c79e-fda2-4591-83dc-944fb8367882",
+        "text": "3.\t menjelaskan kegunaan air bagi kehidupan,",
+        "metadata": {
+          "chunk_id": "01b3c79e-fda2-4591-83dc-944fb8367882",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 4,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 44,
+        "word_count": 6,
+        "position": 3,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "43a2803b-c726-4b7a-a095-9548f4c890d6",
+        "text": "4.\t mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. \nTujuan yang Diharapkan\nMedia Pembelajaran",
+        "metadata": {
+          "chunk_id": "43a2803b-c726-4b7a-a095-9548f4c890d6",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 5,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 112,
+        "word_count": 13,
+        "position": 4,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "19b27789-d1ba-4df8-a3c3-b045d4f2daae",
+        "text": "1.\t Toples kaca",
+        "metadata": {
+          "chunk_id": "19b27789-d1ba-4df8-a3c3-b045d4f2daae",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 6,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 15,
+        "word_count": 3,
+        "position": 5,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "ec7bb476-aeb1-4c4f-b503-7ba1f4a18532",
+        "text": "2.\t Plastik kaca",
+        "metadata": {
+          "chunk_id": "ec7bb476-aeb1-4c4f-b503-7ba1f4a18532",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 7,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 16,
+        "word_count": 3,
+        "position": 6,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "bcb28354-3593-4fdd-bb9d-aa351c7d6615",
+        "text": "3.\t Air panas",
+        "metadata": {
+          "chunk_id": "bcb28354-3593-4fdd-bb9d-aa351c7d6615",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 8,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 13,
+        "word_count": 3,
+        "position": 7,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "76bfc207-def9-4b57-b916-1dd79b5f3864",
+        "text": "4.\t Es batu",
+        "metadata": {
+          "chunk_id": "76bfc207-def9-4b57-b916-1dd79b5f3864",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 9,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 11,
+        "word_count": 3,
+        "position": 8,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "2bf14213-84c1-4dfd-b3bc-ad55d7583bb9",
+        "text": "5.\t Pewarna biru",
+        "metadata": {
+          "chunk_id": "2bf14213-84c1-4dfd-b3bc-ad55d7583bb9",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 10,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 16,
+        "word_count": 3,
+        "position": 9,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "4558a953-9268-4347-9e1c-1452cf195409",
+        "text": "6.\t Karet\nMetode Pembelajaran\nProblem Based Learning (PBL)\nhttps://youtu.be/vZaxn6w0cQk\nSumber: \nQR CODE\nSumber: Dokumentasi penerbit\nGambar 1. Hujan\nBAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air\nSumber: Dokumentasi penerbit\nGambar 2. Air sebagai salah satu sumber kehidupan manusia\nSemua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat \nmembutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan \nuntuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan \nmembutuhkan air untuk berfotosintesis.  Hal tersebut menunjukkan bahwa air merupakan \nsalah satu sumber kehidupan. \nAir termasuk\u00a0sumber daya alam\u00a0yang dapat diperbaharui. Ini berarti jumlah air di bumi \ntidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu \nada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses \nsiklus air itu? Ayo, kita pelajari bersama-sama!  \nTopik 1: Apa itu Siklus Air?\n \n \nUraian materi\nPernahkah kamu berpikir dari man",
+        "metadata": {
+          "chunk_id": "4558a953-9268-4347-9e1c-1452cf195409",
+          "chunk_type": "assessment",
+          "assessment_type": "question",
+          "question_number": 11,
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.8,
+          "educational_value_score": 0.9
+        },
+        "character_count": 1039,
+        "word_count": 148,
+        "position": 10,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "4d680f96-ea75-4078-9899-d0c67a38e42c",
+        "text": "BAHAN AJAR   6\nPokok Bahasan: \nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hidayat\nIlmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n2\nAyo Mengamati\nHai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. \nHmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang \nsiklus air di bawah ini!\nNah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan \nbelajar kali ini! \nSetelah mempelajari pokok bahasan ini, siswa dapat:\n1.\t mendeskripsikan tentang siklus air,\n2.\t menjelaskan tahapan-tahapan siklus air, \n3.\t menjelaskan kegunaan air bagi kehidupan,\n4.\t mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. \nTujuan yang Diharapkan\nMedia Pembelajaran\n1.\t Toples kaca\n2.\t Plastik kaca\n3.\t Air panas\n4.\t Es batu\n5.\t Pewarna biru\n6.\t Karet\nMetode Pembelajaran\nProblem Based Learning (PBL)\nhttps://youtu.be/vZaxn6w0cQk\nSumber: \nQR CODE\nSumber: Dokumentasi penerbit\nGambar 1. Hujan\nBAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air\nSumber: Dokumentasi penerbit\nGambar 2. Air sebagai salah satu sumber kehidupan manusia\nSemua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat \nmembutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan \nuntuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan \nmembutuhkan air untuk berfotosintesis.  Hal tersebut menunjukkan bahwa air merupakan \nsalah satu sumber kehidupan. \nAir termasuk\u00a0sumber daya alam\u00a0yang dapat diperbaharui. Ini berarti jumlah air di bumi \ntidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu \nada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses \nsiklus air itu? Ayo, kita pelajari bersama-sama!  \nTopik 1: Apa itu Siklus Air?\n \n \nUraian materi\nPernahkah kamu berpikir dari man",
+        "metadata": {
+          "chunk_id": "4d680f96-ea75-4078-9899-d0c67a38e42c",
+          "chunk_type": "inquiry",
+          "inquiry_stage": "question",
+          "pedagogy_type": "inquiry_learning",
+          "subject": "IPA",
+          "grade": "6",
+          "chunk_quality_score": 0.75,
+          "educational_value_score": 0.85
+        },
+        "character_count": 2000,
+        "word_count": 288,
+        "position": 0,
+        "confidence": 0.75
+      }
+    ],
+    "chunk_count": 14,
+    "chunking_strategy": "semantic_curriculum_aware",
+    "chunk_types": {
+      "competency": 1,
+      "activity": 1,
+      "assessment": 11,
+      "inquiry": 1
+    },
+    "processing_time_ms": 150
+  },
+  "semantic_enrichment_service_siklus-air.pdf": {
+    "success": true,
+    "enriched_chunks": [
+      {
+        "chunk_id": "chunk_siklus-air_1",
+        "text": "BAHAN AJAR   6\nPokok Bahasan: \nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hidayat\n",
+        "metadata": {
+          "subject": "IPA",
+          "grade": "6"
+        },
+        "enrichment": {
+          "pedagogy_classification": {
+            "pedagogy_type": "inquiry_learning",
+            "confidence": 0.0,
+            "indicators": [],
+            "all_scores": {
+              "inquiry_learning": 0,
+              "differentiated_learning": 0,
+              "deep_learning": 0,
+              "project_based_learning": 0,
+              "problem_based_learning": 0
+            }
+          },
+          "taxonomy_tags": {
+            "error": "TaxonomyTagger.tag() takes 2 positional arguments but 4 were given"
+          },
+          "competency_tags": {
+            "competencies_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "assessment_tags": {
+            "assessment_types_detected": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "cognitive_tags": {
+            "cognitive_levels": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "learning_objective_tags": {
+            "learning_objectives": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "deep_learning_tags": {
+            "deep_learning_features": [],
+            "confidence": 0.0,
+            "method": "mock"
+          },
+          "enrichment_metadata": {
+            "enriched_at": "2026-05-29T13:20:48.829857",
+            "enrichment_version": "2.0.0",
+            "content_length": 206,
+            "word_count": 29,
+            "language": "indonesian"
+          }
+        }
+      }
+    ],
+    "chunk_count": 1,
+    "enrichment_types": [
+      "pedagogy_classification",
+      "taxonomy_tags",
+      "competency_tags",
+      "assessment_tags",
+      "cognitive_tags",
+      "learning_objective_tags",
+      "deep_learning_tags",
+      "enrichment_metadata"
+    ],
+    "processing_time_ms": 200
+  }
+}

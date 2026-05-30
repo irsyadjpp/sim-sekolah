@@ -1,15 +1,17 @@
 package auth
 
 import (
+	"sim-sekolah/internal/common"
 	"time"
 
 	"github.com/google/uuid"
 )
 
 type Role struct {
-	ID        uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
-	RoleName  string    `gorm:"unique"`
-	CreatedAt time.Time
+	ID       uuid.UUID `gorm:"type:uuid;default:uuidv7();primaryKey"`
+	RoleName string    `gorm:"unique"`
+
+	common.Auditable
 }
 
 func (Role) TableName() string {
@@ -17,7 +19,7 @@ func (Role) TableName() string {
 }
 
 type User struct {
-	ID           uuid.UUID  `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	ID           uuid.UUID  `gorm:"type:uuid;default:uuidv7();primaryKey" json:"id"`
 	TeacherID    *uuid.UUID `gorm:"type:uuid" json:"teacher_id"`
 	StudentID    *uuid.UUID `gorm:"type:uuid" json:"student_id"`
 	FullName     string     `json:"full_name"`
@@ -32,8 +34,8 @@ type User struct {
 	IsEnabled             bool `gorm:"default:true" json:"is_enabled"`
 
 	LastLogin *time.Time `json:"last_login"`
-	CreatedAt time.Time  `json:"created_at"`
-	UpdatedAt time.Time  `json:"updated_at"`
+
+	common.Auditable
 
 	// Appearance Settings
 	ThemeColor   string `gorm:"default:theme-purple" json:"theme_color"`
@@ -55,11 +57,12 @@ func (User) TableName() string {
 }
 
 type RefreshToken struct {
-	ID        uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
+	ID        uuid.UUID `gorm:"type:uuid;default:uuidv7();primaryKey"`
 	UserID    uuid.UUID
 	Token     string
 	ExpiredAt time.Time
-	CreatedAt time.Time
+
+	common.Auditable
 }
 
 func (RefreshToken) TableName() string {
@@ -67,13 +70,41 @@ func (RefreshToken) TableName() string {
 }
 
 type PasswordResetToken struct {
-	ID        uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
+	ID        uuid.UUID `gorm:"type:uuid;default:uuidv7();primaryKey"`
 	UserID    uuid.UUID
 	Token     string
 	ExpiredAt time.Time
-	CreatedAt time.Time
+
+	common.Auditable
 }
 
 func (PasswordResetToken) TableName() string {
 	return "auth_password_reset_token"
+}
+
+type UserSession struct {
+	ID        uuid.UUID `gorm:"type:uuid;default:uuidv7();primaryKey" json:"id"`
+	UserID    uuid.UUID `gorm:"type:uuid;not null" json:"user_id"`
+	UserAgent string    `gorm:"type:text;not null" json:"user_agent"`
+	IPAddress string    `gorm:"type:varchar(50);not null" json:"ip_address"`
+	IsRevoked bool      `gorm:"default:false" json:"is_revoked"`
+	ExpiresAt time.Time `gorm:"type:timestamptz;not null" json:"expires_at"`
+
+	common.Auditable
+}
+
+func (UserSession) TableName() string {
+	return "auth_user_session"
+}
+
+type Permission struct {
+	ID             uuid.UUID `gorm:"type:uuid;default:uuidv7();primaryKey" json:"id"`
+	PermissionName string    `gorm:"type:varchar(100);unique;not null" json:"permission_name"`
+	Description    string    `gorm:"type:text" json:"description"`
+
+	common.Auditable
+}
+
+func (Permission) TableName() string {
+	return "auth_permission"
 }

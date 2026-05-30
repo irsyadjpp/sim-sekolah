@@ -43,6 +43,7 @@ import (
 	"sim-sekolah/internal/schedule"
 	"sim-sekolah/internal/school"
 	"sim-sekolah/internal/spmb"
+	"sim-sekolah/internal/strategic_planning"
 	"sim-sekolah/internal/student"
 	"sim-sekolah/internal/subject"
 	"sim-sekolah/internal/supervision"
@@ -90,6 +91,9 @@ func SetupRoutes(api fiber.Router, db *gorm.DB, rdb *redis.Client) {
 
 	// Konteks Lokal
 	local_context.SetupRoutes(api, db)
+
+	// Strategic Planning - Analisis Karakteristik Digital
+	strategic_planning.SetupRoutes(api, db)
 
 	// Institusi & Aktor
 	academic_year.SetupRoutes(api, db)

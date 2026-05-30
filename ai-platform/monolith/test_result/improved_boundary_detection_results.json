@@ -1,0 +1,103 @@
+{
+  "test_timestamp": "2026-05-29 21:17:39.170479",
+  "test_version": "improved_boundary_detection_v1",
+  "boundary_detection_result": {
+    "success": true,
+    "document_id": "water_cycle_concepts",
+    "chunks": [
+      {
+        "chunk_id": "105a8cdb-c93c-42c4-8672-3b4ee30bf08f",
+        "text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n4\nlaut, sungai, danau, dan badan air lainnya. Sedangkan transpirasi meru\u00adpa\u00adkan pelepasan \nmolekul air sebagai hasil metabolisme dari tumbuh-tumbuhan.",
+        "chunk_type": "concept_explanation",
+        "importance": "supporting",
+        "bloom_level": "C1_remember",
+        "bloom_is_hots": false,
+        "bloom_is_lots": true,
+        "subject": "IPA",
+        "grade": "4",
+        "related_topics": [],
+        "related_experiments": [],
+        "related_competencies": [],
+        "prerequisite_concepts": [],
+        "quality_score": 0.7999999999999999,
+        "educational_value": 0.7,
+        "complexity_level": "basic",
+        "document_position": 0,
+        "section_hierarchy": [
+          "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n4\n"
+        ],
+        "word_count": 28,
+        "character_count": 201,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "982c5fd0-e6d6-4f57-956a-0043c32ad418",
+        "text": "2. \t Kondensasi\n\t\nKondensasi adalah pro\u00adses perubahan air dari gas menjadi cair atau kita kenal dengan \nistilah pengem\u00adbunan yang merupakan kebalikan dari evaporasi atau penguapan. Pada \nsiklus air, kondensasi terjadi di atmosfer akibat perubahan suhu dan tekanan. Akibat \nadanya kondensasi air akan berkumpul membentuk awan hitam yang siap turun sebagai \nhujan ketika mencapai titik jenuh.",
+        "chunk_type": "process_explanation",
+        "importance": "core",
+        "bloom_level": "C1_remember",
+        "bloom_is_hots": false,
+        "bloom_is_lots": true,
+        "subject": "IPA",
+        "grade": "4",
+        "related_topics": [],
+        "related_experiments": [],
+        "related_competencies": [],
+        "prerequisite_concepts": [],
+        "quality_score": 0.95,
+        "educational_value": 0.9,
+        "complexity_level": "intermediate",
+        "document_position": 1,
+        "section_hierarchy": [],
+        "word_count": 54,
+        "character_count": 390,
+        "confidence": 0.8
+      },
+      {
+        "chunk_id": "9f83f593-3d02-4a11-9558-216dbb0609aa",
+        "text": "3.\t Presipitasi\n\t\nPresipitasi merupakan produk dari kondensasi. Presipitasi dapat terjadi karena adanya \npendinginan dan penambahan uap air, sehingga air yang membentuk awan mencapai \ntitik jenuh. Semakin banyak uap air yang terbentuk di atmosfer, maka tetesan air yang \nada di awan akan semakin banyak dan semakin berat. Ketika awan tidak mampu \nmenampung banyaknya air yang terbentuk, maka air tersebut akan dikeluarkan dalam \nbentuk hujan.\nSecara umum, berikut siklus air yang terjadi. Air yang ada di permukaan bumi menguap \nkarena terkena panas matahari. Uap air akan naik ke atmosfer dan mengalami pendinginan. \nSelanjutnya, uap air akan berubah menjadi kristal-kristal air yang berkumpul membentuk \nawan (kondensasi). Semakin lama awan semakin tebal dan gelap. Gumpalan awan yang \nmenebal mengandung banyak sekali kristal dan uap air. Karena suhu yang rendah, uap air, \ndan kristal air akan mengembun menjadi titik-titik air. Selanjutnya, titik-titik air akan jatuh ke \nbumi menjadi hujan (presipitasi). Air hujan yang jatuh ke bumi sebagian meresap ke dalam \ntanah dan akan keluar sebagai mata air. Sebagaian lagi akan mengalir ke tempat-tempat \nyang lebih rendah, seperti sungai dan akan terus mengalir sampai ke danau atau laut. Air di \nsungai dan laut kembali mendapat panas dari sinar matahari dan mengalami penguapan. \nProses ini berlanjut sampai terjadinya hujan kembali dan dikenal dengan siklus air. \nSumber: Youtube.com (Fendra Nugroho)\nGambar 3. Siklus air",
+        "chunk_type": "process_explanation",
+        "importance": "core",
+        "bloom_level": "C1_remember",
+        "bloom_is_hots": false,
+        "bloom_is_lots": true,
+        "subject": "IPA",
+        "grade": "4",
+        "related_topics": [],
+        "related_experiments": [],
+        "related_competencies": [],
+        "prerequisite_concepts": [],
+        "quality_score": 0.85,
+        "educational_value": 0.9,
+        "complexity_level": "advanced",
+        "document_position": 2,
+        "section_hierarchy": [
+          "Fendra Nugroho)\nGambar 3."
+        ],
+        "word_count": 216,
+        "character_count": 1474,
+        "confidence": 0.8
+      }
+    ],
+    "chunk_count": 3,
+    "chunking_strategy": "typed_curriculum_aware",
+    "chunk_types": {
+      "types": {
+        "concept_explanation": 1,
+        "process_explanation": 2
+      },
+      "importance_levels": {
+        "supporting": 1,
+        "core": 2
+      }
+    },
+    "boundary_detection": "enabled",
+    "processing_time_ms": 150
+  },
+  "concept_separation": {
+    "evaporasi": "separated",
+    "kondensasi": "multiple",
+    "presipitasi": "separated"
+  },
+  "validation_target": "1 pedagogical intent = 1 chunk"
+}

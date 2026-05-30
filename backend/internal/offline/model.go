@@ -1,6 +1,7 @@
 package offline
 
 import (
+	"sim-sekolah/internal/common"
 	"time"
 
 	"github.com/google/uuid"
@@ -20,9 +21,8 @@ type SyncState struct {
 	Version         int64      `gorm:"type:bigint;default:1"`   // Optimistic locking
 	DeviceID        string     `gorm:"type:varchar(100);index"` // Device that created the offline entry
 	UserID          uuid.UUID  `gorm:"type:uuid;index"`         // User who created the offline entry
-	CreatedAt       time.Time  `gorm:"autoCreateTime"`
-	UpdatedAt       time.Time  `gorm:"autoUpdateTime"`
-	DeletedAt       *time.Time `gorm:"index"`
+
+	common.Auditable
 }
 
 // ConflictResolution represents data merge conflicts
@@ -39,8 +39,8 @@ type ConflictResolution struct {
 	ResolvedBy      uuid.UUID  `gorm:"type:uuid;index"` // User who resolved the conflict
 	ResolutionNotes string     `gorm:"type:text"`
 	DeviceID        string     `gorm:"type:varchar(100);index"` // Device that detected the conflict
-	CreatedAt       time.Time  `gorm:"autoCreateTime"`
-	UpdatedAt       time.Time  `gorm:"autoUpdateTime"`
+
+	common.Auditable
 }
 
 // TableName specifies the table name for SyncState

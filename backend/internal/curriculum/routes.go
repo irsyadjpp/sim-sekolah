@@ -49,4 +49,13 @@ func SetupRoutes(router fiber.Router, db *gorm.DB, rdb *redis.Client) {
 	ekstrakurikulerGroup.Post("/", h.CreateEkstrakurikulerActivity)
 	ekstrakurikulerGroup.Put("/:id", h.UpdateEkstrakurikulerActivity)
 	ekstrakurikulerGroup.Delete("/:id", h.DeleteEkstrakurikulerActivity)
+
+	// Analysis Data Integration routes (FR 4.2.1-4.2.5)
+	analysisIntegrationGroup := router.Group("/analysis-integration")
+	analysisIntegrationGroup.Use(middleware.Protected())
+	analysisIntegrationGroup.Post("/swot", h.IntegrateSWOTData)
+	analysisIntegrationGroup.Post("/root-cause", h.IntegrateRootCauseData)
+	analysisIntegrationGroup.Post("/fishbone", h.IntegrateFishboneData)
+	analysisIntegrationGroup.Post("/student-needs", h.IntegrateStudentNeedsData)
+	analysisIntegrationGroup.Post("/generate-ksp", h.GenerateKSPWithAnalysis)
 }

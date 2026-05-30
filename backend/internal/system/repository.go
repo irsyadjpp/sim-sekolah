@@ -4,9 +4,10 @@ import (
 	"context"
 	"time"
 
+	"sim-sekolah/pkg/logger"
+
 	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"sim-sekolah/pkg/logger"
 )
 
 type SystemRepository interface {
@@ -85,44 +86,27 @@ func (r *systemRepository) InitViewsAndSeed(ctx context.Context) error {
 		Name string
 		SQL  string
 	}{
-		{
-			Name: "vw_dashboard_pimpinan_ksp",
-			SQL: `
-				CREATE OR REPLACE VIEW vw_dashboard_pimpinan_ksp AS
-				SELECT 
-					kd.id AS ksp_document_id,
-					ay.year_name,
-					ay.semester,
-					kd.status AS status_dokumen,
-					COUNT(kc.id) AS jumlah_bab_terisi,
-					ROUND((COUNT(kc.id)::numeric / 5.0) * 100, 2) AS persentase_selesai
-				FROM trx_curriculum_document kd
-				JOIN master_academic_year ay ON kd.academic_year_id = ay.id
-				LEFT JOIN trx_curriculum_chapter kc ON kd.id = kc.curriculum_document_id
-				GROUP BY kd.id, ay.year_name, ay.semester, kd.status;
-			`,
-		},
-		{
-			Name: "vw_dashboard_pimpinan_kognitif",
-			SQL: `
-				CREATE OR REPLACE VIEW vw_dashboard_pimpinan_kognitif AS
-				SELECT 
-					c.id AS classroom_id,
-					c.classroom_name,
-					sub.subject_name,
-					qb.tingkat AS tingkat_kognitif,
-					ROUND(AVG(ascore.score), 2) AS rata_rata_nilai,
-					COUNT(ascore.id) AS total_sampel_jawaban
-				FROM trx_academic_score ascore
-				JOIN trx_question_bank qb ON ascore.question_id = qb.id
-				JOIN trx_teaching_module tm ON qb.module_id = tm.id
-				JOIN trx_atp atp ON tm.atp_id = atp.id
-				JOIN master_classroom c ON atp.classroom_id = c.id
-				JOIN master_subject sub ON atp.subject_id = sub.id
-				WHERE c.academic_year_id = (SELECT id FROM master_academic_year WHERE is_active = true LIMIT 1)
-				GROUP BY c.id, c.classroom_name, sub.subject_name, qb.tingkat;
-			`,
-		},
+// 		{
+// 			Name: "vw_dashboard_pimpinan_kognitif",
+// 			SQL: `
+// 				CREATE OR REPLACE VIEW vw_dashboard_pimpinan_kognitif AS
+// 				SELECT 
+// 					c.id AS classroom_id,
+// 					c.classroom_name,
+// 					sub.subject_name,
+// 					qb.tingkat AS tingkat_kognitif,
+// 					ROUND(AVG(ascore.score), 2) AS rata_rata_nilai,
+// 					COUNT(ascore.id) AS total_sampel_jawaban
+// 				FROM trx_academic_score ascore
+// 				JOIN trx_question_bank qb ON ascore.question_id = qb.id
+// 				JOIN trx_teaching_module tm ON qb.module_id = tm.id
+// 				JOIN trx_atp atp ON tm.atp_id = atp.id
+// 				JOIN master_classroom c ON atp.classroom_id = c.id
+// 				JOIN master_subject sub ON atp.subject_id = sub.id
+// 				WHERE c.academic_year_id = (SELECT id FROM master_academic_year WHERE is_active = true LIMIT 1)
+// 				GROUP BY c.id, c.classroom_name, sub.subject_name, qb.tingkat;
+// 			`,
+// 		},
 		{
 			Name: "vw_dashboard_pimpinan_profil_p5",
 			SQL: `
@@ -136,68 +120,69 @@ func (r *systemRepository) InitViewsAndSeed(ctx context.Context) error {
 				GROUP BY pd.dimension_name, ap5.capaian;
 			`,
 		},
-		{
-			Name: "vw_dashboard_guru_modul_compliance",
-			SQL: `
-				CREATE OR REPLACE VIEW vw_dashboard_guru_modul_compliance AS
-				SELECT 
-					tm.id AS teaching_module_id,
-					tm.title AS judul_modul,
-					t.full_name AS nama_guru,
-					sub.subject_name,
-					COUNT(DISTINCT tma.stage_id) AS jumlah_tahap_terpenuhi,
-					CASE 
-						WHEN COUNT(DISTINCT tma.stage_id) >= 3 THEN 'PATUH'
-						ELSE 'BELUM LENGKAP (Wajib Refleksi)'
-					END AS status_kepatuhan
-				FROM trx_teaching_module tm
-				JOIN trx_atp atp ON tm.atp_id = atp.id
-				JOIN master_classroom c ON atp.classroom_id = c.id
-				JOIN trx_teaching_assignment ta ON c.id = ta.classroom_id AND atp.subject_id = ta.subject_id
-				JOIN master_teacher t ON ta.teacher_id = t.id
-				JOIN master_subject sub ON atp.subject_id = sub.id
-				LEFT JOIN trx_teaching_module_activity tma ON tm.id = tma.module_id
-				GROUP BY tm.id, tm.title, t.full_name, sub.subject_name;
-			`,
-		},
-		{
-			Name: "vw_dashboard_guru_pantauan_siswa",
-			SQL: `
-				CREATE OR REPLACE VIEW vw_dashboard_guru_pantauan_siswa AS
-				SELECT 
-					s.id AS student_id,
-					s.full_name AS nama_siswa,
-					c.classroom_name,
-					COALESCE(att.sick, 0) + COALESCE(att.permission, 0) + COALESCE(att.unexcused, 0) AS total_absen,
-					ROUND(AVG(ascore.score), 2) AS rata_rata_akademik,
-					CASE 
-						WHEN (COALESCE(att.sick, 0) + COALESCE(att.permission, 0) + COALESCE(att.unexcused, 0)) >= 5 OR AVG(ascore.score) < 65 THEN 'PERLU INTERVENSI'
-						ELSE 'AMAN'
-					END AS status_peringatan
-				FROM master_student s
-				JOIN trx_enrollment e ON s.id = e.student_id
-				JOIN master_classroom c ON e.classroom_id = c.id
-				LEFT JOIN trx_attendance att ON s.id = att.student_id AND c.id = att.classroom_id
-				LEFT JOIN trx_academic_score ascore ON s.id = ascore.student_id
-				WHERE c.academic_year_id = (SELECT id FROM master_academic_year WHERE is_active = true LIMIT 1)
-				GROUP BY s.id, s.full_name, c.classroom_name, att.sick, att.permission, att.unexcused;
-			`,
-		},
+// 		{
+// 			Name: "vw_dashboard_guru_modul_compliance",
+// 			SQL: `
+// 				CREATE OR REPLACE VIEW vw_dashboard_guru_modul_compliance AS
+// 				SELECT 
+// 					tm.id AS teaching_module_id,
+// 					tm.title AS judul_modul,
+// 					t.full_name AS nama_guru,
+// 					sub.subject_name,
+// 					COUNT(DISTINCT tma.stage_id) AS jumlah_tahap_terpenuhi,
+// 					CASE 
+// 						WHEN COUNT(DISTINCT tma.stage_id) >= 3 THEN 'PATUH'
+// 						ELSE 'BELUM LENGKAP (Wajib Refleksi)'
+// 					END AS status_kepatuhan
+// 				FROM trx_teaching_module tm
+// 				JOIN trx_atp atp ON tm.atp_id = atp.id
+// 				JOIN master_classroom c ON atp.classroom_id = c.id
+// 				JOIN trx_teaching_assignment ta ON c.id = ta.classroom_id AND atp.subject_id = ta.subject_id
+// 				JOIN master_teacher t ON ta.teacher_id = t.id
+// 				JOIN master_subject sub ON atp.subject_id = sub.id
+// 				LEFT JOIN trx_teaching_module_activity tma ON tm.id = tma.module_id
+// 				GROUP BY tm.id, tm.title, t.full_name, sub.subject_name;
+// 			`,
+// 		},
+// 		{
+// 			Name: "vw_dashboard_guru_pantauan_siswa",
+// 			SQL: `
+// 				CREATE OR REPLACE VIEW vw_dashboard_guru_pantauan_siswa AS
+// 				SELECT 
+// 					s.id AS student_id,
+// 					s.full_name AS nama_siswa,
+// 					c.classroom_name,
+// 					COALESCE(att.sick, 0) + COALESCE(att.permission, 0) + COALESCE(att.unexcused, 0) AS total_absen,
+// 					ROUND(AVG(ascore.score), 2) AS rata_rata_akademik,
+// 					CASE 
+// 						WHEN (COALESCE(att.sick, 0) + COALESCE(att.permission, 0) + COALESCE(att.unexcused, 0)) >= 5 OR AVG(ascore.score) < 65 THEN 'PERLU INTERVENSI'
+// 						ELSE 'AMAN'
+// 					END AS status_peringatan
+// 				FROM master_student s
+// 				JOIN trx_enrollment e ON s.id = e.student_id
+// 				JOIN master_classroom c ON e.classroom_id = c.id
+// 				LEFT JOIN trx_attendance att ON s.id = att.student_id AND c.id = att.classroom_id
+// 				LEFT JOIN trx_academic_score ascore ON s.id = ascore.student_id
+// 				WHERE c.academic_year_id = (SELECT id FROM master_academic_year WHERE is_active = true LIMIT 1)
+// 				GROUP BY s.id, s.full_name, c.classroom_name, att.sick, att.permission, att.unexcused;
+// 			`,
+// 		},
 		{
 			Name: "vw_dashboard_operator_kelengkapan_data",
 			SQL: `
 				CREATE OR REPLACE VIEW vw_dashboard_operator_kelengkapan_data AS
 				SELECT 
 					sch.school_name,
-					CASE WHEN sch.vision IS NOT NULL AND sch.mission IS NOT NULL THEN 100 ELSE 0 END AS persentase_profil_dasar,
+					CASE WHEN sa.vision IS NOT NULL AND sa.mission IS NOT NULL THEN 100 ELSE 0 END AS persentase_profil_dasar,
 					CASE WHEN COUNT(DISTINCT t.id) > 0 THEN 100 ELSE 0 END AS persentase_data_guru,
 					CASE WHEN COUNT(DISTINCT s.id) > 0 THEN 100 ELSE 0 END AS persentase_data_siswa,
 					CASE WHEN COUNT(DISTINCT lc.id) > 0 THEN 100 ELSE 0 END AS persentase_karakteristik_lokal
 				FROM master_school sch
 				LEFT JOIN master_teacher t ON sch.id = t.school_id
+					LEFT JOIN school_administration sa ON sch.id = sa.school_id
 				LEFT JOIN master_student s ON sch.id = s.school_id
 				LEFT JOIN master_local_context lc ON sch.id::text = lc.school_id
-				GROUP BY sch.school_name, sch.vision, sch.mission;
+				GROUP BY sch.school_name, sa.vision, sa.mission;
 			`,
 		},
 	}
@@ -254,9 +239,10 @@ func (r *systemRepository) InitViewsAndSeed(ctx context.Context) error {
 	var queueCount int64
 	r.db.Model(&AutomationQueue{}).Count(&queueCount)
 	if queueCount == 0 {
-		var userID uuid.UUID
-		err := r.db.Raw("SELECT id FROM auth_user LIMIT 1").Scan(&userID).Error
-		if err == nil && userID != uuid.Nil {
+		var userIDStr string
+		err := r.db.Raw("SELECT id FROM auth_user LIMIT 1").Scan(&userIDStr).Error
+		userID, parseErr := uuid.Parse(userIDStr)
+		if err == nil && parseErr == nil && userID != uuid.Nil {
 			logger.Info("Seeding initial automation queue tasks for user ID: " + userID.String())
 			queues := []AutomationQueue{
 				{

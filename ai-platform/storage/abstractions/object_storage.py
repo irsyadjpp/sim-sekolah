@@ -1,5 +1,5 @@
 """
-Object storage abstraction (S3/MinIO)
+Object storage abstraction (S3/SeaweedFS/MinIO)
 """
 
 from typing import Dict, Any, Optional, List, BinaryIO, Union
@@ -338,78 +338,78 @@ class S3Storage(ObjectStorage):
         )
 
 
-class MinIOStorage(ObjectStorage):
+class SeaweedFSStorage(ObjectStorage):
     """
-    MinIO storage implementation (S3-compatible).
-    
-    Provides MinIO object storage using boto3 with MinIO endpoint.
+    SeaweedFS storage implementation (S3-compatible).
+
+    Provides SeaweedFS object storage using boto3 with SeaweedFS S3 gateway endpoint.
     """
-    
+
     def __init__(self, config: StorageConfig):
         """
-        Initialize MinIO storage backend.
-        
+        Initialize SeaweedFS storage backend.
+
         Args:
             config: Storage configuration
         """
         super().__init__(config)
         self._client = None
-    
+
     async def connect(self) -> None:
-        """Establish MinIO connection."""
+        """Establish SeaweedFS connection."""
         import boto3
-        
+
         session_config = {
             "aws_access_key_id": self.config.username,
             "aws_secret_access_key": self.config.password,
             "region_name": self.config.extra_params.get("region", "us-east-1"),
         }
-        
-        # MinIO typically doesn't use SSL for local development
+
+        # SeaweedFS typically doesn't use SSL for local development
         if not self.config.use_ssl:
             session_config["verify"] = False
-        
+
         session = boto3.Session(**session_config)
-        
-        # Use custom MinIO endpoint
+
+        # Use custom SeaweedFS S3 gateway endpoint
         endpoint_url = f"{'https' if self.config.use_ssl else 'http'}://{self.config.host}:{self.config.port}"
-        
+
         self._client = session.client("s3", endpoint_url=endpoint_url)
         self._is_connected = True
-    
+
     async def disconnect(self) -> None:
-        """Close MinIO connection."""
+        """Close SeaweedFS connection."""
         if self._client:
             self._client.close()
             self._client = None
         self._is_connected = False
-    
+
     async def health_check(self) -> Dict[str, Any]:
-        """Check MinIO health."""
+        """Check SeaweedFS health."""
         try:
             # List buckets to verify connectivity
             buckets = await self._client.list_buckets()
             return {
                 "status": "healthy",
-                "backend": "minio",
+                "backend": "seaweedfs",
                 "buckets_count": len(buckets.get("Buckets", [])),
                 "details": {"endpoint": f"{self.config.host}:{self.config.port}"}
             }
         except Exception as e:
             return {
                 "status": "unhealthy",
-                "backend": "minio",
+                "backend": "seaweedfs",
                 "error": str(e)
             }
     
     async def ping(self) -> bool:
-        """Ping MinIO backend."""
+        """Ping SeaweedFS backend."""
         try:
             self._client.head_bucket(Bucket="ping")
             return True
         except:
             return False
-    
+
     async def upload_file(
         self,
         file_path: Union[str, Path, BinaryIO],
@@ -417,7 +417,7 @@ class MinIOStorage(ObjectStorage):
         object_key: str,
         metadata: Optional[Dict[str, Any]] = None,
     ) -> str:
-        """Upload file to MinIO."""
+        """Upload file to SeaweedFS."""
         if isinstance(file_path, (str, Path)):
             with open(file_path, "rb") as f:
                 self._client.upload_fileobj(
@@ -433,50 +433,50 @@ class MinIOStorage(ObjectStorage):
                 Fileobj=file_path,
                 Metadata=metadata or {}
             )
-        
-        return f"minio://{bucket}/{object_key}"
-    
+
+        return f"seaweedfs://{bucket}/{object_key}"
+
     async def download_file(
         self,
         bucket: str,
         object_key: str,
         local_path: Union[str, Path],
     ) -> str:
-        """Download file from MinIO."""
+        """Download file from SeaweedFS."""
         local_path = Path(local_path)
         local_path.parent.mkdir(parents=True, exist_ok=True)
-        
+
         self._client.download_file(
             Bucket=bucket,
             Key=object_key,
             Filename=str(local_path)
         )
-        
+
         return str(local_path)
-    
+
     async def delete_file(self, bucket: str, object_key: str) -> bool:
-        """Delete file from MinIO."""
+        """Delete file from SeaweedFS."""
         self._client.delete_object(Bucket=bucket, Key=object_key)
         return True
-    
+
     async def file_exists(self, bucket: str, object_key: str) -> bool:
-        """Check if file exists in MinIO."""
+        """Check if file exists in SeaweedFS."""
         try:
             self._client.head_object(Bucket=bucket, Key=object_key)
             return True
         except:
             return False
-    
+
     async def list_files(
         self,
         bucket: str,
         prefix: str = "",
         limit: int = 1000,
     ) -> List[Dict[str, Any]]:
-        """List files in MinIO bucket."""
+        """List files in SeaweedFS bucket."""
         paginator = self._client.get_paginator("list_objects_v2")
         result = []
-        
+
         for page in paginator.paginate(Bucket=bucket, Prefix=prefix):
             for obj in page.get("Contents", [])[:limit]:
                 result.append({
@@ -485,18 +485,18 @@ class MinIOStorage(ObjectStorage):
                     "last_modified": obj["LastModified"],
                     "etag": obj["ETag"].strip('"'),
                 })
-                
+
                 if len(result) >= limit:
                     break
-                    
+
         return result
-    
+
     async def get_file_metadata(
         self,
         bucket: str,
         object_key: str,
     ) -> Dict[str, Any]:
-        """Get file metadata from MinIO."""
+        """Get file metadata from SeaweedFS."""
         response = self._client.head_object(Bucket=bucket, Key=object_key)
         return {
             "key": response["ResponseMetadata"]["HTTPHeaders"].get("x-amz-meta-custom", ""),
@@ -512,7 +512,7 @@ class MinIOStorage(ObjectStorage):
         object_key: str,
         expiration: int = 3600,
     ) -> str:
-        """Generate presigned URL for MinIO."""
+        """Generate presigned URL for SeaweedFS."""
         return self._client.generate_presigned_url(
             ClientMethod="get_object",
             Params={"Bucket": bucket, "Key": object_key},

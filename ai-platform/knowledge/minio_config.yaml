@@ -1,0 +1,163 @@
+# MinIO AIStor Knowledge Storage Configuration
+# Configuration untuk knowledge folder di MinIO AIStor S3-compatible storage
+
+# MinIO AIStor S3 Configuration
+minio:
+  s3:
+    endpoint: "http://minio:9000"
+    region: "us-east-1"
+    access_key_id: "${MINIO_ROOT_USER:-admin}"
+    secret_access_key: "${MINIO_ROOT_PASSWORD:-admin123}"
+    secure: false
+  bucket:
+    name: "knowledge-assets"
+    create_if_not_exists: true
+  path_prefix: "knowledge/"
+
+# Knowledge Structure Configuration
+knowledge_structure:
+  # Categories yang akan di-maintain di SeaweedFS
+  categories:
+    - name: "cp"
+      description: "Capaian Pembelajaran (Learning Outcomes)"
+      subjects: ["bahasa", "ipa", "ips", "matematika"]
+      retention_policy: "permanent"
+    - name: "atp"
+      description: "Alur Tujuan Pembelajaran (Learning Objectives Flow)"
+      subjects: ["bahasa", "ipa", "ips", "matematika"]
+      retention_policy: "permanent"
+    - name: "buku_guru"
+      description: "Teacher's textbooks"
+      subjects: ["bahasa", "ipa", "ips", "matematika"]
+      retention_policy: "versioned"
+    - name: "buku_siswa"
+      description: "Student's textbooks"
+      subjects: ["bahasa", "ipa", "ips", "matematika"]
+      retention_policy: "versioned"
+    - name: "modul_ajar"
+      description: "Learning modules"
+      subjects: ["bahasa", "ipa", "ips", "matematika"]
+      retention_policy: "versioned"
+    - name: "asesmen"
+      description: "Assessment materials"
+      subjects: ["bahasa", "ipa", "ips", "matematika"]
+      retention_policy: "restricted"
+    - name: "media"
+      description: "Educational media resources"
+      subjects: ["bahasa", "ipa", "ips", "matematika"]
+      retention_policy: "permanent"
+    - name: "p5"
+      description: "Projek Penguatan Profil Pelajar Pancasila"
+      subjects: ["general"]
+      retention_policy: "permanent"
+    - name: "ontology"
+      description: "Educational domain ontologies"
+      subjects: ["general"]
+      retention_policy: "permanent"
+
+# Metadata Configuration
+metadata:
+  standard_fields:
+    - title
+    - subject
+    - grade_level
+    - author
+    - publisher
+    - publication_date
+    - last_updated
+    - version
+    - language
+    - format
+    - license
+    - tags
+    - curriculum_alignment
+    - description
+    - learning_objectives
+    - prerequisites
+    - difficulty_level
+    - estimated_duration
+    - keywords
+  
+  # Educational metadata enrichment
+  enrichment:
+    bloom_taxonomy: true
+    competency_mapping: true
+    pedagogy_classification: true
+    difficulty_assessment: true
+
+# Caching Configuration
+caching:
+  enabled: true
+  # Local cache untuk frequently accessed files
+  local_cache:
+    enabled: true
+    directory: "/tmp/knowledge_cache"
+    max_size_gb: 10
+    ttl_hours: 24
+  
+  # Redis cache untuk metadata
+  redis_cache:
+    enabled: true
+    ttl_seconds: 3600
+    key_prefix: "knowledge:"
+
+# Versioning Configuration
+versioning:
+  enabled: true
+  strategy: "semantic" # semantic, timestamp, hash
+  max_versions: 5 # Keep maximum 5 versions per file
+  auto_cleanup: true
+  archive_old_versions: true
+
+# Sync Configuration (untuk hybrid approach)
+sync:
+  enabled: false # Set to true jika ingin sync dengan local filesystem
+  local_path: "/path/to/ai-platform/knowledge"
+  sync_interval_minutes: 5
+  direction: "bidirectional" # upload_only, download_only, bidirectional
+  conflict_resolution: "seaweedfs_wins" # local_wins, seaweedfs_wins, manual
+
+# Monitoring Configuration
+monitoring:
+  enabled: true
+  metrics:
+    upload_count: true
+    download_count: true
+    cache_hit_rate: true
+    error_rate: true
+    latency: true
+  logging:
+    level: "INFO"
+    format: "json"
+    upload_log: "/var/log/knowledge_upload.log"
+    download_log: "/var/log/knowledge_download.log"
+    error_log: "/var/log/knowledge_error.log"
+
+# Security Configuration
+security:
+  encryption:
+    enabled: false # Enable jika ingin encrypt data at rest
+    algorithm: "AES256"
+  
+  access_control:
+    enabled: true
+    default_policy: "read_only"
+    role_based_access: true
+    roles:
+      - name: "curriculum_admin"
+        permissions: ["read", "write", "delete", "admin"]
+      - name: "teacher"
+        permissions: ["read"]
+      - name: "student"
+        permissions: ["read"]
+      - name: "system"
+        permissions: ["read", "write", "delete"]
+
+# Backup Configuration
+backup:
+  enabled: true
+  schedule: "0 2 * * *" # Daily at 2 AM
+  retention_days: 30
+  destination: "s3://backup-bucket/knowledge-backups"
+  compression: true
+  encryption: true

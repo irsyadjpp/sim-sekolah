@@ -7,7 +7,12 @@ readme = "README.md"
 
 [tool.uv.workspace]
 members = [
-    "shared/*",
+    "shared",
+    "shared/grpc",
+    "shared/schemas",
+    "shared/events",
+    "shared/observability",
+    "shared/security",
     "services/gateway-service",
     "services/parser-service",
     "services/semantic-chunk-service",
@@ -20,6 +25,24 @@ members = [
     "services/moderation-service",
     "services/reranking-service",
     "services/vision-service",
+    "services/strategic-analysis-service",
+    "services/adaptive-learning-engine",
+    "services/advanced-enhancement-service",
+    "services/ai-agents-service",
+    "services/assessment-engine",
+    "services/curriculum-engine",
+    "services/educational-intelligence-service",
+    "services/educational-observability-service",
+    "services/educational-ontology-service",
+    "services/hallucination-guard-service",
+    "services/learning-graph-engine",
+    "services/learning-progression-engine",
+    "services/notification-service",
+    "services/orchestration-service",
+    "services/pedagogy-engine",
+    "services/recommendation-engine",
+    "services/retrieval-enhancement-service",
+    "services/semantic-enrichment-service",
 ]
 
 [tool.uv]
@@ -36,6 +59,12 @@ dev-dependencies = [
 ]
 
 [tool.uv.sources]
+ai-platform-shared = { workspace = true }
+ai-platform-shared-grpc = { workspace = true }
+ai-platform-shared-schemas = { workspace = true }
+ai-platform-shared-events = { workspace = true }
+ai-platform-shared-observability = { workspace = true }
+ai-platform-shared-security = { workspace = true }
 
 # =========================
 # BLACK

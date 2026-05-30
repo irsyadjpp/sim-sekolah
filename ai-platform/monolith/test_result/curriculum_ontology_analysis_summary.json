@@ -1,0 +1,18 @@
+{
+  "curriculum_ontology_status": "completed",
+  "statistics": {
+    "total_learning_objectives": 0,
+    "total_competency_mappings": 10,
+    "subject_distribution": {},
+    "grade_distribution": {},
+    "phase_distribution": {},
+    "total_pedagogical_dependencies": 0
+  },
+  "effectiveness": {
+    "aligned_chunks": 0,
+    "chunks_with_objectives": 0,
+    "alignment_percentage": 0.0,
+    "objectives_percentage": 0.0
+  },
+  "test_timestamp": "2026-05-29 21:28:31.417751"
+}

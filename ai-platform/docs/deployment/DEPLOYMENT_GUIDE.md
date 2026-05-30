@@ -17,7 +17,72 @@ Dokumen ini mencakup:
 * scaling strategy,
 * GPU deployment,
 * observability deployment,
-* production hardening.
+* production hardening,
+* integration dengan SIM Sekolah terpadu.
+
+---
+
+# Current Infrastructure Status
+
+## Integration dengan SIM Sekolah
+
+AI Platform saat ini terintegrasi dengan ekosistem SIM Sekolah yang memiliki:
+
+### Existing Infrastructure (SIM Sekolah Utama)
+- PostgreSQL 18.4-alpine (port 5432)
+- Redis 7-alpine (port 11576)
+- RabbitMQ 3-management-alpine (ports 5672, 15672)
+- Qdrant latest (ports 6333-6334)
+- RustFS (S3-compatible storage, ports 9000-9001) - akan diganti dengan SeaweedFS
+- Backend Go Fiber (port 8080)
+- OTEL Collector
+- Neo4j (ports 7474, 7687)
+
+### AI Platform Infrastructure (Stand-alone)
+- PostgreSQL 15-alpine (port 5432)
+- Redis 7-alpine (port 6379)
+- RabbitMQ 3.12-management-alpine (ports 5672, 15672)
+- Qdrant v1.7.0 (ports 6333-6334)
+- MinIO (ports 9000-9001)
+- Observability Stack (Prometheus, Grafana, Loki, Tempo)
+
+### Integration Challenges
+1. **Port Conflicts**: Beberapa service memiliki port yang sama (telah di-resolve)
+2. **Version Differences**: PostgreSQL, Qdrant, RabbitMQ versions berbeda
+3. **Storage Solutions**: RustFS vs MinIO vs SeaweedFS (telah di-resolve dengan SeaweedFS)
+4. **Network Isolation**: Dua docker-compose networks terpisah
+
+### Port Mapping Resolution
+Berikut adalah port mapping yang telah di-adjust untuk menghindari konflik:
+
+**SIM Sekolah Infrastructure:**
+- Backend: 8080
+- PostgreSQL: 5432
+- Redis: 11576
+- RabbitMQ: 5672, 15672
+- Qdrant: 6333, 6334
+- SeaweedFS Master: 9333, 19333
+- SeaweedFS Volume: 8333, 18333 (container: 8080, 18080)
+- SeaweedFS Filer: 8888, 18888
+- SeaweedFS S3: 9555, 9556 (container: 8333, 8334)
+
+**AI Platform Infrastructure (Default):**
+- PostgreSQL: 5432 (shared dengan SIM Sekolah saat integrated)
+- Redis: 6379
+- RabbitMQ: 5672, 15672 (shared dengan SIM Sekolah saat integrated)
+- Qdrant: 6333, 6334 (shared dengan SIM Sekolah saat integrated)
+- MinIO: 9100, 9101 (diubah dari 9000, 9001 untuk menghindari konflik)
+- Grafana: 3030 (diubah dari 3000 untuk menghindari konflik dengan frontend)
+- Prometheus: 9090
+- Loki: 3100
+- Tempo: 3200, 4317, 4318
+- AI Services: 8001-8012
+
+### Recommended Integration Strategy
+1. **Unified Infrastructure**: Gunakan satu infrastructure stack untuk kedua platform
+2. **SeaweedFS Migration**: Ganti RustFS dengan SeaweedFS untuk object storage terpadu
+3. **Service Discovery**: Implementasikan cross-platform service discovery
+4. **Environment Configuration**: Standardize environment variables
 
 ---
 
@@ -111,7 +176,8 @@ Gunakan:
          │ PostgreSQL                     │
          │ Qdrant                         │
          │ RabbitMQ / Kafka               │
-         │ MinIO                          │
+         │ SeaweedFS (Object Storage)     │
+         │ Redis (Cache)                  │
          │ Prometheus                     │
          │ Grafana                        │
          └─────────────────────────────────┘
@@ -143,6 +209,107 @@ Local development environment.
 
 ```text id="dev-stack"
 docker-compose
+```
+
+---
+
+# Port Configuration Reference
+
+## SIM Sekolah Port Mapping
+| Service | External Port | Container Port | Notes |
+|---------|---------------|----------------|-------|
+| PostgreSQL | 5432 | 5432 | Database |
+| Redis | 11576 | 11576 | Cache |
+| RabbitMQ | 5672, 15672 | 5672, 15672 | Message Queue |
+| Qdrant | 6333, 6334 | 6333, 6334 | Vector Database |
+| Backend | 8080 | 8080 | Go Fiber API |
+| SeaweedFS Master | 9333, 19333 | 9333, 19333 | Storage Master |
+| SeaweedFS Volume | 8333, 18333 | 8080, 18080 | Storage Volume |
+| SeaweedFS Filer | 8888, 18888 | 8888, 18888 | File Management |
+| SeaweedFS S3 | 9555, 9556 | 8333, 8334 | S3 Gateway |
+| Frontend | 3000 | 80 | React Frontend |
+
+## AI Platform Port Mapping (Default)
+| Service | External Port | Container Port | Notes |
+|---------|---------------|----------------|-------|
+| PostgreSQL | 5432 | 5432 | Shared dengan SIM Sekolah |
+| Redis | 6379 | 6379 | Cache |
+| RabbitMQ | 5672, 15672 | 5672, 15672 | Shared dengan SIM Sekolah |
+| Qdrant | 6333, 6334 | 6333, 6334 | Shared dengan SIM Sekolah |
+| MinIO | 9100, 9101 | 9000, 9101 | Object Storage (conflict resolved) |
+| Grafana | 3030 | 3000 | Observability (conflict resolved) |
+| Prometheus | 9090 | 9090 | Metrics |
+| Loki | 3100 | 3100 | Log Aggregation |
+| Tempo | 3200, 4317, 4318 | 3200, 4317, 4318 | Distributed Tracing |
+| Gateway Service | 8002 | 8002 | API Gateway |
+| Parser Service | 8001 | 8001 | Document Processing |
+| Semantic Chunk Service | 8003 | 8003 | Text Chunking |
+| Metadata Service | 8004 | 8004 | Document Metadata |
+| Embedding Service | 8005 | 8005 | Vector Generation |
+| Retrieval Service | 8006 | 8006 | Semantic Retrieval |
+| Generation Service | 8007 | 8007 | AI Generation |
+| Audit Service | 8008 | 8008 | Audit Logging |
+| Moderation Service | 8009 | 8009 | Content Moderation |
+| Reranking Service | 8010 | 8010 | Result Reranking |
+| Vision Service | 8011 | 8011 | Image Processing |
+| Monitoring Service | 8012 | 8012 | Service Monitoring |
+
+## Conflict Resolution Summary
+1. **Port 8080**: SeaweedFS Volume moved to 8333 (external) to avoid Backend conflict
+2. **Port 9000, 9001**: AI Platform MinIO moved to 9100, 9101 to avoid SeaweedFS S3 conflict
+3. **Port 3000**: AI Platform Grafana moved to 3030 to avoid Frontend conflict
+4. **Port 9443**: SeaweedFS S3 moved to 9555 to avoid Portainer conflict
+5. **Infrastructure Ports**: PostgreSQL, RabbitMQ, Qdrant intentionally shared for integrated deployment
+
+---
+
+# Current Deployment Options
+
+## Option A: Stand-alone AI Platform (Current Default)
+
+Jalankan AI Platform secara terpisah dengan infrastructure sendiri:
+
+```bash
+cd ai-platform
+cp .env.example .env
+docker-compose up -d
+```
+
+**Pros**:
+- Tidak ada konflik dengan SIM Sekolah
+- Development yang lebih cepat
+- Dependency yang lebih terkontrol
+
+**Cons**:
+- Duplikasi infrastructure resources
+- Integrasi lebih kompleks
+- Resource usage lebih tinggi
+
+## Option B: Integrated Deployment (Recommended for Production)
+
+Integrasikan AI Platform dengan existing SIM Sekolah infrastructure:
+
+**Langkah-langkah**:
+1. Gunakan existing PostgreSQL, Redis, RabbitMQ, Qdrant dari SIM Sekolah
+2. Tambahkan SeaweedFS untuk menggantikan RustFS
+3. Deploy hanya AI Platform services (tanpa infrastructure duplikat)
+4. Konfigurasikan environment variables untuk menggunakan existing services
+
+**Configuration Changes Needed**:
+- Port mapping untuk menghindari conflicts
+- Environment variables untuk cross-network communication
+- Service discovery configuration
+- Shared network setup
+
+## Option C: Hybrid Deployment
+
+Gunakan sebagian infrastructure, deploy sebagian:
+
+```bash
+# Gunakan existing SIM Sekolah infrastructure
+# Deploy hanya AI Platform services
+cd ai-platform
+docker-compose -f docker-compose.yml --profile services-only up -d
 ```
 
 ---
@@ -275,7 +442,8 @@ Berisi:
 * PostgreSQL,
 * RabbitMQ,
 * Qdrant,
-* MinIO.
+* SeaweedFS (Object Storage),
+* Redis.
 
 ---
 
@@ -301,6 +469,11 @@ Characteristics:
 gateway-service
 retrieval-service
 generation-service
+parser-service
+semantic-chunk-service
+metadata-service
+monitoring-service
+strategic-analysis-service
 ```
 
 ---
@@ -326,9 +499,12 @@ Characteristics:
 # Examples
 
 ```text id="worker-services"
-OCR workers
-embedding workers
-indexing workers
+parser-service (document processing)
+semantic-chunk-service (text chunking)
+embedding-service (vector generation)
+metadata-service (document metadata)
+vision-service (image processing)
+reranking-service (result optimization)
 ```
 
 ---
@@ -354,9 +530,10 @@ Characteristics:
 # Examples
 
 ```text id="gpu-services"
-reranking-service
-vision-service
-embedding-service
+embedding-service (vector generation)
+reranking-service (result optimization)
+vision-service (image processing)
+generation-service (AI response generation)
 ```
 
 ---
@@ -501,6 +678,50 @@ queue > 1000
 
 ---
 
+# Current Service Implementation
+
+## Active Services (docker-compose.yml)
+
+Services yang saat ini sudah terintegrasi dalam docker-compose.yml:
+
+1. **gateway-service** (port 8002) - API Gateway
+2. **parser-service** (port 8001) - Document parsing
+3. **semantic-chunk-service** (port 8003) - Semantic text chunking
+4. **metadata-service** (port 8004) - Document metadata extraction
+5. **embedding-service** (port 8005) - Vector embedding generation
+6. **retrieval-service** (port 8006) - Semantic retrieval
+7. **generation-service** (port 8007) - AI content generation
+8. **audit-service** (port 8008) - Audit logging
+9. **moderation-service** (port 8009) - Content moderation
+10. **reranking-service** (port 8010) - Result reranking
+11. **vision-service** (port 8011) - Image/vision processing
+12. **monitoring-service** (port 8012) - Service monitoring
+13. **strategic-analysis-service** - Educational analysis
+
+## Additional Services (Development Phase)
+
+Services yang ada dalam direktori tetapi belum fully integrated:
+
+- adaptive-learning-engine
+- advanced-enhancement-service
+- ai-agents-service
+- assessment-engine
+- curriculum-engine
+- educational-intelligence-service
+- educational-observability-service
+- educational-ontology-service
+- hallucination-guard-service
+- learning-graph-engine
+- learning-progression-engine
+- notification-service
+- orchestration-service
+- pedagogy-engine
+- recommendation-engine
+- retrieval-enhancement-service
+- semantic-enrichment-service
+
+---
+
 # Storage Deployment
 
 ---
@@ -556,11 +777,50 @@ Gunakan:
 
 ---
 
-# 3. MinIO
+# 3. Redis
 
 ## Purpose
 
-Object storage.
+Caching layer untuk performance optimization.
+
+---
+
+# Uses
+
+* retrieval caching,
+* metadata caching,
+* prompt caching,
+* session management,
+* rate limiting.
+
+---
+
+# Production Requirements
+
+* persistence,
+* replication,
+* memory optimization,
+- eviction policies.
+
+---
+
+# 4. SeaweedFS
+
+## Purpose
+
+Distributed object storage system untuk menggantikan RustFS dan MinIO.
+
+---
+
+# Migration Path
+
+**From RustFS (SIM Sekolah)**:
+- RustFS saat ini digunakan di SIM Sekolah utama
+- Akan diganti dengan SeaweedFS untuk integrasi yang lebih baik
+
+**From MinIO (AI Platform)**:
+- AI Platform saat ini menggunakan MinIO
+- Akan bermigrasi ke SeaweedFS untuk统一 storage solution
 
 ---
 
@@ -569,15 +829,30 @@ Object storage.
 * PDFs,
 * OCR results,
 * extracted images,
-* embeddings artifacts.
+* embeddings artifacts,
+* model checkpoints,
+* curriculum documents,
+* assessment materials.
+
+---
+
+# SeaweedFS Advantages
+
+- **Better Performance**: Higher throughput than MinIO/RustFS
+- **S3 Compatible**: Full S3 API compatibility
+- **Distributed Architecture**: Better scaling capabilities
+- **Filer Support**: Better file management
+- **Active Development**: More active community than RustFS
 
 ---
 
 # Production Requirements
 
-* distributed storage,
-* replication,
-* lifecycle policies.
+* distributed storage cluster,
+* replication across multiple nodes,
+* lifecycle policies,
+- S3 gateway layer,
+- Filer server for metadata management.
 
 ---
 
@@ -815,10 +1090,11 @@ Semua traffic wajib:
 
 ---
 
-# MinIO
+# SeaweedFS
 
-* object versioning,
-* lifecycle backup.
+* volume replication,
+- snapshot backup,
+- lifecycle policies.
 
 ---
 

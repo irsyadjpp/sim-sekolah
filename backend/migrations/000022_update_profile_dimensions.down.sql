@@ -1,3 +1,0 @@
--- Down migration: Revert profile dimensions update
--- This migration only updated data, so we just need to restore original data if needed
--- For now, we'll keep the updated data as it's the correct state

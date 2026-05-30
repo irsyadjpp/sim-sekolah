@@ -11,6 +11,8 @@ service VisionService {
     rpc ExtractFormula(ExtractFormulaRequest) returns (ExtractFormulaResponse);
     rpc ClassifyImage(ClassifyImageRequest) returns (ClassifyImageResponse);
     rpc PreprocessImage(PreprocessImageRequest) returns (PreprocessImageResponse);
+    rpc AnalyzeFigures(AnalyzeFiguresRequest) returns (AnalyzeFiguresResponse);
+    rpc ClassifyFiguresForEducation(ClassifyFiguresForEducationRequest) returns (ClassifyFiguresForEducationResponse);
 }
 
 // Vision Service Messages
@@ -160,4 +162,74 @@ message ImagePreprocessing {
 message PreprocessingStep {
     string operation = 1;
     map<string, string> parameters = 2;
+}
+
+// Figure Analysis Messages - Integration dengan Parser Service
+message AnalyzeFiguresRequest {
+    repeated string minio_keys = 1;  // MinIO keys untuk figures yang ingin dianalisis
+    map<string, string> context = 2;  // document context (subject, grade, etc.)
+    map<string, string> options = 3;
+}
+
+message AnalyzeFiguresResponse {
+    bool success = 1;
+    string message = 2;
+    repeated FigureAnalysisResult results = 3;
+    map<string, string> metadata = 4;
+}
+
+message FigureAnalysisResult {
+    string image_id = 1;
+    string minio_key = 2;
+    bool analysis_success = 3;
+    string analysis_error = 4;
+    string description = 5;
+    float confidence = 6;
+    repeated DetectedElement detected_elements = 7;
+    repeated DetectedText detected_text = 8;
+    map<string, string> metadata = 9;
+}
+
+message DetectedElement {
+    string element_type = 1;
+    string label = 2;
+    float confidence = 3;
+    BoundingBox bbox = 4;
+}
+
+message DetectedText {
+    string text = 1;
+    float confidence = 2;
+    BoundingBox bbox = 3;
+    string language = 4;
+}
+
+// Educational Figure Classification Messages
+message ClassifyFiguresForEducationRequest {
+    repeated string minio_keys = 1;
+    map<string, string> context = 2;  // curriculum context
+    map<string, string> options = 3;
+}
+
+message ClassifyFiguresForEducationResponse {
+    bool success = 1;
+    string message = 2;
+    repeated EducationalFigureClassification results = 3;
+    map<string, string> metadata = 4;
+}
+
+message EducationalFigureClassification {
+    string image_id = 1;
+    string minio_key = 2;
+    string figure_type = 3;  // ILLUSTRATION, DIAGRAM, CHART, etc.
+    string figure_role = 4;  // PRIMARY, SECONDARY, etc.
+    string figure_subject = 5;  // IPA, IPS, MATEMATIKA, etc.
+    float confidence = 6;
+    bool is_educational = 7;
+    bool is_p5_related = 8;
+    bool is_assessment_related = 9;
+    repeated string detected_elements = 10;
+    repeated string educational_keywords = 11;
+    string educational_significance = 12;  // ESSENTIAL, SUPPLEMENTARY, DECORATIVE
+    map<string, string> metadata = 13;
 }

@@ -114,7 +114,6 @@ func (s *intelligenceService) UpsertProfileExt(ctx context.Context, studentID st
 		SpecialNeedsNotes: req.SpecialNeedsNotes,
 		BaselineLiteracy:  req.BaselineLiteracy,
 		BaselineNumeracy:  req.BaselineNumeracy,
-		UpdatedAt:         time.Now(),
 	}
 
 	return s.repo.UpsertProfileExt(ctx, ext)
@@ -138,7 +137,6 @@ func (s *intelligenceService) CreateAnecdotal(ctx context.Context, req CreateAne
 		ObservationDate: time.Now(),
 		ContextActivity: req.ContextActivity,
 		Notes:           req.Notes,
-		CreatedAt:       time.Now(),
 	}
 
 	err = s.repo.CreateAnecdotal(ctx, obs, req.TagIDs)
@@ -185,7 +183,6 @@ func (s *intelligenceService) CreateInstrument(ctx context.Context, req CreateIn
 		Title:               req.Title,
 		AssessmentType:      req.AssessmentType,
 		ScoringMethod:       req.ScoringMethod,
-		CreatedAt:           time.Now(),
 	}
 
 	err = s.repo.CreateInstrument(ctx, inst)
@@ -219,7 +216,6 @@ func (s *intelligenceService) SubmitResultsBatch(ctx context.Context, instrument
 			StudentID:         studentUUID,
 			RubricAchievement: item.RubricAchievement,
 			NarrativeFeedback: item.NarrativeFeedback,
-			AssessedAt:        time.Now(),
 		}
 
 		if inst.ScoringMethod == "NUMERIC" {
@@ -316,7 +312,6 @@ func (s *intelligenceService) CalculateEarlyWarningAlerts(ctx context.Context) e
 						SeverityLevel: "HIGH",
 						TriggerReason: fmt.Sprintf("Siswa terdeteksi alpa sebanyak %d kali dalam 7 hari terakhir.", attendanceDropCount),
 						Status:        "OPEN",
-						DetectedAt:    time.Now(),
 					}
 					_ = s.repo.CreateAlert(ctx, alert)
 				}
@@ -359,7 +354,6 @@ func (s *intelligenceService) CalculateEarlyWarningAlerts(ctx context.Context) e
 								SeverityLevel: severity,
 								TriggerReason: fmt.Sprintf("Tercatat tag perilaku negatif '%s' sebanyak %d kali dalam seminggu terakhir.", tc.TagID, tc.Count),
 								Status:        "OPEN",
-								DetectedAt:    time.Now(),
 							}
 							_ = s.repo.CreateAlert(ctx, alert)
 						}

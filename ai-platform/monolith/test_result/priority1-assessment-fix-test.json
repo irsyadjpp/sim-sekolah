@@ -1,0 +1,1085 @@
+{
+  "success": true,
+  "document_id": "priority1-assessment-test",
+  "chunks": [
+    {
+      "chunk_id": "b2412162-58e4-4aff-a765-2e57a01a97f4",
+      "text": "Pokok Bahasan:\nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\n\n\nEditor:\n\n\n\nIlustrator:\nDra. Sri Rahayu, M.Pd.\n\nRiska Luthfiana\n\n\nFebi Rahmat Hidayat",
+      "chunk_type": "concept_intro",
+      "importance": "supporting",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": false,
+      "bloom_is_lots": true,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.7999999999999999,
+      "educational_value": 0.7,
+      "complexity_level": "basic",
+      "document_position": 0,
+      "section_hierarchy": [
+        "Pokok Bahasan:",
+        "Utama\nPenyusun:"
+      ],
+      "word_count": 26,
+      "character_count": 190,
+      "confidence": 0.8,
+      "related_activities": [],
+      "related_assessments": [],
+      "has_cross_references": false,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "Pokok Bahasan: \nMengenal Siklus Air\nuntuk Kelas IV SD\nPT Jepe Press Media Utama\nPenyusun:\t \t\n\t\n\t\nEditor:\t\n\t\n\t\n\t\nIlustrator:\nDra. Sri Rahayu, M.Pd.\t\n\t\nRiska Luthfiana\t\n\t\n\t\nFebi Rahmat Hidayat",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 0,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 13,
+          "leading_trailing_spaces": 13,
+          "total_normalizations": 26
+        },
+        "character_count_change": 15
+      },
+      "unicode_normalization_summary": {
+        "chunks_normalized": 12,
+        "soft_hyphens_removed": 5,
+        "ligatures_normalized": 0,
+        "whitespace_normalized": 74
+      },
+      "semantic_intent": "explanation",
+      "classification_confidence": 0.6,
+      "original_chunk_type": "concept_explanation",
+      "pedagogical_type": "cover_page",
+      "pedagogical_intent": "organization",
+      "pedagogical_features": {
+        "has_questions": false,
+        "question_count": 0,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": false,
+        "has_rubric": false,
+        "is_cover_page": true,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C2_understand",
+      "bloom_confidence": 0.9,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 1,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 1,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "6af831b3-1f0b-4539-958a-65589ccec857",
+      "text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n2",
+      "chunk_type": "concept_intro",
+      "importance": "supporting",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": false,
+      "bloom_is_lots": true,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.7999999999999999,
+      "educational_value": 0.7,
+      "complexity_level": "basic",
+      "document_position": 1,
+      "section_hierarchy": [],
+      "word_count": 10,
+      "character_count": 52,
+      "confidence": 0.8,
+      "related_activities": [],
+      "related_assessments": [],
+      "has_cross_references": false,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n2",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 0,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 0,
+          "leading_trailing_spaces": 0,
+          "total_normalizations": 0
+        },
+        "character_count_change": 0
+      },
+      "semantic_intent": "explanation",
+      "classification_confidence": 0.6,
+      "original_chunk_type": "concept_explanation",
+      "pedagogical_type": "concept_explanation",
+      "pedagogical_intent": "instruction",
+      "pedagogical_features": {
+        "has_questions": false,
+        "question_count": 0,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": false,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C1_remember",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "523644d5-7a62-4d2f-9a95-e31ab8e705c4",
+      "text": "Ayo Mengamati\nHai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air.\nHmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang\nsiklus air di bawah ini!\nNah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan\nbelajar kali ini!\nSetelah mempelajari pokok bahasan ini, siswa dapat:",
+      "chunk_type": "concept_explanation",
+      "importance": "supporting",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": false,
+      "bloom_is_lots": true,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.7999999999999999,
+      "educational_value": 0.7,
+      "complexity_level": "intermediate",
+      "document_position": 2,
+      "section_hierarchy": [],
+      "word_count": 57,
+      "character_count": 382,
+      "confidence": 0.8,
+      "related_activities": [],
+      "related_assessments": [],
+      "has_cross_references": false,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "Ayo Mengamati\nHai teman-teman, perkenalkan namaku Anggi. Kali ini kita akan belajar tentang siklus air. \nHmm, kira-kira itu apa ya? Sebelum kita mulai belajar, ayo kita simak video singkat tentang \nsiklus air di bawah ini!\nNah, sekarang teman-teman tentu sudah semangat, bukan? Ayo, kita mulai serunya kegiatan \nbelajar kali ini! \nSetelah mempelajari pokok bahasan ini, siswa dapat:",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 0,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 0,
+          "leading_trailing_spaces": 4,
+          "total_normalizations": 4
+        },
+        "character_count_change": 4
+      },
+      "pedagogical_type": "concept_explanation",
+      "pedagogical_intent": "instruction",
+      "pedagogical_features": {
+        "has_questions": true,
+        "question_count": 2,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": false,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C2_understand",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "13f0e14e-34b2-4eee-92d4-a157c6bf449a",
+      "text": "4.\t mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan.\nTujuan yang Diharapkan Metode Pembelajaran\nProblem Based Learning (PBL)\nhttps://youtu.be/vZaxn6w0cQk BAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air",
+      "chunk_type": "experiment",
+      "importance": "activity",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": true,
+      "bloom_is_lots": false,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.9,
+      "educational_value": 0.9,
+      "complexity_level": "basic",
+      "document_position": 3,
+      "section_hierarchy": [
+        "Zaxn6w0cQk BAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\n"
+      ],
+      "word_count": 28,
+      "character_count": 227,
+      "confidence": 0.8,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "4.\t mendemonstrasikan tahapan siklus air berdasarkan hasil percobaan. \nTujuan yang Diharapkan Metode Pembelajaran\nProblem Based Learning (PBL)\nhttps://youtu.be/vZaxn6w0cQk BAHAN AJAR 6: MENGENAL SIKLUS AIR\n3\nMengenal Siklus Air",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 0,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 1,
+          "leading_trailing_spaces": 1,
+          "total_normalizations": 2
+        },
+        "character_count_change": 1
+      },
+      "pedagogical_type": "learning_objective",
+      "pedagogical_intent": "instruction",
+      "pedagogical_features": {
+        "has_questions": false,
+        "question_count": 0,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": false,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C3_apply",
+      "bloom_confidence": 0.85,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 2,
+          "application": 1,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": "experiment",
+        "cognitive_complexity": "advanced",
+        "recall_indicators": 0,
+        "comprehension_indicators": 2,
+        "application_indicators": 1,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "a238bf1c-d158-44c2-96ec-5d10ba7d0a47",
+      "text": "Gambar 2. Air sebagai salah satu sumber kehidupan manusia\nSemua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat\nmembutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan\nuntuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan\nmembutuhkan air untuk berfotosintesis. Hal tersebut menunjukkan bahwa air merupakan\nsalah satu sumber kehidupan.\nAir termasuk sumber daya alam yang dapat diperbaharui. Ini berarti jumlah air di bumi\ntidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu\nada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses\nsiklus air itu? Ayo, kita pelajari bersama-sama!",
+      "chunk_type": "concept_explanation",
+      "importance": "supporting",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": true,
+      "bloom_is_lots": false,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.7999999999999999,
+      "educational_value": 0.7,
+      "complexity_level": "intermediate",
+      "document_position": 4,
+      "section_hierarchy": [
+        "Gambar 2."
+      ],
+      "word_count": 104,
+      "character_count": 722,
+      "confidence": 0.8,
+      "related_activities": [
+        "13f0e14e-34b2-4eee-92d4-a157c6bf449a"
+      ],
+      "related_assessments": [],
+      "has_cross_references": true,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "Gambar 2. Air sebagai salah satu sumber kehidupan manusia\nSemua makhluk hidup, baik manusia, hewan, dan tumbuhan di dunia ini sangat \nmembutuhkan air. Manusia membutuhkan air untuk minum, mandi, mencuci baju, dan \nuntuk melakukan kegiatan lainnya. Hewan membutuhkan air untuk minum dan tumbuhan \nmembutuhkan air untuk berfotosintesis.  Hal tersebut menunjukkan bahwa air merupakan \nsalah satu sumber kehidupan. \nAir termasuk sumber daya alam yang dapat diperbaharui. Ini berarti jumlah air di bumi \ntidak akan habis dan akan terus ada. Mengapa demikian? Sama seperti udara, air akan selalu \nada karena air mengalami proses pendauran (siklus). Tahukan kamu bagaimana proses \nsiklus air itu? Ayo, kita pelajari bersama-sama!",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 0,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 1,
+          "multiple_newlines": 0,
+          "multiple_tabs": 0,
+          "leading_trailing_spaces": 8,
+          "total_normalizations": 9
+        },
+        "character_count_change": 9
+      },
+      "pedagogical_type": "bibliography",
+      "pedagogical_intent": "organization",
+      "pedagogical_features": {
+        "has_questions": true,
+        "question_count": 2,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": true,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": true
+      },
+      "bloom_level_semantic": "C4_analyze",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "54c4fbb4-5e75-4539-b8e5-94faac0b9588",
+      "text": "Uraian materi\nPernahkah kamu berpikir dari manakah datangnya air? Mengapa air tidak bisa habis\nmeskipun digunakan setiap hari? Nah, sebelumnya kita tahu bahwa air akan selalu ada di\nbumi karena air mengalami daur (siklus). Siklus air di bumi merupakan runtutan perubahan\nwujud air yang terjadi terus-menerus dan berulang-ulang.\nSiklus air atau disebut juga siklus hidrologi adalah gerak perputaran air dengan\nperubahan air menjadi berbagai wujud dan kembali ke bentuk semula.",
+      "chunk_type": "concept_explanation",
+      "importance": "supporting",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": true,
+      "bloom_is_lots": false,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.7999999999999999,
+      "educational_value": 0.7,
+      "complexity_level": "intermediate",
+      "document_position": 5,
+      "section_hierarchy": [],
+      "word_count": 70,
+      "character_count": 481,
+      "confidence": 0.8,
+      "related_activities": [
+        "13f0e14e-34b2-4eee-92d4-a157c6bf449a"
+      ],
+      "related_assessments": [],
+      "has_cross_references": true,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "Uraian materi\nPernahkah kamu berpikir dari manakah datangnya air? Mengapa air tidak bisa habis \nmeskipun digunakan setiap hari? Nah, sebelumnya kita tahu bahwa air akan selalu ada di \nbumi karena air mengalami daur (siklus). Siklus air di bumi merupakan runtutan perubahan \nwujud air yang terjadi terus-menerus dan berulang-ulang.  \nSiklus air atau disebut juga siklus hidrologi adalah gerak perputaran air dengan \nperubahan air menjadi berbagai wujud dan kembali ke bentuk semula.",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 0,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 1,
+          "multiple_newlines": 0,
+          "multiple_tabs": 0,
+          "leading_trailing_spaces": 5,
+          "total_normalizations": 6
+        },
+        "character_count_change": 6
+      },
+      "pedagogical_type": "concept_explanation",
+      "pedagogical_intent": "instruction",
+      "pedagogical_features": {
+        "has_questions": true,
+        "question_count": 2,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": true,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C4_analyze",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "f2a506fb-2e16-4509-ad85-1ecf8d0e1a54",
+      "text": "Secara sederhana, siklus air terjadi melalui tahapan evaporasi atau transpirasi,\nkondensasi, dan presipitasi.",
+      "chunk_type": "process_explanation",
+      "importance": "core",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": false,
+      "bloom_is_lots": true,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.95,
+      "educational_value": 0.9,
+      "complexity_level": "basic",
+      "document_position": 6,
+      "section_hierarchy": [],
+      "word_count": 13,
+      "character_count": 110,
+      "confidence": 0.8,
+      "related_activities": [],
+      "related_assessments": [],
+      "has_cross_references": false,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "Secara sederhana, siklus air terjadi melalui tahapan evaporasi atau transpirasi, \nkondensasi, dan presipitasi.",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 0,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 0,
+          "leading_trailing_spaces": 1,
+          "total_normalizations": 1
+        },
+        "character_count_change": 1
+      },
+      "pedagogical_type": "concept_explanation",
+      "pedagogical_intent": "instruction",
+      "pedagogical_features": {
+        "has_questions": false,
+        "question_count": 0,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": false,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C2_understand",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "1f363565-8f0e-4c26-bbe1-283735ce0d9a",
+      "text": "Istilah evaporasi diguna­kan untuk menunjukkan proses penguapan air yang berasal dari",
+      "chunk_type": "process_explanation",
+      "importance": "core",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": false,
+      "bloom_is_lots": true,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.95,
+      "educational_value": 0.9,
+      "complexity_level": "basic",
+      "document_position": 7,
+      "section_hierarchy": [],
+      "word_count": 11,
+      "character_count": 85,
+      "confidence": 0.8,
+      "related_activities": [],
+      "related_assessments": [],
+      "has_cross_references": false,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "Istilah evaporasi diguna­kan untuk menunjukkan proses penguapan air yang berasal dari",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 1,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 0,
+          "leading_trailing_spaces": 0,
+          "total_normalizations": 0
+        },
+        "character_count_change": 0
+      },
+      "pedagogical_type": "concept_explanation",
+      "pedagogical_intent": "instruction",
+      "pedagogical_features": {
+        "has_questions": false,
+        "question_count": 0,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": false,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C2_understand",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "3d380cdd-c28c-41a1-9cd8-842459edf2ac",
+      "text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n4\nlaut, sungai, danau, dan badan air lainnya. Sedangkan transpirasi meru­pa­kan pelepasan\nmolekul air sebagai hasil metabolisme dari tumbuh-tumbuhan.",
+      "chunk_type": "concept_explanation",
+      "importance": "supporting",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": false,
+      "bloom_is_lots": true,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.7999999999999999,
+      "educational_value": 0.7,
+      "complexity_level": "basic",
+      "document_position": 8,
+      "section_hierarchy": [
+        "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n4\n"
+      ],
+      "word_count": 28,
+      "character_count": 201,
+      "confidence": 0.8,
+      "related_activities": [
+        "13f0e14e-34b2-4eee-92d4-a157c6bf449a"
+      ],
+      "related_assessments": [],
+      "has_cross_references": true,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "Ilmu Pengetahuan Alam dan Sosial UNTUK SD KELAS IV\n4\nlaut, sungai, danau, dan badan air lainnya. Sedangkan transpirasi meru­pa­kan pelepasan \nmolekul air sebagai hasil metabolisme dari tumbuh-tumbuhan.",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 2,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 0,
+          "leading_trailing_spaces": 1,
+          "total_normalizations": 1
+        },
+        "character_count_change": 1
+      },
+      "pedagogical_type": "concept_explanation",
+      "pedagogical_intent": "instruction",
+      "pedagogical_features": {
+        "has_questions": false,
+        "question_count": 0,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": false,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C2_understand",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "f4fac0a8-1003-4191-8793-caada0fd1a55",
+      "text": "2. \t Kondensasi\n\nKondensasi adalah pro­ses perubahan air dari gas menjadi cair atau kita kenal dengan\nistilah pengem­bunan yang merupakan kebalikan dari evaporasi atau penguapan. Pada\nsiklus air, kondensasi terjadi di atmosfer akibat perubahan suhu dan tekanan. Akibat\nadanya kondensasi air akan berkumpul membentuk awan hitam yang siap turun sebagai\nhujan ketika mencapai titik jenuh.",
+      "chunk_type": "process_explanation",
+      "importance": "core",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": false,
+      "bloom_is_lots": true,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.95,
+      "educational_value": 0.9,
+      "complexity_level": "intermediate",
+      "document_position": 9,
+      "section_hierarchy": [],
+      "word_count": 54,
+      "character_count": 390,
+      "confidence": 0.8,
+      "related_activities": [],
+      "related_assessments": [],
+      "has_cross_references": false,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "2. \t Kondensasi\n\t\nKondensasi adalah pro­ses perubahan air dari gas menjadi cair atau kita kenal dengan \nistilah pengem­bunan yang merupakan kebalikan dari evaporasi atau penguapan. Pada \nsiklus air, kondensasi terjadi di atmosfer akibat perubahan suhu dan tekanan. Akibat \nadanya kondensasi air akan berkumpul membentuk awan hitam yang siap turun sebagai \nhujan ketika mencapai titik jenuh.",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 2,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 2,
+          "leading_trailing_spaces": 5,
+          "total_normalizations": 7
+        },
+        "character_count_change": 5
+      },
+      "pedagogical_type": "concept_explanation",
+      "pedagogical_intent": "instruction",
+      "pedagogical_features": {
+        "has_questions": false,
+        "question_count": 0,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": true,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C2_understand",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "c5522dec-2b08-41a0-bdd2-c9df916cc92e",
+      "text": "3.\t Presipitasi\n\nPresipitasi merupakan produk dari kondensasi. Presipitasi dapat terjadi karena adanya\npendinginan dan penambahan uap air, sehingga air yang membentuk awan mencapai\ntitik jenuh. Semakin banyak uap air yang terbentuk di atmosfer, maka tetesan air yang\nada di awan akan semakin banyak dan semakin berat. Ketika awan tidak mampu\nmenampung banyaknya air yang terbentuk, maka air tersebut akan dikeluarkan dalam\nbentuk hujan.",
+      "chunk_type": "process_explanation",
+      "importance": "core",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": false,
+      "bloom_is_lots": true,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.95,
+      "educational_value": 0.9,
+      "complexity_level": "intermediate",
+      "document_position": 10,
+      "section_hierarchy": [],
+      "word_count": 63,
+      "character_count": 442,
+      "confidence": 0.8,
+      "related_activities": [],
+      "related_assessments": [],
+      "has_cross_references": false,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "3.\t Presipitasi\n\t\nPresipitasi merupakan produk dari kondensasi. Presipitasi dapat terjadi karena adanya \npendinginan dan penambahan uap air, sehingga air yang membentuk awan mencapai \ntitik jenuh. Semakin banyak uap air yang terbentuk di atmosfer, maka tetesan air yang \nada di awan akan semakin banyak dan semakin berat. Ketika awan tidak mampu \nmenampung banyaknya air yang terbentuk, maka air tersebut akan dikeluarkan dalam \nbentuk hujan.",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 0,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 2,
+          "leading_trailing_spaces": 6,
+          "total_normalizations": 8
+        },
+        "character_count_change": 6
+      },
+      "pedagogical_type": "formative_assessment",
+      "pedagogical_intent": "assessment",
+      "pedagogical_features": {
+        "has_questions": false,
+        "question_count": 0,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": true,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C2_understand",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    },
+    {
+      "chunk_id": "b99947e7-a282-48c9-8943-12a3189b39f9",
+      "text": "Secara umum, berikut siklus air yang terjadi. Air yang ada di permukaan bumi menguap\nkarena terkena panas matahari. Uap air akan naik ke atmosfer dan mengalami pendinginan.\nSelanjutnya, uap air akan berubah menjadi kristal-kristal air yang berkumpul membentuk\nawan (kondensasi). Semakin lama awan semakin tebal dan gelap. Gumpalan awan yang\nmenebal mengandung banyak sekali kristal dan uap air. Karena suhu yang rendah, uap air,\ndan kristal air akan mengembun menjadi titik-titik air. Selanjutnya, titik-titik air akan jatuh ke\nbumi menjadi hujan (presipitasi). Air hujan yang jatuh ke bumi sebagian meresap ke dalam\ntanah dan akan keluar sebagai mata air. Sebagaian lagi akan mengalir ke tempat-tempat\nyang lebih rendah, seperti sungai dan akan terus mengalir sampai ke danau atau laut. Air di\nsungai dan laut kembali mendapat panas dari sinar matahari dan mengalami penguapan.\nProses ini berlanjut sampai terjadinya hujan kembali dan dikenal dengan siklus air.",
+      "chunk_type": "process_explanation",
+      "importance": "core",
+      "bloom_level": "C1_remember",
+      "bloom_is_hots": false,
+      "bloom_is_lots": true,
+      "subject": "IPA",
+      "grade": "4",
+      "related_topics": [],
+      "related_experiments": [],
+      "related_competencies": [],
+      "prerequisite_concepts": [],
+      "quality_score": 0.95,
+      "educational_value": 0.9,
+      "complexity_level": "intermediate",
+      "document_position": 11,
+      "section_hierarchy": [],
+      "word_count": 145,
+      "character_count": 972,
+      "confidence": 0.8,
+      "related_activities": [],
+      "related_assessments": [],
+      "has_cross_references": false,
+      "curriculum_elements": {
+        "CP": [],
+        "TP": [],
+        "KD": [],
+        "ATP": []
+      },
+      "original_text": "Secara umum, berikut siklus air yang terjadi. Air yang ada di permukaan bumi menguap \nkarena terkena panas matahari. Uap air akan naik ke atmosfer dan mengalami pendinginan. \nSelanjutnya, uap air akan berubah menjadi kristal-kristal air yang berkumpul membentuk \nawan (kondensasi). Semakin lama awan semakin tebal dan gelap. Gumpalan awan yang \nmenebal mengandung banyak sekali kristal dan uap air. Karena suhu yang rendah, uap air, \ndan kristal air akan mengembun menjadi titik-titik air. Selanjutnya, titik-titik air akan jatuh ke \nbumi menjadi hujan (presipitasi). Air hujan yang jatuh ke bumi sebagian meresap ke dalam \ntanah dan akan keluar sebagai mata air. Sebagaian lagi akan mengalir ke tempat-tempat \nyang lebih rendah, seperti sungai dan akan terus mengalir sampai ke danau atau laut. Air di \nsungai dan laut kembali mendapat panas dari sinar matahari dan mengalami penguapan. \nProses ini berlanjut sampai terjadinya hujan kembali dan dikenal dengan siklus air.",
+      "unicode_normalized": true,
+      "normalization_stats": {
+        "soft_hyphens_removed": 0,
+        "ligatures_normalized": 0,
+        "whitespace_stats": {
+          "multiple_spaces": 0,
+          "multiple_newlines": 0,
+          "multiple_tabs": 0,
+          "leading_trailing_spaces": 10,
+          "total_normalizations": 10
+        },
+        "character_count_change": 10
+      },
+      "pedagogical_type": "concept_explanation",
+      "pedagogical_intent": "instruction",
+      "pedagogical_features": {
+        "has_questions": false,
+        "question_count": 0,
+        "has_reflection": false,
+        "has_discussion": false,
+        "has_glossary": false,
+        "has_rubric": false,
+        "is_cover_page": false,
+        "is_table_of_contents": null,
+        "is_bibliography": false
+      },
+      "bloom_level_semantic": "C2_understand",
+      "bloom_confidence": 0.6,
+      "bloom_indicators": {
+        "level_indicators": {
+          "recall": 0,
+          "comprehension": 0,
+          "application": 0,
+          "analysis": 0,
+          "evaluation": 0,
+          "synthesis": 0
+        },
+        "activity_type": null,
+        "cognitive_complexity": "basic",
+        "recall_indicators": 0,
+        "comprehension_indicators": 0,
+        "application_indicators": 0,
+        "analysis_indicators": 0,
+        "evaluation_indicators": 0,
+        "synthesis_indicators": 0
+      }
+    }
+  ],
+  "chunk_count": 12,
+  "chunking_strategy": "typed_curriculum_aware",
+  "chunk_types": {
+    "types": {
+      "concept_intro": 2,
+      "concept_explanation": 4,
+      "experiment": 1,
+      "process_explanation": 5
+    },
+    "importance_levels": {
+      "supporting": 6,
+      "activity": 1,
+      "core": 5
+    }
+  },
+  "boundary_detection": "enabled",
+  "cross_reference_semantics": "enabled",
+  "knowledge_graph_stats": {
+    "total_nodes": 12,
+    "total_edges": 6,
+    "node_types": {
+      "concept": 11,
+      "activity": 1
+    },
+    "relationship_types": {
+      "builds_on": 3,
+      "demonstrates": 3
+    },
+    "connected_components": 7
+  },
+  "curriculum_ontology": "enabled",
+  "curriculum_stats": {
+    "total_learning_objectives": 0,
+    "total_competency_mappings": 12,
+    "subject_distribution": {},
+    "grade_distribution": {},
+    "phase_distribution": {},
+    "total_pedagogical_dependencies": 0
+  },
+  "curriculum_elements": null,
+  "unicode_normalization": "enabled",
+  "unicode_stats": {
+    "total_chunks": 12,
+    "chunks_normalized": 12,
+    "total_soft_hyphens_removed": 5,
+    "total_ligatures_normalized": 0,
+    "total_whitespace_normalizations": 74,
+    "enabled": true
+  },
+  "pedagogical_classification": "enabled",
+  "pedagogical_stats": {
+    "total_chunks": 12,
+    "pedagogical_types": {
+      "cover_page": 1,
+      "concept_explanation": 8,
+      "learning_objective": 1,
+      "bibliography": 1,
+      "formative_assessment": 1
+    },
+    "pedagogical_intents": {
+      "organization": 2,
+      "instruction": 9,
+      "assessment": 1
+    },
+    "special_types": {
+      "reflection": 0,
+      "discussion": 0,
+      "glossary": 4,
+      "rubric": 0,
+      "assessment": 3,
+      "cover_page": 1,
+      "table_of_contents": 0,
+      "bibliography": 1
+    }
+  },
+  "enhanced_chunk_classification": "enabled",
+  "chunk_classification_improvements": {
+    "total_chunks": 12,
+    "classification_changes": 2,
+    "assessment_reductions": 0,
+    "type_distribution": {
+      "concept_intro": 2,
+      "concept_explanation": 4,
+      "experiment": 1,
+      "process_explanation": 5
+    }
+  },
+  "bloom_semantic_classification": "enabled",
+  "bloom_semantic_stats": {
+    "total_chunks": 12,
+    "bloom_levels_distribution": {
+      "C2_understand": 8,
+      "C1_remember": 1,
+      "C3_apply": 1,
+      "C4_analyze": 2
+    },
+    "semantic_vs_original": {
+      "C1_remember→C2_understand": 8,
+      "C1_remember→C1_remember": 1,
+      "C1_remember→C3_apply": 1,
+      "C1_remember→C4_analyze": 2
+    },
+    "improvements": 11,
+    "hots_chunks": 3,
+    "lots_chunks": 9
+  },
+  "processing_time_ms": 150
+}

@@ -12,6 +12,8 @@ service ParserService {
     rpc ExtractImages(ExtractImagesRequest) returns (ExtractImagesResponse);
     rpc ExtractOCR(ExtractOCRRequest) returns (ExtractOCRResponse);
     rpc DetectLayout(DetectLayoutRequest) returns (DetectLayoutResponse);
+    rpc ExtractFigures(ExtractFiguresRequest) returns (ExtractFiguresResponse);
+    rpc AnalyzeFiguresWithVision(AnalyzeFiguresWithVisionRequest) returns (AnalyzeFiguresWithVisionResponse);
 }
 
 // Parser Service Messages
@@ -158,4 +160,192 @@ message LayoutElement {
     string element_type = 1;
     repeated BoundingBox bbox = 2;
     map<string, string> properties = 3;
+}
+
+// Figure Extraction - High-Level Pedagogical Figure Interpretation
+message ExtractFiguresRequest {
+    string document_id = 1;
+    bytes document_data = 2;
+    map<string, string> context = 3;  // document context (subject, grade, etc.)
+    map<string, string> options = 4;
+}
+
+message ExtractFiguresResponse {
+    bool success = 1;
+    string message = 2;
+    FigureExtractionResult result = 3;
+    map<string, string> metadata = 4;
+}
+
+message FigureExtractionResult {
+    string doc_id = 1;
+    string file_path = 2;
+    int32 total_images = 3;
+    int32 total_figures = 4;
+    repeated FigureMetadata figures = 5;
+    map<string, int32> by_type = 6;
+    map<string, int32> by_role = 7;
+    map<string, int32> by_subject = 8;
+}
+
+message FigureMetadata {
+    string image_id = 1;
+    int32 page_number = 2;
+    repeated float bbox = 3;  // [x0, y0, x1, y1]
+    int32 width_px = 4;
+    int32 height_px = 5;
+    string minio_key = 6;
+    
+    // High-level classification
+    FigureType figure_type = 7;
+    FigureRole figure_role = 8;
+    FigureSubject figure_subject = 9;
+    
+    // Caption information
+    string caption = 10;
+    float caption_confidence = 11;
+    string caption_position = 12;
+    
+    // Vision AI analysis
+    string ai_description = 13;
+    float ai_confidence = 14;
+    
+    // Educational significance
+    bool is_essential = 15;
+    bool is_supplementary = 16;
+    bool is_assessment_related = 17;
+    bool is_p5_related = 18;
+    
+    // Additional metadata
+    repeated string detected_elements = 19;
+    repeated string educational_keywords = 20;
+    string difficulty_level = 21;
+    
+    // Source information
+    string source = 22;
+    bool is_original = 23;
+    
+    // Technical metadata (inherited from ImageExtractor)
+    ImageMetadata image_metadata = 24;
+}
+
+message ImageMetadata {
+    string image_id = 1;
+    int32 xref = 2;
+    int32 page_number = 3;
+    int32 page_width = 4;
+    int32 page_height = 5;
+    repeated float bbox = 6;
+    repeated float bbox_normalized = 7;
+    string format = 8;
+    int32 width_px = 9;
+    int32 height_px = 10;
+    string color_space = 11;
+    int32 bits_per_component = 12;
+    int32 file_size_bytes = 13;
+    float aspect_ratio = 14;
+    ImageType image_type = 15;
+    bool is_likely_noise = 16;
+    string noise_reason = 17;
+    string content_hash = 18;
+    bool is_duplicate = 19;
+    
+    // Context information
+    string surrounding_text_above = 20;
+    string surrounding_text_below = 21;
+    bool has_caption_candidate = 22;
+}
+
+// Vision Service Integration - Analyze figures with AI
+message AnalyzeFiguresWithVisionRequest {
+    string document_id = 1;
+    repeated string minio_keys = 2;  // MinIO keys untuk figures yang ingin dianalisis
+    map<string, string> context = 3;
+    map<string, string> options = 4;
+}
+
+message AnalyzeFiguresWithVisionResponse {
+    bool success = 1;
+    string message = 2;
+    repeated FigureAnalysisResult results = 3;
+    map<string, string> metadata = 4;
+}
+
+message FigureAnalysisResult {
+    string image_id = 1;
+    string minio_key = 2;
+    bool analysis_success = 3;
+    string analysis_error = 4;
+    string description = 5;
+    float confidence = 6;
+    repeated DetectedElement detected_elements = 7;
+    repeated DetectedText detected_text = 8;
+    map<string, string> metadata = 9;
+}
+
+message DetectedElement {
+    string element_type = 1;
+    string label = 2;
+    float confidence = 3;
+    BoundingBox bbox = 4;
+}
+
+message DetectedText {
+    string text = 1;
+    float confidence = 2;
+    BoundingBox bbox = 3;
+    string language = 4;
+}
+
+// Enums untuk classification
+enum FigureType {
+    FIGURE_TYPE_ILLUSTRATION = 0;
+    FIGURE_TYPE_DIAGRAM = 1;
+    FIGURE_TYPE_CHART = 2;
+    FIGURE_TYPE_MAP = 3;
+    FIGURE_TYPE_TIMELINE = 4;
+    FIGURE_TYPE_PHOTO = 5;
+    FIGURE_TYPE_PORTRAIT = 6;
+    FIGURE_TYPE_GEOMETRIC_SHAPE = 7;
+    FIGURE_TYPE_SCIENTIFIC_MODEL = 8;
+    FIGURE_TYPE_MATHEMATICAL = 9;
+    FIGURE_TYPE_INFOGRAPHIC = 10;
+    FIGURE_TYPE_FLOWCHART = 11;
+    FIGURE_TYPE_P5_PROJECT = 12;
+    FIGURE_TYPE_ASESMEN_VISUAL = 13;
+    FIGURE_TYPE_LEARNING_RESOURCE = 14;
+    FIGURE_TYPE_UNKNOWN = 15;
+}
+
+enum FigureRole {
+    FIGURE_ROLE_PRIMARY = 0;
+    FIGURE_ROLE_SECONDARY = 1;
+    FIGURE_ROLE_BACKGROUND = 2;
+    FIGURE_ROLE_NAVIGATION = 3;
+    FIGURE_ROLE_ASSESSMENT = 4;
+}
+
+enum FigureSubject {
+    FIGURE_SUBJECT_IPA = 0;
+    FIGURE_SUBJECT_IPS = 1;
+    FIGURE_SUBJECT_MATEMATIKA = 2;
+    FIGURE_SUBJECT_BAHASA_INDONESIA = 3;
+    FIGURE_SUBJECT_BAHASA_INGGRIS = 4;
+    FIGURE_SUBJECT_PJOK = 5;
+    FIGURE_SUBJECT_SENI_BUDAYA = 6;
+    FIGURE_SUBJECT_PPKN = 7;
+    FIGURE_SUBJECT_AGAMA = 8;
+    FIGURE_SUBJECT_IPAS = 9;
+    FIGURE_SUBJECT_SBDP = 10;
+    FIGURE_SUBJECT_P5 = 11;
+    FIGURE_SUBJECT_UNKNOWN = 12;
+}
+
+enum ImageType {
+    IMAGE_TYPE_RASTER_EMBEDDED = 0;
+    IMAGE_TYPE_VECTOR_RENDERED = 1;
+    IMAGE_TYPE_SCANNED_PAGE = 2;
+    IMAGE_TYPE_SCANNED_REGION = 3;
+    IMAGE_TYPE_DECORATIVE = 4;
+    IMAGE_TYPE_UNKNOWN = 5;
 }
